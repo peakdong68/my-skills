@@ -1,5 +1,5 @@
 ---
-description: Conduct a five-axis code review — correctness, readability, architecture, security, performance
+description: 执行五维度代码审查——正确性、可读性、架构、安全性、性能
 ---
 
 Invoke the agent-skills:code-review-and-quality skill.

@@ -1,5 +1,5 @@
 ---
-description: Implement the next task incrementally — build, test, verify, commit
+description: 增量式实现下一个任务——构建、测试、验证、提交
 ---
 
 Invoke the agent-skills:incremental-implementation skill alongside agent-skills:test-driven-development.
