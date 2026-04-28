@@ -1,0 +1,12 @@
+{
+  "name": "my-agent-skills",
+  "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Peak Dong"
+  },
+  "homepage": "https://github.com/peakdong68/my-agent-skills",
+  "repository": "https://github.com/peakdong68/my-agent-skills",
+  "license": "MIT",
+  "commands": "./.claude/commands"
+}
