@@ -3,6 +3,30 @@ name: using-agent-skills
 description: Discovers and invokes agent skills. Use when starting a session or when you need to discover which skill applies to the current task. This is the meta-skill that governs how all other skills are discovered and invoked.
 ---
 
+<SUBAGENT-STOP>
+If you were dispatched as a subagent to execute a specific task, skip this skill.
+</SUBAGENT-STOP>
+
+## Instruction Priority
+
+Superpowers skills override default system prompt behavior, but **user instructions always take precedence**:
+
+1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority
+2. **my-agent-skills** — override default system behavior where they conflict
+3. **Default system prompt** — lowest priority
+
+If CLAUDE.md, GEMINI.md, or AGENTS.md says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
+
+## How to Access Skills
+
+**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.
+
+**In Copilot CLI:** Use the `skill` tool. Skills are auto-discovered from installed plugins. The `skill` tool works the same as Claude Code's `Skill` tool.
+
+**In Gemini CLI:** Skills activate via the `activate_skill` tool. Gemini loads skill metadata at session start and activates the full content on demand.
+
+**In other environments:** Check your platform's documentation for how skills are loaded.
+
 # Using Agent Skills
 
 ## Overview
@@ -82,6 +106,7 @@ Sycophancy is a failure mode. "Of course!" followed by implementing a bad idea h
 Your natural tendency is to overcomplicate. Actively resist it.
 
 Before finishing any implementation, ask:
+
 - Can this be done in fewer lines?
 - Are these abstractions earning their complexity?
 - Would a staff engineer look at this and say "why didn't you just..."?
@@ -93,6 +118,7 @@ If you build 1000 lines and 100 would suffice, you have failed. Prefer the borin
 Touch only what you're asked to touch.
 
 Do NOT:
+
 - Remove comments you don't understand
 - "Clean up" code orthogonal to the task
 - Refactor adjacent systems as a side effect
@@ -152,23 +178,23 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 
 ## Quick Reference
 
-| Phase | Skill | One-Line Summary |
-|-------|-------|-----------------|
-| Define | idea-refine | Refine ideas through structured divergent and convergent thinking |
-| Define | spec-driven-development | Requirements and acceptance criteria before code |
-| Plan | planning-and-task-breakdown | Decompose into small, verifiable tasks |
-| Build | incremental-implementation | Thin vertical slices, test each before expanding |
-| Build | source-driven-development | Verify against official docs before implementing |
-| Build | context-engineering | Right context at the right time |
-| Build | frontend-ui-engineering | Production-quality UI with accessibility |
-| Build | api-and-interface-design | Stable interfaces with clear contracts |
-| Verify | test-driven-development | Failing test first, then make it pass |
-| Verify | browser-testing-with-devtools | Chrome DevTools MCP for runtime verification |
-| Verify | debugging-and-error-recovery | Reproduce → localize → fix → guard |
-| Review | code-review-and-quality | Five-axis review with quality gates |
-| Review | security-and-hardening | OWASP prevention, input validation, least privilege |
-| Review | performance-optimization | Measure first, optimize only what matters |
-| Ship | git-workflow-and-versioning | Atomic commits, clean history |
-| Ship | ci-cd-and-automation | Automated quality gates on every change |
-| Ship | documentation-and-adrs | Document the why, not just the what |
-| Ship | shipping-and-launch | Pre-launch checklist, monitoring, rollback plan |
+| Phase  | Skill                         | One-Line Summary                                                  |
+| ------ | ----------------------------- | ----------------------------------------------------------------- |
+| Define | idea-refine                   | Refine ideas through structured divergent and convergent thinking |
+| Define | spec-driven-development       | Requirements and acceptance criteria before code                  |
+| Plan   | planning-and-task-breakdown   | Decompose into small, verifiable tasks                            |
+| Build  | incremental-implementation    | Thin vertical slices, test each before expanding                  |
+| Build  | source-driven-development     | Verify against official docs before implementing                  |
+| Build  | context-engineering           | Right context at the right time                                   |
+| Build  | frontend-ui-engineering       | Production-quality UI with accessibility                          |
+| Build  | api-and-interface-design      | Stable interfaces with clear contracts                            |
+| Verify | test-driven-development       | Failing test first, then make it pass                             |
+| Verify | browser-testing-with-devtools | Chrome DevTools MCP for runtime verification                      |
+| Verify | debugging-and-error-recovery  | Reproduce → localize → fix → guard                                |
+| Review | code-review-and-quality       | Five-axis review with quality gates                               |
+| Review | security-and-hardening        | OWASP prevention, input validation, least privilege               |
+| Review | performance-optimization      | Measure first, optimize only what matters                         |
+| Ship   | git-workflow-and-versioning   | Atomic commits, clean history                                     |
+| Ship   | ci-cd-and-automation          | Automated quality gates on every change                           |
+| Ship   | documentation-and-adrs        | Document the why, not just the what                               |
+| Ship   | shipping-and-launch           | Pre-launch checklist, monitoring, rollback plan                   |
