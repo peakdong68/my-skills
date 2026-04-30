@@ -2,15 +2,15 @@
 description: 执行五维度代码审查——正确性、可读性、架构、安全性、性能
 ---
 
-Invoke the agent-skills:code-review-and-quality skill.
+调用 my-agent-skills:code-review-and-quality 技能。
 
-Review the current changes (staged or recent commits) across all five axes:
+从以下五个维度审查当前变更（已暂存或最近的提交）：
 
-1. **Correctness** — Does it match the spec? Edge cases handled? Tests adequate?
-2. **Readability** — Clear names? Straightforward logic? Well-organized?
-3. **Architecture** — Follows existing patterns? Clean boundaries? Right abstraction level?
-4. **Security** — Input validated? Secrets safe? Auth checked? (Use security-and-hardening skill)
-5. **Performance** — No N+1 queries? No unbounded ops? (Use performance-optimization skill)
+1. **正确性** — 是否符合规范？是否处理了边缘情况？测试是否充分？
+2. **可读性** — 命名是否清晰？逻辑是否直观？组织是否良好？
+3. **架构** — 是否遵循现有模式？边界是否清晰？抽象层级是否恰当？
+4. **安全性** — 输入是否经过验证？秘密信息是否安全？是否检查了身份验证？（使用 security-and-hardening 技能）
+5. **性能** — 是否存在 N+1 查询？是否存在无界操作？（使用 performance-optimization 技能）
 
-Categorize findings as Critical, Important, or Suggestion.
-Output a structured review with specific file:line references and fix recommendations.
+将发现的问题分类为：严重、重要或建议。
+输出结构化审查报告，包含具体的文件:行号引用及修复建议。

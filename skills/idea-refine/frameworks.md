@@ -1,99 +1,101 @@
-# Ideation Frameworks Reference
+# 构思框架参考
 
-Use these frameworks selectively. Pick the lens that fits the idea — don't mechanically run every framework. The goal is to unlock thinking, not to follow a checklist.
+有选择地使用这些框架。选择适合该想法的视角——不要机械地套用每一个框架。目标是解锁思考，而不是遵循清单。
 
 ## SCAMPER
 
-A structured way to transform an existing idea by applying seven different operations:
+一种通过应用七种不同操作来改造现有想法的结构化方法：
 
-- **Substitute:** What component, material, or process could you swap out? What if you replaced the core technology? The target audience? The business model?
-- **Combine:** What if you merged this with another product, service, or idea? What two things that don't usually go together would create something new?
-- **Adapt:** What else is like this? What ideas from other industries, domains, or time periods could you borrow? What parallel exists in nature?
-- **Modify (Magnify/Minimize):** What if you made it 10x bigger? 10x smaller? What if you exaggerated one feature? What if you stripped it to the absolute minimum?
-- **Put to other uses:** Who else could use this? What other problems could it solve? What happens if you use it in a completely different context?
-- **Eliminate:** What happens if you remove a feature entirely? What's the version with zero configuration? What would it look like with half the steps?
-- **Reverse/Rearrange:** What if you did the steps in the opposite order? What if the user did the work instead of the system (or vice versa)? What if you reversed the value chain?
+- **替代(Substitute)：** 你可以替换哪些组件、材料或流程？如果你替换了核心技术呢？目标受众呢？商业模式呢？
+- **结合 (Combine)：** 如果你将其与另一个产品、服务或想法合并会怎样？哪两个通常不在一起的东西会创造出新事物？
+- **改编(Adapt)：** 还有什么与之相似？你可以从其他行业、领域或时代借用哪些想法？自然界中存在什么可类比的现象？
+- **修改（放大/缩小）(Modify/Magnify/Minimize)：** 如果你将其放大 10 倍会怎样？缩小 10 倍呢？如果你夸张地突出某个功能呢？如果你将其精简到绝对的最小值呢？
+- **移作他用(Put to other uses)：** 还有谁能使用这个？它还能解决哪些其他问题？如果你在完全不同的语境中使用它，会发生什么？
+- **消除(Eliminate)：** 如果你完全移除某个功能会怎样？零配置的版本是什么样的？如果步骤减少一半，它会是什么样？
+- **逆向/重排(Reverse/Rearrange)：** 如果你以相反的顺序执行步骤会怎样？如果由用户来完成系统的工作（反之亦然）呢？如果你逆转价值链呢？
 
-**Best for:** Improving or reimagining existing products/features. Less useful for greenfield ideas.
+**最适用于：** 改进或重新构思现有产品/功能。对于从零开始的全新想法（greenfield ideas）不太适用。
 
-## How Might We (HMW)
+## 我们如何能（How Might We, HMW）
 
-Reframe problems as opportunities using the "How Might We..." format:
+使用“我们如何能……”的格式，将问题重新构建为机会：
 
-- Start with an observation or pain point
-- Reframe it as "How might we [desired outcome] for [specific user] without [key constraint]?"
-- Generate multiple HMW framings of the same problem — different framings unlock different solutions
+- 从一个观察或痛点开始
+- 将其重构为“我们如何能为[特定用户]带来[期望结果]，而不[关键约束]？”
+- 针对同一个问题生成多个 HMW 框架——不同的框架会解锁不同的解决方案
 
-**Good HMW qualities:**
-- Narrow enough to be actionable ("...help new users find relevant content in their first 5 minutes")
-- Broad enough to allow creative solutions (not "...add a recommendation sidebar")
-- Contains a tension or constraint that forces creativity
+**好的 HMW 特征：**
 
-**Bad HMW qualities:**
-- Too broad: "How might we make users happy?"
-- Too narrow: "How might we add a button to the settings page?"
-- Solution-embedded: "How might we build a chatbot for support?"
+- 足够窄而可操作（“帮助新用户在最初 5 分钟内找到相关内容”）
+- 足够宽泛以允许创造性的解决方案（不是“……添加一个推荐侧边栏”）
+- 包含一种迫使产生创造力的张力或约束
 
-**Best for:** Reframing stuck thinking. When someone is anchored on a solution, pull them back to the problem.
+**不好的 HMW 特征：**
 
-## First Principles Thinking
+- 太宽泛：“我们如何能让用户开心？”
+- 太窄：“我们如何在设置页面添加一个按钮？”
+- 嵌入解决方案：“我们如何构建一个用于支持的聊天机器人？”
 
-Break the idea down to its fundamental truths, then rebuild from there:
+**最适用于：** 重新构建陷入僵局的思维。当某人锚定在某个解决方案上时，将其拉回到问题上。
 
-1. **What do we know is true?** (not assumed, not conventional — actually true)
-2. **What are we assuming?** List every assumption, even the ones that feel obvious
-3. **Which assumptions can we challenge?** For each, ask: "Is this actually a law of physics, or just how it's been done?"
-4. **Rebuild from the truths.** If you only had the fundamental truths, what would you build?
+## 第一性原理思维
 
-**Best for:** Breaking out of incremental thinking. When every idea feels like a small improvement on the status quo.
+将想法分解为其最基本的真理，然后从那里重建：
 
-## Jobs to Be Done (JTBD)
+1.  **我们知道什么是真的？**（不是假设的，不是常规的——确实是真实的）
+2.  **我们在假设什么？** 列出每一个假设，即使是那些感觉显而易见的。
+3.  **我们可以挑战哪些假设？** 对于每一个，问：“这实际上是物理定律，还是仅仅因为一直是这样做的？”
+4.  **从真理出发重建。** 如果你只有这些基本真理，你会构建什么？
 
-Focus on what the user is trying to accomplish, not what they say they want:
+**最适用于：** 打破渐进式思维。当每个想法都感觉像是对现状的微小改进时。
 
-- **Functional job:** What task are they trying to complete?
-- **Emotional job:** How do they want to feel?
-- **Social job:** How do they want to be perceived?
+## 待完成工作（Jobs to Be Done, JTBD）
 
-Format: "When I [situation], I want to [motivation], so I can [expected outcome]."
+关注用户试图完成什么，而不是他们说自己想要什么：
 
-**Key insight:** People don't buy products — they hire them to do a job. The competing product isn't always in the same category. (Netflix competes with sleep, not just other streaming services.)
+- **功能性工作：** 他们试图完成什么任务？
+- **情感性工作：** 他们想要什么样的感受？
+- **社会性工作：** 他们希望如何被他人看待？
 
-**Best for:** Understanding the real problem. When you're not sure if you're solving the right thing.
+格式：“当我在[情境]中，我想要[动机]，以便我可以[预期结果]。”
 
-## Constraint-Based Ideation
+**关键洞见：** 人们不是购买产品——他们是雇用产品来完成一项工作。竞争产品不总是在同一类别中。（Netflix 的竞争对手是睡眠，而不仅仅是其他流媒体服务。）
 
-Deliberately impose constraints to force creative solutions:
+**最适用于：** 理解真正的问题。当你不确定自己是否解决了正确的问题时。
 
-- **Time constraint:** "What if you only had 1 day to build this?"
-- **Feature constraint:** "What if it could only have one feature?"
-- **Tech constraint:** "What if you couldn't use [the obvious technology]?"
-- **Cost constraint:** "What if it had to be free forever?"
-- **Audience constraint:** "What if your user had never used a computer before?"
-- **Scale constraint:** "What if it needed to work for 1 billion users? What about just 10?"
+## 基于约束的构思(Constraint-Based Ideation)
 
-**Best for:** Cutting through complexity. When the idea is growing too large or too vague.
+有意施加约束以迫使产生创造性解决方案：
 
-## Pre-mortem
+- **时间约束：** “如果你只有 1 天时间来构建这个呢？”
+- **功能约束：** “如果它只能有一个功能呢？”
+- **技术约束：** “如果你不能使用[显而易见的技术]呢？”
+- **成本约束：** “如果它必须永久免费呢？”
+- **用户约束：** “如果你的用户以前从未用过电脑呢？”
+- **规模约束：** “如果它要面向 10 亿用户工作呢？那仅 10 个用户呢？”
 
-Imagine the idea has already failed. Work backwards:
+**最适用于：** 穿透复杂性。当想法变得太大或太模糊时。
 
-1. It's 12 months from now. The project shipped and flopped. What went wrong?
-2. List every plausible reason for failure — technical, market, team, timing
-3. For each failure mode: Is this preventable? Is this a signal the idea needs to change?
-4. Which failure modes are you willing to accept? Which ones would kill the project?
+## 事前验尸(Pre-mortem)
 
-**Best for:** Phase 2 evaluation. Stress-testing ideas that feel good but haven't been pressure-tested.
+设想这个想法已经失败。然后反推：
 
-## Analogous Inspiration
+1.  假设现在是 12 个月后。项目已发布但惨败。出了什么问题？
+2.  列出每一个可能的失败原因——技术、市场、团队、时机
+3.  对于每一种失败模式：这是可预防的吗？这是否表明想法需要改变？
+4.  你愿意接受哪些失败模式？哪些会毁掉项目？
 
-Look at how other domains solved similar problems:
+**最适用于：** 第二阶段评估。对感觉良好但尚未经过压力测试的想法进行压力测试。
 
-- What industry has already solved a version of this problem?
-- What would this look like if [specific company/product] built it?
-- What natural system works this way?
-- What historical precedent exists?
+## 类比启发(Analogous Inspiration)
 
-The key is finding *structural* similarities, not surface-level ones. "Uber for X" is surface-level. "A two-sided marketplace that solves a trust problem between strangers" is structural.
+看看其他领域是如何解决类似问题的：
 
-**Best for:** Phase 1 expansion. Generating variations that feel genuinely different from the obvious approach.
+- 哪个行业已经解决了这个问题的一个版本？
+- 如果[某个特定的公司/产品]来构建它，它会是什么样？
+- 哪个自然系统是这样运作的？
+- 存在哪些历史先例？
+
+关键是寻找*结构*上的相似性，而不是表面上的一致。“Uber for X” 是表面层次的。“解决陌生人之间信任问题的双边市场”则是结构性的。
+
+**最适用于：** 第一阶段扩展。生成感觉上与显而易见的做法真正不同的变体。

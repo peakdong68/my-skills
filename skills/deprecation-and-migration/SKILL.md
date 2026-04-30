@@ -1,146 +1,143 @@
 ---
 name: deprecation-and-migration
-description: Manages deprecation and migration. Use when removing old systems, APIs, or features. Use when migrating users from one implementation to another. Use when deciding whether to maintain or sunset existing code.
+description: 管理弃用和迁移。适用于移除旧系统、API 或功能时。适用于将用户从一种实现迁移到另一种实现时。适用于决定是否维护或逐步淘汰现有代码时。
 ---
 
-# Deprecation and Migration
+# 弃用与迁移
 
-## Overview
+## 概述
 
-Code is a liability, not an asset. Every line of code has ongoing maintenance cost — bugs to fix, dependencies to update, security patches to apply, and new engineers to onboard. Deprecation is the discipline of removing code that no longer earns its keep, and migration is the process of moving users safely from the old to the new.
+代码是负债，而非资产。每一行代码都在持续产生维护成本——漏洞修复、依赖更新、安全补丁应用以及新工程师的入职培训。**弃用**是移除那些不再值得保留的代码的纪律，而**迁移**则是安全地将用户从旧系统转移到新系统的过程。
 
-Most engineering organizations are good at building things. Few are good at removing them. This skill addresses that gap.
+大多数工程组织擅长构建事物，却很少擅长移除事物。这项技能正是为了弥补这一差距。
 
-## When to Use
+## 适用场景
 
-- Replacing an old system, API, or library with a new one
-- Sunsetting a feature that's no longer needed
-- Consolidating duplicate implementations
-- Removing dead code that nobody owns but everybody depends on
-- Planning the lifecycle of a new system (deprecation planning starts at design time)
-- Deciding whether to maintain a legacy system or invest in migration
+- 用新系统、新 API 或新库替换旧有系统
+- 逐步淘汰不再需要的功能
+- 合并重复的实现
+- 移除无人认领、但人人依赖的死代码
+- 规划新系统的生命周期（弃用规划始于设计阶段）
+- 决定是维护遗留系统，还是投资进行迁移
 
-## Core Principles
+## 核心原则
 
-### Code Is a Liability
+### 代码即负债
 
-Every line of code has ongoing cost: it needs tests, documentation, security patches, dependency updates, and mental overhead for anyone working nearby. The value of code is the functionality it provides, not the code itself. When the same functionality can be provided with less code, less complexity, or better abstractions — the old code should go.
+每一行代码都伴随持续成本：它需要测试、文档、安全补丁、依赖更新，以及给周围任何工作者带来的心智负担。代码的价值在于其提供的功能，而非代码本身。当同样的功能可以用更少的代码、更低的复杂度或更好的抽象提供时——旧代码就应当被移除。
 
-### Hyrum's Law Makes Removal Hard
+### 海勒姆定律(Hyrum's Law)使移除变得困难
 
-With enough users, every observable behavior becomes depended on — including bugs, timing quirks, and undocumented side effects. This is why deprecation requires active migration, not just announcement. Users can't "just switch" when they depend on behaviors the replacement doesn't replicate.
+在足够多的用户面前，任何可观察到的行为都会被人依赖——包括缺陷、时序差异和未文档化的副作用。这就是为什么弃用需要主动迁移，而不仅仅是发布公告。当用户所依赖的行为无法被新系统完全复现时，他们无法“直接切换”。
 
-### Deprecation Planning Starts at Design Time
+### 弃用规划始于设计阶段
 
-When building something new, ask: "How would we remove this in 3 years?" Systems designed with clean interfaces, feature flags, and minimal surface area are easier to deprecate than systems that leak implementation details everywhere.
+构建新系统时，应自问：“三年后我们如何移除它？” 设计上具有清晰接口、特性标志和最小暴露面的系统，比到处泄漏实现细节的系统更容易被弃用。
 
-## The Deprecation Decision
+## 弃用决策
 
-Before deprecating anything, answer these questions:
+在弃用任何事物前，先回答以下问题：
 
 ```
-1. Does this system still provide unique value?
-   → If yes, maintain it. If no, proceed.
-
-2. How many users/consumers depend on it?
-   → Quantify the migration scope.
-
-3. Does a replacement exist?
-   → If no, build the replacement first. Don't deprecate without an alternative.
-
-4. What's the migration cost for each consumer?
-   → If trivially automated, do it. If manual and high-effort, weigh against maintenance cost.
-
-5. What's the ongoing maintenance cost of NOT deprecating?
-   → Security risk, engineer time, opportunity cost of complexity.
+1. 该系统是否仍提供独特的价值？
+   → 若是，则维护它。若否，则继续。
+2. 有多少用户/消费者依赖它？
+   → 量化迁移的范围。
+3. 是否存在替代方案？
+   → 若否，则先构建替代方案。无替代方案则不应弃用。
+4. 每位消费者的迁移成本是多少？
+   → 若能轻松自动化，就执行自动化。若是手动且高成本，则与维护成本进行权衡。
+5. 不弃用的持续维护成本是什么？
+   → 安全风险、工程师时间、复杂度的机会成本。
 ```
 
-## Compulsory vs Advisory Deprecation
+## 强制弃用与建议弃用
 
-| Type | When to Use | Mechanism |
-|------|-------------|-----------|
-| **Advisory** | Migration is optional, old system is stable | Warnings, documentation, nudges. Users migrate on their own timeline. |
-| **Compulsory** | Old system has security issues, blocks progress, or maintenance cost is unsustainable | Hard deadline. Old system will be removed by date X. Provide migration tooling. |
+| 类型     | 适用时机                                         | 机制                                                      |
+| -------- | ------------------------------------------------ | --------------------------------------------------------- |
+| **建议** | 迁移是可选操作，旧系统稳定                       | 警告、文档、引导。用户按自己的时间表迁移。                |
+| **强制** | 旧系统存在安全问题、阻碍进展，或维护成本难以承受 | 设定硬性截止日期。旧系统将在日期 X 被移除。提供迁移工具。 |
 
-**Default to advisory.** Use compulsory only when the maintenance cost or risk justifies forcing migration. Compulsory deprecation requires providing migration tooling, documentation, and support — you can't just announce a deadline.
+**默认采用建议方式。** 仅当维护成本或风险足以证明强制迁移的合理性时，才使用强制方式。强制弃用要求提供迁移工具、文档和支持 —— 不能仅仅宣布一个截止日期就完事。
 
-## The Migration Process
+## 迁移流程
 
-### Step 1: Build the Replacement
+### 第 1 步：构建替代方案
 
-Don't deprecate without a working alternative. The replacement must:
+没有可用的替代方案之前不要弃用。替代方案必须：
 
-- Cover all critical use cases of the old system
-- Have documentation and migration guides
-- Be proven in production (not just "theoretically better")
+- 覆盖旧系统的所有关键用例
+- 拥有文档和迁移指南
+- 已在生产环境中得到验证（而非仅仅“理论上更好”）
 
-### Step 2: Announce and Document
+### 第 2 步：公告与文档化
 
 ```markdown
-## Deprecation Notice: OldService
+## 弃用公告：OldService
 
-**Status:** Deprecated as of 2025-03-01
-**Replacement:** NewService (see migration guide below)
-**Removal date:** Advisory — no hard deadline yet
-**Reason:** OldService requires manual scaling and lacks observability.
-            NewService handles both automatically.
+**状态：** 自 2025-03-01 起弃用
+**替代：** NewService（参见下方迁移指南）
+**移除日期：** 建议性 —— 暂未设硬性截止日期
+**原因：** OldService 需要手动扩缩且缺乏可观测性。
+NewService 自动处理这两项。
 
-### Migration Guide
-1. Replace `import { client } from 'old-service'` with `import { client } from 'new-service'`
-2. Update configuration (see examples below)
-3. Run the migration verification script: `npx migrate-check`
+### 迁移指南
+
+1. 将 `import { client } from 'old-service'` 替换为 `import { client } from 'new-service'`
+2. 更新配置（参见下方示例）
+3. 运行迁移验证脚本：`npx migrate-check`
 ```
 
-### Step 3: Migrate Incrementally
+### 第 3 步：增量迁移
 
-Migrate consumers one at a time, not all at once. For each consumer:
-
-```
-1. Identify all touchpoints with the deprecated system
-2. Update to use the replacement
-3. Verify behavior matches (tests, integration checks)
-4. Remove references to the old system
-5. Confirm no regressions
-```
-
-**The Churn Rule:** If you own the infrastructure being deprecated, you are responsible for migrating your users — or providing backward-compatible updates that require no migration. Don't announce deprecation and leave users to figure it out.
-
-### Step 4: Remove the Old System
-
-Only after all consumers have migrated:
+逐个迁移消费者，而非一次性全部迁移。针对每位消费者：
 
 ```
-1. Verify zero active usage (metrics, logs, dependency analysis)
-2. Remove the code
-3. Remove associated tests, documentation, and configuration
-4. Remove the deprecation notices
-5. Celebrate — removing code is an achievement
+1. 识别与弃用系统的所有接触点
+2. 更新为使用替代方案
+3. 验证行为是否匹配（测试、集成检查）
+4. 移除对旧系统的引用
+5. 确认无回归问题
 ```
 
-## Migration Patterns
+**扰动规则(The Churn Rule)：** 如果你拥有被弃用的基础设施，你就有责任迁移你的用户 —— 或提供无需迁移的向后兼容更新。不要只是宣布弃用，然后让用户自行处理。
 
-### Strangler Pattern
+### 第 4 步：移除旧系统
 
-Run old and new systems in parallel. Route traffic incrementally from old to new. When the old system handles 0% of traffic, remove it.
+仅在所有消费者均已迁移后：
 
 ```
-Phase 1: New system handles 0%, old handles 100%
-Phase 2: New system handles 10% (canary)
-Phase 3: New system handles 50%
-Phase 4: New system handles 100%, old system idle
-Phase 5: Remove old system
+1. 验证零活跃使用量（指标、日志、依赖分析）
+2. 移除代码
+3. 移除关联的测试、文档和配置
+4. 移除弃用公告
+5. 庆祝 —— 移除代码是一项成就
 ```
 
-### Adapter Pattern
+## 迁移模式
 
-Create an adapter that translates calls from the old interface to the new implementation. Consumers keep using the old interface while you migrate the backend.
+### 绞杀者模式(Strangler Pattern)
+
+同时运行新旧系统。逐步将流量从旧系统路由至新系统。当旧系统处理 0% 的流量时，将其移除。
+
+```
+阶段 1：新系统处理 0%，旧系统处理 100%
+阶段 2：新系统处理 10%（金丝雀测试）
+阶段 3：新系统处理 50%
+阶段 4：新系统处理 100%，旧系统处于空闲
+阶段 5：移除旧系统
+```
+
+### 适配器模式(Adapter Pattern)
+
+创建一个适配器，将来自旧接口的调用转译至新实现。消费者继续使用旧接口，同时后端已迁移。
 
 ```typescript
-// Adapter: old interface, new implementation
+// 适配器：旧接口，新实现
 class LegacyTaskService implements OldTaskAPI {
   constructor(private newService: NewTaskService) {}
 
-  // Old method signature, delegates to new implementation
+  // 旧方法签名，委托给新实现
   getTask(id: number): OldTask {
     const task = this.newService.findById(String(id));
     return this.toOldFormat(task);
@@ -148,9 +145,9 @@ class LegacyTaskService implements OldTaskAPI {
 }
 ```
 
-### Feature Flag Migration
+### 特性标志迁移
 
-Use feature flags to switch consumers from old to new system one at a time:
+使用特性标志逐个将消费者从旧系统切换至新系统：
 
 ```typescript
 function getTaskService(userId: string): TaskService {
@@ -161,46 +158,46 @@ function getTaskService(userId: string): TaskService {
 }
 ```
 
-## Zombie Code
+## 僵尸代码
 
-Zombie code is code that nobody owns but everybody depends on. It's not actively maintained, has no clear owner, and accumulates security vulnerabilities and compatibility issues. Signs:
+僵尸代码是指无人认领但人人依赖的代码。它没有得到主动维护，没有明确的负责人，且不断积累安全漏洞和兼容性问题。迹象包括：
 
-- No commits in 6+ months but active consumers exist
-- No assigned maintainer or team
-- Failing tests that nobody fixes
-- Dependencies with known vulnerabilities that nobody updates
-- Documentation that references systems that no longer exist
+- 6 个月以上无提交记录，但存在活跃的消费者
+- 无指定的维护者或团队
+- 存在无人修复的失败测试
+- 存在已知漏洞但无人更新的依赖项
+- 文档中引用了已不存在的系统
 
-**Response:** Either assign an owner and maintain it properly, or deprecate it with a concrete migration plan. Zombie code cannot stay in limbo — it either gets investment or removal.
+**应对措施：** 要么指定负责人并妥善维护，要么制定具体的迁移计划将其弃用。僵尸代码不能滞留在不确定状态 —— 要么获得投入，要么被移除。
 
-## Common Rationalizations
+## 常见合理化借口
 
-| Rationalization | Reality |
-|---|---|
-| "It still works, why remove it?" | Working code that nobody maintains accumulates security debt and complexity. Maintenance cost grows silently. |
-| "Someone might need it later" | If it's needed later, it can be rebuilt. Keeping unused code "just in case" costs more than rebuilding. |
-| "The migration is too expensive" | Compare migration cost to ongoing maintenance cost over 2-3 years. Migration is usually cheaper long-term. |
-| "We'll deprecate it after we finish the new system" | Deprecation planning starts at design time. By the time the new system is done, you'll have new priorities. Plan now. |
-| "Users will migrate on their own" | They won't. Provide tooling, documentation, and incentives — or do the migration yourself (the Churn Rule). |
-| "We can maintain both systems indefinitely" | Two systems doing the same thing is double the maintenance, testing, documentation, and onboarding cost. |
+| 借口                         | 现实                                                                       |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| “它还能用，为什么要移除？”   | 没人维护但能工作的代码会悄悄积累安全债务和复杂度。维护成本在无声增长。     |
+| “将来可能有人需要它”         | 如果将来需要，到时可以重建。保留不用的代码带来的成本远高于重建的成本。     |
+| “迁移太昂贵了”               | 将迁移成本与未来 2-3 年的持续维护成本进行比较。从长远看，迁移通常更便宜。  |
+| “等新系统完成之后我们就弃用” | 弃用规划始于设计阶段。等到新系统完成时，你会有新的优先级。现在就开始规划。 |
+| “用户会自己迁移的”           | 他们不会。提供工具、文档和激励措施 —— 或者由你亲自执行迁移（扰动规则）。   |
+| “我们可以无限期维护两个系统” | 两个系统做同一件事，意味着双倍的维护、测试、文档和入职成本。               |
 
-## Red Flags
+## 警示信号
 
-- Deprecated systems with no replacement available
-- Deprecation announcements with no migration tooling or documentation
-- "Soft" deprecation that's been advisory for years with no progress
-- Zombie code with no owner and active consumers
-- New features added to a deprecated system (invest in the replacement instead)
-- Deprecation without measuring current usage
-- Removing code without verifying zero active consumers
+- 已弃用的系统没有可用的替代方案
+- 弃用公告没有配套的迁移工具或文档
+- 处于“建议”状态多年的“软”弃用没有进展
+- 无人认领却存在活跃消费者的僵尸代码
+- 在已弃用的系统上添加新功能（应将投入放在替代方案上）
+- 未衡量当前使用量就宣布弃用
+- 未确认零活跃消费者就移除代码
 
-## Verification
+## 完成确认
 
-After completing a deprecation:
+弃用完成后：
 
-- [ ] Replacement is production-proven and covers all critical use cases
-- [ ] Migration guide exists with concrete steps and examples
-- [ ] All active consumers have been migrated (verified by metrics/logs)
-- [ ] Old code, tests, documentation, and configuration are fully removed
-- [ ] No references to the deprecated system remain in the codebase
-- [ ] Deprecation notices are removed (they served their purpose)
+- [ ] 替代方案已在生产环境验证，并覆盖所有关键用例
+- [ ] 存在包含具体步骤和示例的迁移指南
+- [ ] 所有活跃消费者已完成迁移（通过指标/日志验证）
+- [ ] 旧代码、测试、文档和配置已被完全移除
+- [ ] 代码库中不存在任何对已弃用系统的引用
+- [ ] 弃用公告已移除（它们已尽其用）

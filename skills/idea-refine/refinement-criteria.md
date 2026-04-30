@@ -1,113 +1,126 @@
-# Refinement & Evaluation Criteria
+# 精炼与评估标准
 
-Use this rubric during Phase 2 (Evaluate & Converge) to stress-test idea directions. Not every criterion applies to every idea — use judgment about which dimensions matter most for the specific context.
+在第二阶段（评估与收敛）使用本评分标准对创意方向进行压力测试。并非每条标准都适用于每个创意——请根据具体情境判断哪些维度最为关键。
 
-## Core Evaluation Dimensions
+## 核心评估维度
 
-### 1. User Value
+### 1. 用户价值
 
-The most important dimension. If the value isn't clear, nothing else matters.
+最重要的维度。如果价值不清晰，其他一切都没有意义。
 
-**Painkiller vs. Vitamin:**
-- **Painkiller:** Solves an acute, frequent problem. Users will actively seek this out. They'll switch from their current solution. Signs: people describe the problem with emotion, they've built workarounds, they'll pay for a solution.
-- **Vitamin:** Nice to have. Makes something marginally better. Users won't go out of their way. Signs: people nod politely, say "that's cool," then don't change behavior.
+**止痛药 vs. 维生素：**
 
-**Questions to ask:**
-- Can you name 3 specific people who have this problem right now?
-- What are they doing today instead? (The real competitor is always the current workaround.)
-- Would they switch from their current approach? What would make them switch?
-- How often do they encounter this problem? (Daily problems > monthly problems)
-- Is this a "pull" problem (users are asking for this) or a "push" problem (you think they should want this)?
+- **止痛药：** 解决一个尖锐、高频的问题。用户会主动寻找这类方案。他们会从当前解决方案切换过来。信号：人们带着情绪描述问题，他们已经建立了变通做法，他们愿意为此付费。
+- **维生素：** 锦上添花。让某些事情好一点点。用户不会特意费心去用。信号：人们礼貌点头，说“这很酷”，但不会改变行为。
 
-**Red flags:**
-- "Everyone could use this" — if you can't name a specific user, the value isn't clear
-- "It's like X but better" — marginal improvements rarely drive adoption
-- The problem is real but rare — high intensity but low frequency rarely justifies a product
+**需要追问的问题：**
 
-### 2. Feasibility
+- 你能说出 3 个此刻正面临这个问题的具体的人吗？
+- 他们现在在用什么方法应对？（真正的竞品永远是当下的变通做法。）
+- 他们愿意从当前做法切换过来吗？什么会促使他们切换？
+- 他们多久会遇到一次这个问题？（每日出现的问题 > 每月出现的问题）
+- 这是一个“拉”的问题（用户主动寻求解决方案）还是一个“推”的问题（你认为他们应该想要这个）？
 
-Can you actually build this? Not just technically, but practically.
+**危险信号：**
 
-**Technical feasibility:**
-- Does the core technology exist and work reliably?
-- What's the hardest technical problem? Is it a known-hard problem or a novel one?
-- Are there dependencies on third parties, APIs, or data sources you don't control?
-- What's the minimum technical stack needed? (If the answer is "a lot," that's a signal.)
+- “每个人都能用得上”——如果你无法指出一个具体的用户，价值就不清晰
+- “它就像 X，但更好”——边际改进很少能驱动采用
+- 问题真实但罕见——高强度但低频次的困扰很少能支撑一个产品
 
-**Resource feasibility:**
-- What's the minimum team/effort to build an MVP?
-- Does it require specialized expertise you don't have?
-- Are there regulatory, legal, or compliance requirements?
+### 2. 可行性
 
-**Time-to-value:**
-- How quickly can you get something in front of users?
-- Is there a version that delivers value in days/weeks, not months?
-- What's the critical path? What has to happen first?
+你真的能把它做出来吗？不仅是技术上，还包括实际层面。
 
-**Red flags:**
-- "We just need to solve [very hard research problem] first"
-- Multiple dependencies that all need to work simultaneously
-- MVP still requires months of work — likely not minimal enough
+**技术可行性：**
 
-### 3. Differentiation
+- 核心技术是否存在且能可靠运行？
+- 最棘手的技术难题是什么？是公认的难题还是一个全新的难题？
+- 是否存在对你不掌控的第三方、API 或数据源的依赖？
+- 所需的最小技术栈是什么？（如果答案是“需要很多”，那是一个信号。）
 
-What makes this genuinely different? Not better — *different*.
+**资源可行性：**
 
-**Questions to ask:**
-- If a user described this to a friend, what would they say? Is that description compelling?
-- What's the one thing this does that nothing else does? (If you can't name one, that's a problem.)
-- Is this differentiation durable? Can a competitor copy it in a week?
-- Is the difference something users actually care about, or just something builders find interesting?
+- 构建 MVP 所需的最小团队或精力是多少？
+- 是否需要你不具备的专业知识？
+- 是否存在监管、法律或合规要求？
 
-**Types of differentiation (strongest to weakest):**
-1. **New capability:** Does something that was previously impossible
-2. **10x improvement:** So much better on a key dimension that it changes behavior
-3. **New audience:** Brings an existing capability to people who were excluded
-4. **New context:** Works in a situation where existing solutions fail
-5. **Better UX:** Same capability, dramatically simpler experience
-6. **Cheaper:** Same thing, lower cost (weakest — easily competed away)
+**价值实现时间：**
 
-**Red flags:**
-- Differentiation is entirely about technology, not user experience
-- "We're faster/cheaper/prettier" without a structural reason why
-- The feature that differentiates is not the feature users care most about
+- 你需要多快能把东西放到用户面前？
+- 是否存在一个能在几天或几周内交付价值的版本，而非数月？
+- 关键路径是什么？必须先完成的是什么？
 
-## Assumption Audit
+**危险信号：**
 
-For every idea direction, explicitly list assumptions in three categories:
+- “我们只需要先解决[某个极难的研究问题]”
+- 多个依赖项需要同时就绪
+- MVP 仍需数月工作——可能还不够精简
 
-### Must Be True (Dealbreakers)
-Assumptions that, if wrong, kill the idea entirely. These need validation before building.
+### 3. 差异化
 
-Example: "Users will share their data with us" — if they won't, the entire product doesn't work.
+是什么让它真正地与众不同？不是更好——而是*不同*。
 
-### Should Be True (Important)
-Assumptions that significantly impact success but don't kill the idea. You can adjust the approach if these are wrong.
+**需要追问的问题：**
 
-Example: "Users prefer self-serve over talking to a person" — if wrong, you need a different go-to-market, but the core product can still work.
+- 如果用户向朋友描述该产品，他们会怎么说？这个描述是否有吸引力？
+- 这件事做到了一件其他产品做不到的事情，那是什么？（如果你说不出一个点，那就有问题。）
+- 这个差异化能持久吗？竞争对手能否在一周内复制？
+- 这个差异是用户真正关心的，还是只有构建者感兴趣？
 
-### Might Be True (Nice to Have)
-Assumptions about secondary features or optimizations. Don't validate these until the core is proven.
+**差异化类型（从最强到最弱）：**
 
-Example: "Users will want to share their results with teammates" — a growth feature, not a core value proposition.
+1. **新能力：** 做到了以前不可能做到的事
+2. **10 倍提升：** 在某个关键维度上远超以往，足以改变行为
+3. **新受众：** 将现有能力带给以前被排除在外的人
+4. **新场景：** 在现有解决方案失效的情境下发挥作用
+5. **更好的用户体验：** 相同能力，体验极大简化
+6. **更便宜：** 做同样的事，成本更低（最弱——极易被价格战消解）
 
-## Decision Framework
+**危险信号：**
 
-When choosing between directions, rank on this matrix:
+- 差异化完全在于技术，而非用户体验
+- “我们更快/更便宜/更好看”，但没有结构性的原因支撑
+- 构成差异化的功能，并非用户最关心的功能
 
-|                    | High Feasibility | Low Feasibility |
-|--------------------|-------------------|-----------------|
-| **High Value**     | Do this first     | Worth the risk   |
-| **Low Value**      | Only if trivial   | Don't do this    |
+## 假设审计
 
-Then use differentiation as the tiebreaker between options in the same quadrant.
+针对每个创意方向，明确列出三个类别的假设：
 
-## MVP Scoping Principles
+### 必须为真（一票否决）
 
-When defining MVP scope for the chosen direction:
+这些假设如果错误，会彻底扼杀这个创意。在构建之前就必须验证。
 
-1. **One job, done well.** The MVP should nail exactly one user job. Not three jobs done partially.
-2. **The riskiest assumption first.** The MVP's primary purpose is to test the assumption most likely to be wrong.
-3. **Time-box, not feature-list.** "What can we build and test in [timeframe]?" is better than "What features do we need?"
-4. **The 'Not Doing' list is mandatory.** Explicitly name what you're cutting and why. This prevents scope creep and forces honest prioritization.
-5. **If it's not embarrassing, you waited too long.** The first version should feel incomplete to the builder. If it doesn't, you over-built.
+示例：“用户会愿意向我们分享他们的数据”——如果他们不愿意，整个产品就无法运作。
+
+### 应该为真（重要）
+
+这些假设会显著影响成功与否，但不至于直接终结创意。如果此类假设错误，你可以调整方法。
+
+示例：“相比与人沟通，用户更偏好自助服务”——如果错了，你可能需要采用不同的市场进入策略，但核心产品仍可运作。
+
+### 可能为真（锦上添花）
+
+关于次要功能或优化的假设。核心价值被证实之前，不要验证这些。
+
+示例：“用户会希望与队友分享他们的结果”——这是一个增长性功能，而非核心价值主张。
+
+## 决策框架
+
+在选择不同方向时，使用以下矩阵进行排名：
+
+|            | 高可行性     | 低可行性   |
+| ---------- | ------------ | ---------- |
+| **高价值** | 优先做这个   | 值得冒险   |
+| **低价值** | 除非毫不费力 | 不要做这个 |
+
+然后用差异化作为同一象限内选项之间的胜负手。
+
+## MVP 范围界定原则
+
+在确定选定方向的 MVP 范围时：
+
+1. **把一个任务做好。** MVP 应该精准搞定一个用户任务。而不是三个任务都做得半生不熟。
+2. **最先验证风险最高的假设。** MVP 的主要目的是测试那个最容易出错的假设。
+3. **用时间盒，而不是功能列表。** “我们在[时间框架]内能构建并测试什么？”此问法优于“我们需要哪些功能？”
+4. **“不做的事”清单是强制性的。** 明确列出你砍掉的内容及其原因。这能防止范围蔓延，并迫使你诚实地进行优先级排序。
+5. **如果你不为它感到难为情，那你就等太久了。** 第一个版本应该让构建者感觉不完整。如果没这种感觉，说明你过度构建了。

@@ -1,223 +1,243 @@
 ---
 name: planning-and-task-breakdown
-description: Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks. Use when a task feels too large to start, when you need to estimate scope, or when parallel work is possible.
+description: 将工作拆解为有序任务。当你已有规范说明或明确需求，且需要将工作拆解为可执行的任务时使用此模式。用于任务感觉太大无从下手、需要估算范围，或存在并行工作可能性的场景。
 ---
 
-# Planning and Task Breakdown
+# 规划与任务拆解
 
-## Overview
+## 概述
 
-Decompose work into small, verifiable tasks with explicit acceptance criteria. Good task breakdown is the difference between an agent that completes work reliably and one that produces a tangled mess. Every task should be small enough to implement, test, and verify in a single focused session.
+将工作分解为小型、可验证的任务，并附上明确的验收标准。优秀的任务拆解，是智能体能够可靠完成工作，还是产出一团乱麻的分水岭。每个任务都应足够小，以便在单次专注的会话中完成实现、测试和验证。
 
-## When to Use
+## 适用场景
 
-- You have a spec and need to break it into implementable units
-- A task feels too large or vague to start
-- Work needs to be parallelized across multiple agents or sessions
-- You need to communicate scope to a human
-- The implementation order isn't obvious
+- 当你已有规范说明，需要将其拆解为可实现的单元时
+- 当一个任务感觉太大或太模糊而无法启动时
+- 当工作需要在多个智能体或会话之间并行处理时
+- 当需要向人类沟通工作范围时
+- 当实现顺序尚不明确时
 
-**When NOT to use:** Single-file changes with obvious scope, or when the spec already contains well-defined tasks.
+**不适用场景：** 范围明显的单文件修改，或规范说明中已包含良好定义的任务时。
 
-## The Planning Process
+## 规划流程
 
-### Step 1: Enter Plan Mode
+### 步骤 1：进入规划模式
 
-Before writing any code, operate in read-only mode:
+在编写任何代码之前，先以只读模式操作：
 
-- Read the spec and relevant codebase sections
-- Identify existing patterns and conventions
-- Map dependencies between components
-- Note risks and unknowns
+- 阅读规范说明和相关的代码库部分
+- 识别现有的模式和约定
+- 梳理组件之间的依赖关系
+- 记录风险和未知因素
 
-**Do NOT write code during planning.** The output is a plan document, not implementation.
+**在规划期间不要编写代码。** 输出物是一份规划文档，而非实现。
 
-### Step 2: Identify the Dependency Graph
+### 步骤 2：识别依赖图
 
-Map what depends on what:
+梳理清楚谁依赖谁：
 
 ```
-Database schema
+数据库模式
     │
-    ├── API models/types
+    ├── API 模型/类型
     │       │
-    │       ├── API endpoints
+    │       ├── API 端点
     │       │       │
-    │       │       └── Frontend API client
+    │       │       └── 前端 API 客户端
     │       │               │
-    │       │               └── UI components
+    │       │               └── UI 组件
     │       │
-    │       └── Validation logic
+    │       └── 验证逻辑
     │
-    └── Seed data / migrations
+    └── 种子数据 / 迁移
 ```
 
-Implementation order follows the dependency graph bottom-up: build foundations first.
+实现顺序应遵循依赖图自底向上：先构建基础。
 
-### Step 3: Slice Vertically
+### 步骤 3：垂直切分
 
-Instead of building all the database, then all the API, then all the UI — build one complete feature path at a time:
+与其先构建所有数据库层，再构建所有 API 层，最后构建所有 UI 层——不如一次构建一个完整的功能路径：
 
-**Bad (horizontal slicing):**
+**不好的做法（水平切分）：**
+
 ```
-Task 1: Build entire database schema
-Task 2: Build all API endpoints
-Task 3: Build all UI components
-Task 4: Connect everything
-```
-
-**Good (vertical slicing):**
-```
-Task 1: User can create an account (schema + API + UI for registration)
-Task 2: User can log in (auth schema + API + UI for login)
-Task 3: User can create a task (task schema + API + UI for creation)
-Task 4: User can view task list (query + API + UI for list view)
+任务 1：构建整个数据库模式
+任务 2：构建所有 API 端点
+任务 3：构建所有 UI 组件
+任务 4：连接所有部分
 ```
 
-Each vertical slice delivers working, testable functionality.
+**好的做法（垂直切分）：**
 
-### Step 4: Write Tasks
+```
+任务 1：用户可以创建账户（注册功能的模式 + API + UI）
+任务 2：用户可以登录（认证功能的模式 + API + UI）
+任务 3：用户可以创建任务（创建任务的模式 + API + UI）
+任务 4：用户可以查看任务列表（查询功能 + API + 列表视图 UI）
+```
 
-Each task follows this structure:
+每个垂直切片都能交付可运行、可测试的功能。
+
+### 步骤 4：编写任务
+
+每个任务都遵循以下结构：
 
 ```markdown
-## Task [N]: [Short descriptive title]
+## 任务 [N]：[简短的描述性标题]
 
-**Description:** One paragraph explaining what this task accomplishes.
+**描述：** 用一段话解释此任务要完成什么。
 
-**Acceptance criteria:**
-- [ ] [Specific, testable condition]
-- [ ] [Specific, testable condition]
+**验收标准：**
 
-**Verification:**
-- [ ] Tests pass: `npm test -- --grep "feature-name"`
-- [ ] Build succeeds: `npm run build`
-- [ ] Manual check: [description of what to verify]
+- [ ] [具体的、可测试的条件]
+- [ ] [具体的、可测试的条件]
 
-**Dependencies:** [Task numbers this depends on, or "None"]
+**验证方式：**
 
-**Files likely touched:**
+- [ ] 测试通过：`npm test -- --grep "功能名称"`
+- [ ] 构建成功：`npm run build`
+- [ ] 手动检查：[描述要验证的内容]
+
+**依赖项：** [此任务依赖的任务编号，或“无”]
+
+**可能涉及的文件：**
+
 - `src/path/to/file.ts`
 - `tests/path/to/test.ts`
 
-**Estimated scope:** [Small: 1-2 files | Medium: 3-5 files | Large: 5+ files]
+**预估范围：** [小：1-2 个文件 | 中：3-5 个文件 | 大：5 个以上文件]
 ```
 
-### Step 5: Order and Checkpoint
+### 步骤 5：排序与检查点
 
-Arrange tasks so that:
+按以下方式排列任务：
 
-1. Dependencies are satisfied (build foundation first)
-2. Each task leaves the system in a working state
-3. Verification checkpoints occur after every 2-3 tasks
-4. High-risk tasks are early (fail fast)
+1.  依赖关系得到满足（先构建基础）
+2.  每个任务执行完毕后，系统都保持可工作的状态
+3.  每完成 2-3 个任务后，设置验证检查点
+4.  高风险任务排在前面（尽早失败）
 
-Add explicit checkpoints:
+添加明确的检查点：
 
 ```markdown
-## Checkpoint: After Tasks 1-3
-- [ ] All tests pass
-- [ ] Application builds without errors
-- [ ] Core user flow works end-to-end
-- [ ] Review with human before proceeding
+## 检查点：完成任务 1-3 之后
+
+- [ ] 所有测试通过
+- [ ] 应用可以无错误地构建
+- [ ] 核心用户流程可以端到端跑通
+- [ ] 继续前需经人类审查
 ```
 
-## Task Sizing Guidelines
+## 任务粒度指南
 
-| Size | Files | Scope | Example |
-|------|-------|-------|---------|
-| **XS** | 1 | Single function or config change | Add a validation rule |
-| **S** | 1-2 | One component or endpoint | Add a new API endpoint |
-| **M** | 3-5 | One feature slice | User registration flow |
-| **L** | 5-8 | Multi-component feature | Search with filtering and pagination |
-| **XL** | 8+ | **Too large — break it down further** | — |
+| 大小     | 文件数 | 范围                      | 示例                   |
+| -------- | ------ | ------------------------- | ---------------------- |
+| **超小** | 1      | 单一函数或配置更改        | 添加一个验证规则       |
+| **小**   | 1-2    | 一个组件或端点            | 添加一个新的 API 端点  |
+| **中**   | 3-5    | 一个功能切片              | 用户注册流程           |
+| **大**   | 5-8    | 多组件功能                | 带筛选和分页的搜索功能 |
+| **超大** | 8+     | **过大 — 需要进一步拆解** | —                      |
 
-If a task is L or larger, it should be broken into smaller tasks. An agent performs best on S and M tasks.
+如果一个任务是大或超大，应将其拆分为更小的任务。智能体处理小和中任务时表现最佳。
 
-**When to break a task down further:**
-- It would take more than one focused session (roughly 2+ hours of agent work)
-- You cannot describe the acceptance criteria in 3 or fewer bullet points
-- It touches two or more independent subsystems (e.g., auth and billing)
-- You find yourself writing "and" in the task title (a sign it is two tasks)
+**何时应进一步拆解任务：**
 
-## Plan Document Template
+- 预计花费超过单次专注会话的时间（大约 2 小时以上的智能体工作时长）
+- 无法在 3 个或更少的要点内描述清楚验收标准
+- 涉及两个或以上独立的子系统（例如，认证和计费）
+- 发现自己在任务标题中使用了“和”字（这是两个任务的信号）
+
+## 规划文档模板
 
 ```markdown
-# Implementation Plan: [Feature/Project Name]
+# 实现计划：[功能/项目名称]
 
-## Overview
-[One paragraph summary of what we're building]
+## 概述
 
-## Architecture Decisions
-- [Key decision 1 and rationale]
-- [Key decision 2 and rationale]
+[用一段话总结我们要构建的内容]
 
-## Task List
+## 架构决策
 
-### Phase 1: Foundation
-- [ ] Task 1: ...
-- [ ] Task 2: ...
+- [关键决策 1 及其理由]
+- [关键决策 2 及其理由]
 
-### Checkpoint: Foundation
-- [ ] Tests pass, builds clean
+## 任务列表
 
-### Phase 2: Core Features
-- [ ] Task 3: ...
-- [ ] Task 4: ...
+### 阶段 1：基础
 
-### Checkpoint: Core Features
-- [ ] End-to-end flow works
+- [ ] 任务 1: ...
+- [ ] 任务 2: ...
 
-### Phase 3: Polish
-- [ ] Task 5: ...
-- [ ] Task 6: ...
+### 检查点：基础
 
-### Checkpoint: Complete
-- [ ] All acceptance criteria met
-- [ ] Ready for review
+- [ ] 测试通过，构建干净
 
-## Risks and Mitigations
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| [Risk] | [High/Med/Low] | [Strategy] |
+### 阶段 2：核心功能
 
-## Open Questions
-- [Question needing human input]
+- [ ] 任务 3: ...
+- [ ] 任务 4: ...
+
+### 检查点：核心功能
+
+- [ ] 端到端流程可运行
+
+### 阶段 3：打磨
+
+- [ ] 任务 5: ...
+- [ ] 任务 6: ...
+
+### 检查点：完成
+
+- [ ] 所有验收标准均已满足
+- [ ] 准备就绪，可供审查
+
+## 风险及缓解措施
+
+| 风险   | 影响       | 缓解策略 |
+| ------ | ---------- | -------- |
+| [风险] | [高/中/低] | [策略]   |
+
+## 待决问题
+
+- [需要人工输入的疑问]
 ```
 
-## Parallelization Opportunities
+## 并行化机会
 
-When multiple agents or sessions are available:
+当有多个智能体代理或会话可用时：
 
-- **Safe to parallelize:** Independent feature slices, tests for already-implemented features, documentation
-- **Must be sequential:** Database migrations, shared state changes, dependency chains
-- **Needs coordination:** Features that share an API contract (define the contract first, then parallelize)
+- **可安全并行：** 独立的功能切片、针对已实现功能的测试、文档
+- **必须顺序执行：** 数据库迁移、共享状态的变更、依赖链
+- **需要协调：** 共享同一 API 契约的功能（先定义契约，再并行实现）
 
-## Common Rationalizations
+## 常见借口辨析
 
-| Rationalization | Reality |
-|---|---|
-| "I'll figure it out as I go" | That's how you end up with a tangled mess and rework. 10 minutes of planning saves hours. |
-| "The tasks are obvious" | Write them down anyway. Explicit tasks surface hidden dependencies and forgotten edge cases. |
-| "Planning is overhead" | Planning is the task. Implementation without a plan is just typing. |
-| "I can hold it all in my head" | Context windows are finite. Written plans survive session boundaries and compaction. |
+| 借口                         | 现实                                                                 |
+| ---------------------------- | -------------------------------------------------------------------- |
+| “我边做边想”                 | 这就是你会搞出一团乱麻、需要返工的原因。花 10 分钟规划能节省数小时。 |
+| “任务显而易见”               | 还是要写下来。明确的任务能暴露隐藏的依赖和被遗忘的边界情况。         |
+| “规划是额外开销”             | 规划本身就是任务。没有计划的实现只是在打字。                         |
+| “我能把所有东西都记在脑子里” | 上下文窗口是有限的。书面的计划可以在会话边界和压缩后依然存在。       |
 
-## Red Flags
+## 危险信号
 
-- Starting implementation without a written task list
-- Tasks that say "implement the feature" without acceptance criteria
-- No verification steps in the plan
-- All tasks are XL-sized
-- No checkpoints between tasks
-- Dependency order isn't considered
+- 没有书面任务列表就开始实现
+- 任务只写了“实现某某功能”而没有验收标准
+- 计划中没有验证步骤
+- 所有任务都是超大规模的
+- 任务之间没有检查点
+- 未考虑依赖顺序
 
-## Verification
+## 验证
 
-Before starting implementation, confirm:
+在开始实现前，确认：
 
-- [ ] Every task has acceptance criteria
-- [ ] Every task has a verification step
-- [ ] Task dependencies are identified and ordered correctly
-- [ ] No task touches more than ~5 files
-- [ ] Checkpoints exist between major phases
-- [ ] The human has reviewed and approved the plan
+- [ ] 每个任务都有验收标准
+- [ ] 每个任务都有验证步骤
+- [ ] 任务依赖关系已确认且排序正确
+- [ ] 没有任何任务涉及超过约 5 个文件
+- [ ] 主要阶段之间存在检查点
+- [ ] 人类已经审查并批准了该计划
+
+将经过验证的计划文档保存至：docs/plans/<feature-name>/plan.md，并将任务列表(task list)产物保存至：docs/plans/<feature-name>/todo.md。
+注明：用户对计划产物保存位置的偏好设置将覆盖此默认值

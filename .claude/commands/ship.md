@@ -2,77 +2,71 @@
 description: 通过并行分发给专家角色执行发布前检查清单，然后综合得出“发布/不发布”决策
 ---
 
-Invoke the agent-skills:shipping-and-launch skill.
+调用 my-agent-skills:shipping-and-launch 技能。
 
-`/ship` is a **fan-out orchestrator**. It runs three specialist personas in parallel against the current change, then merges their reports into a single go/no-go decision with a rollback plan. The personas operate independently — no shared state, no ordering — which is what makes parallel execution safe and useful here.
+`/ship` 是一个**并行分发协调器**。它针对当前变更并行运行三个专家角色，然后将它们的报告合并为单一的“发布/不发布”决策及回滚计划。这些角色独立运作——无共享状态、无顺序依赖——这使得在此处进行并行执行既安全又有效。
 
-## Phase A — Parallel fan-out
+## A 阶段 — 并行分发
 
-Spawn three subagents concurrently using the Agent tool. **Issue all three Agent tool calls in a single assistant turn so they execute in parallel** — sequential calls defeat the purpose of this command.
+使用 Agent 工具并发启动三个子代理。**在一次助手回复中发出所有三个 Agent 工具调用，以便它们并行执行**——顺序调用会违背此命令的目的。
 
-In Claude Code, each call passes `subagent_type` matching the persona's `name` field:
+在 Claude Code 中，每次调用传递的 `subagent_type` 需匹配角色的 `name` 字段：
 
-1. **`code-reviewer`** — Run a five-axis review (correctness, readability, architecture, security, performance) on the staged changes or recent commits. Output the standard review template.
-2. **`security-auditor`** — Run a vulnerability and threat-model pass. Check OWASP Top 10, secrets handling, auth/authz, dependency CVEs. Output the standard audit report.
-3. **`test-engineer`** — Analyze test coverage for the change. Identify gaps in happy path, edge cases, error paths, and concurrency scenarios. Output the standard coverage analysis.
+1. **`code-reviewer`** — 对已暂存的变更或最近提交执行五维度审查（正确性、可读性、架构、安全性、性能）。输出标准审查模板。
+2. **`security-auditor`** — 执行漏洞和威胁模型检查。检查 OWASP Top 10、秘密信息处理、身份验证/授权、依赖项 CVE。输出标准审计报告。
+3. **`test-engineer`** — 分析变更的测试覆盖率。识别正常路径、边缘情况、错误路径和并发场景中的缺口。输出标准覆盖率分析。
 
-In other harnesses without an Agent tool, invoke each persona's system prompt sequentially and treat their outputs as if returned in parallel — the merge phase still works.
+在没有 Agent 工具的其他环境中，按顺序调用每个角色的系统提示，并将其输出视为并行返回——合并阶段仍然有效。
 
-Constraints (from Claude Code's subagent model):
+约束条件（来自 Claude Code 的子代理模型）：
+- 子代理不能生成其他子代理——不要让一个角色委托给另一个角色。
+- 每个子代理拥有自己的上下文窗口，并仅将其报告返回给主会话。
+- 如果你需要相互交谈而非仅汇报的队友，请使用 Claude Code Agent Teams，并将这些角色引用为队友类型（参见 `references/orchestration-patterns.md`）。
 
-- Subagents cannot spawn other subagents — do not let one persona delegate to another.
-- Each subagent gets its own context window and returns only its report to this main session.
-- If you need teammates that talk to each other instead of just reporting back, use Claude Code Agent Teams and reference these personas as teammate types (see `references/orchestration-patterns.md`).
+**角色解析。** 如果你在 `.claude/agents/` 或 `~/.claude/agents/` 中定义了自己的 `code-reviewer`、`security-auditor` 或 `test-engineer`，这些定义将优先于此插件的版本——`/ship` 会自动获取你的自定义设置。这是有意为之：插件子代理位于 Claude Code 范围优先级表的底部，因此用户级定义按设计胜出。
 
-**Persona resolution.** If you've defined your own `code-reviewer`, `security-auditor`, or `test-engineer` in `.claude/agents/` or `~/.claude/agents/`, those take precedence over this plugin's versions — `/ship` picks up your customizations automatically. This is intentional: plugin subagents sit at the bottom of Claude Code's scope priority table, so user-level definitions win by design.
+## B 阶段 — 在主上下文中合并
 
-## Phase B — Merge in main context
+当收到所有三份报告后，主代理（而非子角色）对其进行综合：
 
-Once all three reports are back, the main agent (not a sub-persona) synthesizes them:
+1. **代码质量** — 汇总来自 `code-reviewer` 的严重/重要发现以及任何失败的测试、代码检查或构建输出。解决审查者之间的重复项。
+2. **安全性** — 将任何 `security-auditor` 的严重/高优先级发现提升为发布阻碍项。与 `code-reviewer` 的安全性维度进行交叉参考。
+3. **性能** — 从 `code-reviewer` 的性能维度提取信息；如果适用，交叉检查 Core Web Vitals。
+4. **可访问性** — 验证键盘导航、屏幕阅读器支持、对比度（这三个角色未涵盖——在此处直接处理，或调用可访问性检查清单）。
+5. **基础设施** — 环境变量、迁移、监控、功能标志。直接验证。
+6. **文档** — README、ADR（架构决策记录）、变更日志。直接验证。
 
-1. **Code Quality** — Aggregate Critical/Important findings from `code-reviewer` and any failing tests, lint, or build output. Resolve duplicates between reviewers.
-2. **Security** — Promote any Critical/High `security-auditor` findings to launch blockers. Cross-reference with `code-reviewer`'s security axis.
-3. **Performance** — Pull from `code-reviewer`'s performance axis; cross-check Core Web Vitals if applicable.
-4. **Accessibility** — Verify keyboard nav, screen reader support, contrast (not covered by the three personas — handle directly here, or invoke the accessibility checklist).
-5. **Infrastructure** — Env vars, migrations, monitoring, feature flags. Verify directly.
-6. **Documentation** — README, ADRs, changelog. Verify directly.
+## C 阶段 — 决策与回滚
 
-## Phase C — Decision and rollback
-
-Produce a single output:
+生成单一输出：
 
 ```markdown
-## Ship Decision: GO | NO-GO
+## 发布决策：发布 (GO) | 不发布 (NO-GO)
 
-### Blockers (must fix before ship)
+### 阻碍项（发布前必须修复）
+- [来源角色：严重发现 + 文件:行号]
 
-- [Source persona: Critical finding + file:line]
+### 建议修复项（发布前应修复）
+- [来源角色：重要发现 + 文件:行号]
 
-### Recommended fixes (should fix before ship)
+### 已知风险（仍决定发布）
+- [风险 + 缓解措施]
 
-- [Source persona: Important finding + file:line]
+### 回滚计划
+- 触发条件：[哪些信号会促使回滚]
+- 回滚步骤：[确切步骤]
+- 恢复时间目标：[目标时间]
 
-### Acknowledged risks (shipping anyway)
-
-- [Risk + mitigation]
-
-### Rollback plan
-
-- Trigger conditions: [what signals would prompt rollback]
-- Rollback procedure: [exact steps]
-- Recovery time objective: [target]
-
-### Specialist reports (full)
-
-- [code-reviewer report]
-- [security-auditor report]
-- [test-engineer report]
+### 专家报告（完整）
+- [code-reviewer 报告]
+- [security-auditor 报告]
+- [test-engineer 报告]
 ```
 
-## Rules
+## 规则
 
-1. The three Phase A personas run in parallel — never sequentially.
-2. Personas do not call each other. The main agent merges in Phase B.
-3. The rollback plan is mandatory before any GO decision.
-4. If any persona returns a Critical finding, the default verdict is NO-GO unless the user explicitly accepts the risk.
-5. **Skip the fan-out only if all of the following are true:** the change touches 2 files or fewer, the diff is under 50 lines, and it does not touch auth, payments, data access, or config/env. Otherwise, default to fan-out. `/ship` is designed for production-bound changes — when the blast radius is non-trivial, run the parallel review even if the diff looks small.
+1. A 阶段的三个角色并行运行——绝不顺序运行。
+2. 角色之间互不调用。主代理在 B 阶段进行合并。
+3. 在任何“发布”决策之前，回滚计划是强制性的。
+4. 如果任何角色返回严重发现，默认裁决为“不发布”，除非用户明确接受该风险。
+5. **仅当满足以下所有条件时才跳过并行分发：** 变更涉及 2 个或更少文件，差异行数少于 50 行，且不涉及身份验证、支付、数据访问或配置/环境变量。否则，默认执行并行分发。`/ship` 专为面向生产的变更设计——当影响范围非微不足道时，即使差异看起来很小，也要运行并行审查。
