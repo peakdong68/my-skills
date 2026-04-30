@@ -139,7 +139,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 
 **“不做”清单可以说是最有价值的部分。** 专注关乎对好想法说不。明确这些权衡。
 
-询问用户是否要将此保存到 `docs/ideas/[idea-name].md`（或他们选择的位置）。仅在用户确认后才保存。
+询问用户是否要将此保存到 `docs/ideas/[idea-name].md`（或他们选择的位置）。仅在用户确认后才保存，并使用git commit 提交。。
 
 ### 应避免的反面模式
 
