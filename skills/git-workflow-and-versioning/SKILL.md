@@ -1,6 +1,6 @@
 ---
 name: git-workflow-and-versioning
-description: 构建 Git 工作流实践。进行任何代码更改时使用。在提交、分支、解决冲突时使用，或者在需要跨多个并行流组织工作时使用。
+description: 构建 Git 工作流实践。当 agent 执行以下任一 git 操作时激活：创建提交（git commit）、暂存变更（git add）、查看历史或差异（git log/diff）、创建或切换分支、解决合并冲突、使用 git worktree 隔离并行工作。被增量实现、代码审查、测试驱动开发、工作流验证等技能在涉及版本控制操作时内部引用。
 ---
 
 # Git 工作流与版本控制
