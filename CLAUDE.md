@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+重要说明！目录superpowers资源为参考资源，非本项目资源，仅作为参考
+
 # agent-skills
 
 面向 AI 编程代理的生产级工程技能集合——封装了资深工程师在构建软件时使用的完整工流程、质量门禁和最佳实践。本项目同时是一个 Claude Code 插件（通过 `.claude-plugin/plugin.json` 定义），安装后技能和代理角色会自动被发现。
