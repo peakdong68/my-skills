@@ -1,0 +1,14 @@
+---
+description: 对规范文档进行独立的三层质量审查——由独立子代理执行结构完整性、需求一致性和边界鲁棒性检查
+---
+
+调用 my-agent-skills:spec-review 技能。
+
+必选参数：Spec 文档路径（省略时自动选择 `docs/specs/` 下最新的 spec）。
+
+1. 使用 Agent 工具派发独立子代理（subagent_type: "general-purpose"）
+2. 子代理定位并读取 spec 文档
+3. 建立需求基线（对话上下文 + idea-refine 文档）
+4. 执行三层校验：L1 结构完整性 → L2 需求一致性 → L3 边界鲁棒性
+5. 产出结构化审查报告，按严重/重要/建议分类
+6. 呈现报告给用户，等待用户决定是否进入 plan
