@@ -173,7 +173,7 @@ Skills 是纯 Markdown 格式——它们适用于任何接受系统提示或指
 | [code-simplification](skills/code-simplification/SKILL.md)           | 切斯特顿的栅栏原则、500 行规则、在保留确切行为的同时降低复杂度                      | 代码能运行，但可读性或可维护性低于应有水平时 |
 | [security-and-hardening](skills/security-and-hardening/SKILL.md)     | OWASP Top 10 预防、认证模式、密钥管理、依赖审计、三层边界系统                       | 处理用户输入、认证、数据存储或外部集成时     |
 | [performance-optimization](skills/performance-optimization/SKILL.md) | 测量优先方法 - Core Web Vitals 目标、分析工作流、包分析、反模式检测                 | 存在性能要求或你怀疑有回归时                 |
-| [workflow-verification](skills/workflow-verification/SKILL.md)       | 从 git log 反推任务完成状态、与计划验证点比对、重写 todo.md 和 plan.md、产出验证报告 | 审查完成后、发布前，作为工作流收口步骤         |
+| [workflow-verification](skills/workflow-verification/SKILL.md)       | 从 git log 反推任务完成状态、与计划验证点比对、重写 tplan.md、产出验证报告 | 审查完成后、发布前，作为工作流收口步骤         |
 
 ### Ship - 自信部署
 
