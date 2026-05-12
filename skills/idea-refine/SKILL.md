@@ -28,7 +28,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 想法文档只是"概念"，不是"设计"。跳过规范步骤直接写代码，等同于拿着餐巾纸草图就开始盖楼。
 
 **偏离协议：** 如果你（代理）在任何阶段认为某个步骤可以跳过——常见合理化包括"改动很小""只是修 bug""只是一个文件""用户已经说可以开始做"——你**必须**执行以下三步，缺一不可：
-1. **声明流程要求：** 先说明流程原本要求你接下来做什么（例如："按照流程，下一步应该写设计文档到 docs/plans/，然后用 writing-plans 做实现计划"）
+1. **声明流程要求：** 先说明流程原本要求你接下来做什么（例如："按照流程，下一步应该写设计文档到 docs/spec/，然后用 writing-plans 做实现计划"）
 2. **说明偏离理由：** 再说明你为什么判断这次可以不同（例如："这次的变更范围很小——单文件、加一个中间件、无 API 变更"）
 3. **请求用户裁决：** 明确询问用户是否同意跳过这些步骤
 
@@ -37,7 +37,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 
 ## 输出
 
-最终输出是一份 markdown 单页文档，保存至 `docs/ideas/[idea-name].md`（经用户确认后），包含：
+最终输出是一份 markdown 单页文档，保存至 `docs/spec/feature_<date>_<id>_<topic>/idea.md`（经用户确认后），包含：
 
 - 问题陈述
 - 推荐方向
@@ -49,8 +49,8 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 
 想法文档保存后，**不要**直接开始编写代码。必须按顺序执行：
 
-1. 调用 `spec-driven-development` 技能 → 产出结构化规范文档（`docs/specs/`）
-2. 建议运行 `spec-review` 技能 → 独立审查规范质量
+1. 调用 `spec-driven-development` 技能 → 产出结构化规范文档（保存至 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`）
+2. 调用 `spec-review` 技能 → 独立审查规范质量
 3. 调用 `planning-and-task-breakdown` 技能 → 产出实现计划和任务清单
 4. 然后才能开始实现
 
@@ -163,7 +163,7 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 
 **“不做”清单可以说是最有价值的部分。** 专注关乎对好想法说不。明确这些权衡。
 
-询问用户是否要将此保存到 `docs/ideas/[idea-name].md`（或他们选择的位置）。仅在用户确认后才保存，并使用git commit 提交。。
+询问用户是否要将此保存到 `docs/spec/feature_<date>_<id>_<topic>/idea.md`（或他们选择的位置）。仅在用户确认后才保存，并使用git commit 提交。。
 
 ### 应避免的反面模式
 

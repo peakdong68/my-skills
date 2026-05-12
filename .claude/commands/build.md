@@ -2,7 +2,7 @@
 description: 增量式实现下一个任务——构建、测试、验证、提交
 ---
 
-同时调用 my-agent-skills:incremental-implementation 技能和 my-agent-skills:test-driven-development 技能。
+同时调用 my-agent-skills:incremental-implementation 技能和 my-agent-skills:test-driven-development 技能，一次执行一个任务。使用`context-engineering`在每一步加载正确的计划任务部分和源文件，而不是用整个计划任务淹没代理。
 
 从计划中选取下一个待处理任务。对于每个任务：
 
