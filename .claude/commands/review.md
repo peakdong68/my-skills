@@ -2,15 +2,15 @@
 description: 执行五维度代码审查——正确性、可读性、架构、安全性、性能
 ---
 
-调用 my-agent-skills:code-review-and-quality 技能。
+调用 `my-agent-skills:code-review-and-quality` 技能。
 
 从以下五个维度审查当前变更（已暂存或最近的提交）。审查前，先调用 `my-agent-skills:git-workflow-and-versioning` 获取变更范围——通过 `git diff --staged` 或 `git log` 确定待审查的文件清单和提交范围：
 
 1. **正确性** — 是否符合规范设计文档/计划任务文档(`spec-design.md、plan.md`)？是否处理了边缘情况？测试是否充分？
 2. **可读性** — 命名是否清晰？逻辑是否直观？组织是否良好？
 3. **架构** — 是否遵循现有模式？边界是否清晰？抽象层级是否恰当？
-4. **安全性** — 输入是否经过验证？秘密信息是否安全？是否检查了身份验证？（使用 security-and-hardening 技能）
-5. **性能** — 是否存在 N+1 查询？是否存在无界操作？（使用 performance-optimization 技能）
+4. **安全性** — 输入是否经过验证？秘密信息是否安全？是否检查了身份验证？（使用 `security-and-hardening` 技能）
+5. **性能** — 是否存在 N+1 查询？是否存在无界操作？（使用 `performance-optimization` 技能）
 
 将发现的问题分类为：严重、重要或建议。
 输出结构化审查报告，包含具体的文件:行号引用及修复建议。
