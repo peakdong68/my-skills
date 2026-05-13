@@ -11,9 +11,9 @@ description: 在编写代码前先制定结构化规范——通过硬门控、9
 
 将经过验证的规范文档写入 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`。用户确认后，立即调用 `git add` 暂存该文件，然后执行 `git commit -m "spec: add <topic> 设计规范"` 提交。
 
-<硬门控>
+<HARD-GATE>
 在展示设计并获得用户批准之前，**不得**调用任何实现技能、编写任何代码、搭建任何项目或采取任何实现行动。这适用于**所有**项目，无论其看似多么简单。
-</硬门控>
+</HARD-GATE>
 
 ## 何时使用
 
