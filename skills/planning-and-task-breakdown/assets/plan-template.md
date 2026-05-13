@@ -6,7 +6,7 @@
 
 **技术栈:** [框架、语言、关键依赖项及其版本]
 
-**设计文档:** [关联的 spec 文档路径，如 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`]
+**设计文档:** [关联的 spec 文档路径，如 `./spec-design.md`]
 
 **前置:** [前置计划或条件的说明，如 "plan-1.md（Task 1-4）已完成"]
 
