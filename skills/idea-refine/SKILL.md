@@ -48,14 +48,9 @@ bash "${CLAUDE_PLUGIN_ROOT}/idea-refine/scripts/idea-refine.sh"
 
 ## 完成后的下一步
 
-想法文档保存后，**不要**直接开始编写代码。必须按顺序执行：
+想法文档保存后，提示用户：
 
-1. 调用 `spec-driven-development` 技能 → 产出结构化规范文档（保存至 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`）
-2. 调用 `spec-review` 技能 → 独立审查规范质量
-3. 调用 `planning-and-task-breakdown` 技能 → 产出实现计划和任务清单
-4. 然后才能开始实现
-
-想法文档只回答了"我们构建什么？为什么？"，规范回答"我们如何构建？"，计划回答"按什么顺序构建？"。跳过任何一个阶段都会导致返工。
+> 想法文档已保存。是否还有其他问题需要继续沟通改进？如果没有，可以执行 `/spec` 产出结构化规范文档和实现计划。
 
 ## 详细说明
 
