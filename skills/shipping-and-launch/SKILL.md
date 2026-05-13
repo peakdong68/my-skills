@@ -314,3 +314,15 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 - [ ] 关键用户流程正常工作
 - [ ] 日志正在流动
 - [ ] 回滚已测试或已确认就绪
+
+## 发布后归档
+
+当 `/ship` 产出 **发布 (GO)** 决策后，提示用户执行 `/archive` 命令将已完成的功能目录归档：
+
+```
+发布决策为 GO。功能已完成并通过所有发布前检查。
+  如需归档该功能的 spec 目录，请执行:
+    /archive docs/spec/feature_<date>_<id>_<topic>/
+```
+
+归档应在 `/ship` 通过之后执行——如果发布检查发现阻塞项需要返工，功能目录必须保留在 `docs/spec/` 活跃区。

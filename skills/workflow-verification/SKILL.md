@@ -334,24 +334,18 @@ git log --oneline --name-status <first-commit>..HEAD
 就绪判定: ❌ 阻塞 — 关键检查点"核心功能"未通过（任务 4 无匹配提交）
 ```
 
-**4.5 归档提示**
+**4.5 下一步提示**
 
-当验证结论为 **✅ 全部通过** 且就绪判定为 **✅ 可以进入 /ship** 时，在终端输出后追加归档提示：
+当验证结论为 **✅ 全部通过** 且就绪判定为 **✅ 可以进入 /ship** 时，在终端输出后追加：
 
 ```
-✅ 全部验收项通过。是否将已完成的功能归档至 archive？
-  源: docs/spec/feature_<date>_<id>_<topic>/
-  目标: docs/spec/archive/feature_<date>_<id>_<topic>/
-  操作: git mv <源> <目标> && git commit -m "chore: 归档 feature_<date>_<id>_<topic> — 全部验证通过"
-
-[Y] 执行归档  [N] 跳过，保留在 spec/
+✅ 全部验收项通过。请执行 /ship 进入发布前检查。
 ```
 
 行为规则：
 
-- **用户选择 Y** → ★ 使用 `Task` 工具分派独立子代理执行归档（子代理类型: `general-purpose`，参照 `assets/spec-archive-prompt.md` 模板）。子代理负责：`git mv` 目录 → 更新 `docs/spec/global/index.md`（追加归档行 + 更新领域计数 + 更新页脚时间戳） → 单次 `chore:` 提交。主流程等待子代理返回提交 hash 确认后继续。
-- **用户选择 N** → 跳过，不做任何变更。功能目录保留在 `docs/spec/` 下。
-- **非全部通过（⚠️ 或 ❌）** → 不显示归档提示，因为功能仍有待处理项，不应归档。
+- **全部通过（✅）** → 提示用户执行 `/ship`
+- **非全部通过（⚠️ 或 ❌）** → 不提示 `/ship`，报告阻塞原因并由用户决定后续步骤
 
 ## 常见合理化借口
 
@@ -390,5 +384,5 @@ git log --oneline --name-status <first-commit>..HEAD
 - [ ] 验证报告已写入 `verify-report.md`（与 plan.md 同级目录），包含逐任务判定依据和就绪判定
 - [ ] 重复验证时报告包含 `## 与前次验证对比` 章节（任务状态变化、检查点变化、开放项收敛）
 - [ ] 终端已输出执行摘要 + 报告文件路径
-- [ ] 全部通过时已提示用户是否归档（用户确认后由独立子代理参照 `assets/spec-archive-prompt.md` 执行 `git mv` + 更新 `docs/spec/global/index.md` + 提交）
+- [ ] 全部通过时已提示用户可执行 `/ship` 命令
 - [ ] 致命阻塞项（关键检查点未通过）已在报告中明确标注

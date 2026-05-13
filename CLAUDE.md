@@ -36,8 +36,8 @@ docs/                      → 各工具的设置指南 + skill-anatomy.md
 ## 开发生命周期与命令
 
 ```
-DEFINE → PLAN → BUILD → VERIFY → REVIEW → VERIFY → SHIP
-/spec    /plan   /build   /test    /review   /verify   /ship
+DEFINE → PLAN → BUILD → VERIFY → REVIEW → VERIFY → SHIP → ARCHIVE
+/spec    /plan   /build   /test    /review   /sdd-verify   /ship   /archive
 ```
 
 每个命令自动激活对应的技能。技能也会根据意图自动激活——例如设计 API 会触发 `api-and-interface-design`，构建 UI 会触发 `frontend-ui-engineering`。
