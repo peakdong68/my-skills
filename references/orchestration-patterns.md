@@ -80,7 +80,7 @@ user → code-reviewer → report → user
 用户按定义好的顺序运行斜杠命令，并在步骤间传递上下文（或提交历史）。没有编排智能体——用户**就是**编排者。
 
 ```
-user runs:  /spec  →  /plan  →  /build  →  /test  →  /review  →  /ship
+user runs:  /spec  →  /planning  →  /build  →  /test  →  /review  →  /ship
 ```
 
 **适用场景：** 工作流存在依赖关系（每一步都需要上一步的输出），且步骤间的人工判断能带来额外价值。
@@ -315,7 +315,7 @@ Clean up the team
 
 ### C. 进行复述的串行编排器
 
-一个代表用户调用 `/spec`，然后 `/plan`，然后 `/build` 等的智能体。
+一个代表用户调用 `/spec`，然后 `/planning`，然后 `/build` 等的智能体。
 
 **失败原因：**
 - 丢失了能尽早发现方向错误的人工检查点

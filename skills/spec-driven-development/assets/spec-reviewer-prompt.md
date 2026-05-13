@@ -107,9 +107,9 @@ Task tool (general-purpose):
     ## Post-Review Handoff
 
     Based on the conclusion:
-    - **✓ Ready for planning** → Tell user: proceed to `/plan` or invoke `planning-and-task-breakdown`
-    - **⚠ Suggestions but can proceed** → List suggestions, let user decide; if confirmed, proceed to `/plan`
-    - **✗ Fix before planning** → List critical issues; user must fix spec and re-review before `/plan`
+    - **✓ Ready for planning** → Tell user: proceed to `/planning` or invoke `planning-and-task-breakdown`
+    - **⚠ Suggestions but can proceed** → List suggestions, let user decide; if confirmed, proceed to `/planning`
+    - **✗ Fix before planning** → List critical issues; user must fix spec and re-review before `/planning`
 
     Never skip directly to code implementation after review. The next step after spec review is always planning.
 ```
@@ -131,4 +131,4 @@ After the subagent returns, confirm:
 - [ ] Requirement baseline established with confidence source noted
 - [ ] Three-layer checks (L1/L2/L3) all completed
 - [ ] Review report includes specific section references and fix suggestions
-- [ ] Report presented to user, awaiting decision to proceed to `/plan`
+- [ ] Report presented to user, awaiting decision to proceed to `/planning`

@@ -107,7 +107,7 @@ YAML frontmatter（name、description）
 | 命令      | 调用的技能                                           |
 | --------- | ---------------------------------------------------- |
 | `/spec`   | spec-driven-development                              |
-| `/plan`   | planning-and-task-breakdown                          |
+| `/planning`   | planning-and-task-breakdown                          |
 | `/build`  | incremental-implementation + test-driven-development |
 | `/test`   | test-driven-development                              |
 | `/review` | code-review-and-quality                              |
@@ -128,7 +128,7 @@ YAML frontmatter（name、description）
 
 ## Spec 和任务产出物
 
-`/spec` 和 `/plan` 命令会创建工作产出物（`SPEC.md`、`tasks/plan.md`、`tasks/todo.md`）。在开发过程中，将它们视为**动态文档**：
+`/spec` 和 `/planning` 命令会创建工作产出物（`SPEC.md`、`plan.md`）。在开发过程中，将它们视为**动态文档**：
 
 - 在开发期间将它们放入版本控制中，这样开发者和智能体就有了一个共享的事实来源。
 - 当范围或决策发生变化时更新它们。

@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 skills/                    → 21 项核心技能（每个目录一个 SKILL.md）
 agents/                    → 3 个专业角色（code-reviewer, security-auditor, test-engineer）
 hooks/                     → 会话生命周期钩子脚本
-.claude/commands/          → 8 个斜杠命令（/spec, /plan, /build, /test, /review, /code-simplify, /verify, /ship）
+.claude/commands/          → 8 个斜杠命令（/spec, /planning, /build, /test, /review, /code-simplify, /verify, /ship）
 references/                → 4 份补充检查清单（testing, security, performance, accessibility）
 references/orchestration-patterns.md → 编排模式与反模式目录
 docs/                      → 各工具的设置指南 + skill-anatomy.md
@@ -37,7 +37,7 @@ docs/                      → 各工具的设置指南 + skill-anatomy.md
 
 ```
 DEFINE → PLAN → BUILD → VERIFY → REVIEW → VERIFY → SHIP → ARCHIVE
-/spec    /plan   /build   /test    /review   /sdd-verify   /ship   /archive
+/spec    /planning   /build   /test    /review   /sdd-verify   /ship   /archive
 ```
 
 每个命令自动激活对应的技能。技能也会根据意图自动激活——例如设计 API 会触发 `api-and-interface-design`，构建 UI 会触发 `frontend-ui-engineering`。

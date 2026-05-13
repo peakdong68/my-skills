@@ -131,7 +131,7 @@
 
 - 不创建 `agents/spec-reviewer.md`（MVP 阶段用 general-purpose 子代理，验证有效后再提取角色）
 - 不修改 `workflow-verification`（spec-review 是上游门禁，verify 是下游收口，职责不重叠）
-- 不修改 `/plan` 命令（plan 技能本身的前置检查引用已足够）
+- 不修改 `/planning` 命令（plan 技能本身的前置检查引用已足够）
 
 ## 独立实例机制
 

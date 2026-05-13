@@ -9,7 +9,7 @@
 核查发现，**整个命令链中没有任何一个环节真正更新 todo.md**：
 
 ```
-/plan → 产生 todo.md（全是 [ ]）
+/planning → 产生 todo.md（全是 [ ]）
 /build → 提交代码，todo.md 原封不动 ← 步骤 8 "标记任务为完成" 是死文字
 /test  → 运行测试，不碰 todo.md
 /review → 审查代码，不碰 todo.md
