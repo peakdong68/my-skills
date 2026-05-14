@@ -9,7 +9,7 @@ description: 在编写代码前先制定结构化规范——通过硬门控、9
 
 在编写任何代码之前，先通过结构化对话产出经过验证的规范文档。该规范是你与人类工程师共享的唯一事实来源——它定义了我们正在构建什么、为什么构建，以及如何判断是否完成。
 
-将经过验证的规范文档写入 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`。用户确认后，立即调用 `git add` 暂存该文件，然后执行 `git commit -m "spec: add <topic> 设计规范"` 提交。
+将经过验证的规范文档写入 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`（多阶段则为 `spec-design-<N>.md`）。用户确认后，立即调用 `git add` 暂存该文件，然后执行 `git commit -m "spec: add <topic> 设计规范"` 提交。
 
 <HARD-GATE>
 在展示设计并获得用户批准之前，**不得**调用任何实现技能、编写任何代码、搭建任何项目或采取任何实现行动。这适用于**所有**项目，无论其看似多么简单。
@@ -144,7 +144,7 @@ digraph spec_flow {
 
 ### 7. 编写设计文档
 
-将验证后的设计写入 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`，然后立即执行 `git add` 暂存该文件，随后 `git commit -m "spec: add <topic> 设计规范"` 提交。
+将验证后的设计写入 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`（多阶段则为 `spec-design-<N>.md`），然后立即执行 `git add` 暂存该文件，随后 `git commit -m "spec: add <topic> 设计规范"` 提交。
 
 ### 8. 规范自查
 
@@ -159,7 +159,7 @@ digraph spec_flow {
 
 在规范自查通过后，请用户在继续之前审查书面规范：
 
-> "规格说明已撰写并提交至 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`。独立审查已通过，审查报告如下：<简要摘要>。请审查，并在我们开始制定实现计划之前告诉我是否需要进行任何更改。"
+> "规格说明已撰写并提交至 `docs/spec/feature_<date>_<id>_<topic>/spec-design.md`（多阶段则为 spec-design-<N>.md）。独立审查已通过，审查报告如下：<简要摘要>。请审查，并在我们开始制定实现计划之前告诉我是否需要进行任何更改。"
 
 等待用户的回复。如果他们请求更改，进行修改并重新运行规范自查（步骤 8）。仅在用户批准后继续。
 
