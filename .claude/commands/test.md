@@ -17,3 +17,5 @@ description: 运行测试驱动开发 (TDD) 工作流——编写失败测试、
 5. 运行完整测试套件以检查回归问题
 
 对于浏览器相关问题，还需调用 my-agent-skills:browser-testing-with-devtools，以便通过 Chrome DevTools MCP 进行验证。
+
+完成通过后，撰写测试验证报告——保存至`docs/spec/feature_<date>_<id>_<topic>/test.md`，并在继续之前与用户确认

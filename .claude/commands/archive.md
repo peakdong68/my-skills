@@ -2,7 +2,7 @@
 description: 将已完成的功能目录归档至 docs/spec/archive/，更新全局 Spec 索引并提交
 ---
 
-将已完成验证的功能 spec 目录归档。
+将已完成验证的功能 spec 目录归档。归档前应先执行`documentation-and-adrs`记录决策与文档.
 
 ## 参数
 
