@@ -256,5 +256,5 @@ export function createTask(data: TaskInput, options?: { notify?: boolean }) {
 - [ ] 完整测试套件通过
 - [ ] 构建是干净的
 - [ ] 功能按照规范端到端工作
-- [ ] 任务标记为完成
+- [ ] 任务标记为完成 — plan.md 中对应任务 checkbox 是否从 `[ ]` 更新为 `[x]`
 - [ ] 没有未提交（git commit）的改动遗留
