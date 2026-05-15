@@ -8,5 +8,5 @@
   "homepage": "https://github.com/peakdong68/my-agent-skills",
   "repository": "https://github.com/peakdong68/my-agent-skills",
   "license": "MIT",
-  "commands": "./.claude/commands"
+  "commands": ".claude/commands"
 }
