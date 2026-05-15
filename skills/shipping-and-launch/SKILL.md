@@ -272,9 +272,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 ## 另请参阅
 
-- 关于安全预发布检查，请参阅 `references/security-checklist.md`
-- 关于性能预发布检查清单，请参阅 `references/performance-checklist.md`
-- 关于上线前可访问性验证，请参阅 `references/accessibility-checklist.md`
+- 关于安全预发布检查，请参阅 `code-review-and-quality/references/security-checklist.md`
+- 关于性能预发布检查清单，请参阅 `performance-optimization/references/performance-checklist.md`
+- 关于上线前可访问性验证，请参阅 `frontend-ui-engineering/references/accessibility-checklist.md`
 
 ## 常见借口
 

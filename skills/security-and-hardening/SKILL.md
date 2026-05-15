@@ -334,7 +334,7 @@ git diff --cached | grep -i "password\|secret\|api_key\|token"
 
 ## 另请参阅
 
-有关详细的安全检查清单和预提交验证步骤，请参阅 `references/security-checklist.md`。
+有关详细的安全检查清单和预提交验证步骤，请参阅 `code-review-and-quality/references/security-checklist.md`。
 
 ## 常见的合理化解
 
