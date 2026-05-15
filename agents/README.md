@@ -7,6 +7,8 @@
 | [code-reviewer](code-reviewer.md)       | 高级资深工程师 | 合并前的五轴审查                    |
 | [security-auditor](security-auditor.md) | 安全工程师     | 漏洞检测、OWASP 风格审计            |
 | [test-engineer](test-engineer.md)       | 质量保证工程师 | 测试策略、覆盖率分析、Prove-It 模式 |
+| [plan-checker](plan-checker.md)         | 计划审查员     | 实现计划三层审查（结构/覆盖/健壮性） |
+| [spec-reviewer](spec-reviewer.md)       | 规范审查员     | 规范文档三层审查（结构/一致性/鲁棒性） |
 
 ## 角色如何与技能和命令关联
 
@@ -109,7 +111,7 @@
 
 本仓库中的角色设计为无需修改即可作为 Claude Code 子智能体(subagents)和 Agent Teams 团队成员使用：
 
-- **作为子智能体(subagents)：** 启用此插件后自动发现（无需路径配置）。使用 Agent 工具时指定 `subagent_type: code-reviewer`（或 `security-auditor`、`test-engineer`）。`/ship` 是典型示例。
+- **作为子智能体(subagents)：** 启用此插件后自动发现（无需路径配置）。使用 `Agent`工具时指定 `subagent_type: code-reviewer`（或 `security-auditor`、`test-engineer`）。`/ship` 是典型示例。
 - **作为 Agent Teams 团队成员**（实验性，需要 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`）：启动团队成员时引用相同的角色名称。角色正文将**追加到**团队成员的系统提示词中作为附加指令（而非替换），因此你的角色文本将放置在主控安装的团队协调指令之上（SendMessage、task-list 工具等）。
 
 子智能体(subagents)仅将结果报告给主智能体。Agent Teams 允许团队成员互相直接通信。当报告已足够时，使用子智能体(subagents)；当子智能体(subagents)需要互相质疑对方发现时（例如竞争假设调试），使用 Agent Teams。完整映射请参见 [references/orchestration-patterns.md](../references/orchestration-patterns.md)。
