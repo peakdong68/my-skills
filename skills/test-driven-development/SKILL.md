@@ -326,6 +326,8 @@ describe('TaskService', () => {
 
 有关详细的 DevTools 设置说明和工作流，请参阅 `browser-testing-with-devtools`。
 
+**重要：** 浏览器调试结束后必须调用 `browser_close`（Playwright MCP）或 `close_page`（Chrome DevTools MCP）关闭浏览器，否则残留进程会锁定 `node_modules` 文件。
+
 ## 何时使用子代理进行测试
 
 对于复杂的 Bug 修复，启动一个子代理来编写重现测试：
@@ -377,3 +379,4 @@ describe('TaskService', () => {
 - [ ] 测试名称描述了正在验证的行为
 - [ ] 没有跳过或禁用任何测试
 - [ ] 覆盖率未下降（如果跟踪的话）
+- [ ] 若使用了浏览器调试，浏览器已通过 close_page / browser_close 关闭

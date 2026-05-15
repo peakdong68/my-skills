@@ -18,4 +18,7 @@ description: 运行测试驱动开发 (TDD) 工作流——编写失败测试、
 
 对于浏览器相关问题，还需调用 my-agent-skills:browser-testing-with-devtools，以便通过 Chrome DevTools MCP 进行验证。
 
+**注意：** 调试/测试完成后必须关闭浏览器——Chrome DevTools MCP 调用 close_page，Playwright MCP 调用 browser_close——避免残留进程锁定 node_modules。
+
+
 完成通过后，撰写测试验证报告——保存至`docs/spec/feature_<date>_<id>_<topic>/test.md`，并在继续之前与用户确认
