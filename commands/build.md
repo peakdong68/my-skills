@@ -2,7 +2,7 @@
 description: 增量式实现下一个任务——构建、测试、验证、提交
 ---
 
-同时调用 `incremental-implementation` 技能和 `test-driven-development` 技能，一次执行一个任务。使用`context-engineering`技能在每一步加载正确的计划任务部分和源文件，而不是用整个计划任务淹没代理。
+同时调用 my-agent-skills:incremental-implementation  技能和 my-agent-skills:test-driven-development 技能，一次执行一个任务。使用my-agent-skills:context-engineering 技能在每一步加载正确的计划任务部分和源文件，而不是用整个计划任务淹没代理。
 
 阅读计划，`docs/spec/feature_<date>_<id>_<topic>/plan.md`（多阶段则为 plan-<N>.md），提取的 checkbox 任务清单，创建 TodoWrite。
 

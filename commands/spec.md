@@ -2,7 +2,7 @@
 description: 启动规范驱动开发——在编写代码之前先撰写结构化规范
 ---
 
-调用 `spec-driven-development` 技能。
+调用 my-agent-skills:spec-driven-development 技能。
 
 首先了解用户想要构建的内容。针对以下方面提出澄清性问题：
 1. 目标和目标用户

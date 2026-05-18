@@ -2,7 +2,7 @@
 description: 运行测试驱动开发 (TDD) 工作流——编写失败测试、实现代码、验证。对于 Bug，使用“证明它” (Prove-It) 模式。
 ---
 
-调用 `test-driven-development` 技能。
+调用 my-agent-skills:test-driven-development 技能。
 
 对于新功能：
 1. 编写描述预期行为的测试（它们应当失败）
@@ -16,7 +16,7 @@ description: 运行测试驱动开发 (TDD) 工作流——编写失败测试、
 4. 确认测试通过
 5. 运行完整测试套件以检查回归问题
 
-对于浏览器相关问题，还需调用 `browser-testing-with-devtools`，以便通过 Chrome DevTools MCP 进行验证。
+对于浏览器相关问题，还需调用 my-agent-skills:browser-testing-with-devtools ，以便通过 Chrome DevTools MCP 进行验证。
 
 **注意：** 调试/测试完成后必须关闭浏览器——Chrome DevTools MCP 调用 close_page，Playwright MCP 调用 browser_close——避免残留进程锁定 node_modules。
 

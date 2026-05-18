@@ -2,14 +2,14 @@
 description: 验收检查任务清单，与计划验证点比对，从 git 历史反推任务完成状态，更新 plan.md 以反映最终真实状态，并产出验证报告。
 ---
 
-调用 `workflow-verification` 技能。
+调用 my-agent-skills:workflow-verification 技能。
 
 该命令是工作流收口步骤，在 `/review` 之后、`/ship` 之前执行。不信任 plan.md 中的 `[x]` 状态——从 git log 完全反推实际完成情况。分四个阶段：
 
 ## 阶段 1: 采集信号
 - 读取 `docs/spec/feature_<date>_<id>_<topic>/plan.md`（多阶段使用 `plan-<N>.md`） — 计划与检查点定义 + 任务 checkbox 骨架（忽略现有 `[ ]/[x]` 状态，仅提取任务 ID 和描述）
 - **检查已有 `verify-report.md`** — 首次验证正常执行；重复验证时读取旧报告，提取上次判定快照，本次产出的报告追加 `## 与前次验证对比` 章节（任务状态变化、检查点变化、开放项收敛）
-- ★ 涉及 git 操作前，先调用 `git-workflow-and-versioning` 获取提交格式规范与历史查询模式
+- ★ 涉及 git 操作前，先调用 my-agent-skills:git-workflow-and-versioning  获取提交格式规范与历史查询模式
 - 读取 `git log`（从计划创建至今，按 git-workflow-and-versioning 的提交格式解析）— 唯一可信的执行事实来源
 - 读取 `/review` 输出中的偏差记录表格
 - 采集当前代码状态（`git status`、`git diff` 未暂存变更、构建/测试结果）
