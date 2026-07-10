@@ -17,6 +17,7 @@
     "tdd",
     "code-review"
   ],
+  "commands": ["./commands/"],
   "skills": [
     "./skills/engineering/ask-matt",
     "./skills/engineering/diagnosing-bugs",
