@@ -14,7 +14,7 @@
 ```
 /plugin marketplace add peakdong68/my-skills
 
-/plugin install my-skills@peak-skills
+/plugin install my-skills@my-skills
 ```
 
 ``
