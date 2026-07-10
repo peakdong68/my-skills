@@ -1,19 +1,43 @@
 {
-  "name": "my-agent-skills",
-  "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship.",
-  "version": "1.0.8",
+  "name": "my-skills",
+  "description": "Production-grade engineering skills for AI coding agents.",
+  "version": "1.0.0",
   "author": {
     "name": "Peak Dong"
   },
-  "homepage": "https://github.com/peakdong68/my-agent-skills",
-  "repository": "https://github.com/peakdong68/my-agent-skills",
+  "homepage": "https://github.com/peakdong68/my-skills",
+  "repository": "https://github.com/peakdong68/my-skills",
   "license": "MIT",
   "keywords": [
     "skills",
+    "grill-with-docs",
+    "to-spec",
+    "to-tickets",
+    "implement",
     "tdd",
-    "debugging",
-    "collaboration",
-    "best-practices",
-    "workflows"
+    "code-review"
+  ],
+  "skills": [
+    "./skills/engineering/ask-matt",
+    "./skills/engineering/diagnosing-bugs",
+    "./skills/engineering/grill-with-docs",
+    "./skills/engineering/triage",
+    "./skills/engineering/improve-codebase-architecture",
+    "./skills/engineering/setup-matt-pocock-skills",
+    "./skills/engineering/tdd",
+    "./skills/engineering/to-spec",
+    "./skills/engineering/to-tickets",
+    "./skills/engineering/wayfinder",
+    "./skills/engineering/implement",
+    "./skills/engineering/prototype",
+    "./skills/engineering/research",
+    "./skills/engineering/domain-modeling",
+    "./skills/engineering/codebase-design",
+    "./skills/engineering/code-review",
+    "./skills/productivity/grill-me",
+    "./skills/productivity/grilling",
+    "./skills/productivity/handoff",
+    "./skills/productivity/teach",
+    "./skills/productivity/writing-great-skills"
   ]
 }

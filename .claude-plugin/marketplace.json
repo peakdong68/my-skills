@@ -1,19 +1,17 @@
 {
-  "name": "peak-agent-skills",
+  "name": "my-skills",
+  "description": "Production-grade engineering skills for AI coding agents ",
   "owner": {
     "name": "Peak Dong"
   },
-  "metadata": {
-    "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship."
-  },
   "plugins": [
     {
-      "name": "my-agent-skills",
+      "name": "my-skills",
       "source": {
         "source": "github",
-        "repo": "peakdong68/my-agent-skills"
+        "repo": "peakdong68/my-skills"
       },
-      "description": "Production-grade engineering skills covering every phase of software development: spec, plan, build, verify, review, and ship."
+      "description": ""
     }
   ]
 }
