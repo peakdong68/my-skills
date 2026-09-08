@@ -8,6 +8,8 @@ Do not use decomposition to reopen decisions already settled upstream.
 
 ## Storage
 
+Follow the artifact registry for current and historical work-item owners and tracker configuration for operations. Existing work stays with its owner unless explicitly migrated; registration changes alone do not create replacement tickets.
+
 Use the project's existing work-tracking mechanism.
 
 Tickets may be:

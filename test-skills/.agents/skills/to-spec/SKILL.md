@@ -18,6 +18,8 @@ Prefer updating an existing Spec for the same work. Reference information owned 
 
 Reuse project configuration. Missing tracker configuration does not prevent local drafting; handle publication requirements under Publishing.
 
+Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for Spec location, historical owners and lifecycle. Existing work remains with its owner unless explicitly migrated. Without a registry, reuse established conventions. An independent Spec does not move with a linked change record's delivery lifecycle.
+
 ## Rules
 
 ### 1. Synthesize, do not redesign

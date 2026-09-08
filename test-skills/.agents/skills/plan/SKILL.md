@@ -11,6 +11,8 @@ Planning is synthesis and decision completion, not a mandatory step for every en
 
 ## Authoritative work item
 
+Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for historical/current owners, destinations and lifecycle. Missing registration does not block planning; reuse established project conventions.
+
 Reuse the project's existing authoritative work item, such as an issue, Spec, accepted plan, or Proposal.
 
 Create a Proposal only when no suitable work item captures the goal, scope, and decision status.

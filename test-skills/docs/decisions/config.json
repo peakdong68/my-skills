@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "categories": [
+    { "id": "engineering", "name": "工程方法论", "scope": "本仓库交付的工程阶段编排、门禁及执行边界。" },
+    { "id": "skill-design", "name": "技能设计", "scope": "本仓库交付的技能职责、产物和触发方式。" },
+    { "id": "decision-records", "name": "变更记录工具", "scope": "本仓库提供的可复用记录规范、初始化资源和检查工具。" }
+  ]
+}

@@ -15,6 +15,10 @@
 
 ### 项目初始化
 
+工件位置与历史衔接由 setup 按 [工件注册方法](./setup-matt-pocock-skills/artifact-registration.md) 配置，样板见 [artifacts.md](./setup-matt-pocock-skills/artifacts.md)。默认注册到目标项目的 `docs/agents/artifacts.md`，再由 AGENTS.md 或 CLAUDE.md 引用；这不是本技能仓库的业务工件位置。
+
+可选择保留现有约定、仅新工作使用新位置，或按已授权范围迁移。采用本方法时，Proposal 可直接存为 proposed 变更记录，独立 RFC/Spec 默认分别维护在 `docs/rfcs/`、`docs/specs/`，工单由配置的跟踪器或本地工作项拥有。已有工作默认更新历史属主，不因重新注册而复制合同或移动文件。
+
 首次在业务项目使用这套工程技能时，先在目标项目中调用 **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)**，建立后续技能读取的项目配置：
 
 ```text
@@ -31,6 +35,10 @@
 | 项目指令入口 | 在已有 CLAUDE.md 或 AGENTS.md 中创建或更新 `Agent skills` 配置引用；两者都不存在时由用户选择创建哪个。 |
 
 已有配置的项目复用现有约定，不需要每次开发前重新初始化。后续可直接维护 `docs/agents/*.md`；切换跟踪器或重新初始化时再调用 setup。
+
+重复执行 setup 默认只检查并补齐兼容的缺失配置：相同文件跳过，不同文件保留并报告，规则、模板及脚本都不自动覆盖或升级。只有明确要求重新配置或升级时才合并相应变更。已有决策记录保留，索引使用项目自身经检查的脚本从当前记录生成。
+
+需要分类决策记录、自动索引和检查脚本时，可在 setup 中选用 [决策记录配置](./setup-matt-pocock-skills/decision-records.md)。通用资源位于该技能的 `resources/decision-records/`，分类由目标项目在 `docs/decisions/config.json` 中定义，样板不预置类别；记录按 proposed、implemented、rejected 组织，批准依据与交付状态分开。新项目只部署规则、模板和脚本并生成空索引，不复制本技能仓库的实际决策。已有 ADR 或决策体系优先复用；采用 engineering-v2.md 不意味着必须安装此配置。
 
 初始化负责技能所需的项目配置，不自动选择或安装 engineering 流程。建议将选定的 `engineering.md` 或 `engineering-v2.md` 复制到业务项目的 `docs/agents/engineering.md`，作为该项目工程流程的统一维护位置，再按项目场景调整内容。
 

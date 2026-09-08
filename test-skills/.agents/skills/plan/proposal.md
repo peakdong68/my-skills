@@ -6,6 +6,8 @@ When used, the Proposal is the canonical root of that planning work. It identifi
 
 ## Storage
 
+Use registered artifact locations first. If a `proposed` change record owns the Proposal, create or update that record rather than a second Proposal. Existing work remains with its historical owner unless explicitly migrated. The defaults below apply only when no registered or established convention resolves the location.
+
 Prefer the project's configured issue tracker when one exists.
 
 Otherwise store the Proposal locally at:

@@ -9,6 +9,8 @@ Actively build and sharpen the project's domain model as you design. This is the
 
 ## File structure
 
+Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for historical/current decision ownership. If change records own durable decisions, use that owner instead of creating duplicate ADRs. Paths and creation rules below are fallbacks where no project convention overrides them.
+
 Most repos have a single context:
 
 ```
