@@ -1,6 +1,6 @@
 ---
 name: implement
-description: 用于工作已通过项目的 Implementation Gate、必要决策已解决且实施已获授权时执行实现工作。
+description: 在项目“实施门禁”通过后实施已授权的工作，包括实施评审和最终验证的准备工作。
 ---
 
 # 实施

@@ -1,13 +1,15 @@
 ---
 name: implement
-description: Use when work has passed the project's Implementation Gate, required decisions are resolved, and execution is authorized.
+description: Implement authorized work after the project's Implementation Gate passes, including implementation review and preparation for final verification.
 ---
 
 # Implement
 
 Implement the authorized work described by its authoritative work item and referenced contracts.
 
-Assume readiness and execution authority have been established by the engineering workflow.
+For implementation, assume readiness and execution authority have been established by the engineering workflow.
+
+For a review-only request, use the review scope and axes below without entering implementation or requiring its gate. Deliver evidence-backed findings and coverage limitations; do not automatically fix changes or advance their workflow status. The implementation correction and completion rules apply only to authorized implementation.
 
 ## Decomposition
 
@@ -31,14 +33,16 @@ If implementation exposes a material unresolved product, domain, architectural, 
 
 ## Implementation Review
 
-When implementation is complete, review the resulting change along two independent axes:
+Establish the review baseline and scope from the request and available context. Review the full scoped change, including new, staged, and unstaged files where applicable; distinguish pre-existing and unrelated changes.
+
+Review the resulting implementation, or the independently requested change scope, along two independent axes:
 
 - **Standards** — fidelity to repository standards, accepted RFCs and ADRs, established architecture, conventions, and constraints.
 - **Spec** — fidelity to the authoritative work contract, including missing behavior, incorrect behavior, and unintended scope.
 
 Keep the two axes distinct so a pass on one does not mask a failure on the other.
 
-Resolve material findings by ownership:
+During authorized implementation, resolve material findings by ownership:
 
 | Finding | Route |
 |---|---|
@@ -62,4 +66,3 @@ Implementation is complete when:
 - the change is ready for final verification
 
 Update the authoritative work item using the project's workflow convention when such a transition is defined.
-

@@ -1,0 +1,5 @@
+interface:
+  display_name: "architecture security review"
+  short_description: "以软件架构师、安全评审人和代码审查者三个独立视角判断方案与实现。"
+policy:
+  allow_implicit_invocation: false
