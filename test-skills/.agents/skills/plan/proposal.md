@@ -1,8 +1,8 @@
 # Proposal
 
-Every work item planned through `plan` has one Proposal.
+Use a Proposal when the work needs a root planning artifact and no existing authoritative work item serves that purpose.
 
-The Proposal is the canonical root of that planning work. It identifies the work and references authoritative artifacts without duplicating them.
+When used, the Proposal is the canonical root of that planning work. It identifies the work and references authoritative artifacts without duplicating them.
 
 ## Storage
 

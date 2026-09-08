@@ -8,7 +8,9 @@ This section defines project-level orchestration, decision authority, gates, and
 
 ### Discuss
 
-Understand the request and resolve enough ambiguity to determine whether the work can proceed directly or requires formal planning.
+Discuss is complete when the goal, scope, and any material unresolved decisions are identified well enough to choose the next stage.
+
+Resolve routine details from context and repository evidence. Ask only for missing information that materially affects the work; implementation details need not all be settled here.
 
 Do not create planning artifacts merely because the conversation is exploratory.
 
@@ -53,7 +55,8 @@ Only successful verification completes the work.
 
 ### Return Rule
 
-Return to the earliest stage that owns the unresolved issue.
+Return affected work to the earliest stage that owns the unresolved issue. Continue independent, authorized work while that issue is resolved.
+
+Corrections within the agreed contract retain the existing execution authorization; resume the workflow without requesting it again.
 
 Do not compensate for an upstream contract gap in implementation, and do not compensate for an implementation defect by weakening verification.
-

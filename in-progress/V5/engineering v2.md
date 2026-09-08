@@ -6,15 +6,21 @@ Route engineering work through:
 
 This section defines project-level orchestration, decision authority, gates, and return paths.
 
+A stage-scoped request ends when that stage's deliverable is complete.
+
 ### Discuss
 
-Understand the request and resolve enough ambiguity to determine whether the work can proceed directly or requires formal planning.
+Discuss is complete when the goal, scope, and material unresolved decisions are clear enough to choose the next stage.
+
+Resolve routine details from context and repository evidence; ask only for missing information that materially affects the work.
 
 Do not create planning artifacts merely because the conversation is exploratory.
 
 ### Planning
 
 Formal planning is required when implementation would otherwise need to invent a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
+
+Planning establishes the intended outcome, scope, and observable acceptance conditions, with a practical way to verify them.
 
 Use the project's existing authoritative planning artifacts and conventions.
 
@@ -31,11 +37,11 @@ Do not require a particular artifact type when the project already has an author
 
 Do not create a new artifact when an existing authoritative artifact already owns the required information.
 
-#### RFC
+#### Technical Design
 
-Use an RFC when meaningful technical design must be resolved before implementation.
+Resolve material technical decisions in the project's existing design artifact. Use an RFC when a separate design proposal is needed.
 
-An RFC may begin as a draft and becomes an implementation basis only when accepted or approved under the project's workflow.
+A proposed design becomes an implementation basis only when accepted or approved under the project's workflow.
 
 Resolve ordinary technical choices directly when they remain within the agreed contract, accepted architecture, and project constraints.
 
@@ -53,7 +59,7 @@ Review the planning set before implementation along three independent axes:
 
 Keep the axes distinct so a pass on one does not mask a failure on another.
 
-Plan Review may accept, reject, or require revision of a proposed RFC.
+Plan Review may accept, reject, or require revision of the proposed design within established decision authority.
 
 Resolve findings in the artifact that owns them.
 
@@ -65,12 +71,14 @@ When an accepted decision establishes or changes a durable architectural constra
 
 Plan Review passes only when no unresolved material finding or required decision remains.
 
+Planning is complete when required decisions are resolved and Plan Review passes.
+
 ### Implementation Gate
 
 Implementation may begin only when both conditions hold:
 
 1. **Readiness** — the authoritative work and required design are sufficiently defined, required planning review has passed, blockers are resolved, and the project's workflow considers the work executable.
-2. **Authorization** — code execution has been explicitly requested or otherwise authorized under repository rules.
+2. **Authorization** — implementation of the defined scope is authorized under repository rules.
 
 Readiness and execution authorization are separate gates.
 
@@ -128,14 +136,19 @@ Route material findings by ownership:
 | Product or technical contract must change or was never resolved | Return to Planning |
 | Issue is unrelated to the agreed work | Do not expand scope automatically |
 
-Resolve in-scope findings before proceeding to verification.
+Resolve material in-scope findings before proceeding to verification.
 
 There is no "fix it while we're here" path for unrelated work.
 
+Implementation is complete when the authorized scope is implemented, relevant checks pass, and material Implementation Review findings are resolved.
 
 ### Verify
 
-Verify completed and reviewed work against its authoritative contract using the strongest practical evidence.
+Verification passes when sufficient practical evidence demonstrates that the agreed acceptance conditions hold for the completed and reviewed work.
+
+Reuse relevant implementation-time evidence; broaden or repeat checks only when changes, failures, or unresolved risks justify it.
+
+Expected behavior comes from the authoritative contract; implementation and tests provide evidence, not authority.
 
 If verification fails, route the failure to its owner:
 
@@ -147,11 +160,13 @@ If verification fails, route the failure to its owner:
 
 After an in-scope fix, verify again.
 
-Only successful verification completes the work.
+Report pass, fail, or blocked with supporting evidence and any remaining gaps. Only a pass completes end-to-end delivery.
 
 ### Return rule
 
-Return to the earliest stage that owns the unresolved issue.
+Return affected work to the earliest stage that owns the unresolved issue. Continue independent, authorized work.
+
+Corrections within the agreed contract retain the existing execution authorization.
 
 Do not compensate for an upstream contract gap in implementation.
 

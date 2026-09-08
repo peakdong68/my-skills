@@ -5,17 +5,17 @@ description: Use when creating or updating a Proposal, when the product contract
 
 # Plan
 
-Turn the current conversation and relevant project context into the minimum planning artifacts needed for the work to pass the project's Implementation Gate. 
+Turn the current conversation and relevant project context into the minimum planning artifacts needed to establish implementation readiness.
 
 Planning is synthesis and decision completion, not a mandatory step for every engineering task.
 
-## Proposal
+## Authoritative work item
 
-Every work item planned through this skill has one Proposal.
+Reuse the project's existing authoritative work item, such as an issue, Spec, accepted plan, or Proposal.
 
-Read [proposal.md](./proposal.md) when creating or updating it.
+Create a Proposal only when no suitable work item captures the goal, scope, and decision status.
 
-Reuse an existing Proposal when one already represents the work.
+Read [proposal.md](./proposal.md) when creating or updating a Proposal.
 
 ## Planning
 
@@ -46,7 +46,6 @@ When the required planning work is complete, read [review.md](./review.md).
 
 Resolve material findings in the artifact that owns them and review again.
 
-Planning completes when the planning set passes Plan Review and satisfies the project's requirements for entering implementation.
+Planning completes when required decisions are resolved and the planning set passes Plan Review.
 
-Do not begin implementation unless requested.
-
+Check execution authorization separately under the project's Implementation Gate before entering implementation; reuse authorization already granted for this scope.
