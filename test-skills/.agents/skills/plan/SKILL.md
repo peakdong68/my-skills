@@ -23,7 +23,7 @@ Read [proposal.md](./proposal.md) when creating or updating a Proposal.
 
 Create additional artifacts only when needed:
 
-- **PRD** — read [prd.md](./prd.md) when the product contract needs further definition.
+- **Product requirements** — read [prd.md](./prd.md) when the product contract needs further definition; refine its existing owner and create a separate PRD only when requested or independent ownership is needed.
 - **RFC** — read [rfc.md](./rfc.md) when meaningful technical decisions must be resolved before implementation.
 
 Use established domain language and architectural decisions as project context.

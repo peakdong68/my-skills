@@ -20,6 +20,7 @@
 | 2026-09-08 | [两种工程流程面向不同项目](./implemented/engineering/2026-09-08-engineering-workflow-variants.md) | engineering | implemented |
 | 2026-09-08 | [方案批准与执行授权分离](./implemented/engineering/2026-09-08-separate-approval-and-execution.md) | engineering | implemented |
 | 2026-09-08 | [Spec 是可选工件，生成不代表批准](./implemented/skill-design/2026-09-08-optional-spec-artifact.md) | skill-design | implemented |
+| 2026-09-08 | [产品需求优先由现有合同承载](./implemented/skill-design/2026-09-08-product-contract-ownership.md) | skill-design | implemented |
 
 ### rejected
 
@@ -43,6 +44,7 @@
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
 | 2026-09-08 | [Spec 是可选工件，生成不代表批准](./implemented/skill-design/2026-09-08-optional-spec-artifact.md) | skill-design | implemented |
+| 2026-09-08 | [产品需求优先由现有合同承载](./implemented/skill-design/2026-09-08-product-contract-ownership.md) | skill-design | implemented |
 
 ### 变更记录工具
 
