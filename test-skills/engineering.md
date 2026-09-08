@@ -20,6 +20,8 @@ Enter `plan` when implementation would otherwise require inventing a material pr
 
 Skip Plan when the work is already sufficiently defined.
 
+Identify the Proposal or existing work item for the current change by its ID, URL or path. It defines the selected scope and acceptance conditions, directly or by reference to relevant requirements and design. Reuse it; a separate Proposal, PRD, Spec or RFC is needed only when its content needs a new owner.
+
 Plan owns its planning artifacts and Plan Review.
 
 If a later stage exposes a material unresolved contract decision, return to `plan`.
@@ -28,22 +30,23 @@ If a later stage exposes a material unresolved contract decision, return to `pla
 
 Enter implementation only when:
 
-- the authoritative work is sufficiently defined
-- required decisions and blockers are resolved
-- the project's workflow considers the work executable
-- execution is authorized under repository rules
+- the identified Proposal or existing work item specifies the selected implementation scope
+- observable acceptance conditions are stated or linked to applicable requirement sections
+- necessary design decisions, required planning review and approvals are evidenced, with no material unresolved decision affecting this scope
+- dependencies and blockers allow the selected scope to start
+- execution authorization under repository rules covers that scope
 
 Planning readiness and execution authorization are separate conditions.
 
-The authoritative work may be a Proposal, Spec, issue, ticket, accepted plan, or another project-defined artifact.
-
-Use the project's existing workflow conventions rather than requiring a particular artifact type, status, or approval mechanism.
+Use the work item and its references as evidence; a status label or directory location alone does not pass the gate. Reuse valid review and authorization evidence. Before coding, sync agreed scope and decisions not yet reflected in their existing owners.
 
 ### Implement
 
 After the Implementation Gate passes, use `implement`.
 
 Implementation owns execution, decomposition when needed, implementation-time testing, and Implementation Review.
+
+Implementation tickets are created here as needed, not required by the initial gate. Each ticket inherits its parent's scope and valid authorization; check its acceptance conditions and dependencies before starting it.
 
 Do not stop at the first working implementation when authorized end-to-end work still requires review or verification.
 

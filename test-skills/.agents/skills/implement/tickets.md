@@ -1,6 +1,6 @@
 # Implementation Tickets
 
-Decompose authorized work only when it cannot be executed coherently as one unit.
+After entering implementation, decompose authorized work only when it cannot be executed coherently as one unit. Tickets are created by implementation as needed, not prerequisites for its initial gate.
 
 Tickets are execution units, not additional design documents.
 
@@ -18,7 +18,7 @@ Tickets may be:
 - local Markdown files
 - another project-defined execution artifact
 
-Reference the parent or authoritative work item where the project convention supports it.
+Reference the parent Proposal or existing work item by its ID, URL or path, using the project's native relationship mechanism when available.
 
 ## Tracer bullets
 
@@ -81,7 +81,7 @@ Use the project's native dependency mechanism when one exists.
 
 ## Inheritance
 
-Tickets inherit their contract from the authoritative parent work and referenced artifacts.
+Tickets inherit scope, requirements, design and applicable execution authorization from their identified parent work item and referenced artifacts.
 
 This may include:
 
@@ -99,6 +99,8 @@ Avoid detailed implementation recipes or decisions the implementer can safely ma
 ## Execution
 
 Work the executable frontier.
+
+Before starting a ticket, check its inherited scope, acceptance conditions and blocking dependencies. Reuse the parent's valid authorization for that scope without repeating the full planning gate. A new material decision returns affected work to `plan`; decomposition cannot supply a missing upstream decision.
 
 Complete each ticket to a coherent, tested, and verifiable state before advancing dependent work.
 

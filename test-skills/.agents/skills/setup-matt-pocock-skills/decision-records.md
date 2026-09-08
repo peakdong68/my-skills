@@ -4,7 +4,7 @@ Use this resource when the user selects a categorized decision system with gener
 
 ## Existing projects
 
-Follow [artifact-registration.md](artifact-registration.md) to register artifact owners and historical/new locations. The selected registry determines whether a Proposal is itself a change record, where independent RFCs/Specs remain, and whether migration is authorized. Deploying this bundle does not silently change that ownership.
+Follow [artifact-registration.md](artifact-registration.md) to register artifact owners and historical/new locations. New Proposals use configured work tracking; decision records may reference them without duplicating their contents or work status. Preserve registered historical files that serve both roles and their state mappings unless migration is authorized. Independent RFCs/Specs retain their own owners. Deploying this bundle does not silently change that ownership.
 
 Inspect existing decision, ADR, RFC and proposal conventions. Reuse their authoritative locations rather than creating a competing system. If adopting this bundle requires changing existing categories, statuses or formats, present that mapping in the setup draft; do not migrate records or overwrite customized files implicitly.
 

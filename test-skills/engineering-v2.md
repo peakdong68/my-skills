@@ -24,20 +24,11 @@ Formal planning is required when implementation would otherwise need to invent a
 
 Planning establishes the intended outcome, scope, and observable acceptance conditions, with a practical way to verify them.
 
-Use the project's existing authoritative planning artifacts and conventions.
+Identify the Proposal or existing work item for this change by its ID, URL or path. It owns the goal, selected scope, acceptance conditions and decision status, directly or through references to applicable requirements and design. A product-wide Spec alone does not identify the current change.
 
-Depending on the project, these may include:
+Reuse a suitable work item; create a Proposal when a new planning root is needed. Separate PRDs, Specs, RFCs and ADRs are used when their content needs independent ownership. A clear work item and sufficient requirements are necessary even when no new document is needed.
 
-- Proposal or issue
-- PRD
-- approved Spec
-- RFC
-- ADR
-- another project-defined contract
-
-Do not require a particular artifact type when the project already has an authoritative equivalent.
-
-Do not create a new artifact when an existing authoritative artifact already owns the required information.
+Before creating or updating a Proposal, use the project's issue-tracker configuration for its location, work states and review/approval evidence. If missing, ask the user to complete that configuration; discussion and conversation drafts can continue. Local Markdown is valid when configured. Preserve historical owners and project formats. Decision records may reference the Proposal; their delivery lifecycle does not set its work status.
 
 #### Technical Design
 
@@ -61,7 +52,7 @@ Review the planning set before implementation along three independent axes:
 
 Keep the axes distinct so a pass on one does not mask a failure on another.
 
-Plan Review may accept, reject, or require revision of the proposed design within established decision authority.
+Plan Review assesses the design within established decision authority. Record the result on the identified Proposal or existing work item; obtain required external approvals before treating proposed decisions as accepted.
 
 Resolve findings in the artifact that owns them.
 
@@ -75,30 +66,34 @@ Plan Review passes only when no unresolved material finding or required decision
 
 Planning is complete when required decisions are resolved and Plan Review passes.
 
+Update that work item's readiness under its configured workflow only when required approvals are also obtained and no blocker prevents the selected scope from starting. Referenced artifacts retain their own approval conventions; review does not grant execution authorization.
+
 ### Implementation Gate
 
 Implementation may begin only when both conditions hold:
 
-1. **Readiness** — the authoritative work and required design are sufficiently defined, required planning review has passed, blockers are resolved, and the project's workflow considers the work executable.
+1. **Readiness** — the identified Proposal or existing work item specifies the selected scope and observable acceptance conditions, directly or by reference to applicable requirement sections; necessary design decisions, required planning review and approvals are evidenced; no material unresolved decision or blocking dependency prevents that scope from starting.
 2. **Authorization** — implementation of the defined scope is authorized under repository rules.
 
 Readiness and execution authorization are separate gates.
 
-Use the project's existing statuses, labels, approvals, or other workflow conventions. Do not require a specific artifact type or status name.
+Use the work item and its references as evidence; a status label or directory location alone does not pass the gate. Reuse valid review and authorization evidence. Before coding, sync agreed scope and decisions not yet reflected in their existing owners.
 
-Skip formal Planning when the authoritative work already satisfies the readiness side of this gate.
+Skip formal Planning when the identified work item already satisfies the readiness side of this gate.
 
 ### Implement
 
 Implement only after the Implementation Gate passes.
 
-Implement against the authoritative contract and accepted design.
+Implement the selected work item's scope against its acceptance conditions, referenced requirements and accepted design.
 
 #### Decomposition
 
 Implement directly when the work fits one coherent execution unit.
 
 Decompose into implementation tickets when the work has meaningful independent slices, dependencies, or is too large to execute coherently as one unit.
+
+Create these tickets after entering implementation; they are not prerequisites for its initial gate. Tickets reference the parent work item and inherit its scope and valid execution authorization. Check each ticket's acceptance conditions and dependencies before starting it, without repeating the full planning gate. New material decisions return affected work to Planning.
 
 When tickets are used:
 
@@ -145,6 +140,8 @@ Resolve material in-scope findings before proceeding to verification.
 There is no "fix it while we're here" path for unrelated work.
 
 Implementation is complete when the authorized scope is implemented, relevant checks pass, and material Implementation Review findings are resolved.
+
+Update the work item's implementation progress under the project convention. Final delivery completion and any decision-record transition to `implemented` follow successful final verification.
 
 ### Verify
 

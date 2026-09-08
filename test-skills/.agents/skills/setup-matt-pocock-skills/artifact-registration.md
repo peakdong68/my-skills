@@ -16,7 +16,9 @@ Re-registration does not authorize moving historical artifacts. Multiple directo
 
 ## Default method
 
-When the user selects this repository's artifact method, propose the seed locations and clarify independent ADR usage and tracker/local work items. A Proposal can itself be a `proposed` change record; do not create a duplicate Note. Read [decision-records.md](decision-records.md) if deploying that system. Choosing an engineering workflow alone does not select this artifact method automatically.
+When the user selects this repository's artifact method, register Proposal handling in the issue-tracker configuration: its location and identifier, work states, review/approval evidence and readiness transition. Configure a remote tracker or explicit local Markdown tracking; there is no unconfigured Proposal storage fallback. Reuse established choices and resolve missing configuration in the setup review.
+
+A Proposal is the planning work item; a decision record may reference it to preserve a durable choice or delivery rationale without copying it. If historical files already serve both roles, register the mapping between work status, approval and record delivery lifecycle. Preserve that ownership unless migration is authorized. Read [decision-records.md](decision-records.md) if deploying the record system. Choosing an engineering workflow alone does not select this artifact method automatically.
 
 RFCs and Specs are optional independent owners, not mandatory steps. They retain their own locations and approval conventions when associated change records move between delivery states. Record project style references when available; create no empty artifacts just to establish directories.
 
@@ -31,6 +33,6 @@ For engineering artifact discovery, creation, updates and lifecycle,
 follow `docs/agents/artifacts.md`.
 ```
 
-The registry owns location and historical-routing rules; tracker configuration owns operations, domain configuration owns glossary consumption, and decision configuration owns categories. Cross-reference these rather than duplicating rules. Update existing pointers and domain configuration within the selected scope.
+The registry owns artifact relationships and historical routing; it points to tracker configuration for work-item locations, identifiers, operations and work states. Domain configuration owns glossary consumption, and decision configuration owns categories. Cross-reference these rather than duplicating rules. Update existing pointers and domain configuration within the selected scope.
 
 Verify existing work still resolves to its owner, new destinations are explicit, approval and delivery states remain distinct, and references to existing files resolve. Future directories need not exist yet. For authorized migrations also verify preserved content, record counts and inbound links. Report outstanding migration work instead of claiming it complete.

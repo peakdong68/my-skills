@@ -17,7 +17,9 @@
 
 工件位置与历史衔接由 setup 按 [工件注册方法](./setup-matt-pocock-skills/artifact-registration.md) 配置，样板见 [artifacts.md](./setup-matt-pocock-skills/artifacts.md)。默认注册到目标项目的 `docs/agents/artifacts.md`，再由 AGENTS.md 或 CLAUDE.md 引用；这不是本技能仓库的业务工件位置。
 
-可选择保留现有约定、仅新工作使用新位置，或按已授权范围迁移。采用本方法时，Proposal 可直接存为 proposed 变更记录，独立 RFC/Spec 默认分别维护在 `docs/rfcs/`、`docs/specs/`，工单由配置的跟踪器或本地工作项拥有。已有工作默认更新历史属主，不因重新注册而复制合同或移动文件。
+可选择保留现有约定、仅新工作使用新位置，或按已授权范围迁移。采用本方法时，Proposal 按已配置的跟踪机制管理，可选择远程平台或本地 Markdown；创建或更新前缺少配置时先提示用户配置。变更记录可引用 Proposal，工作状态与记录交付生命周期分开。独立 RFC/Spec 默认分别维护在 `docs/rfcs/`、`docs/specs/`。已有工作默认更新历史属主，不因重新注册而复制合同或移动文件。
+
+每次实施明确本次 Proposal 或既有工作项，核对其范围、验收、必要决定与评审批准、阻塞情况及执行授权。已有工作项充分时不另建 Proposal；独立 PRD/RFC/Spec 按内容归属需要创建。实施 Ticket 在进入 Implement 后按需拆分，继承父工作项的范围与有效授权，不是首次开工的前置产物。
 
 首次在业务项目使用这套工程技能时，先在目标项目中调用 **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)**，建立后续技能读取的项目配置：
 
@@ -50,7 +52,7 @@
 工程任务按 `docs/agents/engineering.md` 执行：
 Discuss → Plan → Implement → Verify。
 
-仅 `/implement` 或用户明确输入“执行实现”视为执行授权；
+当前范围准备就绪且尚未获得执行授权时，提示用户输入“执行实现”；收到后开始实施。
 “确认”“可以”“同意”等仅表示审批。
 
 执行授权在已确定的工作范围内持续有效，覆盖实施、审查、
@@ -61,7 +63,7 @@ Discuss → Plan → Implement → Verify。
 限定阶段的请求在该阶段交付完成后结束。
 ```
 
-已有工程入口时更新原有配置，避免重复添加。若项目移除了 implement 技能，将示例中的授权句改为“仅用户明确输入‘执行实现’视为执行授权；‘确认’‘可以’‘同意’等仅表示审批。”，不再依赖 `/implement` 技能入口。
+已有工程入口时更新原有配置，避免重复添加。上述授权方式不依赖是否安装 implement 技能。
 
 ### code-review：可选的固定审查流程
 

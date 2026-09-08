@@ -5,13 +5,15 @@ description: Implement authorized work after the project's Implementation Gate p
 
 # Implement
 
-Implement the authorized work described by its authoritative work item and referenced contracts.
+Implement the selected scope of the identified Proposal or existing work item. Resolve its issue ID, URL or file path and the requirements and design sections it references before coding.
 
-For implementation, assume readiness and execution authority have been established by the engineering workflow.
+Before implementation, check the scope and acceptance conditions, required decisions and review/approval evidence, unresolved blockers, and execution authorization for that scope under project rules. Reuse valid evidence without requesting confirmation again. Sync already agreed scope and decisions to their existing owners; unresolved material decisions return to `plan`. Document status or location alone does not establish readiness or authorization.
 
 For a review-only request, use the review scope and axes below without entering implementation or requiring its gate. Deliver evidence-backed findings and coverage limitations; do not automatically fix changes or advance their workflow status. The implementation correction and completion rules apply only to authorized implementation.
 
 ## Decomposition
+
+After the Implementation Gate passes, create implementation tickets only when decomposition is needed. Their existence is not a condition for initially entering implementation.
 
 Implement directly when the work fits one coherent execution unit.
 
@@ -21,7 +23,7 @@ Do not create tickets merely to enumerate coding steps.
 
 ## Execution
 
-Implement against the authoritative work item and its referenced contracts, accepted designs, and architectural decisions.
+Implement against the selected work item's scope, acceptance conditions, referenced requirements, accepted designs and architectural decisions.
 
 Use established architecture, conventions, interfaces, and domain language unless the authoritative design explicitly changes them.
 
@@ -65,4 +67,4 @@ Implementation is complete when:
 - material Implementation Review findings are resolved
 - the change is ready for final verification
 
-Update the authoritative work item using the project's workflow convention when such a transition is defined.
+Update the identified work item's implementation progress using the project's workflow convention. Keep final delivery completion and any decision-record transition to `implemented` for successful final verification.

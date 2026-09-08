@@ -9,15 +9,17 @@ Turn the current conversation and relevant project context into the minimum plan
 
 Planning is synthesis and decision completion, not a mandatory step for every engineering task.
 
-## Authoritative work item
+## Work item
 
 Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for historical/current owners, destinations and lifecycle. Missing registration does not block planning; reuse established project conventions.
 
-Reuse the project's existing authoritative work item, such as an issue, Spec, accepted plan, or Proposal.
+Identify the Proposal or existing work item for this planning effort by its issue ID, URL, or file path. It owns the current goal, scope, acceptance conditions and decision status, directly or through explicit references to requirements and design. A product-wide Spec alone does not identify which change is being planned.
 
-Create a Proposal only when no suitable work item captures the goal, scope, and decision status.
+Reuse a suitable existing work item; create a Proposal when a new planning root is needed. Separate PRDs, Specs and RFCs are optional; a clearly identified work item and sufficient implementation requirements are not.
 
 Read [proposal.md](./proposal.md) when creating or updating a Proposal.
+
+Implementation tickets are decomposed during implementation when needed, not required planning deliverables.
 
 ## Planning
 
