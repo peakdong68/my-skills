@@ -105,7 +105,7 @@ Discuss → Plan → Implement → Verify。
 裁剪时还需检查以下关联：
 
 - 移除 implement 后，不能再依赖 `/implement` 技能入口来启动工作。若项目沿用本仓库的授权规则，可继续使用“执行实现”；其他项目按自己的明确授权约定执行。
-- 若保留 implement 或 verify 而移除 plan，将其中返回 `plan` 技能的引用改为返回 v2 的 Planning 阶段。独立保留的技能仍应服从项目工程入口。
+- implement 的回退目标是项目的 Planning 阶段，不直接依赖 plan 技能。若保留 verify 而移除 plan，检查并将其中的技能引用改为项目 Planning 阶段。独立保留的技能仍应服从项目工程入口。
 - 保留 grill-with-docs、triage 或 wayfinder 时，保留它们调用的 grilling、domain-modeling；保留 wayfinder 的研究分支时还需 research。
 - 保留 tdd 时，其接口设计分支会使用 codebase-design；improve-codebase-architecture 也依赖 codebase-design、domain-modeling 等支持技能。
 - 保留 fix-bug 时，保留 diagnosing-bugs，并处理上文列出的 code-review 调用。
