@@ -20,8 +20,6 @@ A Proposal is a GitLab issue identified by its URL or project-qualified issue nu
 
 During setup, register the project's representation of planning, ready, in-progress, complete and rejected work, using existing project fields, labels or a status entry in the issue description. Record Plan Review results and approval evidence in the issue's decision section or linked review notes. A ready transition requires the applicable review and approvals with no blocker for the selected scope; execution authorization remains governed by project instructions. Completion follows delivery and final verification. Preserve historical state mappings rather than adding a parallel vocabulary.
 
-Implementation tickets are created after entering implementation when needed and reference the parent Proposal or existing work item. They are not prerequisites for starting that work.
-
 ## Merge requests as a triage surface
 
 **MRs as a request surface: no.** _(Set to `yes` if this repo treats external merge requests as feature requests; `/triage` reads this flag.)_

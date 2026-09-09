@@ -19,8 +19,6 @@ Reuse a suitable existing work item; create a Proposal when a new planning root 
 
 Read [proposal.md](./proposal.md) when creating or updating a Proposal.
 
-Implementation tickets are decomposed during implementation when needed, not required planning deliverables.
-
 ## Planning
 
 Create additional artifacts only when needed:

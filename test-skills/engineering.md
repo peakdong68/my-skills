@@ -46,8 +46,6 @@ After the Implementation Gate passes, use `implement`.
 
 Implementation owns execution, decomposition when needed, implementation-time testing, and Implementation Review.
 
-Implementation tickets are created here as needed, not required by the initial gate. Each ticket inherits its parent's scope and valid authorization; check its acceptance conditions and dependencies before starting it.
-
 Do not stop at the first working implementation when authorized end-to-end work still requires review or verification.
 
 ### Verify

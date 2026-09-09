@@ -19,7 +19,7 @@ Keep the content proportional to the work:
 - **Goal and scope** — the intended change, reason, included work and important exclusions.
 - **Acceptance** — observable completion conditions, or precise references to the applicable requirements.
 - **Decisions** — material proposed choices, unresolved questions and the resulting review and approval evidence.
-- **References** — existing PRD, Spec, RFC, ADR or other supporting artifacts; link implementation tickets after they are created during implementation.
+- **References** — existing PRD, Spec, RFC, ADR or other supporting artifacts.
 
 A small Proposal may contain all necessary requirements and design. Create separate artifacts only when they need independent ownership. Reference their relevant sections instead of copying them or adding placeholder links.
 

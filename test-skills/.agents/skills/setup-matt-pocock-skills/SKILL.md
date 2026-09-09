@@ -41,7 +41,7 @@ Lead each section with the recommended answer so the user can accept it in a wor
 
 **Section A — Issue tracker.**
 
-> Explainer: The "issue tracker" is where this repo tracks Proposals and work items, including implementation tickets created during implementation. Configure the system you use, including local Markdown if preferred.
+> Explainer: The "issue tracker" is where this repo tracks Proposals and work items. Configure the system you use, including local Markdown if preferred.
 
 Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
 

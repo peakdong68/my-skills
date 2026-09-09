@@ -17,7 +17,7 @@ Use `Status: planning`, `ready`, `in-progress`, `complete` or `rejected` near th
 
 Record Plan Review results and approval evidence in the Proposal's Decisions section, with references to relevant requirements and design. Move to `ready` only when required review and approvals are complete and the selected scope has no blocking decision or dependency. Start `in-progress` only with execution authorization under project rules; use `complete` after delivery and final verification. If readiness is lost, return affected work to `planning` and record the blocker; record the decision when rejecting work.
 
-Separate Specs and designs remain at their registered locations. Implementation tickets are created as needed after entering implementation and link back to this Proposal or the existing parent work item.
+Separate Specs and designs remain at their registered locations.
 
 ## When a skill says "publish to the issue tracker"
 

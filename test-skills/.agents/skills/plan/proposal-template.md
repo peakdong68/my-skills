@@ -16,4 +16,4 @@
 
 ## References
 
-<Link existing supporting requirements and design sections. Link implementation tickets when created during implementation; omit absent artifacts.>
+<Link existing supporting requirements and design sections. Omit absent artifacts.>
