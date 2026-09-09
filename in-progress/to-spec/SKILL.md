@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: "Create or update a testable Spec from established product and design decisions and repository evidence, without reopening decisions or granting implementation approval."
+description: "Consolidate established decisions into a testable specification, reusing existing contract owners and completing the necessary review without granting implementation approval."
 disable-model-invocation: true
 ---
 
@@ -15,6 +15,20 @@ The Spec answers:
 The Spec records requirements intended for implementation and acceptance verification. Its authority follows the project's review and approval conventions; generating it does not grant approval or execution authorization.
 
 Prefer updating an existing Spec for the same work. Reference information owned by other authoritative artifacts rather than duplicating it. If the Spec is intended to replace an existing contract, record that relationship through the project's acceptance process; do not create a competing authority by default.
+
+## Select the content owner
+
+Before drafting, identify the selected work and where its requirements, design decisions, and acceptance conditions already live:
+
+- **Existing Spec for the same scope** — update that Spec, preserving identifiers and authoritative references.
+- **Sufficient contract in a Proposal, Issue, or other artifact** — reuse it. Invoking this skill does not by itself require a separate Spec file; identify the existing coverage and any necessary changes.
+- **Established decisions with an expression gap** — clarify behavior and acceptance in their existing owner. Create a separate Spec only when explicitly required or when the project requires independent ownership.
+- **Explicitly required separate Spec** — state its relationship to the existing contract. Reference upstream authority; if detailed requirements are to move, use the project's acceptance process to establish the new owner and update the former owner to reference it rather than maintaining two editable copies.
+- **Interview or conversation without existing artifacts** — draft from established decisions and relevant repository evidence. Separate accepted choices from suggestions and unresolved questions; discussion alone is not acceptance. Do not require a preliminary PRD, RFC, or Proposal merely to draft a Spec.
+
+An expression gap concerns a decision already made but not stated precisely. A decision gap requires a new material choice; record it as a blocker rather than resolving it while writing. A Spec is optional after Planning, not a mandatory restatement of its outputs.
+
+## Project conventions
 
 Reuse project configuration. Missing tracker configuration does not prevent local drafting; handle publication requirements under Publishing.
 
@@ -53,7 +67,7 @@ If a required product or design decision is missing, contradictory, or ambiguous
 - identify the owning upstream decision
 - do not guess
 
-A Spec with blocking unknowns is not sufficiently defined. Complete unaffected content and identify the owning planning decision. In an end-to-end task, the enclosing engineering workflow returns affected work to Planning; for a Spec-only request, deliver the draft and blockers.
+A Spec with blocking unknowns is not sufficiently defined. Complete and review unaffected content and identify the owning planning decision. In an end-to-end task, the enclosing engineering workflow returns affected work to Planning; for a Spec-only request, deliver the reviewed draft, review outcome, and blockers.
 
 ### 3. Inspect repository evidence
 
@@ -132,6 +146,8 @@ The goal is not to maximize the number of seams. Use the fewest stable seams tha
 ## Process
 
 ### Step 1 — Establish scope and evidence
+
+Apply the content-owner selection above. Reuse valid review and approval evidence for the selected scope, recording what it covers; inspect changed content and affected references rather than automatically repeating the whole planning effort.
 
 Extract the already-established:
 
@@ -223,6 +239,25 @@ If any blocking condition fails:
 - identify the blocker and its owning upstream layer
 - do not guess
 - do not publish it as ready for implementation
+
+### Step 6 — Review and resolve findings
+
+Actually perform the necessary specification review before delivery; content self-checks or a promise of later review are not substitutes. Follow the project's required review method and reviewer conventions. If none exist, perform a focused review against the source decisions and repository evidence:
+
+- fidelity to established decisions, including separation of accepted choices from interview suggestions
+- consistency with governing requirements, design constraints, terminology, and related contracts
+- coverage of the selected scope, with observable acceptance criteria and viable verification paths
+- clear ownership, references, and any intended replacement relationship, without competing contracts
+
+Reuse review evidence only where its scope and conclusions still apply. For unchanged, previously reviewed decisions, check transcription fidelity and references; review new or substantively changed requirements, constraints, and acceptance conditions together with their affected relationships. A first Spec produced from an interview needs review of the written contract even when individual decisions were already accepted.
+
+Fix expression omissions, inconsistencies resolvable from existing authority, and reference errors in their owning artifacts, then review affected content again. Record material unresolved choices as blockers owned by Planning; do not invent decisions to obtain a review pass. Continue reviewing independent content. If required reviewers or evidence are unavailable, report the specific review blocker rather than claiming review completion.
+
+Within an engineering workflow, supply this review's scope, findings, resolutions, and evidence to the governing work item's Plan Review. That review retains responsibility for the whole planning set and may reuse this evidence without repeating covered checks. For a standalone Spec request, complete the specification review and report its outcome; a Proposal or full Plan Review is not a prerequisite just to deliver the reviewed draft.
+
+### Step 7 — Deliver the result
+
+Identify the reused or updated contract owner, or the new Spec and its authority relationships. Report content readiness, the actual review outcome and coverage, reused evidence, resolved findings, and remaining blockers or required approvals using project conventions. Keep content readiness, review, approval, and execution authorization distinct. A blocked reviewed draft is a valid Spec-only deliverable, not an implementation-ready contract.
 
 ## Spec Template
 

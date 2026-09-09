@@ -81,3 +81,7 @@ Relevant PRDs, RFCs, ADRs, Specs, prototypes, issues, or repository evidence.
 Sufficiently defined | Blocked
 
 If blocked, list each content gap and the upstream decision that owns it. Record known review, approval, and execution authorization status separately using project conventions.
+
+## Review Evidence
+
+Record the actual review outcome, scope, source decisions and any valid prior review evidence reused. Summarize resolved findings and remaining review or decision blockers. Link to the authoritative review record when one already owns this evidence rather than duplicating it. Record required approvals separately; review does not grant execution authorization.
