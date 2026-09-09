@@ -9,7 +9,7 @@ Implement the selected scope of the identified Proposal or existing work item. R
 
 Before implementation, check the scope and acceptance conditions, required decisions and review/approval evidence, unresolved blockers, and execution authorization for that scope under project rules. Reuse valid evidence without requesting confirmation again. Sync already agreed scope and decisions to their existing owners; unresolved material decisions return to the project's Planning stage. Document status or location alone does not establish readiness or authorization.
 
-For a review-only request, use the review scope and axes below without entering implementation or requiring its gate. Deliver evidence-backed findings and coverage limitations; do not automatically fix changes or advance their workflow status. The implementation correction and completion rules apply only to authorized implementation.
+For a review-only request, use the `code-review` skill without entering implementation or requiring its gate. Deliver findings and coverage limitations; do not automatically fix changes or advance their workflow status. The implementation correction and completion rules apply only to authorized implementation.
 
 ## Decomposition
 
@@ -35,14 +35,7 @@ If implementation exposes a material unresolved product, domain, architectural, 
 
 ## Implementation Review
 
-Establish the review baseline and scope from the request and available context. Review the full scoped change, including new, staged, and unstaged files where applicable; distinguish pre-existing and unrelated changes.
-
-Review the resulting implementation, or the independently requested change scope, along two independent axes:
-
-- **Standards** — fidelity to repository standards, accepted RFCs and ADRs, established architecture, conventions, and constraints.
-- **Spec** — fidelity to the authoritative work contract, including missing behavior, incorrect behavior, and unintended scope.
-
-Keep the two axes distinct so a pass on one does not mask a failure on the other.
+Use the `code-review` skill to review the implementation. Supply the review baseline, selected scope, governing work item and referenced requirements/design, including relevant uncommitted and new files. The skill owns the review method and report.
 
 During authorized implementation, resolve material findings by ownership:
 

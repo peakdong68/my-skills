@@ -1,8 +1,10 @@
-# Optional decision record setup
+# Optional Agent Notes setup
 
 Use this resource when the user selects a categorized decision system with generated indexes and checks. It supplements project configuration; it does not choose an engineering workflow, approve decisions, or authorize implementation.
 
 ## Existing projects
+
+New installations use `.agents/notes/` for Agent Notes. For an existing location such as `docs/decisions/`, preserve its registered owner and scripts unless migration is explicitly authorized. A default-path change or repeat setup does not authorize copying records to a second location or replacing existing scripts. When an upgrade retains the old location, adapt the bundled script root to that registered location.
 
 Follow [artifact-registration.md](artifact-registration.md) to register artifact owners and historical/new locations. New Proposals use configured work tracking; decision records may reference them without duplicating their contents or work status. Preserve registered historical files that serve both roles and their state mappings unless migration is authorized. Independent RFCs/Specs retain their own owners. Deploying this bundle does not silently change that ownership.
 
@@ -28,21 +30,21 @@ Never reset existing decision records. INDEX.md may be regenerated from the proj
 
 The reusable source is [resources/decision-records/](resources/decision-records/). It contains:
 
-- `docs/decisions/README.md`: management rules with project-configured categories
-- `docs/decisions/config.json`: empty category configuration to populate from the target project
-- `docs/decisions/templates/record.md`: fallback template
+- `.agents/notes/README.md`: management rules with project-configured categories
+- `.agents/notes/config.json`: empty category configuration to populate from the target project
+- `.agents/notes/templates/record.md`: fallback template
 - `scripts/decisions/lib.mjs`, `update-index.mjs`, `check.mjs`: dependency-free Node.js tools
 
-For a new installation, copy these six files to matching paths under the target project after the setup draft is approved or deployment is already authorized. For existing installations, follow the per-file rules above. Copy no records or generated index from this skill repository's own `docs/decisions/`. For a new installation, generate an empty index; existing projects retain their records.
+For a new installation, copy these six files to matching paths under the target project after the setup draft is approved or deployment is already authorized. For existing installations, follow the per-file rules above. Copy no records or generated index from this skill repository's own `.agents/notes/`. For a new installation, generate an empty index; existing projects retain their records.
 
 The bundle defines no default categories. Reuse target-project categories, or propose ids, names and scopes based on its actual delivery objects and confirm them in the existing setup review. Save them in config.json; scripts read this configuration. An empty categories array can bootstrap an empty index, but cannot classify records. Do not copy this skill repository's categories. Preserve the proposed/implemented/rejected lifecycle and record project approval evidence separately. Existing lifecycle migrations require an explicit upgrade request; preserve history and repair links.
 
 Add a concise reference in the selected project instruction file:
 
 ```markdown
-### Decision records
+### Agent Notes
 
-For nontrivial engineering changes and major proposals, follow `docs/decisions/README.md`.
+For nontrivial engineering changes and major proposals, follow `.agents/notes/README.md`.
 Reuse existing authoritative records; maintain affected records with the change,
 regenerate the index, and run the documented checks.
 ```

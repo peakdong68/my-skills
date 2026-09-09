@@ -1,6 +1,6 @@
 当前项目中工程工作流有两个版本：engineering.md和engineering-v2.md。
 
-本仓库的提案与持久决策见 [决策记录约定](./docs/decisions/README.md) 和 [自动索引](./docs/decisions/INDEX.md)。
+本仓库的工程决定与交付依据见 [Agent Notes 约定](./.agents/notes/README.md) 和 [自动索引](./.agents/notes/INDEX.md)。
 
 engineering-v2.md 作为工程工作流方法论，不直接引用相应的技能，有模型按需使用。
 

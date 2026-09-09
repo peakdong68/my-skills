@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process';
 
 const repo = fileURLToPath(new URL('../../', import.meta.url));
 const temp = await mkdtemp(path.join(tmpdir(), 'record-regression-'));
-const docs = path.join(temp, 'docs/decisions');
+const docs = path.join(temp, '.agents/notes');
 const run = name => spawnSync(process.execPath, [path.join(temp, `scripts/decisions/${name}.mjs`)], { cwd: temp, encoding: 'utf8' });
 const pass = name => { const r = run(name); assert.equal(r.status, 0, r.stderr); return r; };
 const fail = expected => { const r = run('check'); assert.equal(r.status, 1); assert.ok(r.stderr.includes(expected), r.stderr); };

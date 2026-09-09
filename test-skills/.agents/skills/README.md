@@ -8,7 +8,7 @@
 
 | 工程流程选择 | 使用方式 |
 | --- | --- |
-| `engineering.md` | 由流程路由到 plan、implement、verify，保留这些阶段技能及实际用到的支持材料。 |
+| `engineering.md` | 由流程路由到 plan、implement、verify；implement 调用 code-review 完成实施审查，保留这些技能及支持材料。 |
 | `engineering-v2.md` | 由文档直接定义工程方法论，模型依据任务语义按需选用独立技能；不要求每个阶段加载同名技能。 |
 
 两个文件用于不同项目场景，选择适合的一版作为项目工程入口。
@@ -40,7 +40,7 @@
 
 重复执行 setup 默认只检查并补齐兼容的缺失配置：相同文件跳过，不同文件保留并报告，规则、模板及脚本都不自动覆盖或升级。只有明确要求重新配置或升级时才合并相应变更。已有决策记录保留，索引使用项目自身经检查的脚本从当前记录生成。
 
-需要分类决策记录、自动索引和检查脚本时，可在 setup 中选用 [决策记录配置](./setup-matt-pocock-skills/decision-records.md)。通用资源位于该技能的 `resources/decision-records/`，分类由目标项目在 `docs/decisions/config.json` 中定义，样板不预置类别；记录按 proposed、implemented、rejected 组织，批准依据与交付状态分开。新项目只部署规则、模板和脚本并生成空索引，不复制本技能仓库的实际决策。已有 ADR 或决策体系优先复用；采用 engineering-v2.md 不意味着必须安装此配置。
+需要分类决策记录、自动索引和检查脚本时，可在 setup 中选用 [决策记录配置](./setup-matt-pocock-skills/decision-records.md)。通用资源位于该技能的 `resources/decision-records/`，分类由目标项目在 `.agents/notes/config.json` 中定义，样板不预置类别；记录按 proposed、implemented、rejected 组织，批准依据与交付状态分开。新项目只部署规则、模板和脚本并生成空索引，不复制本技能仓库的实际决策。已有 ADR 或决策体系优先复用；采用 engineering-v2.md 不意味着必须安装此配置。
 
 初始化负责技能所需的项目配置，不自动选择或安装 engineering 流程。建议将选定的 `engineering.md` 或 `engineering-v2.md` 复制到业务项目的 `docs/agents/engineering.md`，作为该项目工程流程的统一维护位置，再按项目场景调整内容。
 
@@ -65,19 +65,22 @@ Discuss → Plan → Implement → Verify。
 
 已有工程入口时更新原有配置，避免重复添加。上述授权方式不依赖是否安装 implement 技能。
 
-### code-review：可选的固定审查流程
+### code-review：按工程流程选择
 
-对于采用 GPT-6 Astra 等较强模型的业务项目，可以选择不安装或移除 `code-review`，让模型依据 implement 或 engineering-v2.md 中的审查要义完成工作。这是一种项目配置选择，不是仅凭模型名称就能保证审查质量；应以项目实际变更的审查表现判断是否适合。
+采用 `engineering.md` 时，implement 依赖 `code-review` 执行实施审查，自身保留发现的归属、范围内修正和完成责任。保留 implement 就需要保留 code-review。
+
+采用 `engineering-v2.md` 时，模型可以直接依据方法论中的 Implementation Review 完成审查，code-review 可按项目需要选配。对于 GPT-6 Astra 等较强模型，可结合实际审查表现选择精简技能；模型名称本身不保证审查质量。
 
 这种配置保留 Standards、Spec、范围完整性和独立 PR／分支审查，代理数量、检查方法及报告形式由模型按情境判断。移除的是固定技能流程，不是实施审查和验收要求。
 
-如果需要固定双代理、代码异味基线和统一报告方式，则保留 `code-review`。同时保留时，可在业务项目的 AGENTS.md 中约定：
+采用 v2 且不通过 implement 技能执行时，如果同时保留 `code-review`，可在业务项目的 AGENTS.md 中约定：
 
 > 实施过程中的审查使用工程流程内置的 Implementation Review；仅在用户明确指定 code-review 技能时使用其独立审查流程。
 
 移除前检查业务项目中的调用引用，不能只删除目录。当前共享技能库有以下关联：
 
 - `fix-bug/SKILL.md`：第 10 步要求调用 code-review。选配时改为执行项目内置的实施审查，继续保留缺陷修正和验证闭环。
+- `implement/SKILL.md`：实施审查与独立审查入口均调用 code-review。采用 v2 并移除 code-review 时，应直接按 v2 实施，或先调整项目副本中的审查实现。
 - `tdd/SKILL.md`：将重构归入审查阶段，并引用 code-review。选配时将该引用改为项目的 Implementation Review，不改变 TDD 的适用方式。
 
 这些调整针对业务项目中的副本；共享技能库可保留原有完整流程。
@@ -89,7 +92,7 @@ Discuss → Plan → Implement → Verify。
 | 选择 | 技能 | 原因与条件 |
 | --- | --- | --- |
 | 可优先移除 | plan、implement、verify | v2 已承载阶段职责、门禁、审阅和完成条件。移除后直接依据 v2 推进；如仍需要这些技能的独立入口、工件模板或任务分解细节，也可以保留。 |
-| 可移除，或保留为显式选用 | code-review | v2 已包含双维度审查、范围完整性及独立 PR 审查；需要固定审查程序时再保留，依赖处理见上文。 |
+| 可移除，或保留为显式选用 | code-review | v2 已包含审查方法；若仍使用 implement 技能，则需保留其 code-review 依赖。其他依赖处理见上文。 |
 | 建议保留 | diagnosing-bugs、research | 分别提供复杂故障的诊断方法和带来源的调查产物，补充工程流程没有展开的专项工作。 |
 | 复杂领域或跨模块项目建议保留 | architect、domain-modeling、codebase-design | 提供架构取舍、领域记录和模块设计方法；v2 只定义这些决策的责任与边界。 |
 | 按测试方式保留 | tdd | 适合需要明确测试优先流程的项目；常规测试和验收不依赖安装该技能。 |
@@ -166,7 +169,7 @@ Discuss → Plan → Implement → Verify
 | --- | --- | --- |
 | Discuss：理解目标、范围和未决问题 | grilling；用户可选 grill-me、grill-with-docs | research、domain-modeling、prototype；用户可选 triage、to-questionnaire、wayfinder |
 | Plan：解决必要决策，明确合同与验收条件 | plan | architect、codebase-design、domain-modeling、research、prototype；用户可选 to-spec、improve-codebase-architecture、wayfinder |
-| Implement：实施已授权范围并完成审阅 | implement（内置 Implementation Review） | tdd、diagnosing-bugs、resolving-merge-conflicts；按项目选择 code-review；用户可选 fix-bug |
+| Implement：实施已授权范围并完成审阅 | implement → code-review；implement 负责发现归属与修正 | tdd、diagnosing-bugs、resolving-merge-conflicts；用户可选 fix-bug |
 | Verify：用证据判断验收条件是否成立 | verify | diagnosing-bugs；用户可选 to-verify 进行独立的交付后验收 |
 
 `writing-for-agents` 适用于涉及代理文档的工作；`wizard` 适用于流程中必须由人完成的步骤。`handoff` 和 `wait-what` 支持跨阶段交接与沟通，`setup-matt-pocock-skills`、`chinese-commit-conventions` 和 `teach` 分别服务于配置、提交规范和学习场景。
