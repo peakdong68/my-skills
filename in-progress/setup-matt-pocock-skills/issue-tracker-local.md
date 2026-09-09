@@ -5,10 +5,19 @@ Issues and specs for this repo live as markdown files in `.scratch/`.
 ## Conventions
 
 - One feature per directory: `.scratch/<feature-slug>/`
+- The Proposal is `.scratch/<feature-slug>/proposal.md`; its file path is its work identifier. Reuse registered historical Proposal paths for existing work.
 - The spec is `.scratch/<feature-slug>/spec.md`
 - Implementation issues are one file per ticket at `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` — never a single combined tickets file
 - Triage state is recorded as a `Status:` line near the top of each issue file (see `triage-labels.md` for the role strings)
 - Comments and conversation history append to the bottom of the file under a `## Comments` heading
+
+## Proposal workflow
+
+Use `Status: planning`, `ready`, `in-progress`, `complete` or `rejected` near the top of the Proposal, unless the project has configured other states. These are work states, separate from ticket triage and decision-record lifecycle.
+
+Record Plan Review results and approval evidence in the Proposal's Decisions section, with references to relevant requirements and design. Move to `ready` only when required review and approvals are complete and the selected scope has no blocking decision or dependency. Start `in-progress` only with execution authorization under project rules; use `complete` after delivery and final verification. If readiness is lost, return affected work to `planning` and record the blocker; record the decision when rejecting work.
+
+Separate Specs and designs remain at their registered locations.
 
 ## When a skill says "publish to the issue tracker"
 

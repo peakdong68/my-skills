@@ -6,6 +6,8 @@ Turn the established product or work contract into a sufficiently resolved techn
 
 ## Lifecycle
 
+Use the project's artifact registry for RFC location and historical ownership. An independent RFC does not move with a linked change record's delivery lifecycle.
+
 Use the project's existing RFC lifecycle when one exists.
 
 Do not introduce a competing status vocabulary.
@@ -103,4 +105,3 @@ The RFC is ready for Plan Review when:
 Routine implementation details should remain open.
 
 Being ready for review does not itself make the RFC approved or authoritative.
-

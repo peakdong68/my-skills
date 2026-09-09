@@ -1,106 +1,36 @@
 # Proposal
 
-Use a Proposal when the work needs a root planning artifact and no existing authoritative work item serves that purpose.
+A Proposal proposes a change and is the root work item for that planning effort when no suitable existing work item serves this purpose. It owns the goal, scope, acceptance and decision status, and references detailed requirements and design where they have separate owners.
 
-When used, the Proposal is the canonical root of that planning work. It identifies the work and references authoritative artifacts without duplicating them.
+## Configuration and storage
 
-## Storage
+Before creating or updating a Proposal, read the project's issue-tracker configuration referenced by project instructions, normally `docs/agents/issue-tracker.md`. It must define where Proposals live and how their work status and review/approval evidence are maintained. Local Markdown is a supported tracker when explicitly configured.
 
-Prefer the project's configured issue tracker when one exists.
+If this configuration is missing or does not resolve Proposal handling, ask the user to complete it. Continue discussion and drafting in the conversation; do not invent a storage location, publish the Proposal or set its workflow status before configuration is established.
 
-Otherwise store the Proposal locally at:
+Reuse the existing Proposal and follow the artifact registry for historical ownership. A registration change does not migrate existing work. Create one Proposal in the configured location, not both a tracker issue and a duplicate local document.
 
-    docs/proposals/<slug>.md
+## Contents and format
 
-Reuse an existing Proposal when the work already has one.
+Follow the project's existing Proposal format and relevant maintained examples. When no project format exists, use [proposal-template.md](./proposal-template.md) as a body outline; status fields still come from tracker configuration.
 
-Do not create both an issue and a local Proposal unless the project explicitly requires it.
+Keep the content proportional to the work:
 
-## Contents
+- **Goal and scope** — the intended change, reason, included work and important exclusions.
+- **Acceptance** — observable completion conditions, or precise references to the applicable requirements.
+- **Decisions** — material proposed choices, unresolved questions and the resulting review and approval evidence.
+- **References** — existing PRD, Spec, RFC, ADR or other supporting artifacts.
 
-Keep the Proposal concise.
+A small Proposal may contain all necessary requirements and design. Create separate artifacts only when they need independent ownership. Reference their relevant sections instead of copying them or adding placeholder links.
 
-Include:
+## Status and updates
 
-### Summary
+Use only the configured tracker's work states and evidence conventions. Record Plan Review results on this Proposal; transition it to ready only when readiness and required approvals are established. Execution authorization remains subject to project rules. A review result, approval and execution authorization are distinct facts.
 
-Briefly describe the intended change and why it exists.
+Update the Proposal when agreed scope, decisions, review results, workflow status or supporting references change. Detailed requirements, design reasoning and ticket progress stay with their respective owners.
 
-### Acceptance
+## Relationship to decision records
 
-Define the minimum observable conditions for considering the work successful.
+A decision record may reference the Proposal to preserve a durable choice or delivery rationale without duplicating the proposal. Its `proposed / implemented / rejected` delivery lifecycle does not set the Proposal's work status.
 
-Keep this concise when another authoritative artifact, such as a PRD or Spec, owns the detailed contract.
-
-### Artifacts
-
-Reference authoritative artifacts that actually exist, such as:
-
-- PRD
-- Spec
-- RFC
-- ADRs
-- implementation tickets
-
-Do not create placeholder artifacts merely to populate this section.
-
-## Status
-
-Use the project's existing workflow convention to represent Proposal status.
-
-This may use:
-
-- issue-tracker statuses
-- labels
-- approvals
-- frontmatter
-- another established project mechanism
-
-Do not introduce a parallel status vocabulary when the project already defines one.
-
-For a local Proposal in a project without an established convention, a simple status field may be used:
-
-    ---
-    status: planning
-    ---
-
-The status should make relevant lifecycle distinctions clear, such as whether the work is still being planned, approved for implementation, blocked, or complete.
-
-The exact state names belong to the project.
-
-## Updates
-
-Update the Proposal when:
-
-- its workflow status materially changes
-- an authoritative artifact is added, removed, replaced, or superseded
-- implementation tickets are introduced
-
-Do not copy detailed requirements, design reasoning, review findings, or implementation progress into the Proposal when another artifact owns that information.
-
-## Local format
-
-    ---
-    status: <project-defined-status>
-    ---
-
-    # <Title>
-
-    ## Summary
-
-    <What is changing and why.>
-
-    ## Acceptance
-
-    - <Observable success condition>
-    - <Observable success condition>
-
-    ## Artifacts
-
-    - PRD: <reference>
-    - Spec: <reference>
-    - RFC: <reference>
-    - ADR: <reference>
-    - Tickets: <reference>
-
-Omit artifact entries that do not exist.
+If an existing project uses one file for both purposes, follow its registered mapping of work status, approval evidence and record lifecycle. Do not add a competing `status` field or migrate historical Proposals automatically.

@@ -11,10 +11,13 @@ Scaffold the per-repo configuration that the engineering skills assume:
 - **Issue tracker** — where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
+- **Artifact registry** — current and historical artifact owners, new destinations, and lifecycle conventions
 
 This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
 
 ## Process
+
+On repeat invocation, default to inspecting and filling missing configuration, not replacing or upgrading existing files. Reuse settled choices without asking again. Skip identical files; preserve and report differences from bundled defaults, including scripts. Apply changes to existing files only within an explicitly requested reconfiguration or upgrade scope. The steps below do not authorize blanket overwrites or duplicate instruction blocks.
 
 ### 1. Explore
 
@@ -25,6 +28,7 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - `docs/agents/` — does this skill's prior output already exist?
+- Artifact registries, representative planning files, and historical locations referenced by project instructions
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
 - Monorepo signals — a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. Present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
@@ -37,7 +41,7 @@ Lead each section with the recommended answer so the user can accept it in a wor
 
 **Section A — Issue tracker.**
 
-> Explainer: The "issue tracker" is where issues live for this repo. Skills like `to-tickets`, `triage`, and `to-spec` read from and write to it — they need to know whether to call `gh issue create`, write a markdown file under `.scratch/`, or follow some other workflow you describe. Pick the place you actually track work for this repo.
+> Explainer: The "issue tracker" is where this repo tracks Proposals and work items. Configure the system you use, including local Markdown if preferred.
 
 Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
 
@@ -48,6 +52,8 @@ Default posture: these skills were designed for GitHub. If a `git remote` points
 
 Record the choice in `docs/agents/issue-tracker.md`. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off** — leave it off and don't raise it; a user who wants external PRs in the triage queue can flip the flag in the file later.
 
+Include the Proposal location/identifier, work-state representation and transitions, and where review and approval evidence are recorded. Reuse existing states; if missing, resolve their mapping in this setup review. Readiness requires the applicable review and approvals, while execution authorization follows project instructions. This configuration is required before creating or updating Proposals; choosing a tracker does not itself authorize publishing work or creating remote labels.
+
 **Section B — Triage label vocabulary.** Skip this section entirely if the `triage` skill isn't installed (exploration told you) — an uninstalled skill needs no labels.
 
 If it is installed, ask exactly one question:
@@ -56,9 +62,11 @@ If it is installed, ask exactly one question:
 
 The defaults are the five canonical roles, each label string equal to its name: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. On **yes**, write them as-is. Only if the user says no — usually because their tracker already uses other names (e.g. `bug:triage` for `needs-triage`) — collect the overrides so `triage` applies existing labels instead of creating duplicates.
 
-**Section C — Domain docs.** Default to **single-context** — one `CONTEXT.md` + `docs/adr/` at the repo root. This fits almost every repo; write it without asking.
+**Section C — Artifact and domain docs.** Read [artifact-registration.md](artifact-registration.md) to register historical and new artifact locations. Reuse the user's chosen registration mode; distinguish new-work routing from migration. Use the selected registry for decision/ADR locations. Without another choice, retain the single-context default of `CONTEXT.md` plus `docs/adr/`.
 
 Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
+
+**Optional decision records.** When the user requests categorized decision records with an index and checks, read [decision-records.md](decision-records.md). Reuse any existing decision system first. Include this option in the same configuration review; prior explicit selection does not require another approval round. Selecting an engineering workflow alone does not require installing it.
 
 ### 3. Confirm and edit
 
@@ -66,6 +74,8 @@ Show the user a draft of:
 
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
+- The artifact registry and historical/new location map, normally `docs/agents/artifacts.md`
+- If selected, the decision-record deployment and its project instruction pointer, including its relationship to existing ADRs
 
 Let them edit before writing.
 
@@ -97,6 +107,10 @@ The block:
 ### Domain docs
 
 [one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+
+### Artifact management
+
+For engineering artifact discovery, creation, updates and lifecycle, follow `docs/agents/artifacts.md`.
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
@@ -108,6 +122,7 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [issue-tracker-local.md](./issue-tracker-local.md) — local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md) — label mapping (only if `triage` is installed)
 - [domain.md](./domain.md) — domain doc consumer rules + layout
+- [artifacts.md](./artifacts.md) — adapt artifact ownership and historical/new locations to the selected registration mode
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
