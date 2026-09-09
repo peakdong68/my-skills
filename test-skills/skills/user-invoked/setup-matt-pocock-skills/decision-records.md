@@ -28,7 +28,9 @@ Never reset existing decision records. INDEX.md may be regenerated from the proj
 
 ### Files and deployment
 
-The reusable source is [resources/decision-records/](resources/decision-records/). It contains:
+Resolve [resources/decision-records/](resources/decision-records) relative to the setup skill loaded for this invocation, whether installed at user or project level. Determine the target project separately and deploy the selected files there; do not infer the resource source from the target project's directory layout.
+
+The reusable source contains:
 
 - `.agents/notes/README.md`: management rules with project-configured categories
 - `.agents/notes/config.json`: empty category configuration to populate from the target project

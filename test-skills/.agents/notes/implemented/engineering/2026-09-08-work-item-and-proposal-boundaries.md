@@ -41,4 +41,4 @@ Plan Review 结论写回本次 Proposal 或既有工作项，取得所需批准�
 
 2026-09-08 本任务会话中，用户列明七项歧义，认可统一方案，补充 Ticket 由 implement 进入实施后按需拆分，并授权执行；无独立会话链接。
 
-实现见 [工程流程](../../../../engineering.md)、[方法论版本](../../../../engineering-v2.md)、[Plan](../../../../.agents/skills/plan/SKILL.md)、[Proposal](../../../../.agents/skills/plan/proposal.md)、[Review](../../../../.agents/skills/plan/review.md)、[Implement](../../../../.agents/skills/implement/SKILL.md)、[工件注册](../../../../.agents/skills/setup-matt-pocock-skills/artifact-registration.md) 与 [记录规则](../../README.md)。
+实现见 [工程流程](../../../../engineering.md)、[方法论版本](../../../../engineering-v2.md)、[Plan](../../../../skills/model-invoked/plan/SKILL.md)、[Proposal](../../../../skills/model-invoked/plan/proposal.md)、[Review](../../../../skills/model-invoked/plan/review.md)、[Implement](../../../../skills/model-invoked/implement/SKILL.md)、[工件注册](../../../../skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 与 [记录规则](../../README.md)。

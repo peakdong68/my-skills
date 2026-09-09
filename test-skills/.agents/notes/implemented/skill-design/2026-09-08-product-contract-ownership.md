@@ -23,4 +23,4 @@ verification: 已核对 prd.md 与 plan 入口一致，记录检查通过
 
 2026-09-08 本任务会话中，用户询问 PRD 与提案及用户意图的关系，随后要求按建议修正；无独立会话链接。
 
-参见 [产品需求说明](../../../../.agents/skills/plan/prd.md)、[Plan 入口](../../../../.agents/skills/plan/SKILL.md) 和 [工件注册决定](../decision-records/2026-09-08-artifact-location-registration.md)。
+参见 [产品需求说明](../../../../skills/model-invoked/plan/prd.md)、[Plan 入口](../../../../skills/model-invoked/plan/SKILL.md) 和 [工件注册决定](../decision-records/2026-09-08-artifact-location-registration.md)。

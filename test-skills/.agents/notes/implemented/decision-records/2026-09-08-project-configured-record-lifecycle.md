@@ -35,6 +35,6 @@ verification: 见正文的验证命令及自动化场景
 
 部分替代 [可复用资源与项目历史分离](./2026-09-08-portable-decision-records.md) 中关于固定分类及旧生命周期的内容，其余副本归属和防覆盖规则继续适用。
 
-实现见 [配置](../../config.json)、[规范](../../README.md)、[检查器](../../../../scripts/decisions/lib.mjs)、[setup](../../../../.agents/skills/setup-matt-pocock-skills/decision-records.md)。
+实现见 [配置](../../config.json)、[规范](../../README.md)、[检查器](../../../../scripts/decisions/lib.mjs)、[setup](../../../../skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
 
 验证命令：`node scripts/decisions/update-index.mjs`、`node scripts/decisions/check.mjs`、`node scripts/decisions/self-test.mjs`。自动化场景覆盖空资源部署、自定义分类、各生命周期与必填依据、失效链接及索引新鲜度；重复 setup 防覆盖仍是技能执行约束，不是安装器保证。

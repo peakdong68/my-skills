@@ -19,4 +19,4 @@ engineering-v2.md 是独立方法论，保留其内置审查规则。采用 v2 �
 
 本决定调整技能依赖，不扩大执行权限。补充 [两种工程流程](./2026-09-08-engineering-workflow-variants.md) 的审查实现方式；本次不修改 code-review 技能或 engineering-v2.md。
 
-实现见 [implement](../../../../.agents/skills/implement/SKILL.md)、[code-review](../../../../.agents/skills/code-review/SKILL.md) 和 [技能选配说明](../../../../.agents/skills/README.md)。依据为 2026-09-09 本任务会话，无独立会话链接。
+实现见 [implement](../../../../skills/model-invoked/implement/SKILL.md)、[code-review](../../../../skills/model-invoked/code-review/SKILL.md) 和 [技能选配说明](../../../../skills/README.md)。依据为 2026-09-09 本任务会话，无独立会话链接。

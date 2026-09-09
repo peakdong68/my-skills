@@ -35,6 +35,6 @@ verification: 对照正文引用的已交付文件及本任务检查结果核对
 
 同一会话后续，用户要求落实重复执行不自动覆盖、已有差异保留和显式升级的规则；本段补充既有项目副本归属决定的维护行为。
 
-参见 [初始化方式](../../../../.agents/skills/setup-matt-pocock-skills/decision-records.md)、[通用资源](../../../../.agents/skills/setup-matt-pocock-skills/resources/decision-records/)、[项目管理约定](../../README.md)。
+参见 [初始化方式](../../../../skills/user-invoked/setup-matt-pocock-skills/decision-records.md)、[通用资源](../../../../skills/user-invoked/setup-matt-pocock-skills/resources/decision-records)、[项目管理约定](../../README.md)。
 
 验证：本仓库记录检查通过；临时目标项目仅复制五个资源文件，可生成六类视图的空索引并通过检查，不包含本仓库历史。

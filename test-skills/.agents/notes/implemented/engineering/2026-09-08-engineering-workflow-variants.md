@@ -29,4 +29,4 @@ engineering.md 负责精简编排并引用阶段技能；engineering-v2.md 独�
 
 2026-09-08 本任务会话中，用户明确说明两个版本用于不同项目，并要求 v2 保持独立方法论定位；无独立会话链接。
 
-参见 [精简版](../../../../engineering.md)、[方法论版](../../../../engineering-v2.md)、[选配说明](../../../../.agents/skills/README.md)。
+参见 [精简版](../../../../engineering.md)、[方法论版](../../../../engineering-v2.md)、[选配说明](../../../../skills/README.md)。

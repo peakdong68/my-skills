@@ -25,4 +25,4 @@ verification: 原有十条记录内容校验一致，新路径记录检查、资
 
 验证命令：`node scripts/decisions/check.mjs`、`node scripts/decisions/self-test.mjs`、`git diff --check`；另核对通用资源与部署副本一致，以及旧路径只在历史说明中保留。
 
-参见 [Agent Notes 规则](../../README.md)、[setup 配置](../../../../.agents/skills/setup-matt-pocock-skills/decision-records.md)、[工件位置样板](../../../../.agents/skills/setup-matt-pocock-skills/artifacts.md)。本次更新默认物理位置，沿用 [工件注册方法](./2026-09-08-artifact-location-registration.md) 中保留历史归属和显式迁移的原则。
+参见 [Agent Notes 规则](../../README.md)、[setup 配置](../../../../skills/user-invoked/setup-matt-pocock-skills/decision-records.md)、[工件位置样板](../../../../skills/user-invoked/setup-matt-pocock-skills/artifacts.md)。本次更新默认物理位置，沿用 [工件注册方法](./2026-09-08-artifact-location-registration.md) 中保留历史归属和显式迁移的原则。

@@ -29,4 +29,4 @@ to-spec 保持用户主动调用，优先更新已有 Spec，引用其他权威�
 
 2026-09-08 本任务会话中，用户要求修正 to-spec，继而要求优先使用已有文件风格并拆分模板；无独立会话链接。
 
-参见 [to-spec](../../../../.agents/skills/to-spec/SKILL.md)、[模板](../../../../.agents/skills/to-spec/spec-template.md)、[Planning 约定](../../../../engineering-v2.md)。
+参见 [to-spec](../../../../skills/user-invoked/to-spec/SKILL.md)、[模板](../../../../skills/user-invoked/to-spec/spec-template.md)、[Planning 约定](../../../../engineering-v2.md)。

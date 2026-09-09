@@ -31,4 +31,4 @@ Proposal 默认直接作为 proposed 记录及未配置时自行选择落盘位�
 
 2026-09-08 本任务会话中用户强调“提供一种方法约定”，认可默认方法、注册入口和历史衔接方案；无独立会话链接。
 
-参见 [注册方法](../../../../.agents/skills/setup-matt-pocock-skills/artifact-registration.md)、[样板](../../../../.agents/skills/setup-matt-pocock-skills/artifacts.md)、[Plan](../../../../.agents/skills/plan/SKILL.md)。本记录补充 [项目分类及生命周期](./2026-09-08-project-configured-record-lifecycle.md)。
+参见 [注册方法](../../../../skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md)、[样板](../../../../skills/user-invoked/setup-matt-pocock-skills/artifacts.md)、[Plan](../../../../skills/model-invoked/plan/SKILL.md)。本记录补充 [项目分类及生命周期](./2026-09-08-project-configured-record-lifecycle.md)。

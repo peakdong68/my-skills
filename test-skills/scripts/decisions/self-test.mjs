@@ -12,7 +12,7 @@ const run = name => spawnSync(process.execPath, [path.join(temp, `scripts/decisi
 const pass = name => { const r = run(name); assert.equal(r.status, 0, r.stderr); return r; };
 const fail = expected => { const r = run('check'); assert.equal(r.status, 1); assert.ok(r.stderr.includes(expected), r.stderr); };
 try {
-  await cp(path.join(repo, '.agents/skills/setup-matt-pocock-skills/resources/decision-records'), temp, { recursive: true });
+  await cp(path.join(repo, 'skills/user-invoked/setup-matt-pocock-skills/resources/decision-records'), temp, { recursive: true });
   pass('update-index'); pass('check');
   const emptyConfig = JSON.parse(await readFile(path.join(docs, 'config.json'), 'utf8'));
   assert.deepEqual(emptyConfig.categories, []);

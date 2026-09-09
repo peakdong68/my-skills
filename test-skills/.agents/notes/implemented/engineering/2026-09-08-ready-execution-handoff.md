@@ -21,4 +21,4 @@ implement 开工前核对当前范围的就绪与执行授权，沿用已有有�
 
 2026-09-08 本任务会话中，用户要求按已讨论的简短措辞先修正两项问题，另行重新思考门禁判断方式；无独立会话链接。
 
-已交付规则见 [AGENTS.md](../../../../AGENTS.md) 与 [implement](../../../../.agents/skills/implement/SKILL.md)。
+已交付规则见 [AGENTS.md](../../../../AGENTS.md) 与 [implement](../../../../skills/model-invoked/implement/SKILL.md)。
