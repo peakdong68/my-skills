@@ -1,62 +1,52 @@
 ---
 name: architect
-description: 分析跨模块职责、依赖与数据流，评估架构方案及迁移影响。用于模块拆分、接口边界、跨模块重构和迁移方案等尚待解决的架构决策；落实已批准方案时，仅分析新发现的架构问题。
+description: Analyze cross-module responsibilities, dependencies and data flows, and evaluate architectural options and migration impacts. Use for unresolved architectural decisions involving module boundaries, interfaces, cross-module refactoring or migration plans; when implementing an approved plan, analyze only newly discovered architectural issues.
 ---
 
-# 架构分析
+# Architectural Analysis
 
-查清谁负责什么、谁依赖谁、数据如何流动，给出有证据的最小有效调整。
+Establish who owns what, who depends on whom, and how data flows. Recommend the smallest effective change supported by evidence.
 
-## 使用边界
+## Scope and authority
 
-- 本技能提供分析与建议，不授予代码实施权限；遵循用户授权和当前项目适用的审批规则。
-- 复用已批准方案，不因改动涉及多个模块而重开设计。发现与现行合同的冲突时，说明证据和
-  需要裁决的事项；继续其他独立且已授权的工作。
-- 需要落盘时，沿用项目已有的文档归属与组织方式，不自动创建整套决策产物。
+- This skill provides analysis and recommendations, not permission to implement code. Follow the user's authorization and the current project's applicable approval rules.
+- Reuse approved plans; do not reopen design merely because a change spans multiple modules. When you find a conflict with the current contract, explain the evidence and the decision needed. Continue other independent, authorized work.
+- When recording findings, follow the project's existing document ownership and organization. Do not automatically create a full set of decision artifacts.
 
-## 查清问题与证据
+## Establish the problem and evidence
 
-先从用户请求和已有上下文确定决策点、涉及模块、预期收益与必须保留的行为。优先按项目
-指令（如 AGENTS.md）的路由查相关需求、架构文档、已接受决策与接口合同；没有路由时，
-从 README、现有文档和程序入口定位。不要求特定文档名称、目录或技术栈。
+Use the request and existing context to identify the decision, affected modules, expected benefits and behavior that must be preserved. Follow project instruction pointers, such as those in AGENTS.md, to relevant requirements, architecture documents, accepted decisions and interface contracts. Without such pointers, use the README, existing documentation and program entry points. Do not require particular document names, directories or technology stacks.
 
-按需读取模块配置、公共接口、调用方与内部实现，追踪影响边界的调用、数据流和生命周期。
-聚焦待解决的问题，不要求扫描整个仓库。项目指定参考实现或兼容标准时，核查相关行为
-及已有验证记录；没有指定时，不额外引入参考实现作为权威。
+Read module configuration, public interfaces, callers and internal implementations as needed to trace calls, data flows and lifecycles that affect the boundaries in question. Focus on the unresolved problem; a whole-repository scan is not required. When the project specifies a reference implementation or compatibility standard, check the relevant behavior and existing verification records. Otherwise, do not introduce an additional reference implementation as an authority.
 
-区分现行合同、源码中的实际行为和待验证推测。文档与源码不一致时明确指出，不能用当前实现
-反过来覆盖已批准合同。性能或故障判断引用测量、复现或调用路径；证据不足时保留为假设。
+Distinguish the current contract, actual behavior in source code and unverified hypotheses. Explicitly identify discrepancies between documentation and code; the current implementation must not override an approved contract. Support performance or failure claims with measurements, reproductions or call paths. Keep claims hypothetical when evidence is insufficient.
 
-只有缺失信息会改变方案选择且无法自行查证时才询问。等待回答期间继续不依赖该信息的分析。
+Ask only when missing information would change the choice of solution and cannot be established independently. While awaiting an answer, continue analysis that does not depend on it.
 
-## 分析与取舍
+## Analysis and trade-offs
 
-按问题选择有实质影响的维度，不机械填满清单：
+Select dimensions that materially affect the problem rather than mechanically filling every checklist item:
 
-| 维度 | 核查重点 |
+| Dimension | What to examine |
 | --- | --- |
-| 职责与依赖 | 职责是否有明确属主，依赖是否符合约定方向，是否出现循环或跨层访问 |
-| 接口与兼容 | 哪些调用方受影响，字段、错误、时序与兼容承诺是否变化 |
-| 数据与生命周期 | 状态由谁持有，消息如何流动，取消、失败与资源释放由谁负责 |
-| 耦合与复杂度 | 是否减少联动修改，新增抽象是否有实际消费者，是否存在更小的调整 |
-| 迁移与验证 | 能否分步落地，过渡期如何兼容，如何回退或恢复，以及用什么证据验收 |
+| Responsibilities and dependencies | Whether responsibilities have clear owners, dependencies follow the agreed direction, and cycles or cross-layer access exist |
+| Interfaces and compatibility | Which callers are affected and whether fields, errors, timing or compatibility commitments change |
+| Data and lifecycle | Who owns state, how messages flow, and who handles cancellation, failure and resource cleanup |
+| Coupling and complexity | Whether coordinated changes are reduced, new abstractions have actual consumers, and a smaller change is possible |
+| Migration and verification | Whether delivery can be incremental, how transitional compatibility works, how to roll back or recover, and what evidence establishes acceptance |
 
-诊断问题时，从可观察的症状追踪到具体模块关系，再提出修正；不要把偏好的设计模式当作根因。
-比较方案时纳入维持现状或局部调整，只比较能满足需求的选项，避免为凑方案数制造劣质备选。
+When diagnosing a problem, trace observable symptoms to specific relationships between modules before proposing a correction. Do not treat a preferred design pattern as a root cause. When comparing options, include retaining the current approach or making a local adjustment. Compare only options that can meet the requirements; do not invent inferior alternatives to reach an option count.
 
-优先推荐符合现行约束、能解决实际问题且迁移成本合理的方案。证据不足以选定时，给出条件性
-推荐和最小验证步骤，不代替用户裁决未定的产品行为、公共合同或不可逆权衡。
+Prefer an approach that respects current constraints, solves the actual problem and has reasonable migration costs. When evidence is insufficient to choose, provide a conditional recommendation and the smallest verification steps. Do not decide unresolved product behavior, public contracts or irreversible trade-offs on the user's behalf.
 
-## 交付与完成
+## Delivery and completion
 
-先给结论，再给关键依据和取舍。简单问题简答；多方案用表格，复杂依赖或数据流按需画图，
-不强制固定模板或字数。
+Lead with the conclusion, followed by the key evidence and trade-offs. Answer simple questions briefly; use tables for alternatives and diagrams when complex dependencies or data flows warrant them. Do not impose a fixed template or word count.
 
-交付应覆盖本次决策所需的：
+Cover what the current decision needs:
 
-- 推荐及依据，关键事实链接到文档或源码位置；
-- 受影响的模块、接口与调用方，必要的迁移顺序和验证方式；
-- 必须解决的风险、可选优化，以及尚待查证或用户裁决的事项。
+- The recommendation and its basis, with key facts linked to documentation or source locations.
+- Affected modules, interfaces and callers, plus any necessary migration sequence and verification approach.
+- Risks that must be resolved, optional improvements, and matters requiring further evidence or a user decision.
 
-上述内容有证据支持，或明确标出缺失证据及其对结论的影响，才算分析完成。
-分析完成不代表方案获批或实现完成。
+Analysis is complete only when these points are supported by evidence, or missing evidence and its effect on the conclusion are explicit. Completing analysis does not mean the proposal is approved or implementation is complete.
