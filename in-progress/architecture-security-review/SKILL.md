@@ -1,115 +1,90 @@
 ---
 name: architecture-security-review
-description: 对仓库或重大变更进行架构、安全与实现综合评审，先判断技术路线及替代方案，再审查仍值得保留的实现，报告有证据且值得修复的问题。用于完整仓库评审、技术路线复核或跨模块安全与代码联合审查；普通局部代码审查和单一设计咨询不自动升级为此流程。
+description: Review a repository or major change across architecture, security and implementation. Evaluate the technical approach and alternatives before reviewing the implementation worth retaining, and report evidence-backed issues worth fixing. Use for full repository reviews, technical direction assessments or combined cross-module security and code reviews; do not automatically escalate ordinary local code reviews or individual design questions into this workflow.
 disable-model-invocation: true
 ---
 
-# 架构、安全与代码综合评审
+# Architecture, Security and Code Review
 
-以软件架构师、安全评审人和代码审查者三个独立视角判断方案与实现。既有设计、投入和测试
-通过都不是正确性的保证；优先发现值得处理的根因，不以问题数量衡量评审质量。
+Assess the approach and implementation from three independent perspectives: software architect, security reviewer and code reviewer. Existing design, invested effort and passing tests do not guarantee correctness. Prioritize root causes worth addressing; do not measure review quality by the number of findings.
 
-## 范围与权限
+## Scope and authority
 
-- 本流程交付评审结论，不修改被评审代码、配置、测试或设计，不自动发布评论、创建工单或推送。
-  用户之后明确要求实施时，另按项目准入规则开展。
-- 复用用户或调用流程指定的仓库、基线与范围。完整评审覆盖主要架构和信任边界，并对高风险
-  路径深入查证；不把它解释成无目的逐行扫描，也不把抽样审查声称为全量安全保证。
-- 先按项目 AGENTS.md 及其路由找材料；有 CLAUDE.md 等补充说明时按适用范围读取。不假定语言、
-  目录结构、部署平台或问题跟踪器。缺少某一种文档本身不阻止其余评审。
-- 只读调查可使用搜索、Git 记录及已有测试。运行前检查命令副作用，使用临时目录、假服务或
-  隔离环境；不运行会触碰真实数据、凭据、生产服务或外部写入的测试。不能安全执行时记录
-  验证缺口并继续静态分析，不展示秘密值。
-- 仅当仓库确实找不到答案、不同答案会明显改变结论、且无法靠合理只读检查继续判断时提问，
-  每次最多三个关键问题。普通不确定性明确标记；等待期间继续独立分析。
+- Deliver review conclusions without modifying the reviewed code, configuration, tests or design. Do not automatically publish comments, create tickets or push changes. If the user later explicitly requests implementation, follow the project's implementation entry rules separately.
+- Reuse the repository, baseline and scope specified by the user or calling workflow. A full review covers the main architectural and trust boundaries and investigates high-risk paths in depth. Do not interpret it as an aimless line-by-line scan or claim that sampled review guarantees comprehensive security.
+- Find material through the project's AGENTS.md and its pointers first. Read supplementary instructions such as CLAUDE.md where applicable. Do not assume a language, directory structure, deployment platform or issue tracker. Missing one kind of document does not itself block the rest of the review.
+- Read-only investigation may use searches, Git history and existing tests. Check commands for side effects before running them, and use temporary directories, fake services or isolated environments. Do not run tests that touch real data, credentials, production services or external writes. If safe execution is not possible, record the verification gap and continue static analysis. Do not display secret values.
+- Ask only when the repository cannot supply the answer, different answers would materially change the conclusion, and reasonable read-only checks cannot resolve the question. Ask at most three essential questions at a time. Label ordinary uncertainty explicitly and continue independent analysis while waiting.
 
-## 调查与还原
+## Investigate and reconstruct
 
-先确定项目目标、当前交付范围和主要风险，建立有目的的调查路径：
+First establish the project goals, current delivery scope and main risks, then pursue a focused investigation:
 
-1. 读取 README、项目指令，以及相关需求、设计、已接受决策、spec、工单和验收资料。
-2. 记录当前分支、HEAD、已有工作区改动和评审基线。检查近期相关提交；有当前改动时涵盖
-   staged、unstaged 与相关新增文件。区分既有缺陷和本次引入的问题，不以空 diff 代替仓库评审。
-3. 核对依赖清单与锁文件、构建和部署配置、运行环境假设；追踪程序入口、核心调用关系、
-   数据模型、外部服务和关键测试。优先深入受改动影响或后果严重的路径。
-4. 从不可信输入追到身份认证、授权、敏感数据与副作用，标出谁能调用、信任在哪转换、
-   状态由谁持有、失败如何恢复。按需追踪内部实现，不止于接口声明或局部补丁。
+1. Read the README, project instructions, and relevant requirements, designs, accepted decisions, specs, work items and acceptance material.
+2. Record the current branch, HEAD, existing worktree changes and review baseline. Inspect relevant recent commits. When reviewing current changes, include staged, unstaged and relevant new files. Distinguish pre-existing defects from newly introduced ones; an empty diff does not replace a repository review.
+3. Examine dependency manifests and lockfiles, build and deployment configuration, and runtime assumptions. Trace program entry points, core call relationships, data models, external services and key tests. Prioritize paths affected by the change or with serious consequences.
+4. Trace untrusted input through authentication, authorization, sensitive data and side effects. Identify who can call each entry point, where trust changes, who owns state and how failures recover. Follow internal implementation as needed rather than stopping at interface declarations or local patches.
 
-用文件位置支撑目标与现状判断，列出影响结论的假设和缺失信息。需求与已接受合同用于判断
-应该发生什么，源码与实测用于判断实际发生什么；两者不一致时明确说明。设计本身仍可被质疑，
-但不能通过重新解释合同把实现缺陷抹掉。
+Support conclusions about goals and current behavior with file locations, and list assumptions and missing information that affect them. Requirements and accepted contracts establish what should happen; source code and observed results establish what actually happens. State discrepancies explicitly. The design itself may still be challenged, but do not reinterpret the contract to erase an implementation defect.
 
-## 先评技术路线
+## Evaluate the technical approach first
 
-围绕目标检查需求覆盖、复杂度来源、历史补丁、权限边界、状态一致性和运维负担。
-用提交记录或具体代码证明“早期选择导致后续补丁”，不能仅凭模块多或代码长推断过度设计。
+Examine requirement coverage, sources of complexity, historical patches, permission boundaries, state consistency and operational burden in relation to the goals. Use commit history or specific code to support claims that an early choice caused later patches. Do not infer overengineering solely from module count or code length.
 
-判断问题能否局部修正，还是来自共享状态、信任关系、职责划分或技术选择本身。涉及安全时
-说明资产、攻击者能力、入口与部署前提；不要把理想化威胁模型当成当前事实。
+Determine whether a problem can be fixed locally or stems from shared state, trust relationships, responsibility boundaries or the technology choice itself. For security issues, identify the assets, attacker capabilities, entry points and deployment assumptions. Do not present an idealized threat model as current fact.
 
-存在有意义的替代方案时，与当前方案或最小调整比较：
+When meaningful alternatives exist, compare them with the current approach or a minimal adjustment:
 
-| 维度           | 比较内容                                       |
-| -------------- | ---------------------------------------------- |
-| 需求覆盖       | 已满足、缺失和受影响的验收条件                 |
-| 安全与故障影响 | 信任边界、权限大小、失败后的影响范围与恢复能力 |
-| 实现与维护     | 新增机制、联动修改、调试和长期运维成本         |
-| 性能与资源     | 已测量的成本与仍需验证的假设                   |
-| 迁移与回滚     | 数据、接口、过渡期兼容、分步实施和恢复代价     |
+| Dimension | Comparison |
+| --- | --- |
+| Requirement coverage | Acceptance conditions already met, missing or affected |
+| Security and failure impact | Trust boundaries, privilege scope, failure blast radius and recovery capability |
+| Implementation and maintenance | Added mechanisms, coordinated changes, debugging and long-term operational costs |
+| Performance and resources | Measured costs and assumptions still requiring verification |
+| Migration and rollback | Data, interfaces, transitional compatibility, incremental delivery and recovery costs |
 
-不为填表编造备选。替代技术的版本、支持状态或安全能力影响推荐时，核查官方资料；漏洞
-结论核对实际锁定版本、权威公告、可达路径及部署条件，不能只凭包名或扫描器提示定性。
+Do not invent alternatives to fill a table. When alternative technologies' versions, support status or security capabilities affect the recommendation, verify official sources. For vulnerability findings, check the actual locked version, authoritative advisories, reachable paths and deployment conditions. Do not classify a vulnerability based only on a package name or scanner alert.
 
-明确给出一种路线结论及依据：**保留当前方案 / 调整当前方案 / 更换方案 /
-缺少关键信息，暂时无法判断**。建议不等于批准，本流程不提供或应用代码补丁。
+Give one explicit conclusion about the technical approach, with evidence: **retain the current approach / adjust the current approach / replace the approach / insufficient information to decide yet**. A recommendation is not approval. This workflow does not provide or apply code patches.
 
-## 再审具体实现
+## Then review the implementation
 
-路线值得保留或局部调整时，审查保留部分的功能、权限、输入处理、异常处理、并发、状态一致性、
-资源释放、性能、测试和可维护性。沿调用方与数据流核查影响范围，不只检查改动行。
+When the approach is worth retaining or adjusting locally, examine the retained implementation's functionality, permissions, input handling, error handling, concurrency, state consistency, resource cleanup, performance, tests and maintainability. Trace callers and data flows to establish impact rather than checking only changed lines.
 
-若建议更换方案，聚焦迁移前必须控制的风险和仍会保留的代码，避免打磨待淘汰实现。
-路线暂不可判断时，继续能独立证实的安全与正确性检查，明确其适用前提。
+When recommending replacement, focus on risks that must be controlled before migration and on code that will remain, rather than polishing implementation scheduled for removal. When the approach cannot yet be judged, continue independently verifiable security and correctness checks and state their assumptions.
 
-优先使用已有测试、最小安全复现或完整调用路径验证发现。记录实际命令与结果；无法复现时
-说明证据能支持到哪一步。测试缺口只有关联具体必需行为或合理风险时才值得报告。
+Prefer existing tests, minimal safe reproductions or complete call paths to validate findings. Record actual commands and results. When reproduction is not possible, explain how far the evidence supports the claim. Report test gaps only when they relate to specific required behavior or a plausible risk.
 
-## 发现质量
+## Finding quality
 
-每项发现包含：
+Each finding includes:
 
-- **性质**：已确认缺陷 / 合理风险 / 待验证猜测。
-- **严重程度**：致命 / 高 / 中 / 低；结合触发条件、可利用性和影响评定。
-- **置信度**：高 / 中 / 低；说明证据局限，不用严重程度代替置信度。
-- **证据**：准确的文件位置、配置、调用路径或测试结果。
-- **触发场景与后果**：谁在什么条件下触发，影响什么行为、数据或权限。
-- **处理方向**：最小有效修正或架构调整，以及怎样验证，不直接写补丁。
-- **根因关系**：根因或表面症状；同源问题合并，说明受影响范围。
+- **Nature**: confirmed defect / plausible risk / hypothesis requiring verification.
+- **Severity**: critical / high / medium / low, assessed against trigger conditions, exploitability and impact.
+- **Confidence**: high / medium / low. Explain evidence limitations; severity does not substitute for confidence.
+- **Evidence**: precise file locations, configuration, call paths or test results.
+- **Trigger and consequences**: who triggers it under which conditions, and which behavior, data or permissions are affected.
+- **Remediation direction**: the smallest effective correction or architectural adjustment and how to verify it, without writing a patch.
+- **Root-cause relationship**: root cause or symptom. Consolidate findings with the same cause and explain their affected scope.
 
-致命通常意味着广泛系统失陷或不可恢复的严重数据损失；高意味着重要安全边界或核心行为
-被破坏；中意味着有实质影响但范围或触发条件受限；低意味着影响有限且通常可推迟。
-等级必须由具体场景支持，不能按漏洞类别机械套用。
+Critical usually means widespread system compromise or severe, unrecoverable data loss. High means an important security boundary or core behavior is broken. Medium means material impact with limited scope or trigger conditions. Low means limited impact that can usually be deferred. Support severity with a concrete scenario rather than assigning it mechanically by vulnerability category.
 
-只有理论可能性的猜测放入未确认信息，不混入已确认缺陷。区分规范违例与对规范本身的异议；
-不把风格偏好、代码量或已有投入当作缺陷或保留理由。核对修复状态，不重复报告已解决的问题。
-低概率、低影响事项明确说明是否值得处理；没有新的重要发现就如实说明。
+Keep purely theoretical hypotheses among unconfirmed information, separate from confirmed defects. Distinguish violations of a standard from objections to the standard itself. Do not treat style preferences, code volume or invested effort as defects or reasons to retain an approach. Check remediation status and do not report resolved issues again. For low-probability, low-impact concerns, explicitly state whether they are worth addressing. If there are no new material findings, say so.
 
-## 报告与停止条件
+## Report and stopping conditions
 
-按以下顺序输出，使用用户的语言；无实质内容的部分用一句说明，不凑表格或问题数：
+Report in the following order, using the user's language. Use a single sentence for sections without substantive content; do not pad tables or finding counts:
 
-1. **仓库调查范围**：基线、已查模块与路径、运行的检查、未覆盖部分。
-2. **项目目标和当前方案**：简述目标、方案与来源。
-3. **尚未确认的关键信息**：缺失证据及对结论的影响。
-4. **当前方案的关键假设**：成立条件及核查状态。
-5. **方案层问题**：按上述发现格式描述，或说明当前路线合理的依据。
-6. **替代方案及取舍**：只比较真实可行且值得考虑的方案。
-7. **路线结论**：四选一，说明理由和适用条件。
-8. **实现层问题**：按严重程度排序；共用根因引用前项，不重复计数。
-9. **最优先处理的三件事**：最多三件，允许更少或没有；不把猜测排成确定修复任务。
-10. **可以暂时接受的剩余风险**：接受条件、观察信号；用户尚未接受时标为建议。
-11. **是否值得继续下一轮审查**：给出下一轮具体目标和预期收益，或建议停止。
+1. **Repository investigation scope**: baseline, modules and paths examined, checks run and areas not covered.
+2. **Project goals and current approach**: a brief account of the goals, approach and sources.
+3. **Key unconfirmed information**: missing evidence and its effect on conclusions.
+4. **Key assumptions of the current approach**: conditions for validity and verification status.
+5. **Approach-level issues**: use the finding format above, or explain the evidence that supports the current direction.
+6. **Alternatives and trade-offs**: compare only feasible alternatives worth considering.
+7. **Technical approach conclusion**: select one of the four outcomes, with reasons and applicable conditions.
+8. **Implementation issues**: ordered by severity. Reference earlier findings for shared root causes without counting them twice.
+9. **Top three priorities**: at most three, possibly fewer or none. Do not present hypotheses as definite remediation tasks.
+10. **Residual risks that may be accepted for now**: acceptance conditions and signals to monitor. Label acceptance as a recommendation unless the user has accepted it.
+11. **Whether another review round is worthwhile**: give a concrete objective and expected benefit, or recommend stopping.
 
-主要架构与信任边界已调查、优先路径已查证、发现完成去重和修复状态核对、路线结论与覆盖
-限制已说明后，交付报告。后续检查没有新的高价值线索时停止；仍有重要缺口时明确列出，
-不声称全面通过。评审结束等待用户决定，不自动进入整改。
+Deliver the report once the main architectural and trust boundaries have been investigated, priority paths verified, findings deduplicated and checked for remediation status, and the technical approach conclusion and coverage limitations explained. Stop when further checks yield no new high-value leads. Explicitly list important remaining gaps rather than claiming a comprehensive pass. After the review, wait for the user's decision; do not automatically begin remediation.
