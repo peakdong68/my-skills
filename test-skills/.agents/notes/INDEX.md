@@ -16,7 +16,9 @@
 | --- | --- | --- | --- |
 | 2026-09-09 | [Agent Notes 迁移至 .agents/notes](./implemented/decision-records/2026-09-09-agent-notes-location.md) | decision-records | implemented |
 | 2026-09-09 | [技能编排版本复用 code-review](./implemented/engineering/2026-09-09-implementation-review-skill-dependency.md) | engineering | implemented |
+| 2026-09-09 | [独立验收诊断与手动实现修复的衔接](./implemented/skill-design/2026-09-09-diagnosis-manual-repair-handoff.md) | skill-design | implemented |
 | 2026-09-09 | [技能移至根目录并按调用方式分组](./implemented/skill-design/2026-09-09-skill-invocation-layout.md) | skill-design | implemented |
+| 2026-09-09 | [区分工程闭环与独立验收的证据和汇报](./implemented/skill-design/2026-09-09-verification-acceptance-boundaries.md) | skill-design | implemented |
 | 2026-09-08 | [按项目注册工件归属及历史位置](./implemented/decision-records/2026-09-08-artifact-location-registration.md) | decision-records | implemented |
 | 2026-09-08 | [决策管理资源与项目历史分离](./implemented/decision-records/2026-09-08-portable-decision-records.md) | decision-records | implemented |
 | 2026-09-08 | [按项目分类组织提案与交付记录](./implemented/decision-records/2026-09-08-project-configured-record-lifecycle.md) | decision-records | implemented |
@@ -51,7 +53,9 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-09 | [独立验收诊断与手动实现修复的衔接](./implemented/skill-design/2026-09-09-diagnosis-manual-repair-handoff.md) | skill-design | implemented |
 | 2026-09-09 | [技能移至根目录并按调用方式分组](./implemented/skill-design/2026-09-09-skill-invocation-layout.md) | skill-design | implemented |
+| 2026-09-09 | [区分工程闭环与独立验收的证据和汇报](./implemented/skill-design/2026-09-09-verification-acceptance-boundaries.md) | skill-design | implemented |
 | 2026-09-08 | [Spec 是可选工件，生成不代表批准](./implemented/skill-design/2026-09-08-optional-spec-artifact.md) | skill-design | implemented |
 | 2026-09-08 | [产品需求优先由现有合同承载](./implemented/skill-design/2026-09-08-product-contract-ownership.md) | skill-design | implemented |
 

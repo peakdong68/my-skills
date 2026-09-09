@@ -14,6 +14,8 @@ Verify answers:
 
 This is not code review and does not modify the delivery.
 
+Report the delivery's current acceptance state. The user decides whether to request repairs afterward; this skill does not start a correction workflow or advance engineering completion status.
+
 ## Rules
 
 ### 1. Verify the contract
@@ -55,6 +57,8 @@ Do not modify:
 - specifications
 - technical design
 
+Keep diagnosis read-only as well. Do not create commits or publish external review comments as part of this verification request.
+
 Do not weaken or reinterpret acceptance expectations to obtain a pass.
 
 ### 5. Do not invent expected behavior
@@ -94,9 +98,15 @@ For each required criterion record:
 
 Do not infer `PASS` merely from the absence of observed failure.
 
+Continue through all required criteria after finding a failure, checking those that remain independently verifiable and recording blockers for those that cannot be checked reliably.
+
 ### Step 4 — Diagnose failures
 
 Do not assume a failed criterion is an implementation bug.
+
+Confirm each failure against its contract reference, trigger or reproduction steps, expected behavior, observed behavior, and supporting evidence. Speculative concerns are not failures; insufficient acceptance evidence is a blocker. A demonstrated failure may have an unresolved cause: preserve FAIL and explicitly state what remains unknown.
+
+Report pre-existing problems when they affect the acceptance contract, identifying their ownership without expanding the repair scope. Acceptance findings need not originate in the reviewed diff or point to a changed code line.
 
 When the cause is not already established, use [DIAGNOSE.md](./DIAGNOSE.md) to identify:
 
@@ -127,32 +137,28 @@ Produce a concise verification report.
 
 PASS | FAIL | BLOCKED
 
-## Acceptance Results
-
-### <Criterion>
-
-**Result:** PASS | FAIL | BLOCKED
-
-**Evidence:** <observable evidence>
-
-Repeat for each required criterion.
-
 ## Failures
 
-For each failure, when applicable:
+List discrete, actionable failures in impact order. For each include:
 
+- affected criterion and contract reference
+- trigger or reproduction steps and supporting evidence
 - expected behavior
 - observed behavior
-- root cause and classification
+- root cause and classification, or explicit uncertainty
 - required correction
 
 Omit when none fail.
 
 ## Blockers
 
-Describe anything preventing reliable verification.
+Describe anything preventing reliable verification, the affected criteria, and what evidence or user decision is needed. Prioritize by impact.
 
 Omit when none exist.
+
+## Acceptance Results
+
+For every required criterion, provide its contract reference, `PASS | FAIL | BLOCKED`, and observable evidence. Use a compact table or entries; reference failure and blocker details above rather than repeating them.
 
 ## Regression Checks
 
@@ -160,10 +166,16 @@ Relevant regression checks and results.
 
 Omit when unnecessary.
 
+## Verification Limits
+
+State material coverage gaps and residual risks. Any gap preventing a reliable determination on a required criterion must also appear as BLOCKED for that criterion.
+
+Omit when none exist.
+
 ## Overall Result
 
 - `PASS` only when every required criterion passes
 - `FAIL` when any required criterion fails
 - `BLOCKED` when none fail but one or more required criteria cannot be reliably verified
 
-Verification is complete when every required criterion has sufficient evidence or an explicit blocker.
+Verification is complete when every required criterion has sufficient evidence or an explicit blocker and the current result has been reported. This completes the independent acceptance report, not a repair workflow. Do not substitute "No findings" for evidence-backed PASS or invent issues to fill the report.
