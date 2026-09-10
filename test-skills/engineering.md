@@ -39,7 +39,7 @@ Authorization to plan does not authorize implementation. Implementation remains 
 
 ## 2. Plan
 
-Use the [plan skill](./skills/model-invoked/plan/SKILL.md) when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
+Use the `plan` skill when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
 
 For end-to-end work, skip Plan when the work already satisfies the Implementation Gate's readiness conditions. An explicit planning request still receives its requested deliverable and applicable review, reusing existing artifacts and valid evidence.
 
@@ -65,13 +65,13 @@ Use the work item and its references as evidence; a status label or directory lo
 
 ## 4. Implement
 
-After the Implementation Gate passes, use the [implement skill](./skills/model-invoked/implement/SKILL.md) and follow its applicable sections through completion, then proceed to §5 Verify.
+After the Implementation Gate passes, use the `implement` skill and follow its applicable sections through completion, then proceed to §5 Verify.
 
 Do not stop at the first working implementation when authorized end-to-end work still requires review or verification.
 
 ## 5. Verify
 
-After implementation and Implementation Review are complete, use the [verify skill](./skills/model-invoked/verify/SKILL.md) through its final result and completion conditions.
+After implementation and Implementation Review are complete, use the `verify` skill through its final result and completion conditions.
 
 Only successful verification completes the work.
 
