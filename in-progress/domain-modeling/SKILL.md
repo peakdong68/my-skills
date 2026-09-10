@@ -11,6 +11,8 @@ Actively build and sharpen the project's domain model as you design. This is the
 
 Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for historical/current decision ownership. If change records own durable decisions, use that owner instead of creating duplicate ADRs. Paths and creation rules below are fallbacks where no project convention overrides them.
 
+Resolve the repository management root from project instructions and existing registration, using the Git top-level only as a fallback. Working inside a subproject does not change it. The root registry routes all contexts; a root `CONTEXT-MAP.md` selects their domain documents. New Agent Notes installations stay at root `.agents/notes/`, with historical locations preserved as registered. Do not create a registry or record system per context, or derive record categories automatically from contexts.
+
 Most repos have a single context:
 
 ```
@@ -39,7 +41,7 @@ If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The ma
 │       └── docs/adr/
 ```
 
-Create files lazily: only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Create files lazily in the selected context or repository-wide owner: only when you have something to write. Resolve context paths from the map and registry; the `src/` layout above is an example. An existing context ADR remains the decision's authority; Agent Notes may reference it without copying the decision. Create an ADR directory only when an independent ADR is needed at its registered or fallback owner.
 
 ## During the session
 

@@ -24,7 +24,7 @@ Only include these when they add genuine value. Most ADRs won't need them.
 
 ## Numbering
 
-Scan `docs/adr/` for the highest existing number and increment by one.
+Scan the selected registered or fallback ADR directory for the highest existing number and increment by one. In a multi-context repository, resolve that directory through the root registry and context map; do not resolve it from the invocation's working directory. Use a path or context-qualified reference when separate ADR directories reuse a number.
 
 ## When to offer an ADR
 
