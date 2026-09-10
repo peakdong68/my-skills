@@ -1,8 +1,8 @@
-## Engineering Workflow
+# Engineering Workflow
 
 Route engineering work through:
 
-    Discuss → Planning → Implementation Gate → Implement → Verify
+    §1 Discuss → §2 Planning → §3 Implementation Gate → §4 Implement → §5 Verify
 
 This section defines project-level orchestration, decision authority, gates, and return paths.
 
@@ -12,7 +12,7 @@ A stage-scoped request ends when that stage's deliverable is complete.
 
 A request solely to review a PR, branch, or specified change scope uses the review scope and axes under Implementation Review without entering implementation or requiring its gate. Deliver evidence-backed findings and coverage limitations; do not automatically fix changes or advance their workflow status. Implementation correction and completion rules apply only to authorized implementation.
 
-### Discuss
+## 1. Discuss
 
 Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
 
@@ -40,7 +40,7 @@ Route according to the authorized scope:
 
 Authorization to plan does not authorize implementation. Implementation remains subject to the separate gate and repository execution rules.
 
-### Planning
+## 2. Planning
 
 Enter Planning when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
 
@@ -52,7 +52,7 @@ Reuse a suitable work item; create a Proposal when a new planning root is needed
 
 Before creating or updating a Proposal, use the project's issue-tracker configuration for its location, work states and review/approval evidence. If missing, ask the user to complete that configuration; discussion and conversation drafts can continue. Local Markdown is valid when configured. Preserve historical owners and project formats. Decision records may reference the Proposal; their delivery lifecycle does not set its work status.
 
-#### Technical Design
+### Technical Design
 
 Resolve material technical decisions in the project's existing design artifact. Use an RFC when a separate design proposal is needed.
 
@@ -64,7 +64,7 @@ When a material design choice has meaningful alternatives, recommend a direction
 
 Material unresolved product, business, compatibility, cost, risk, architectural-direction, or other value judgments belong to the user unless that authority has been explicitly delegated.
 
-#### Plan Review
+### Plan Review
 
 Review the planning set before implementation along three independent axes:
 
@@ -90,7 +90,7 @@ After drafting, proactively complete Plan Review, resolve material findings in t
 
 Update that work item's readiness under its configured workflow only when required approvals are also obtained and no blocker prevents the selected scope from starting. Referenced artifacts retain their own approval conventions; review does not grant execution authorization.
 
-### Implementation Gate
+## 3. Implementation Gate
 
 Implementation may begin only when both conditions hold:
 
@@ -103,13 +103,13 @@ Use the work item and its references as evidence; a status label or directory lo
 
 For end-to-end work, skip formal Planning when the identified work item already satisfies the readiness side of this gate. An explicit planning request still receives its requested deliverable and applicable review, reusing existing artifacts and valid evidence.
 
-### Implement
+## 4. Implement
 
 Implement only after the Implementation Gate passes.
 
 Implement the selected work item's scope against its acceptance conditions, referenced requirements and accepted design.
 
-#### Decomposition
+### Decomposition
 
 Implement directly when the work fits one coherent execution unit.
 
@@ -127,17 +127,19 @@ When tickets are used:
 
 Do not create tickets merely to enumerate coding steps.
 
-#### Execution
+### Execution
 
 Implement the agreed scope.
-
-Test appropriately while working.
 
 Do not stop at the first working implementation when authorized end-to-end work still has remaining implementation, review, or verification steps.
 
 If implementation exposes a material unresolved contract decision, return to Planning rather than inventing it downstream.
 
-#### Implementation Review
+#### Implementation-time testing
+
+Test appropriately while working, including after corrections.
+
+### Implementation Review
 
 Before handing completed implementation to verification, review the change along two independent axes:
 
@@ -148,6 +150,8 @@ Establish the review baseline and scope from the request and available context. 
 
 Keep the two axes distinct so a pass on one does not mask a failure on the other.
 
+#### Resolve findings and re-review
+
 During authorized implementation, route material findings by ownership:
 
 | Finding | Route |
@@ -157,15 +161,17 @@ During authorized implementation, route material findings by ownership:
 | Product or technical contract must change or was never resolved | Return to Planning |
 | Issue is unrelated to the agreed work | Do not expand scope automatically |
 
-Resolve material in-scope findings before proceeding to verification.
+Return implementation corrections to Execution, rerun affected checks, and re-review the corrected scope. Resolve material in-scope findings before proceeding to verification.
 
 There is no "fix it while we're here" path for unrelated work.
+
+### Completion and handoff
 
 Implementation is complete when the authorized scope is implemented, relevant checks pass, and material Implementation Review findings are resolved.
 
 Update the work item's implementation progress under the project convention. Final delivery completion and any decision-record transition to `implemented` follow successful final verification.
 
-### Verify
+## 5. Verify
 
 Verification passes when sufficient practical evidence demonstrates that the agreed acceptance conditions hold for the completed and reviewed work.
 
@@ -185,7 +191,7 @@ After an in-scope fix, verify again.
 
 Report pass, fail, or blocked with supporting evidence and any remaining gaps. Only a pass completes end-to-end delivery.
 
-### Return Rule
+## Return Rule
 
 Return affected work to the earliest stage that owns the unresolved issue.
 

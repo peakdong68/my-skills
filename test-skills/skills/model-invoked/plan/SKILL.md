@@ -9,7 +9,7 @@ Turn the current conversation and relevant project context into the minimum plan
 
 Planning is synthesis and decision completion, not a mandatory step for every engineering task.
 
-## Work item
+## 1. Establish the work item and scope
 
 Follow the artifact registry referenced by project instructions, or `docs/agents/artifacts.md` when present, for historical/current owners, destinations and lifecycle. Missing registration does not block planning; reuse established project conventions.
 
@@ -19,12 +19,17 @@ Reuse a suitable existing work item; create a Proposal when a new planning root 
 
 Read [proposal.md](./proposal.md) when creating or updating a Proposal.
 
-## Planning
+## 2. Complete necessary planning
 
-Create additional artifacts only when needed:
+Use the following branches only where needed; they do not require a separate artifact for every heading.
 
-- **Product requirements** — read [prd.md](./prd.md) when the product contract needs further definition; refine its existing owner and create a separate PRD only when requested or independent ownership is needed.
-- **RFC** — read [rfc.md](./rfc.md) when meaningful technical decisions must be resolved before implementation.
+### Product requirements
+
+Read [prd.md](./prd.md) when the product contract needs further definition; refine its existing owner and create a separate PRD only when requested or independent ownership is needed.
+
+### Technical design
+
+Read [rfc.md](./rfc.md) when meaningful technical decisions must be resolved before implementation.
 
 Use established domain language and architectural decisions as project context.
 
@@ -32,7 +37,7 @@ Use `domain-modeling` when planning establishes or changes durable domain knowle
 
 Do not create artifacts merely to complete a sequence.
 
-## Decision authority
+### Decision authority
 
 Resolve ordinary technical choices autonomously when they remain within the agreed contract, established architecture, and project constraints.
 
@@ -42,12 +47,18 @@ The user owns such unresolved decisions unless they have explicitly delegated th
 
 When authority is delegated, make the decision and preserve the material reasoning where appropriate.
 
-## Review
+## 3. Plan Review
 
-When the required planning work is complete, read [review.md](./review.md).
+After drafting the necessary planning content, use [review.md](./review.md) to perform Plan Review.
 
-Resolve material findings in the artifact that owns them and review again.
+### Resolve findings and re-review
+
+Return affected content to §2, resolve material findings in the artifact that owns them, and review again. Continue independent planning while a user-owned decision is pending; report unresolved blockers without claiming the planning set passed.
+
+## 4. Completion and handoff
 
 Planning completes when required decisions are resolved and the planning set passes Plan Review.
+
+For a planning-only request, deliver the planning result and review evidence, then end the task. For end-to-end work, continue to the project's Implementation Gate when ready.
 
 Check execution authorization separately under the project's Implementation Gate before entering implementation; reuse authorization already granted for this scope.

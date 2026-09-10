@@ -108,4 +108,4 @@ Update and close completed tickets according to the configured tracker workflow.
 
 Commit completed ticket work when the repository workflow expects ticket-level commits.
 
-Continue until all tickets required by the authorized scope are complete.
+Continue until all tickets required by the authorized scope are complete. Ticket completion does not replace the whole change's [Implementation Review](./SKILL.md#4-implementation-review) or the project's final Verify stage; return the completed scope and evidence to the enclosing implementation workflow.

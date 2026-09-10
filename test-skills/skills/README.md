@@ -123,7 +123,7 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 - **[diagnosing-bugs](./model-invoked/diagnosing-bugs/SKILL.md)**：为故障和性能回归建立反馈循环，通过复现、假设验证和定向探测定位原因，并在授权范围内修复与验证。
 - **[domain-modeling](./model-invoked/domain-modeling/SKILL.md)**：梳理领域术语与模型，将已确定的领域知识和持久架构决策记录到上下文文档或 ADR。
 - **[grilling](./model-invoked/grilling/SKILL.md)**：在用户希望深入推敲想法时，按决策依赖分轮访谈，直到达成共同理解。
-- **[implement](./model-invoked/implement/SKILL.md)**：实施已通过门禁且获得授权的工作，按需分解任务、测试并完成实施审阅；也支持独立 PR、分支或指定范围审查。
+- **[implement](./model-invoked/implement/SKILL.md)**：按进入条件、按需分解、执行与实施期间测试、实施审查、完成交接组织工作；独立审查请求转交 code-review。
 - **[plan](./model-invoked/plan/SKILL.md)**：复用权威工作项，解决必要的产品与技术决策，形成最小规划材料并完成规划审阅。
 - **[prototype](./model-invoked/prototype/SKILL.md)**：构建用于回答特定设计问题的临时原型，探索逻辑、状态模型或界面方案。
 - **[research](./model-invoked/research/SKILL.md)**：由后台代理依据高可信的一手资料调查问题，将带来源引用的结论保存为仓库中的 Markdown 文件。

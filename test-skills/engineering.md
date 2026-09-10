@@ -1,14 +1,14 @@
-## Engineering Workflow
+# Engineering Workflow
 
 Route engineering work through:
 
-    Discuss → Plan → Implementation Gate → Implement → Verify
+    §1 Discuss → §2 Plan → §3 Implementation Gate → §4 Implement → §5 Verify
 
 This section defines project-level orchestration, decision authority, gates, and return paths.
 
 Judge stage completion by that stage's completion conditions; proactively complete its required review, corrections, and re-review. Before ending the task, check for remaining required and authorized work within the request's scope and continue through the workflow when it remains.
 
-### Discuss
+## 1. Discuss
 
 Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
 
@@ -37,9 +37,9 @@ Route according to the authorized scope:
 Authorization to plan does not authorize implementation. Implementation remains subject to the separate gate and repository execution rules.
 
 
-### Plan
+## 2. Plan
 
-Enter `plan` when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
+Use the [plan skill](./skills/model-invoked/plan/SKILL.md) when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
 
 For end-to-end work, skip Plan when the work already satisfies the Implementation Gate's readiness conditions. An explicit planning request still receives its requested deliverable and applicable review, reusing existing artifacts and valid evidence.
 
@@ -49,7 +49,7 @@ Plan owns its planning artifacts and Plan Review. After drafting, proactively co
 
 If a later stage exposes a material unresolved contract decision, return to `plan`.
 
-### Implementation Gate
+## 3. Implementation Gate
 
 Enter implementation only when:
 
@@ -63,21 +63,19 @@ Planning readiness and execution authorization are separate conditions.
 
 Use the work item and its references as evidence; a status label or directory location alone does not pass the gate. Reuse valid review and authorization evidence. Before coding, sync agreed scope and decisions not yet reflected in their existing owners.
 
-### Implement
+## 4. Implement
 
-After the Implementation Gate passes, use `implement`.
-
-Implementation owns execution, decomposition when needed, implementation-time testing, and Implementation Review.
+After the Implementation Gate passes, use the [implement skill](./skills/model-invoked/implement/SKILL.md) and follow its applicable sections through completion, then proceed to §5 Verify.
 
 Do not stop at the first working implementation when authorized end-to-end work still requires review or verification.
 
-### Verify
+## 5. Verify
 
-After implementation and Implementation Review are complete, use `verify`.
+After implementation and Implementation Review are complete, use the [verify skill](./skills/model-invoked/verify/SKILL.md) through its final result and completion conditions.
 
 Only successful verification completes the work.
 
-### Return Rule
+## Return Rule
 
 Return affected work to the earliest stage that owns the unresolved issue.
 
