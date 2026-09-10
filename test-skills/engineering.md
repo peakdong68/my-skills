@@ -6,6 +6,8 @@ Route engineering work through:
 
 This section defines project-level orchestration, decision authority, gates, and return paths.
 
+Judge stage completion by that stage's completion conditions; proactively complete its required review, corrections, and re-review. Before ending the task, check for remaining required and authorized work within the request's scope and continue through the workflow when it remains.
+
 ### Discuss
 
 Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
@@ -43,7 +45,7 @@ For end-to-end work, skip Plan when the work already satisfies the Implementatio
 
 Identify the Proposal or existing work item for the current change by its ID, URL or path. It defines the selected scope and acceptance conditions, directly or by reference to relevant requirements and design. Reuse it; a separate Proposal, PRD, Spec or RFC is needed only when its content needs a new owner.
 
-Plan owns its planning artifacts and Plan Review.
+Plan owns its planning artifacts and Plan Review. After drafting, proactively complete Plan Review, resolve material findings in their owning artifacts, and review affected content again. Planning is complete only when required decisions are resolved and Plan Review passes; a finished draft alone does not complete the stage.
 
 If a later stage exposes a material unresolved contract decision, return to `plan`.
 

@@ -6,6 +6,8 @@ Route engineering work through:
 
 This section defines project-level orchestration, decision authority, gates, and return paths.
 
+Judge stage completion by that stage's completion conditions; proactively complete its required review, corrections, and re-review. Before ending the task, check for remaining required and authorized work within the request's scope and continue through the workflow when it remains.
+
 A stage-scoped request ends when that stage's deliverable is complete.
 
 A request solely to review a PR, branch, or specified change scope uses the review scope and axes under Implementation Review without entering implementation or requiring its gate. Deliver evidence-backed findings and coverage limitations; do not automatically fix changes or advance their workflow status. Implementation correction and completion rules apply only to authorized implementation.
@@ -84,7 +86,7 @@ When an accepted decision establishes or changes a durable architectural constra
 
 Plan Review passes only when no unresolved material finding or required decision remains.
 
-Planning is complete when required decisions are resolved and Plan Review passes.
+After drafting, proactively complete Plan Review, resolve material findings in their owning artifacts, and review affected content again. Planning is complete when required decisions are resolved and Plan Review passes; a finished draft alone does not complete the stage.
 
 Update that work item's readiness under its configured workflow only when required approvals are also obtained and no blocker prevents the selected scope from starting. Referenced artifacts retain their own approval conventions; review does not grant execution authorization.
 
