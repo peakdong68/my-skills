@@ -6,6 +6,8 @@ Use this resource when the user selects a categorized decision system with gener
 
 New installations use `.agents/notes/` for Agent Notes. For an existing location such as `docs/decisions/`, preserve its registered owner and scripts unless migration is explicitly authorized. A default-path change or repeat setup does not authorize copying records to a second location or replacing existing scripts. When an upgrade retains the old location, adapt the bundled script root to that registered location.
 
+Resolve the repository management root through the root artifact registration before deployment. Target paths in this resource are relative to that root, not the invocation's current directory. A multi-context repository shares one Agent Notes installation and its scripts; do not deploy another bundle inside each subproject. Contexts and record categories are independent: use config.json rather than generating categories from project folders.
+
 Follow [artifact-registration.md](artifact-registration.md) to register artifact owners and historical/new locations. New Proposals use configured work tracking; decision records may reference them without duplicating their contents or work status. Preserve registered historical files that serve both roles and their state mappings unless migration is authorized. Independent RFCs/Specs retain their own owners. Deploying this bundle does not silently change that ownership.
 
 Inspect existing decision, ADR, RFC and proposal conventions. Reuse their authoritative locations rather than creating a competing system. If adopting this bundle requires changing existing categories, statuses or formats, present that mapping in the setup draft; do not migrate records or overwrite customized files implicitly.
@@ -28,7 +30,9 @@ Never reset existing decision records. INDEX.md may be regenerated from the proj
 
 ### Files and deployment
 
-The reusable source is [resources/decision-records/](resources/decision-records/). It contains:
+Resolve [resources/decision-records/](resources/decision-records) relative to the setup skill loaded for this invocation, whether installed at user or project level. Determine the target project separately and deploy the selected files there; do not infer the resource source from the target project's directory layout.
+
+The reusable source contains:
 
 - `.agents/notes/README.md`: management rules with project-configured categories
 - `.agents/notes/config.json`: empty category configuration to populate from the target project
