@@ -12,11 +12,30 @@ A request solely to review a PR, branch, or specified change scope uses the revi
 
 ### Discuss
 
-Discuss is complete when the goal, scope, and material unresolved decisions are clear enough to choose the next stage.
+Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
 
-Resolve routine details from context and repository evidence; ask only for missing information that materially affects the work.
+Remain in Discuss while:
 
-Do not create planning artifacts merely because the conversation is exploratory.
+- the work is exploratory
+- material alternatives are still being considered
+- the user is seeking understanding rather than preparing work for implementation
+- the goal or selected scope is not yet clear enough to establish an implementation contract
+
+Resolve routine details from context and repository evidence.
+
+Ask only for missing information that materially affects the work; implementation details need not all be settled here.
+
+Do not create planning artifacts merely because product, technical, or architectural decisions are being discussed.
+
+The model may determine that the discussion is sufficiently mature for a later stage, but must not leave Discuss solely on that basis.
+
+The user decides when discussion proceeds toward implementation, unless the user's existing request already explicitly authorizes that progression.
+
+When progression is authorized:
+
+- proceed directly to the Implementation Gate when the authoritative work is already sufficiently defined
+- enter Plan when material contract decisions still need to be completed or formalized
+ 
 
 ### Planning
 
