@@ -23,6 +23,8 @@ On repeat invocation, default to inspecting and filling missing configuration, n
 
 Look at the current repo to understand its starting state. Read whatever exists; don't assume:
 
+Resolve the repository management root from project instructions and existing registration, using the Git top-level only as a fallback. Perform setup for that boundary, not the current subproject directory. Follow [artifact-registration.md](artifact-registration.md) for root resolution and historical exceptions before creating configuration.
+
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
 - `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
@@ -37,7 +39,7 @@ Look at the current repo to understand its starting state. Read whatever exists;
 
 Summarise what's present and what's missing. Then take the sections in order — one section, one answer, then the next.
 
-Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip the section entirely when exploration already settled it (Section B when `triage` isn't installed, Section C when there's no monorepo).
+Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip questions exploration already settled. Skip Section B when `triage` isn't installed; absence of a monorepo skips the multi-context choice, not artifact registration.
 
 **Section A — Issue tracker.**
 
@@ -65,6 +67,8 @@ The defaults are the five canonical roles, each label string equal to its name: 
 **Section C — Artifact and domain docs.** Read [artifact-registration.md](artifact-registration.md) to register historical and new artifact locations. Reuse the user's chosen registration mode; distinguish new-work routing from migration. Use the selected registry for decision/ADR locations. Without another choice, retain the single-context default of `CONTEXT.md` plus `docs/adr/`.
 
 Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
+
+Multi-context layouts share the root artifact registry and Agent Notes installation. Register context-local document owners there; do not scaffold a registry or `.agents/notes/` per subproject. Context selection does not automatically select record categories.
 
 **Optional decision records.** When the user requests categorized decision records with an index and checks, read [decision-records.md](decision-records.md). Reuse any existing decision system first. Include this option in the same configuration review; prior explicit selection does not require another approval round. Selecting an engineering workflow alone does not require installing it.
 
@@ -111,6 +115,7 @@ The block:
 ### Artifact management
 
 For engineering artifact discovery, creation, updates and lifecycle, follow `docs/agents/artifacts.md`.
+Resolve registry locations from the repository management root, even inside a subproject.
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.

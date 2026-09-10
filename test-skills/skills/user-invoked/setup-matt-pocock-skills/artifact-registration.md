@@ -4,6 +4,12 @@ During setup, establish where the target project finds, creates, updates and tra
 
 ## Discover and select
 
+Establish one repository management root from the applicable project instructions and existing registration before resolving paths. Use the Git top-level as a discovery fallback, not to override an explicitly established management boundary. A subproject working directory or an additional domain context does not establish a new root. If evidence leaves competing roots, resolve that setup decision before creating registries or deploying records.
+
+Within that boundary, use one root-level registry, normally `<root>/docs/agents/artifacts.md`, and one shared Agent Notes installation at `<root>/.agents/notes/` for new installations. Resolve registered location values from this root, even when running from a subproject; ordinary Markdown links remain relative to their containing file. Do not create per-context registries or Agent Notes installations.
+
+The registry can route to context-local `CONTEXT.md`, ADRs, Specs, and other owners. A root `CONTEXT-MAP.md` maps contexts and relationships; it does not partition engineering registration or record categories. Register context and repository-wide decision ownership explicitly, retaining one authoritative owner per decision and linking to it from other records.
+
 Inspect project instructions, registries, representative artifacts, tracker configuration and historical directories. Distinguish authoritative work from examples, generated output and abandoned drafts. Reuse the user's existing choice; otherwise present the relevant mode in the normal setup review:
 
 | Mode | Meaning |
@@ -13,6 +19,8 @@ Inspect project instructions, registries, representative artifacts, tracker conf
 | Migrate | Prepare source/destination and status mappings plus link repairs for the authorized scope, preserving provenance and customized content. |
 
 Re-registration does not authorize moving historical artifacts. Multiple directories may own different work; an old location is not obsolete merely because new destinations were selected.
+
+If historical registries or record systems are distributed, identify the existing governing entry point and register their scope and routing there. Preserve existing owners until an authorized consolidation; do not silently copy them into the new root layout or create another registry to resolve the conflict.
 
 ## Default method
 
@@ -31,8 +39,12 @@ Include the registry, historical/new location map and instruction pointer in the
 
 For engineering artifact discovery, creation, updates and lifecycle,
 follow `docs/agents/artifacts.md`.
+Resolve this registry and its registered locations from the repository management root,
+including when working inside a subproject.
 ```
 
 The registry owns artifact relationships and historical routing; it points to tracker configuration for work-item locations, identifiers, operations and work states. Domain configuration owns glossary consumption, and decision configuration owns categories. Cross-reference these rather than duplicating rules. Update existing pointers and domain configuration within the selected scope.
 
 Verify existing work still resolves to its owner, new destinations are explicit, approval and delivery states remain distinct, and references to existing files resolve. Future directories need not exist yet. For authorized migrations also verify preserved content, record counts and inbound links. Report outstanding migration work instead of claiming it complete.
+
+For multi-context setup, also verify that root and subproject entry points resolve the same registry and Agent Notes installation, while context-local documents resolve through the map and registered ownership. Contexts must not implicitly create categories or duplicate decisions.

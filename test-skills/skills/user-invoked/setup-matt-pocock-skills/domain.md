@@ -6,6 +6,8 @@ How the engineering skills should consume this repo's domain documentation when 
 
 Use the artifact registry referenced by project instructions (normally `docs/agents/artifacts.md`) to resolve current and historical decision owners. ADR paths below are defaults; when decisions are registered elsewhere, read that location and do not create a competing ADR directory.
 
+Resolve the registry and root paths from the repository management root established by project instructions and registration, not the current subproject directory. Multiple contexts share that registry and root `.agents/notes/`; historical owners remain as registered. The context map selects domain documents, not separate engineering registration or record categories. Read context-local paths from the map and registry rather than assuming every project lives under `src/`. Ordinary Markdown links resolve relative to their containing file.
+
 - **`CONTEXT.md`** at the repo root, or
 - **`CONTEXT-MAP.md`** at the repo root if it exists — it points at one `CONTEXT.md` per context. Read each one relevant to the topic.
 - **`docs/adr/`** — read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
