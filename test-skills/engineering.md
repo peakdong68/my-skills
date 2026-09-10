@@ -10,7 +10,7 @@ This section defines project-level orchestration, decision authority, gates, and
 
 Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
 
-Remain in Discuss while:
+When the user has not requested planning or authorized end-to-end progression, remain in Discuss while:
 
 - the work is exploratory
 - material alternatives are still being considered
@@ -25,19 +25,21 @@ Do not create planning artifacts merely because product, technical, or architect
 
 The model may determine that the discussion is sufficiently mature for a later stage, but must not leave Discuss solely on that basis.
 
-The user decides when discussion proceeds toward implementation, unless the user's existing request already explicitly authorizes that progression.
+The user decides when discussion proceeds to planning or implementation. Reuse an existing request that already authorizes that progression; unresolved alternatives do not require a return to Discuss when planning is already authorized.
 
-When progression is authorized:
+Route according to the authorized scope:
 
-- proceed directly to the Implementation Gate when the authoritative work is already sufficiently defined
-- enter Plan when material contract decisions still need to be completed or formalized
+- for a planning-only request, enter Plan, complete the requested planning deliverable and applicable review, then stop without entering implementation
+- for authorized end-to-end work, enter Plan when material contract decisions still need to be completed or formalized; proceed directly to the Implementation Gate only when the authoritative work satisfies its readiness conditions
+
+Authorization to plan does not authorize implementation. Implementation remains subject to the separate gate and repository execution rules.
 
 
 ### Plan
 
-Enter `plan` when the work is proceeding toward implementation and implementation would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
+Enter `plan` when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
 
-Skip Plan when the work is already sufficiently defined.
+For end-to-end work, skip Plan when the work already satisfies the Implementation Gate's readiness conditions. An explicit planning request still receives its requested deliverable and applicable review, reusing existing artifacts and valid evidence.
 
 Identify the Proposal or existing work item for the current change by its ID, URL or path. It defines the selected scope and acceptance conditions, directly or by reference to relevant requirements and design. Reuse it; a separate Proposal, PRD, Spec or RFC is needed only when its content needs a new owner.
 

@@ -14,6 +14,7 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-10 | [Discuss 支持已授权规划及规划限定请求](./implemented/engineering/2026-09-10-discuss-planning-transition.md) | engineering | implemented |
 | 2026-09-10 | [多上下文共用仓库级工件注册与 Agent Notes](./implemented/engineering/2026-09-10-repository-artifact-root.md) | engineering | implemented |
 | 2026-09-09 | [Agent Notes 迁移至 .agents/notes](./implemented/decision-records/2026-09-09-agent-notes-location.md) | decision-records | implemented |
 | 2026-09-09 | [技能编排版本复用 code-review](./implemented/engineering/2026-09-09-implementation-review-skill-dependency.md) | engineering | implemented |
@@ -43,6 +44,7 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-10 | [Discuss 支持已授权规划及规划限定请求](./implemented/engineering/2026-09-10-discuss-planning-transition.md) | engineering | implemented |
 | 2026-09-10 | [多上下文共用仓库级工件注册与 Agent Notes](./implemented/engineering/2026-09-10-repository-artifact-root.md) | engineering | implemented |
 | 2026-09-09 | [技能编排版本复用 code-review](./implemented/engineering/2026-09-09-implementation-review-skill-dependency.md) | engineering | implemented |
 | 2026-09-08 | [两种工程流程面向不同项目](./implemented/engineering/2026-09-08-engineering-workflow-variants.md) | engineering | implemented |

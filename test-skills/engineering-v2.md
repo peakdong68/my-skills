@@ -14,7 +14,7 @@ A request solely to review a PR, branch, or specified change scope uses the revi
 
 Use Discuss to understand the request, explore alternatives, and resolve enough ambiguity to determine the next stage.
 
-Remain in Discuss while:
+When the user has not requested planning or authorized end-to-end progression, remain in Discuss while:
 
 - the work is exploratory
 - material alternatives are still being considered
@@ -29,16 +29,18 @@ Do not create planning artifacts merely because product, technical, or architect
 
 The model may determine that the discussion is sufficiently mature for a later stage, but must not leave Discuss solely on that basis.
 
-The user decides when discussion proceeds toward implementation, unless the user's existing request already explicitly authorizes that progression.
+The user decides when discussion proceeds to planning or implementation. Reuse an existing request that already authorizes that progression; unresolved alternatives do not require a return to Discuss when planning is already authorized.
 
-When progression is authorized:
+Route according to the authorized scope:
 
-- proceed directly to the Implementation Gate when the authoritative work is already sufficiently defined
-- enter Plan when material contract decisions still need to be completed or formalized
+- for a planning-only request, enter Planning, complete the requested planning deliverable and applicable review, then stop without entering implementation
+- for authorized end-to-end work, enter Planning when material contract decisions still need to be completed or formalized; proceed directly to the Implementation Gate only when the authoritative work satisfies its readiness conditions
+
+Authorization to plan does not authorize implementation. Implementation remains subject to the separate gate and repository execution rules.
 
 ### Planning
 
-Formal planning is required when the work is proceeding toward implementation and implementation would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
+Enter Planning when the user requests planning, including planning-only work, or when authorized end-to-end work would otherwise require inventing a material product, scope, domain, architectural, interface, compatibility, or other contract decision.
 
 Planning establishes the intended outcome, scope, and observable acceptance conditions, with a practical way to verify them.
 
@@ -97,7 +99,7 @@ Readiness and execution authorization are separate gates.
 
 Use the work item and its references as evidence; a status label or directory location alone does not pass the gate. Reuse valid review and authorization evidence. Before coding, sync agreed scope and decisions not yet reflected in their existing owners.
 
-Skip formal Planning when the identified work item already satisfies the readiness side of this gate.
+For end-to-end work, skip formal Planning when the identified work item already satisfies the readiness side of this gate. An explicit planning request still receives its requested deliverable and applicable review, reusing existing artifacts and valid evidence.
 
 ### Implement
 
