@@ -4,20 +4,23 @@
 
 工程任务从 Discuss 开始。
 
-进入后续阶段时，读取并按 `./engineering.md` 执行：
+进入后续阶段时，读取并按 `engineering.md` 执行：
 
-`Discuss → Plan → Implementation Gate → Implement → Verify`
+`Discuss → Planning → Implementation Gate → Implement → Verify`
 
-阶段技能映射：
+阶段技能交接（锚在**可判定的动作**上，而不是"进入了某个阶段"）：
 
-* Plan → `plan`
-* Implement → `implement`
-* Verify → `verify`
+* 用户授权推进、且存在待固化的合同决策（进入 Planning）→ `planning`
+* Implementation Gate 通过、**写第一行实现代码之前** → `implement`
+* 实现完成、**报告完成或提交之前** → `code-review`（Implementation Review）
+* 实现期采用测试优先 → `tdd`
+* 审查通过、**声称交付（PASS/完成）之前** → `verify`
 
-进入相应阶段时必须加载对应技能。
+上列动作发生前必须加载对应技能。加载技能不等于满足该阶段的完成条件，也不替代该阶段要求的审查。
 
-Discuss 及阶段推进权限在此定义；Plan 之后的阶段编排、门禁、审查收敛和返回路径由 `./engineering.md` 定义。
+> **与 DSH plan mode 的边界**：plan mode 是会话**模式**（只读，以 `exit_plan_mode` 提交计划供批准），与本仓库的 Planning **阶段**不是同一件事——Planning 阶段按工件注册表产出 Proposal/PRD/RFC 并做 Plan Review，需要写文件。两者不要同时使用：plan mode 内只做只读探索，退出模式后再进入 Planning。
 
+Discuss 及阶段推进权限在此定义；Planning 之后的阶段编排、门禁、审查收敛和返回路径由 `engineering.md` 定义。
 ### Discuss
 
 使用 Discuss 理解请求、探索备选方案，并消除足够的歧义，以判断下一阶段。

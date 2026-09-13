@@ -1,9 +1,9 @@
 ---
-name: plan
+name: planning
 description: Use when creating or updating a Proposal, when the product contract needs further definition, or when material technical decisions must be resolved before implementation.
 ---
 
-# Plan
+# Planning
 
 Turn the current conversation and relevant project context into the minimum planning artifacts needed to establish implementation readiness.
 

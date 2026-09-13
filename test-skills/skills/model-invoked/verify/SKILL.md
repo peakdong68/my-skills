@@ -31,7 +31,7 @@ For each failure, establish the contract expectation, trigger, observed behavior
 
 - **Implementation defect** — fix the implementation.
 - **Verification defect** — fix the incorrect check.
-- **Contract ambiguity or defect** — return affected work to `plan`; material contract decisions require the appropriate approval.
+- **Contract ambiguity or defect** — return affected work to `planning`; material contract decisions require the appropriate approval.
 - **Environment or tooling failure** — fix within authorization or report what prevents further verification.
 - **Pre-existing failure** — record its acceptance impact and ownership; do not automatically expand the repair scope or disregard a required condition it prevents from passing.
 

@@ -64,7 +64,7 @@ When a material design choice has meaningful alternatives, recommend a direction
 
 Material unresolved product, business, compatibility, cost, risk, architectural-direction, or other value judgments belong to the user unless that authority has been explicitly delegated.
 
-### Plan Review
+### planning Review
 
 Review the planning set before implementation along three independent axes:
 
@@ -74,7 +74,7 @@ Review the planning set before implementation along three independent axes:
 
 Keep the axes distinct so a pass on one does not mask a failure on another.
 
-Plan Review assesses the design within established decision authority. Record the result on the identified Proposal or existing work item; obtain required external approvals before treating proposed decisions as accepted.
+planning Review assesses the design within established decision authority. Record the result on the identified Proposal or existing work item; obtain required external approvals before treating proposed decisions as accepted.
 
 Resolve findings in the artifact that owns them.
 
@@ -84,9 +84,9 @@ Material unresolved value judgments or architectural-direction choices belong to
 
 When an accepted decision establishes or changes a durable architectural constraint, preserve it as an ADR when warranted.
 
-Plan Review passes only when no unresolved material finding or required decision remains.
+planning Review passes only when no unresolved material finding or required decision remains.
 
-After drafting, proactively complete Plan Review, resolve material findings in their owning artifacts, and review affected content again. Planning is complete when required decisions are resolved and Plan Review passes; a finished draft alone does not complete the stage.
+After drafting, proactively complete planning Review, resolve material findings in their owning artifacts, and review affected content again. Planning is complete when required decisions are resolved and planning Review passes; a finished draft alone does not complete the stage.
 
 Update that work item's readiness under its configured workflow only when required approvals are also obtained and no blocker prevents the selected scope from starting. Referenced artifacts retain their own approval conventions; review does not grant execution authorization.
 
