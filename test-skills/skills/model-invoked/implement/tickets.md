@@ -100,7 +100,7 @@ Avoid detailed implementation recipes or decisions the implementer can safely ma
 
 Work the executable frontier.
 
-Before starting a ticket, check its inherited scope, acceptance conditions and blocking dependencies. Reuse the parent's valid authorization for that scope without repeating the full planning gate. A new material decision returns affected work to the project's Planning stage; decomposition cannot supply a missing upstream decision.
+Before starting a ticket, check its inherited scope, acceptance conditions and blocking dependencies. Reuse the parent's valid authorization for that scope without requesting the same authorization again. A new material contract decision stops affected work and returns it to Discuss for a new `/planning` or `/implement` command; decomposition cannot supply a missing upstream decision.
 
 Complete each ticket to a coherent, tested, and verifiable state before advancing dependent work.
 

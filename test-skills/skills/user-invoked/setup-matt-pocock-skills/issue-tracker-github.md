@@ -1,6 +1,6 @@
 # Issue tracker: GitHub
 
-Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+Work items for this repo are tracked as GitHub issues. Independent Specs and design artifacts remain at their registered locations. Use the `gh` CLI for all operations.
 
 ## Conventions
 
@@ -33,7 +33,7 @@ GitHub shares one number space across issues and PRs, so a bare `#42` may be eit
 
 ## When a skill says "publish to the issue tracker"
 
-Create a GitHub issue.
+Resolve the work item and publication destination from the request and registered ownership. Update the existing GitHub issue for the same work; create a new issue only when a new work item is required. Confirm that publication is requested or already authorized for that scope. Setup or a ready status alone grants no publication permission. If no work identifier was supplied, inspect relevant existing issues before creating a duplicate; ambiguous ownership must be resolved first.
 
 ## When a skill says "fetch the relevant ticket"
 

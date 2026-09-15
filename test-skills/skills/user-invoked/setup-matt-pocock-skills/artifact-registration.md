@@ -8,6 +8,8 @@ Establish one repository management root from the applicable project instruction
 
 Within that boundary, use one root-level registry, normally `<root>/docs/agents/artifacts.md`, and one shared Agent Notes installation at `<root>/.agents/notes/` for new installations. Resolve registered location values from this root, even when running from a subproject; ordinary Markdown links remain relative to their containing file. Do not create per-context registries or Agent Notes installations.
 
+Within the shared Notes installation, selected contexts may own separate record directories and indexes, mapped by its root configuration; this is not a per-subproject installation. Confirm context layout and Notes enrollment separately, reusing prior choices.
+
 The registry can route to context-local `CONTEXT.md`, ADRs, Specs, and other owners. A root `CONTEXT-MAP.md` maps contexts and relationships; it does not partition engineering registration or record categories. Register context and repository-wide decision ownership explicitly, retaining one authoritative owner per decision and linking to it from other records.
 
 Inspect project instructions, registries, representative artifacts, tracker configuration and historical directories. Distinguish authoritative work from examples, generated output and abandoned drafts. Reuse the user's existing choice; otherwise present the relevant mode in the normal setup review:

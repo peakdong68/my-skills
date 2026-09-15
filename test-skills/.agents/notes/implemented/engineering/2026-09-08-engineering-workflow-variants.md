@@ -2,7 +2,7 @@
 title: 两种工程流程面向不同项目
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-14
 approval: 用户在本任务会话中已确认，日期与依据见正文
 verification: 对照正文引用的已交付文件及本任务检查结果核对；见依据与关联
 ---
@@ -29,4 +29,8 @@ engineering.md 负责精简编排并引用阶段技能；engineering-v2.md 独�
 
 2026-09-08 本任务会话中，用户明确说明两个版本用于不同项目，并要求 v2 保持独立方法论定位；无独立会话链接。
 
-参见 [精简版](../../../../engineering.md)、[方法论版](../../../../engineering-v2.md)、[选配说明](../../../../skills/README.md)。
+参见 [精简版](https://github.com/peakdong68/my-skills/blob/e995fb367530cebcce62f1485b3085d93fcb1a26/test-skills/engineering.md)、[方法论版](../../../../engineering-v2.md)、[选配说明](../../../../skills/README.md)。
+
+## 后续替代
+
+本记录中的当前工程入口、旧执行口令或自动阶段衔接约定，由[命令授权方案](./2026-09-14-command-authorized-engineering.md)替代；历史依据及未冲突职责保留。

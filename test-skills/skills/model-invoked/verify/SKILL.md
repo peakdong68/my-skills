@@ -31,13 +31,13 @@ For each failure, establish the contract expectation, trigger, observed behavior
 
 - **Implementation defect** — fix the implementation.
 - **Verification defect** — fix the incorrect check.
-- **Contract ambiguity or defect** — return affected work to `planning`; material contract decisions require the appropriate approval.
+- **Contract ambiguity or defect** — stop affected implementation and return to Discuss; after discussion, wait for a new `/planning` or `/implement` command rather than automatically entering planning.
 - **Environment or tooling failure** — fix within authorization or report what prevents further verification.
 - **Pre-existing failure** — record its acceptance impact and ownership; do not automatically expand the repair scope or disregard a required condition it prevents from passing.
 
 A demonstrated contract violation remains FAIL even when its root cause is unresolved.
 
-Route corrections through the project stage that owns them, including applicable implementation review, then return to §2 to re-verify affected conditions and relevant regressions. Revisit §1 if an authorized contract change alters the acceptance baseline. Continue independent authorized work while an issue is resolved.
+For corrections within the existing contract and authorization, use the owning implementation or verification path, including applicable implementation review, then return to §2 to re-verify affected conditions and relevant regressions. Revisit §1 if an authorized contract change alters the acceptance baseline. Continue independent authorized work while an issue is resolved.
 
 A failed check is an intermediate result, not a reason to end authorized end-to-end work. Continue correction and re-verification while actionable within the agreed scope and authorization. If progress requires an unavailable dependency, a user-owned decision, or additional authorization, report the remaining failure or blocker and the specific action needed.
 

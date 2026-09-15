@@ -67,7 +67,7 @@ If a required product or design decision is missing, contradictory, or ambiguous
 - identify the owning upstream decision
 - do not guess
 
-A Spec with blocking unknowns is not sufficiently defined. Complete and review unaffected content and identify the owning planning decision. In an end-to-end task, the enclosing engineering workflow returns affected work to Planning; for a Spec-only request, deliver the reviewed draft, review outcome, and blockers.
+A Spec with blocking unknowns is not sufficiently defined. Complete and review unaffected content and identify the owning planning decision. Return unresolved decisions to Discuss and recommend `/planning`; do not invoke formal planning automatically. For a Spec-only request, deliver the reviewed draft, review outcome, and blockers.
 
 ### 3. Inspect repository evidence
 
@@ -231,7 +231,7 @@ The Spec is sufficiently defined only when:
 - no blocking product or design decision remains
 - implementation does not require inventing material behavior or contract decisions
 
-This check establishes content readiness, not passage through the Implementation Gate. Required Plan Review, project approvals, and execution authorization remain separate conditions; reuse their existing evidence rather than requesting them again.
+This check establishes content readiness, not implementation authorization. Required Plan Review, project approvals, and execution authorization remain separate conditions; reuse their existing evidence rather than requesting them again.
 
 If any blocking condition fails:
 

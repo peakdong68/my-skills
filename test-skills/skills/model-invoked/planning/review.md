@@ -31,6 +31,8 @@ For RFCs involved in the work:
 
 When an accepted decision creates or changes a durable architectural constraint, preserve it through `domain-modeling` as an ADR when warranted.
 
+Subsequent Plan Review rounds focus on unresolved material findings, regressions from corrections, and newly evidenced material issues. Reuse valid conclusions; do not reopen accepted decisions without new material evidence. Do not block progress on stylistic preferences, optional improvements, speculative concerns, or unrelated issues. Limit this review to five review-fix cycles, counted independently of other reviews. If material findings remain, report them and return affected work to Discuss; reaching the limit is not a pass.
+
 ## Gate
 
 The planning set passes when:
@@ -44,6 +46,6 @@ The planning set passes when:
 
 Record the review outcome and supporting decision references on the identified Proposal or existing work item. When the review passes, required approvals are obtained and no blocker prevents the selected scope from starting, update that work item's readiness using the configured workflow. A review pass does not itself grant approval or execution authorization; referenced artifacts retain their own approval conventions.
 
-If it does not pass, keep the work in planning, revise the owning artifact, and review again.
+If it does not pass, revise and review again within the authorized planning scope and the review limit above. If progress needs a new scope or user-owned decision, report the blocker and return to Discuss.
 
 Routine implementation details may remain open.

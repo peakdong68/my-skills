@@ -7,7 +7,7 @@ description: Use when creating or updating a Proposal, when the product contract
 
 Turn the current conversation and relevant project context into the minimum planning artifacts needed to establish implementation readiness.
 
-Planning is synthesis and decision completion, not a mandatory step for every engineering task.
+Planning is synthesis and decision completion, not a mandatory step for every engineering task. Load this skill for an explicit `/planning` transition under the project's command policy; discussion maturity alone does not authorize formal planning. Harness Plan Mode is a separate runtime mode, not this skill's authorization.
 
 ## 1. Establish the work item and scope
 
@@ -59,6 +59,4 @@ Return affected content to §2, resolve material findings in the artifact that o
 
 Planning completes when required decisions are resolved and the planning set passes Plan Review.
 
-For a planning-only request, deliver the planning result and review evidence, then end the task. For end-to-end work, continue to the project's Implementation Gate when ready.
-
-Check execution authorization separately under the project's Implementation Gate before entering implementation; reuse authorization already granted for this scope.
+Deliver the planning result, review evidence, and any blockers, then return to Discuss. Recommend `/implement` when the work is sufficiently defined, but wait for that new user command; `/planning` does not authorize implementation.

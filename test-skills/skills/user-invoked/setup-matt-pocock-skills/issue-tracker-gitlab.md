@@ -1,6 +1,6 @@
 # Issue tracker: GitLab
 
-Issues and specs for this repo live as GitLab issues. Use the [`glab`](https://gitlab.com/gitlab-org/cli) CLI for all operations.
+Work items for this repo are tracked as GitLab issues. Independent Specs and design artifacts remain at their registered locations. Use the [`glab`](https://gitlab.com/gitlab-org/cli) CLI for all operations.
 
 ## Conventions
 
@@ -34,7 +34,7 @@ Unlike GitHub, GitLab numbers issues and MRs separately, so `#42` is unambiguous
 
 ## When a skill says "publish to the issue tracker"
 
-Create a GitLab issue.
+Resolve the work item and publication destination from the request and registered ownership. Update the existing GitLab issue for the same work; create a new issue only when a new work item is required. Confirm that publication is requested or already authorized for that scope. Setup or a ready status alone grants no publication permission. If no work identifier was supplied, inspect relevant existing issues before creating a duplicate; ambiguous ownership must be resolved first.
 
 ## When a skill says "fetch the relevant ticket"
 

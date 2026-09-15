@@ -2,7 +2,7 @@
 title: 就绪后请求执行授权与实施交接
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-14
 approval: 用户在本任务会话中要求先修正 AGENTS.md 与 implement 的两项约定
 verification: 已核对授权入口、实施交接与仅审查分支；技能及决策记录检查见本任务结果
 ---
@@ -22,3 +22,7 @@ implement 开工前核对当前范围的就绪与执行授权，沿用已有有�
 2026-09-08 本任务会话中，用户要求按已讨论的简短措辞先修正两项问题，另行重新思考门禁判断方式；无独立会话链接。
 
 已交付规则见 [AGENTS.md](../../../../AGENTS.md) 与 [implement](../../../../skills/model-invoked/implement/SKILL.md)。
+
+## 后续替代
+
+本记录中的当前工程入口、旧执行口令或自动阶段衔接约定，由[命令授权方案](./2026-09-14-command-authorized-engineering.md)替代；历史依据及未冲突职责保留。

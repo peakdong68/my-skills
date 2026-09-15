@@ -1,19 +1,19 @@
 ---
 name: setup-matt-pocock-skills
-description: Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.
+description: Configure, inspect, or update the project settings needed by selected engineering skills, reusing existing tracker, artifact, and domain conventions.
 disable-model-invocation: true
 ---
 
 # Setup Matt Pocock's Skills
 
-Scaffold the per-repo configuration that the engineering skills assume:
+Configure only what the selected skills and current request need. Existing sufficient configuration does not require a preliminary setup run. Supported configuration includes:
 
 - **Issue tracker** — where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
 - **Artifact registry** — current and historical artifact owners, new destinations, and lifecycle conventions
 
-This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
+Inspect the current configuration, identify necessary differences, apply authorized changes, and verify the result. Setup configures tools and artifact locations; it does not grant planning or implementation authority. Preserve the project's progression rules unless the user explicitly requests their deployment or revision. Tracker states do not authorize `/planning` or `/implement`.
 
 ## Process
 
@@ -21,81 +21,60 @@ On repeat invocation, default to inspecting and filling missing configuration, n
 
 ### 1. Explore
 
-Look at the current repo to understand its starting state. Read whatever exists; don't assume:
-
 Resolve the repository management root from project instructions and existing registration, using the Git top-level only as a fallback. Perform setup for that boundary, not the current subproject directory. Follow [artifact-registration.md](artifact-registration.md) for root resolution and historical exceptions before creating configuration.
 
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
 - `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
-- `docs/adr/` and any `src/*/docs/adr/` directories
+- Existing context maps and the ADR or domain-document locations they actually reference, including project directories outside `src/`
 - `docs/agents/` — does this skill's prior output already exist?
 - Artifact registries, representative planning files, and historical locations referenced by project instructions
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
-- Monorepo signals — a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. Present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
+- Context boundaries — existing maps, registered domain owners, user-specified layouts, and actual project responsibilities take precedence. Workspace manifests and package directories are supporting evidence, not prerequisites for multiple contexts.
 
-### 2. Present findings and ask
+### 2. Determine necessary changes
 
-Summarise what's present and what's missing. Then take the sections in order — one section, one answer, then the next.
+Present one concise configuration difference summary: what is reused, what needs adding or changing, and any migration or overwrite implications. Include proposed content for changes that need a user decision. Ask only for unresolved material choices, grouping independent questions where useful; reuse prior decisions and authorization rather than requiring a separate approval round after each section. If no changes are needed, proceed to verification.
 
-Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip questions exploration already settled. Skip Section B when `triage` isn't installed; absence of a monorepo skips the multi-context choice, not artifact registration.
+Apply only the relevant configuration areas below. Skip triage configuration when `triage` is not selected or installed; inspect existing artifact registration independently of context count.
 
 **Section A — Issue tracker.**
 
 > Explainer: The "issue tracker" is where this repo tracks Proposals and work items. Configure the system you use, including local Markdown if preferred.
 
-Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
+Reuse an existing tracker choice first; a hosting remote does not override it. If no choice exists and a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
 
 - **GitHub** — issues live in the repo's GitHub Issues (uses the `gh` CLI)
 - **GitLab** — issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI)
 - **Local markdown** — issues live as files under `.scratch/<feature>/` in this repo (good for solo projects or repos without a remote)
 - **Other** (Jira, Linear, etc.) — ask the user to describe the workflow in one paragraph; the skill will record it as freeform prose
 
-Record the choice in `docs/agents/issue-tracker.md`. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off** — leave it off and don't raise it; a user who wants external PRs in the triage queue can flip the flag in the file later.
+Update the tracker configuration already referenced by project instructions; use `docs/agents/issue-tracker.md` only when no existing owner is established. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off** — leave it off and don't raise it; a user who wants external PRs in the triage queue can flip the flag in the file later.
 
 Include the Proposal location/identifier, work-state representation and transitions, and where review and approval evidence are recorded. Reuse existing states; if missing, resolve their mapping in this setup review. Readiness requires the applicable review and approvals, while execution authorization follows project instructions. This configuration is required before creating or updating Proposals; choosing a tracker does not itself authorize publishing work or creating remote labels.
 
 **Section B — Triage label vocabulary.** Skip this section entirely if the `triage` skill isn't installed (exploration told you) — an uninstalled skill needs no labels.
 
-If it is installed, ask exactly one question:
-
-> Do you want to keep the default triage labels? (recommended: **yes**)
-
-The defaults are the five canonical roles, each label string equal to its name: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. On **yes**, write them as-is. Only if the user says no — usually because their tracker already uses other names (e.g. `bug:triage` for `needs-triage`) — collect the overrides so `triage` applies existing labels instead of creating duplicates.
+Reuse the existing label mapping. If none exists, include the defaults in the configuration summary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. Ask only when a material mapping choice is unresolved. Preserve existing strings and the selected mapping; writing configuration does not itself authorize creating remote labels.
 
 **Section C — Artifact and domain docs.** Read [artifact-registration.md](artifact-registration.md) to register historical and new artifact locations. Reuse the user's chosen registration mode; distinguish new-work routing from migration. Use the selected registry for decision/ADR locations. Without another choice, retain the single-context default of `CONTEXT.md` plus `docs/adr/`.
 
-Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
+Reuse an established multi-context map even without workspace manifests. When no layout exists, propose boundaries, names and paths based on actual responsibilities. Confirm which contexts the user wants to establish in the configuration summary before creating the map; detecting projects or workspace entries does not select them. Reuse settled choices and confirm only additions or changes. A root `CONTEXT-MAP.md` points to the selected contexts' documents. Register intended locations without creating empty glossaries or ADRs.
 
-Multi-context layouts share the root artifact registry and Agent Notes installation. Register context-local document owners there; do not scaffold a registry or `.agents/notes/` per subproject. Context selection does not automatically select record categories.
+Multi-context layouts share the root artifact registry. If Agent Notes is selected, separately confirm which established contexts need records and whether a shared record area is wanted, in the same configuration summary. Map only those selected scopes to separate directories within root `.agents/notes/`, following [decision-records.md](decision-records.md). Context selection does not automatically enable records or create categories; later-discovered projects do not expand either selection.
 
 **Optional decision records.** When the user requests categorized decision records with an index and checks, read [decision-records.md](decision-records.md). Reuse any existing decision system first. Include this option in the same configuration review; prior explicit selection does not require another approval round. Selecting an engineering workflow alone does not require installing it.
 
-### 3. Confirm and edit
+### 3. Apply authorized configuration
 
-Show the user a draft of:
+Use the entry file selected by the user or actually consumed by the target environment, following existing instruction pointers. If both `AGENTS.md` and `CLAUDE.md` exist, identify the authoritative owner rather than giving either filename unconditional priority. Preserve established forwarding between files; do not duplicate the same rules in both. If the target environment and existing evidence do not resolve the choice, ask within the configuration summary before writing. Create a missing entry only within the authorized setup scope.
 
-- The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
-- The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
-- The artifact registry and historical/new location map, normally `docs/agents/artifacts.md`
-- If selected, the decision-record deployment and its project instruction pointer, including its relationship to existing ADRs
-
-Let them edit before writing.
-
-### 4. Write
-
-**Pick the file to edit:**
-
-- If `CLAUDE.md` exists, edit it.
-- Else if `AGENTS.md` exists, edit it.
-- If neither exists, ask the user which one to create — don't pick for them.
-
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa) — always edit the one that's already there.
+Apply the changes whose scope and choices are already authorized. Preserve unrelated text, existing owners, and customized files; migrations and upgrades follow [artifact-registration.md](./artifact-registration.md) and [decision-records.md](./decision-records.md).
 
 If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
 
-The block:
+Adapt this block to the selected configuration; omit unused areas and replace example paths with the existing registered locations:
 
 ```markdown
 ## Agent skills
@@ -118,9 +97,9 @@ For engineering artifact discovery, creation, updates and lifecycle, follow `doc
 Resolve registry locations from the repository management root, even inside a subproject.
 ```
 
-Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
+Include the triage sub-block and configuration only when selected and needed. Apply the same rule to other areas; configuring domain docs alone does not require creating tracker configuration.
 
-Then write the docs files using the seed templates in this skill folder as a starting point:
+For each selected configuration, use the corresponding seed template as a starting point:
 
 - [issue-tracker-github.md](./issue-tracker-github.md) — GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md) — GitLab issue tracker
@@ -129,8 +108,16 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [domain.md](./domain.md) — domain doc consumer rules + layout
 - [artifacts.md](./artifacts.md) — adapt artifact ownership and historical/new locations to the selected registration mode
 
-For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
+For "other" issue trackers, adapt the existing tracker owner using the user's description; create a new configuration at the agreed destination only when no owner exists.
 
-### 5. Done
+### 4. Verify and report
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Before claiming setup complete, check the selected configuration:
+
+- Instruction pointers resolve to the actual configuration owners; registry and local paths use the established management root from both root and subproject entry points.
+- Tracker destinations, work-state mappings, and review/approval references are explicit for selected work tracking; an existing work item is updated in its owner instead of duplicated.
+- Context layout matches the existing map or selected boundaries; shared registration and optional Agent Notes do not become per-context copies.
+- Existing customizations and historical owners remain intact; no unused configuration or placeholder artifacts were introduced. Registered future locations need not exist yet.
+- Check availability of the chosen CLI or other configured access method. Where possible, use a read-only check for account access and destination identity. Missing credentials or tooling are a reported access limitation, not permission to install tools or create test issues, comments, or labels. When Agent Notes is selected, run its documented checks.
+
+Report files added, updated, or reused; the chosen entry and root; checks actually performed; and remaining decisions or access limitations. Distinguish local configuration completion from verified remote access. Repeat setup may inspect, fill gaps, or perform an explicitly requested upgrade; it is not a reset.

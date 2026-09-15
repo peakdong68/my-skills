@@ -40,7 +40,7 @@ Inspect the spec, ADRs, code and tests first. A defect spanning layers is not it
 8. Run directly related tests, then broader relevant tests when necessary.
 9. Run typechecking/build checks where applicable.
 10. Use `code-review` with the repair baseline, selected failures, contract references, and the complete repair diff, including new files.
-11. Resolve material in-scope review findings by ownership. Return unresolved contract decisions to the project's planning stage; keep unrelated findings outside the repair scope.
+11. Resolve material in-scope review findings by ownership. Return unresolved contract decisions to Discuss and wait for the user's `/planning` or `/implement` command; keep unrelated findings outside the repair scope.
 12. Re-verify behavior affected by review corrections, including the original reproduction, affected acceptance criteria, and relevant regressions. Continue the correction and review loop until the completion conditions hold or further progress requires an unavailable dependency, a user-owned decision, or additional authorization.
 
 Verify the original observable failure at an appropriate stable boundary. A passing lower-level regression test alone does not demonstrate that the original acceptance condition is restored. Complete this repair's verification within this skill; a separate user invocation of `to-verify` is not a completion prerequisite.

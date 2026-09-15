@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Implement authorized work after the project's Implementation Gate passes, including implementation review and preparation for final verification.
+description: Implement explicitly authorized, sufficiently defined work through implementation review and final verification.
 ---
 
 # Implement
@@ -9,13 +9,13 @@ description: Implement authorized work after the project's Implementation Gate p
 
 Implement the selected scope of the identified Proposal or existing work item. Resolve its issue ID, URL or file path and the requirements and design sections it references before coding.
 
-Before implementation, check the scope and acceptance conditions, required decisions and review/approval evidence, unresolved blockers, and execution authorization for that scope under project rules. Reuse valid evidence without requesting confirmation again. Sync already agreed scope and decisions to their existing owners; unresolved material decisions return to the project's Planning stage. Document status or location alone does not establish readiness or authorization.
+Load this skill on the user's `/implement` command. Check that the selected scope, observable acceptance conditions, necessary decisions, and applicable approvals are sufficiently defined and dependencies permit work. Reuse existing evidence. If a key contract is unresolved, report the blocker, return to Discuss, and recommend `/planning`; do not enter planning or invent behavior automatically. A command authorizes work but does not supply missing requirements.
 
 For a review-only request, use the `code-review` skill without entering implementation or requiring its gate. Deliver findings and coverage limitations; do not automatically fix changes or advance their workflow status. The implementation correction and completion rules apply only to authorized implementation.
 
 ## 2. Decompose when needed
 
-After the Implementation Gate passes, create implementation tickets only when decomposition is needed. Their existence is not a condition for initially entering implementation.
+Once the authorized work is sufficiently defined, create implementation tickets only when decomposition is needed. Their existence is not a prerequisite for starting.
 
 Implement directly when the work fits one coherent execution unit.
 
@@ -29,7 +29,7 @@ Implement against the selected work item's scope, acceptance conditions, referen
 
 Use established architecture, conventions, interfaces, and domain language unless the authoritative design explicitly changes them.
 
-If implementation exposes a material unresolved product, domain, architectural, interface, compatibility, or other contract decision, return to the project's Planning stage rather than inventing it during implementation.
+If implementation exposes a material unresolved product, domain, architectural, interface, compatibility, or other contract decision, stop affected implementation and return to Discuss. After discussion, wait for a new `/planning` or `/implement` command for the affected work. Continue independent work within its existing authorization.
 
 ### Implementation-time testing
 
@@ -49,12 +49,14 @@ During authorized implementation, resolve material findings by ownership:
 | ----------------------------------------------------------------- | -------------------------------------- |
 | Current implementation is missing or violates the agreed contract | Fix in the current implementation      |
 | Additional execution unit is needed within the same agreed work   | Add or update an implementation ticket |
-| Product or technical contract must change or was never resolved   | Return to the project's Planning stage                       |
+| Product or technical contract must change or was never resolved   | Stop affected work; return to Discuss for a new command                       |
 | Issue is unrelated to the agreed work                             | Do not expand scope automatically      |
 
 There is no "fix it while we're here" path for unrelated work.
 
 For implementation corrections, return to §3, rerun affected checks, and re-review the corrected scope under §4. Resolve material in-scope findings before final verification.
+
+Subsequent Implementation Review rounds focus on unresolved material findings, regressions from corrections, and newly evidenced material issues. Reuse valid conclusions; do not reopen accepted decisions without new material evidence. Do not block progress on stylistic preferences, optional improvements, speculative concerns, or unrelated issues. Limit this review to five review-fix cycles, counted independently of other reviews. If material findings remain, report them and return affected work to Discuss; reaching the limit is not a pass.
 
 ## 5. Completion and handoff
 
@@ -66,6 +68,6 @@ Implementation is complete when:
 - material Implementation Review findings are resolved
 - the change is ready for final verification
 
-For authorized end-to-end work, continue to the project's Verify stage after these conditions hold; do not wait for another instruction to verify.
+After these conditions hold, load and use the `verify` skill to verify the selected repair or implementation under the same `/implement` authorization. Only successful final verification completes delivery; being ready for verification is an intermediate result, not task completion.
 
 Update the identified work item's implementation progress using the project's workflow convention. Keep final delivery completion and any decision-record transition to `implemented` for successful final verification.

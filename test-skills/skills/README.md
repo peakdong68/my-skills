@@ -1,8 +1,8 @@
 # 技能目录
 
-项目定位、工程流程选择、初始化和组合用法见 [根目录使用指南](../README.md)。本页维护调用分类、技能简介及使用示例；具体执行规则以各技能的 `SKILL.md` 为准。
+项目定位、推进命令、初始化和组合用法见 [根目录使用指南](../README.md)。本页维护调用分类、技能简介及使用示例；具体执行规则以各技能的 `SKILL.md` 为准。
 
-用户调用类设置 `disable-model-invocation: true`，由用户主动选择；模型调用类可由模型依据任务语义选用，也可显式调用。实际调用语法与技能发现方式由使用环境提供。选择技能不替代项目的执行授权。
+用户调用类由用户主动选择；模型调用类通常可按任务选用。planning 和 implement 虽保留在 model-invoked 目录，其调用策略要求显式选择，工程推进仍分别需要用户的 `/planning`、`/implement` 命令。实际调用语法与技能发现方式由使用环境提供。选择技能不替代项目的执行授权。
 
 ## 用户调用（user-invoked）
 
@@ -35,7 +35,7 @@
 | 访谈已完成，但还没有正式产物 | 从已确定结论直接整理草稿，不必先补齐 PRD、RFC 或 Proposal；建议和未决问题不作为已批准需求 |
 | 需要独立 Spec 交给其他团队或用于明确的交付要求 | 明确要求独立文档，并说明与既有合同的引用或迁移关系，避免两份竞争合同 |
 
-尚需决定产品行为或技术方案时，由 [plan](./model-invoked/plan/SKILL.md) 解决相应决策；`to-spec` 负责整理已定内容，不通过补写规范替用户作出重大选择。
+尚需决定产品行为或技术方案时，先回到 Discuss，由用户通过 `/planning` 授权 [planning](./model-invoked/planning/SKILL.md) 解决相应决策；`to-spec` 负责整理已定内容，不通过补写规范替用户作出重大选择。
 
 ### 如何调用
 
@@ -103,7 +103,7 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 预期依据：导出需求要求中文字段原样保留。请核实原因并修复。
 ```
 
-执行仍遵循项目授权规则；在本仓库，范围就绪后按提示输入“执行实现”，同一范围内的修正、审查和重验无需重复授权。
+本仓库的正式规划和实施分别由 `/planning` 与 `/implement` 授权；选择 fix-bug 等方法不代替 `/implement`。上面的修复示例需同时提供或已有覆盖当前范围的 `/implement` 授权，同一范围内的修正、审查和重验无需重复授权。
 
 ### 两者如何衔接
 
@@ -124,7 +124,7 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 - **[domain-modeling](./model-invoked/domain-modeling/SKILL.md)**：梳理领域术语与模型，将已确定的领域知识和持久架构决策记录到上下文文档或 ADR。
 - **[grilling](./model-invoked/grilling/SKILL.md)**：在用户希望深入推敲想法时，按决策依赖分轮访谈，直到达成共同理解。
 - **[implement](./model-invoked/implement/SKILL.md)**：按进入条件、按需分解、执行与实施期间测试、实施审查、完成交接组织工作；独立审查请求转交 code-review。
-- **[plan](./model-invoked/plan/SKILL.md)**：复用权威工作项，解决必要的产品与技术决策，形成最小规划材料并完成规划审阅。
+- **[planning](./model-invoked/planning/SKILL.md)**：复用权威工作项，解决必要的产品与技术决策，形成最小规划材料并完成规划审阅。
 - **[prototype](./model-invoked/prototype/SKILL.md)**：构建用于回答特定设计问题的临时原型，探索逻辑、状态模型或界面方案。
 - **[research](./model-invoked/research/SKILL.md)**：由后台代理依据高可信的一手资料调查问题，将带来源引用的结论保存为仓库中的 Markdown 文件。
 - **[resolving-merge-conflicts](./model-invoked/resolving-merge-conflicts/SKILL.md)**：依据双方变更意图处理进行中的 Git 合并或变基冲突，检查结果并完成相应操作。

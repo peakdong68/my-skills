@@ -2,7 +2,7 @@
 title: 方案批准与执行授权分离
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-14
 approval: 用户在本任务会话中已确认，日期与依据见正文
 verification: 对照正文引用的已交付文件及本任务检查结果核对；见依据与关联
 ---
@@ -31,4 +31,8 @@ verification: 对照正文引用的已交付文件及本任务检查结果核对
 
 2026-09-08 本任务会话中，用户认可并要求修正 AGENTS.md，随后重申该规则为项目指令。无独立会话链接，以上记录依据当前会话，不虚构外部批准记录。
 
-现行规则见 [AGENTS.md](../../../../AGENTS.md)，编排见 [engineering.md](../../../../engineering.md)。
+现行规则见 [AGENTS.md](../../../../AGENTS.md)，编排见 [engineering.md](https://github.com/peakdong68/my-skills/blob/e995fb367530cebcce62f1485b3085d93fcb1a26/test-skills/engineering.md)。
+
+## 后续替代
+
+本记录中的当前工程入口、旧执行口令或自动阶段衔接约定，由[命令授权方案](./2026-09-14-command-authorized-engineering.md)替代；历史依据及未冲突职责保留。

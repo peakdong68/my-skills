@@ -1,10 +1,12 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { root, collect, renderIndex } from './lib.mjs';
+import { root, collect, renderIndexes } from './lib.mjs';
 
-const { records, categories, errors } = await collect();
-const index = await readFile(path.join(root, 'INDEX.md'), 'utf8').catch(() => null);
-if (index !== renderIndex(records, categories)) errors.push('INDEX.md: missing or stale; run node scripts/decisions/update-index.mjs');
+const { records, categories, recordRoots, errors } = await collect();
+if (!errors.length) for (const [relative, expected] of await renderIndexes(records, categories, recordRoots)) {
+  const index = await readFile(path.join(root, relative), 'utf8').catch(() => null);
+  if (index !== expected) errors.push(`${relative}: missing or stale; run node scripts/decisions/update-index.mjs`);
+}
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

@@ -16,6 +16,9 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-15 | [按用户选定上下文隔离 Agent Notes 目录](./implemented/decision-records/2026-09-15-context-record-directories.md) | decision-records | implemented |
+| 2026-09-14 | [用用户命令授权规划与实施，移除集中工程编排](./implemented/engineering/2026-09-14-command-authorized-engineering.md) | engineering | implemented |
+| 2026-09-14 | [Setup 按需配置并验证实际入口与工件归属](./implemented/skill-design/2026-09-14-setup-targeted-configuration.md) | skill-design | implemented |
 | 2026-09-10 | [Discuss 支持已授权规划及规划限定请求](./implemented/engineering/2026-09-10-discuss-planning-transition.md) | engineering | implemented |
 | 2026-09-10 | [多上下文共用仓库级工件注册与 Agent Notes](./implemented/engineering/2026-09-10-repository-artifact-root.md) | engineering | implemented |
 | 2026-09-10 | [授权后遵循阶段流程并主动完成阶段内审查](./implemented/engineering/2026-09-10-stage-completion-continuation.md) | engineering | implemented |
@@ -47,6 +50,7 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-14 | [用用户命令授权规划与实施，移除集中工程编排](./implemented/engineering/2026-09-14-command-authorized-engineering.md) | engineering | implemented |
 | 2026-09-10 | [Discuss 支持已授权规划及规划限定请求](./implemented/engineering/2026-09-10-discuss-planning-transition.md) | engineering | implemented |
 | 2026-09-10 | [多上下文共用仓库级工件注册与 Agent Notes](./implemented/engineering/2026-09-10-repository-artifact-root.md) | engineering | implemented |
 | 2026-09-10 | [授权后遵循阶段流程并主动完成阶段内审查](./implemented/engineering/2026-09-10-stage-completion-continuation.md) | engineering | implemented |
@@ -63,6 +67,7 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-14 | [Setup 按需配置并验证实际入口与工件归属](./implemented/skill-design/2026-09-14-setup-targeted-configuration.md) | skill-design | implemented |
 | 2026-09-09 | [独立验收诊断与手动实现修复的衔接](./implemented/skill-design/2026-09-09-diagnosis-manual-repair-handoff.md) | skill-design | implemented |
 | 2026-09-09 | [技能移至根目录并按调用方式分组](./implemented/skill-design/2026-09-09-skill-invocation-layout.md) | skill-design | implemented |
 | 2026-09-09 | [Spec 复用已有合同并完成必要评审](./implemented/skill-design/2026-09-09-spec-owner-selection-and-review.md) | skill-design | implemented |
@@ -76,6 +81,7 @@
 
 | 首次提出 | 记录 | 分类 | 生命周期 |
 | --- | --- | --- | --- |
+| 2026-09-15 | [按用户选定上下文隔离 Agent Notes 目录](./implemented/decision-records/2026-09-15-context-record-directories.md) | decision-records | implemented |
 | 2026-09-09 | [Agent Notes 迁移至 .agents/notes](./implemented/decision-records/2026-09-09-agent-notes-location.md) | decision-records | implemented |
 | 2026-09-08 | [按项目注册工件归属及历史位置](./implemented/decision-records/2026-09-08-artifact-location-registration.md) | decision-records | implemented |
 | 2026-09-08 | [决策管理资源与项目历史分离](./implemented/decision-records/2026-09-08-portable-decision-records.md) | decision-records | implemented |

@@ -2,7 +2,7 @@
 title: 授权后遵循阶段流程并主动完成阶段内审查
 status: implemented
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-09-14
 approval: 本任务会话确认简洁授权指引与阶段完成规则，并明确要求同意，执行实现
 verification: Standards 与 Spec 审查无实质发现，情境文义核对及记录索引、链接和差异检查通过
 ---
@@ -15,7 +15,7 @@ verification: Standards 与 Spec 审查无实质发现，情境文义核对及�
 
 [AGENTS.md](../../../../AGENTS.md) 将收到执行授权后的动作从“开始实施”改为继续按实际路径 ./engineering.md 的阶段执行，避免把授权口令直接解释为开始改代码。AGENTS 不复制技能内部步骤。
 
-[engineering.md](../../../../engineering.md) 与 [engineering-v2.md](../../../../engineering-v2.md) 增加统一结束检查：以阶段完成条件为依据，主动完成必要审查、修正和复核；请求范围仍有必需且已授权工作时继续。Plan 明确草稿后主动完成 Plan Review，处理实质发现并复核，不能把草稿当作规划完成。
+[engineering.md](https://github.com/peakdong68/my-skills/blob/e995fb367530cebcce62f1485b3085d93fcb1a26/test-skills/engineering.md) 与 [engineering-v2.md](../../../../engineering-v2.md) 增加统一结束检查：以阶段完成条件为依据，主动完成必要审查、修正和复核；请求范围仍有必需且已授权工作时继续。Plan 明确草稿后主动完成 Plan Review，处理实质发现并复核，不能把草稿当作规划完成。
 
 保留 Implement 与 Verify 的既有职责和入口，不重复其内部规则；已有有效评审及授权证据继续按原规则复用，限定阶段请求仍在该阶段完整交付后结束。范围仅为三个根级文件及记录、索引，不改研究目录或技能副本。
 
@@ -31,3 +31,7 @@ verification: Standards 与 Spec 审查无实质发现，情境文义核对及�
 三个目标文件已按上述范围修改，Standards 与 Spec 独立审查均无实质发现。逐项文义核对授权后依阶段执行、草稿不等于规划完成、端到端已授权工作继续、阶段限定请求结束和既有证据复用等情境；未运行代理行为测试。
 
 记录索引由 node scripts/decisions/update-index.mjs 生成，node scripts/decisions/check.mjs 校验记录元数据、本地链接和索引一致性通过；git diff --check 通过。工程规则仅增加完成约束，不保证代理运行时绝不跳步。
+
+## 后续替代
+
+本记录中的当前工程入口、旧执行口令或自动阶段衔接约定，由[命令授权方案](./2026-09-14-command-authorized-engineering.md)替代；历史依据及未冲突职责保留。
