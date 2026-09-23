@@ -1,6 +1,3 @@
 interface:
   display_name: "Implement"
-  short_description: "Implement authorized work through review and verification."
-
-policy:
-  allow_implicit_invocation: false
+  short_description: "Implement work that has passed the project's Implementation Gate。"
