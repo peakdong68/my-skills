@@ -1,52 +1,11 @@
-# Register artifact ownership and locations
+# Establish document ownership
 
-During setup, establish where the target project finds, creates, updates and tracks engineering artifacts. Store the agreement in `docs/agents/artifacts.md`, or update the registry already referenced by project instructions. Use [artifacts.md](artifacts.md) as a seed, not as permission to overwrite existing conventions.
+During setup, locate the repository management root from project instructions and existing owners; use Git top-level only when no project boundary is established. Working in a subproject does not silently create another management root. Resolve recorded paths from that root, while Markdown links remain relative to their files.
 
-## Discover and select
+Inspect current project instructions, document conventions, representative artifacts and work tracking. Record the agreed document types, owners, new locations and historical exceptions in the project's existing document entry, normally `docs/AGENTS.md`. Use [docs-agents.md](docs-agents.md) as a starting point when no owner exists. Do not deploy a second artifact registry. Reuse an existing `artifacts.md` only as a historical owner until the project has authorized and completed its consolidation.
 
-Establish one repository management root from the applicable project instructions and existing registration before resolving paths. Use the Git top-level as a discovery fallback, not to override an explicitly established management boundary. A subproject working directory or an additional domain context does not establish a new root. If evidence leaves competing roots, resolve that setup decision before creating registries or deploying records.
+For each artifact, preserve one authoritative home: the tracker owns work status; a Spec owns accepted behavior and acceptance; an RFC owns implementation design; an ADR owns a durable decision; Agent Notes own change-specific reasons and results. Adapt these roles to the project's actual conventions. A root `CONTEXT-MAP.md` can direct readers to context-local documents; the Notes root config separately selects record directories. Contexts do not create record categories.
 
-Within that boundary, use one root-level registry, normally `<root>/docs/agents/artifacts.md`, and one shared Agent Notes installation at `<root>/.agents/notes/` for new installations. Resolve registered location values from this root, even when running from a subproject; ordinary Markdown links remain relative to their containing file. Do not create per-context registries or Agent Notes installations.
+Review existing and new work separately. An existing artifact remains with its owner unless migration is explicitly authorized. New locations can be documented without creating empty files. If ownership changes, include the source, destination, affected scope, status mapping and link repair in the authorized change; do not treat a new entry as proof of migration.
 
-Within the shared Notes installation, selected contexts may own separate record directories and indexes, mapped by its root configuration; this is not a per-subproject installation. Confirm context layout and Notes enrollment separately, reusing prior choices.
-
-The registry can route to context-local `CONTEXT.md`, ADRs, Specs, and other owners. A root `CONTEXT-MAP.md` maps contexts and relationships; it does not partition engineering registration or record categories. Register context and repository-wide decision ownership explicitly, retaining one authoritative owner per decision and linking to it from other records.
-
-Inspect project instructions, registries, representative artifacts, tracker configuration and historical directories. Distinguish authoritative work from examples, generated output and abandoned drafts. Reuse the user's existing choice; otherwise present the relevant mode in the normal setup review:
-
-| Mode | Meaning |
-| --- | --- |
-| Keep existing | Register actual locations and continue their conventions. |
-| New work uses new locations | Register legacy owners and new destinations; existing work stays with its original artifact unless explicitly migrated. |
-| Migrate | Prepare source/destination and status mappings plus link repairs for the authorized scope, preserving provenance and customized content. |
-
-Re-registration does not authorize moving historical artifacts. Multiple directories may own different work; an old location is not obsolete merely because new destinations were selected.
-
-If historical registries or record systems are distributed, identify the existing governing entry point and register their scope and routing there. Preserve existing owners until an authorized consolidation; do not silently copy them into the new root layout or create another registry to resolve the conflict.
-
-## Default method
-
-When the user selects this repository's artifact method, register Proposal handling in the issue-tracker configuration: its location and identifier, work states, review/approval evidence and readiness transition. Configure a remote tracker or explicit local Markdown tracking; there is no unconfigured Proposal storage fallback. Reuse established choices and resolve missing configuration in the setup review.
-
-A Proposal is the planning work item; a decision record may reference it to preserve a durable choice or delivery rationale without copying it. If historical files already serve both roles, register the mapping between work status, approval and record delivery lifecycle. Preserve that ownership unless migration is authorized. Read [decision-records.md](decision-records.md) if deploying the record system. Choosing an engineering workflow alone does not select this artifact method automatically.
-
-RFCs and Specs are optional independent owners, not mandatory steps. They retain their own locations and approval conventions when associated change records move between delivery states. Record project style references when available; create no empty artifacts just to establish directories.
-
-## Register and verify
-
-Include the registry, historical/new location map and instruction pointer in the existing setup draft. Apply already approved configuration edits without a second approval round; migrations require authorization for those changes.
-
-```markdown
-### Artifact management
-
-For engineering artifact discovery, creation, updates and lifecycle,
-follow `docs/agents/artifacts.md`.
-Resolve this registry and its registered locations from the repository management root,
-including when working inside a subproject.
-```
-
-The registry owns artifact relationships and historical routing; it points to tracker configuration for work-item locations, identifiers, operations and work states. Domain configuration owns glossary consumption, and decision configuration owns categories. Cross-reference these rather than duplicating rules. Update existing pointers and domain configuration within the selected scope.
-
-Verify existing work still resolves to its owner, new destinations are explicit, approval and delivery states remain distinct, and references to existing files resolve. Future directories need not exist yet. For authorized migrations also verify preserved content, record counts and inbound links. Report outstanding migration work instead of claiming it complete.
-
-For multi-context setup, also verify that root and subproject entry points resolve the same registry and Agent Notes installation, while context-local documents resolve through the map and registered ownership. Contexts must not implicitly create categories or duplicate decisions.
+Verify that root and subproject readers reach the same document ownership entry, every active artifact has one owner, historical paths remain discoverable, and tracker approval and delivery status are distinct. Refer to the tracker and Notes rules from the document entry instead of repeating their mechanics there.

@@ -3,135 +3,180 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 export const root = fileURLToPath(new URL('../../.agents/notes/', import.meta.url));
 export const lifecycles = ['proposed', 'implemented', 'rejected'];
-const dateOK = v => /^\d{4}-\d{2}-\d{2}$/.test(v ?? '') && !Number.isNaN(Date.parse(v)) && new Date(v).toISOString().slice(0,10) === v;
-const cell = v => String(v ?? '').replaceAll('|','\\|').replaceAll('[','\\[').replaceAll(']','\\]');
-export async function collect({ignoreIndex = false} = {}) {
+
+// Resolve Markdown links by path segment. Preserve POSIX, drive and UNC roots;
+// clamp `..` at the root and resolve absolute targets independently.
+export function resolveTarget(baseDir, target) {
+  const parse = value => {
+    const normalized = value.replaceAll('\\', '/');
+    if (normalized.startsWith('//')) {
+      const segments = normalized.slice(2).split('/').filter(Boolean);
+      const share = segments.splice(0, 2);
+      return { prefix: `//${share.join('/')}/`, stack: segments };
+    }
+    if (/^[A-Za-z]:\//.test(normalized)) return { prefix: normalized.slice(0, 3), stack: normalized.slice(3).split('/').filter(Boolean) };
+    if (normalized.startsWith('/')) return { prefix: '/', stack: normalized.slice(1).split('/').filter(Boolean) };
+    return { prefix: '', stack: normalized.split('/').filter(Boolean) };
+  };
+  const normalizedTarget = target.replaceAll('\\', '/');
+  const absolute = normalizedTarget.startsWith('/') || /^[A-Za-z]:\//.test(normalizedTarget);
+  const parsed = parse(absolute ? normalizedTarget : baseDir);
+  const stack = parsed.stack.slice();
+  for (const segment of (absolute ? [] : normalizedTarget.split('/'))) {
+    if (!segment || segment === '.') continue;
+    if (segment === '..') { if (stack.length) stack.pop(); continue; }
+    stack.push(segment);
+  }
+  return parsed.prefix + stack.join('/');
+}
+
+const dateOK = value => /^\d{4}-\d{2}-\d{2}$/.test(value ?? '') && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0,10) === value;
+
+export async function collect() {
   const errors = [], records = [], documents = [];
   let categories = [], recordRoots = [];
   try {
-    const config = JSON.parse(await readFile(path.join(root,'config.json'),'utf8'));
+    const config = JSON.parse(await readFile(path.join(root, 'config.json'), 'utf8'));
     if (config.version !== 1 || !Array.isArray(config.categories)) throw Error('expected version 1 and categories array');
+    if (Object.hasOwn(config, 'recordFormat')) throw Error('recordFormat is no longer supported; all records use the README format');
     const ids = new Set();
-    for (const c of config.categories) {
-      if (!c || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(c.id ?? '') || ![c.name,c.scope].every(v => typeof v === 'string' && v.trim() && !/[\r\n]/.test(v)) || ids.has(c.id)) throw Error('categories require unique slug ids, names and scopes');
-      ids.add(c.id);
+    for (const category of config.categories) {
+      if (!category || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(category.id ?? '') || ![category.name, category.scope].every(value => typeof value === 'string' && value.trim() && !/[\r\n]/.test(value)) || ids.has(category.id)) throw Error('categories require unique slug ids, names and scopes');
+      ids.add(category.id);
     }
     categories = config.categories;
     if (config.recordRoots !== undefined) {
       if (!Array.isArray(config.recordRoots)) throw Error('recordRoots must be an array');
       const paths = new Set(), contexts = new Set();
-      for (const r of config.recordRoots) {
-        if (!r || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(r.path ?? '') || [...lifecycles,'templates'].includes(r.path) || paths.has(r.path)) throw Error('recordRoots require unique top-level directory slugs');
-        if (typeof r.name !== 'string' || !r.name.trim() || /[\r\n]/.test(r.name)) throw Error('recordRoots require names');
-        if (r.context !== null && (typeof r.context !== 'string' || !r.context.trim() || /[\r\n]/.test(r.context))) throw Error('recordRoots require a context identifier or null for shared');
-        if (contexts.has(r.context)) throw Error('each context or shared scope must have one record root');
-        const stat = await lstat(path.join(root,r.path)).catch(e => { if (e.code === 'ENOENT') return null; throw e; });
+      for (const owner of config.recordRoots) {
+        if (!owner || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(owner.path ?? '') || [...lifecycles, 'templates'].includes(owner.path) || paths.has(owner.path)) throw Error('recordRoots require unique top-level directory slugs');
+        if (typeof owner.name !== 'string' || !owner.name.trim() || /[\r\n]/.test(owner.name)) throw Error('recordRoots require names');
+        if (owner.context !== null && (typeof owner.context !== 'string' || !owner.context.trim() || /[\r\n]/.test(owner.context))) throw Error('recordRoots require a context identifier or null for shared');
+        if (contexts.has(owner.context)) throw Error('each context or shared scope must have one record root');
+        const stat = await lstat(path.join(root, owner.path)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
         if (stat && (!stat.isDirectory() || stat.isSymbolicLink())) throw Error('recordRoots must be real directories within Notes, not links or files');
-        paths.add(r.path); contexts.add(r.context);
+        paths.add(owner.path);
+        contexts.add(owner.context);
       }
-      if (config.recordRoots.some(r => r.context !== null)) {
+      if (config.recordRoots.some(owner => owner.context !== null)) {
         if (typeof config.contextMap !== 'string' || !config.contextMap.trim()) throw Error('contextMap required for context record roots');
-        await access(path.resolve(root, '../..', config.contextMap));
+        await access(resolveTarget(path.dirname(path.dirname(root)), config.contextMap));
       }
       recordRoots = config.recordRoots;
     }
-  } catch (e) { errors.push(`config.json: ${e.message}`); }
-  const ids = categories.map(c => c.id);
-  async function walk(dir) {
-    for (const e of await readdir(dir,{withFileTypes:true})) {
-      const full = path.join(dir,e.name), rel = path.relative(root,full).replaceAll('\\','/'), parts = rel.split('/');
-      if (e.isSymbolicLink()) { errors.push(`${rel}: symbolic links are not supported in Notes`); continue; }
-      if (e.isDirectory()) {
-        if (parts[0] !== 'templates') {
-          const scoped = recordRoots.some(r => r.path === parts[0]);
-          const local = scoped ? parts.slice(1) : parts;
-          if (local.length === 1 && !lifecycles.includes(e.name)) errors.push(`${rel}: unknown lifecycle directory`);
-          if (local.length === 2 && !ids.includes(e.name)) errors.push(`${rel}: unknown project category`);
-          if (local.length > 2) errors.push(`${rel}: nested record directory not supported`);
-        }
+  } catch (error) { errors.push(`config.json: ${error.message}`); }
+
+  const categoryIds = categories.map(category => category.id);
+  async function walk(directory) {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const full = path.join(directory, entry.name);
+      const relative = path.relative(root, full).replaceAll('\\', '/');
+      const parts = relative.split('/');
+      if (entry.isSymbolicLink()) { errors.push(`${relative}: symbolic links are not supported in Notes`); continue; }
+      if (entry.isDirectory()) {
+        if (entry.name === 'templates' && (await readdir(full)).length === 0) continue;
+        const scoped = recordRoots.some(owner => owner.path === parts[0]);
+        const local = scoped ? parts.slice(1) : parts;
+        if (local.length === 1 && !lifecycles.includes(entry.name)) errors.push(`${relative}: unknown lifecycle directory`);
+        if (local.length === 2 && !categoryIds.includes(entry.name)) errors.push(`${relative}: unknown project category`);
+        if (local.length > 2) errors.push(`${relative}: nested record directory not supported`);
         await walk(full);
-      } else if (e.isFile() && e.name.endsWith('.md')) documents.push(full);
+      } else if (entry.isFile() && entry.name.endsWith('.md')) documents.push(full);
     }
   }
   await walk(root);
+
   for (const full of documents.sort()) {
-    const relative = path.relative(root,full).replaceAll('\\','/');
-    const owner = recordRoots.find(r => relative.startsWith(r.path + '/'));
+    const relative = path.relative(root, full).replaceAll('\\', '/');
+    const owner = recordRoots.find(candidate => relative.startsWith(candidate.path + '/'));
     const localRelative = owner ? relative.slice(owner.path.length + 1) : relative;
-    if (ignoreIndex && localRelative === 'INDEX.md') continue;
-    const text = await readFile(full,'utf8'), parts = localRelative.split('/');
-    if (!(relative === 'README.md' || localRelative === 'INDEX.md') && !relative.startsWith('templates/')) {
-      const name = /^(\d{4}-\d{2}-\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.exec(parts[2] ?? '');
-      if (parts.length !== 3 || !lifecycles.includes(parts[0]) || !ids.includes(parts[1]) || !name) { errors.push(`${relative}: invalid lifecycle, category or filename`); continue; }
-      const header = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text), meta = {};
+    if (localRelative === 'INDEX.md') { errors.push(`${relative}: generated indexes are no longer used`); continue; }
+    const text = await readFile(full, 'utf8');
+    const parts = localRelative.split('/');
+    if (relative !== 'README.md' && relative !== 'AGENTS.md') {
+      const filename = /^(\d{4}-\d{2}-\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.exec(parts[2] ?? '');
+      if (parts.length !== 3 || !lifecycles.includes(parts[0]) || !categoryIds.includes(parts[1]) || !filename) { errors.push(`${relative}: invalid lifecycle, category or filename`); continue; }
+      const header = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text);
+      const metadata = {};
       if (!header) errors.push(`${relative}: missing metadata`);
       for (const line of (header?.[1] ?? '').split(/\r?\n/)) {
-        const f = /^([a-z]+): (.+)$/.exec(line);
-        if (!f || Object.hasOwn(meta,f[1])) { errors.push(`${relative}: invalid or duplicate metadata field`); continue; }
-        meta[f[1]] = f[2].trim();
+        const field = /^([a-z]+): (.+)$/.exec(line);
+        if (!field || Object.hasOwn(metadata, field[1])) { errors.push(`${relative}: invalid or duplicate metadata field`); continue; }
+        metadata[field[1]] = field[2].trim();
       }
-      if (!meta.title) errors.push(`${relative}: title required`);
-      if (meta.status !== parts[0]) errors.push(`${relative}: status must match lifecycle directory`);
-      for (const key of ['created','updated']) if (!dateOK(meta[key])) errors.push(`${relative}: invalid ${key}`);
-      if (meta.created !== name[1]) errors.push(`${relative}: filename date differs from created`);
-      if (meta.updated < meta.created) errors.push(`${relative}: updated precedes created`);
-      if (!meta.approval) errors.push(`${relative}: approval evidence or pending statement required`);
-      if (meta.status === 'implemented' && !meta.verification) errors.push(`${relative}: verification reference or explanation required`);
-      if (meta.status === 'rejected' && !meta.reason) errors.push(`${relative}: rejection reason required`);
+      if (!metadata.title) errors.push(`${relative}: title required`);
+      if (metadata.status !== parts[0]) errors.push(`${relative}: status must match lifecycle directory`);
+      for (const key of ['created', 'updated']) if (!dateOK(metadata[key])) errors.push(`${relative}: invalid ${key}`);
+      if (metadata.created !== filename[1]) errors.push(`${relative}: filename date differs from created`);
+      if (metadata.updated < metadata.created) errors.push(`${relative}: updated precedes created`);
+      if (!metadata.approval) errors.push(`${relative}: approval evidence or pending statement required`);
+      if (metadata.status === 'implemented' && !metadata.verification) errors.push(`${relative}: verification reference or explanation required`);
+      if (metadata.status === 'rejected' && !metadata.reason) errors.push(`${relative}: rejection reason required`);
       if (!/^# .+/m.test(text.slice(header?.[0].length ?? 0))) errors.push(`${relative}: document title required`);
-      records.push({...meta, category:parts[1], relative, recordRoot: owner?.path ?? ''});
+
+      const keys = ['title', 'status', 'created', 'updated', 'approval', 'verification', 'reason'];
+      const actual = (header?.[1] ?? '').split(/\r?\n/).map(line => /^([a-z]+): /.exec(line)?.[1]).filter(Boolean);
+      const allowed = keys.filter(key => Object.hasOwn(metadata, key));
+      const expected = keys.slice(0, 5).concat(metadata.status === 'implemented' ? ['verification'] : metadata.status === 'rejected' ? ['reason'] : []);
+      if (actual.join(',') !== expected.join(',')) errors.push(`${relative}: metadata fields must use the documented keys and order`);
+      if (actual.some(key => !keys.includes(key))) errors.push(`${relative}: unknown metadata field`);
+      if (metadata.status !== 'implemented' && metadata.verification) errors.push(`${relative}: verification belongs to implemented records`);
+      if (metadata.status !== 'rejected' && metadata.reason) errors.push(`${relative}: reason belongs to rejected records`);
+      if (allowed.length !== expected.length) errors.push(`${relative}: metadata fields do not match the record lifecycle`);
+      const prose = text.slice(header?.[0].length ?? 0).replace(/```[\s\S]*?```/g, '');
+      const lines = prose.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+      if (lines[0] !== `# Agent Note：${metadata.title}`) errors.push(`${relative}: title must match metadata`);
+      const sections = lines.filter(line => line.startsWith('## '));
+      if (sections[0] !== '## 问题') errors.push(`${relative}: first section must be ## 问题`);
+      const required = metadata.status === 'proposed' ? ['提案', '备选方案', '验收条件', '风险'] : metadata.status === 'implemented' ? ['决定', '备选方案', '后果', '验证'] : ['备选方案'];
+      for (const heading of required.filter(value => value !== '备选方案')) if (!sections.includes(`## ${heading}`)) errors.push(`${relative}: missing section ## ${heading}`);
+      if (!sections.includes('## 备选方案')) {
+        const exception = '<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->';
+        if (!prose.includes(exception) || metadata.created >= '2026-09-22') errors.push(`${relative}: missing section ## 备选方案 or valid pre-format exception`);
+      }
+      if (metadata.status === 'implemented' && sections.some(section => ['## 提案', '## 计划', '## 迁移计划', '## 验收条件'].includes(section))) errors.push(`${relative}: implemented record contains proposal section`);
+      records.push({ ...metadata, category: parts[1], relative, recordRoot: owner?.path ?? '' });
     }
-    const body = text.replace(/```[\s\S]*?```/g,'').replace(/`[^`\n]+`/g,'');
-    for (const link of body.matchAll(/\[[^\]]*\]\((<[^>]+>|[^\s)]+)\)/g)) {
-      const target = link[1].replace(/^<|>$/g,'').split('#')[0];
+
+    const body = text.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]+`/g, '');
+    for (const match of body.matchAll(/\[[^\]]*\]\((<[^>]+>|[^\s)]+)\)/g)) {
+      const target = match[1].replace(/^<|>$/g, '').split('#')[0];
       if (!target || /^[a-z][a-z\d+.-]*:/i.test(target)) continue;
-      try {
-        const dest = path.resolve(path.dirname(full),decodeURIComponent(target));
-        if (ignoreIndex && [root,...recordRoots.map(r => path.join(root,r.path))].some(dir => dest === path.join(dir,'INDEX.md'))) continue;
-        await access(dest);
-      } catch { errors.push(`${relative}: broken local link ${target}`); }
+      try { await access(resolveTarget(path.dirname(full), decodeURIComponent(target))); }
+      catch { errors.push(`${relative}: broken local link ${target}`); }
     }
   }
   const names = new Set();
-  for (const r of records) { const name = path.basename(r.relative); if (names.has(name)) errors.push(`${r.relative}: duplicate record filename`); names.add(name); }
-  return {records,categories,recordRoots,errors};
-}
-export function renderIndex(records,categories) {
-  const lines = ['# Agent Notes 索引','','<!-- Generated by scripts/decisions/update-index.mjs. Do not edit manually. -->','','规则见 [README](./README.md)，分类来源为 [项目配置](./config.json)。生命周期表示交付情况，批准与执行授权分别依据项目约定。',''];
-  function section(title,groups,field) {
-    lines.push(`## ${title}`,'');
-    for (const g of groups) {
-      lines.push(`### ${cell(g.name)}`,''); if (g.scope) lines.push(g.scope,'');
-      const rows = records.filter(r => r[field] === g.id).sort((a,b) => b.created.localeCompare(a.created) || a.relative.localeCompare(b.relative));
-      if (!rows.length) { lines.push('暂无记录。',''); continue; }
-      lines.push('| 首次提出 | 记录 | 分类 | 生命周期 |','| --- | --- | --- | --- |');
-      for (const r of rows) lines.push(`| ${r.created} | [${cell(r.title)}](./${r.relative}) | ${r.category} | ${r.status} |`);
-      lines.push('');
-    }
+  for (const record of records) {
+    const name = path.basename(record.relative);
+    if (names.has(name)) errors.push(`${record.relative}: duplicate record filename`);
+    names.add(name);
   }
-  section('按交付生命周期',lifecycles.map(id => ({id,name:id})),'status');
-  if (categories.length) section('按项目分类',categories,'category');
-  else lines.push('## 按项目分类','','尚未配置项目分类；首份记录创建前先确定分类。','');
-  return lines.join('\n');
+  return { records, categories, recordRoots, errors };
 }
 
-// Root navigation and per-context indexes share one rendering implementation.
-// Registering a future root does not create its directory or index.
-export async function renderIndexes(records, categories, recordRoots) {
-  const indexes = new Map();
-  const navigation = ['## 按记录目录导航', ''];
-  for (const owner of recordRoots) {
-    const exists = await access(path.join(root, owner.path)).then(() => true, () => false);
-    const label = `${cell(owner.name)} (${cell(owner.context ?? '公共记录')})`;
-    navigation.push(exists ? `- [${label}](./${owner.path}/INDEX.md)` : `- ${label} — 已登记，尚无目录`);
-    if (!exists) continue;
-    const rows = records.filter(r => r.recordRoot === owner.path).map(r => ({...r, relative: r.relative.slice(owner.path.length + 1)}));
-    const body = renderIndex(rows, categories).replace('[README](./README.md)', '[README](../README.md)').replace('[项目配置](./config.json)', '[项目配置](../config.json)');
-    indexes.set(`${owner.path}/INDEX.md`, body + '\n[返回总索引](../INDEX.md)\n');
+// Read-only navigation; directories remain the source of the listing.
+export function directoryNavigation(records, recordRoots, selection = {}) {
+  const owners = recordRoots.filter(owner => selection.kind === undefined || (selection.kind === 'context' && owner.context === selection.id) || (selection.kind === 'shared' && owner.context === null));
+  const lines = [];
+  for (const owner of owners) {
+    const rows = records.filter(record => record.recordRoot === owner.path);
+    const notesPath = path.relative(process.cwd(), root).replaceAll('\\', '/') || '.';
+    const label = owner.context === null ? 'shared' : `context:${owner.context}`;
+    lines.push(`${owner.name} [${label}]: ${notesPath}/${owner.path}/ (${rows.length})`);
+    for (const lifecycle of lifecycles) {
+      for (const category of [...new Set(rows.filter(record => record.status === lifecycle).map(record => record.category))].sort()) lines.push(`  ${owner.path}/${lifecycle}/${category}/`);
+    }
   }
-  // Historical unpartitioned records remain discoverable without migration.
-  let main = renderIndex(records.filter(r => !r.recordRoot), categories);
-  if (recordRoots.length) main = main.replace('## 按交付生命周期', navigation.join('\n') + '\n\n以下为原有根级记录；上下文记录见各目录索引。\n\n## 按交付生命周期');
-  indexes.set('INDEX.md', main);
-  return indexes;
+  if (selection.kind === undefined || selection.kind === 'legacy') {
+    const rows = records.filter(record => !record.recordRoot);
+    if (rows.length || !recordRoots.length) {
+      const notesPath = path.relative(process.cwd(), root).replaceAll('\\', '/') || '.';
+      lines.push(`legacy: ${notesPath}/ (${rows.length})`);
+      for (const lifecycle of lifecycles) {
+        for (const category of [...new Set(rows.filter(record => record.status === lifecycle).map(record => record.category))].sort()) lines.push(`  ${lifecycle}/${category}/`);
+      }
+    }
+  }
+  return lines;
 }

@@ -2,14 +2,15 @@
 title: 按项目分类组织提案与交付记录
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-23
 approval: 本任务会话中用户确认完整方案并要求“可以落实”
 verification: 见正文的验证命令及自动化场景
 ---
 
-# 按项目分类组织提案与交付记录
 
-## 背景
+# Agent Note：按项目分类组织提案与交付记录
+
+## 问题
 
 原先将 DSH 六类作为通用默认值，并采用批准状态组织文件，未能表达目标项目自身交付对象，也未覆盖提案到部分实施再到交付的生命周期。
 
@@ -19,11 +20,11 @@ verification: 见正文的验证命令及自动化场景
 
 正文沿用项目风格，工具检查元数据、路径、链接和索引，不强制章节。普通文档治理不另启工程循环，实质合同修改仍按工程工作流处理。
 
-## 理由与替代方案
+## 备选方案
 
 放弃硬编码 DSH 六类：它们来自特定项目语境，不能成为所有项目的必然分类。放弃只用 Draft/Accepted 等批准状态描述记录：已批准但未交付与已交付需要区分。保留可复用源与项目副本的边界，以及重复初始化不覆盖的规则。
 
-## 影响
+## 后果
 
 关于总体提案本身使用 proposed 生命周期的默认规则，已由 [明确实施工作项与提案归属](../engineering/2026-09-08-work-item-and-proposal-boundaries.md) 调整为跟踪器管理 Proposal 工作状态、变更记录管理交付生命周期。分类、记录生命周期及副本保护规则继续适用。
 
@@ -38,3 +39,7 @@ verification: 见正文的验证命令及自动化场景
 实现见 [配置](../../config.json)、[规范](../../README.md)、[检查器](../../../../scripts/decisions/lib.mjs)、[setup](../../../../skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
 
 验证命令：`node scripts/decisions/update-index.mjs`、`node scripts/decisions/check.mjs`、`node scripts/decisions/self-test.mjs`。自动化场景覆盖空资源部署、自定义分类、各生命周期与必填依据、失效链接及索引新鲜度；重复 setup 防覆盖仍是技能执行约束，不是安装器保证。
+
+## 验证
+
+见正文的验证命令及自动化场景

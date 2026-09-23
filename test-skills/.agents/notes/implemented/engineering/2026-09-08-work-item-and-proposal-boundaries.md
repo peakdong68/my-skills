@@ -2,14 +2,19 @@
 title: 明确实施工作项与提案归属
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-23
 approval: 用户在本任务会话对齐 Proposal 与实施 Ticket 边界后明确输入可以执行实现方案
 verification: 见正文验收与验证及本任务检查结果
 ---
 
-# 明确实施工作项与提案归属
 
-## 问题与决定
+# Agent Note：明确实施工作项与提案归属
+
+## 问题
+
+工作项、需求、设计和变更记录的归属及实施对象不清，导致评审结论和进度无处回写。
+
+## 决定
 
 原规则用“权威工作”统称工作项、需求与设计，没有明确本次实施对象；Plan Review 不清楚更新哪个对象；Proposal 与变更记录共享默认路径却采用不同状态语义，未配置时的本地回退又绕过了跟踪约定。
 
@@ -27,7 +32,7 @@ Plan Review 结论写回本次 Proposal 或既有工作项，取得所需批准�
 
 补充 [实施交接](./2026-09-08-ready-execution-handoff.md) 的具体依据，不扩大执行权限。Proposal 跟踪配置前置条件是用户明确要求的保障，不泛化为讨论、普通文档维护或所有工件的配置门禁。
 
-## 验收与验证
+## 验证
 
 - 有明确既有工作项且依据齐全时无需新建 Proposal 或独立 PRD/Spec/RFC。
 - 新建或更新 Proposal 缺少跟踪配置时不自行选址，已配置本地 Markdown 可正常使用。
@@ -42,3 +47,9 @@ Plan Review 结论写回本次 Proposal 或既有工作项，取得所需批准�
 2026-09-08 本任务会话中，用户列明七项歧义，认可统一方案，补充 Ticket 由 implement 进入实施后按需拆分，并授权执行；无独立会话链接。
 
 实现见 [工程流程](https://github.com/peakdong68/my-skills/blob/e995fb367530cebcce62f1485b3085d93fcb1a26/test-skills/engineering.md)、[方法论版本](../../../../engineering-v2.md)、[Plan](../../../../skills/model-invoked/planning/SKILL.md)、[Proposal](../../../../skills/model-invoked/planning/proposal.md)、[Review](../../../../skills/model-invoked/planning/review.md)、[Implement](../../../../skills/model-invoked/implement/SKILL.md)、[工件注册](../../../../skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 与 [记录规则](../../README.md)。
+
+<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->
+
+## 后果
+
+Proposal 跟踪工作状态，Agent Note 保存独有理由与交付事实；实施 Ticket 只在实施中按需拆分。

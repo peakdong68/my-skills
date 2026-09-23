@@ -2,14 +2,19 @@
 title: 区分工程闭环与独立验收的证据和汇报
 status: implemented
 created: 2026-09-09
-updated: 2026-09-09
+updated: 2026-09-23
 approval: 本任务会话确认两种职责及验收改进范围，并明确要求现在执行实现
 verification: 两轴实施审查及修正复核、验收情境文义核对、技能格式兼容校验、本地链接和记录索引检查，详见正文
 ---
 
-# 区分工程闭环与独立验收的证据和汇报
 
-## 决定与依据
+# Agent Note：区分工程闭环与独立验收的证据和汇报
+
+## 问题
+
+工程闭环验证与用户手动发起的独立验收有不同权限和修复职责，不能共用同一完成汇报。
+
+## 决定
 
 本次工作项为本任务会话中用户对两份技能的改进请求，范围与验收依据为双方已确认的逐项证据、修正边界及最终汇报约定；无独立会话链接。此记录保存职责决定与交付依据，不引入额外提案或跟踪状态。
 
@@ -31,7 +36,7 @@ verification: 两轴实施审查及修正复核、验收情境文义核对、技
 
 实现范围为上述两份 SKILL.md 及本仓库记录、索引，不修改调用策略、安装副本或其他工程技能。
 
-## 交付与验证
+## 验证
 
 已交付上述职责、验收覆盖和汇报规则。Standards 审查无实质违规，清除了一个空标题；Spec 审查发现报告顺序与回归结果交付缺口，已修正并复核通过。
 
@@ -40,3 +45,9 @@ verification: 两轴实施审查及修正复核、验收情境文义核对、技
 verify 通过 quick_validate.py。to-verify 保留原始手动调用元数据：原校验器不接受既有 disable-model-invocation 扩展字段，已单独核对其值及整个 frontmatter 与基线一致，并仅在临时副本中移除该字段检查剩余格式，通过后临时副本自动清理。两份技能本地链接检查通过，使用 UTF-8 模式运行校验以避免 Windows 默认编码误读。
 
 记录索引由 node scripts/decisions/update-index.mjs 生成，并运行 node scripts/decisions/check.mjs 与 git diff --check；保留审批真实性和实际行为效果仍需人工及实际使用验证的边界。
+
+<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->
+
+## 后果
+
+verify 可在授权范围内修正并重验；to-verify 保持只读，交付当前证据和所需修正。

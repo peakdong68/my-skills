@@ -1,6 +1,6 @@
 ---
 name: setup-matt-pocock-skills
-description: Configure, inspect, or update the project settings needed by selected engineering skills, reusing existing tracker, artifact, and domain conventions.
+description: Configure, inspect, or update the project settings needed by selected engineering skills, reusing existing tracker, document, and domain conventions.
 disable-model-invocation: true
 ---
 
@@ -11,9 +11,9 @@ Configure only what the selected skills and current request need. Existing suffi
 - **Issue tracker** — where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
-- **Artifact registry** — current and historical artifact owners, new destinations, and lifecycle conventions
+- **Document ownership** — current and historical document owners, new destinations, and lifecycle conventions
 
-Inspect the current configuration, identify necessary differences, apply authorized changes, and verify the result. Setup configures tools and artifact locations; it does not grant planning or implementation authority. Preserve the project's progression rules unless the user explicitly requests their deployment or revision. Tracker states do not authorize `/planning` or `/implement`.
+Inspect the current configuration, identify necessary differences, apply authorized changes, and verify the result. Setup configures selected tools and document locations; it does not grant planning or implementation authority. Preserve the project's progression rules unless the user explicitly requests their deployment or revision. Tracker states do not authorize `/planning` or `/implement`.
 
 ## Process
 
@@ -21,14 +21,14 @@ On repeat invocation, default to inspecting and filling missing configuration, n
 
 ### 1. Explore
 
-Resolve the repository management root from project instructions and existing registration, using the Git top-level only as a fallback. Perform setup for that boundary, not the current subproject directory. Follow [artifact-registration.md](artifact-registration.md) for root resolution and historical exceptions before creating configuration.
+Resolve the repository management root from project instructions and existing document ownership, using the Git top-level only as a fallback. Perform setup for that boundary, not the current subproject directory. Follow [artifact-registration.md](artifact-registration.md) for root resolution and historical exceptions before creating configuration.
 
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
 - `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
 - Existing context maps and the ADR or domain-document locations they actually reference, including project directories outside `src/`
 - `docs/agents/` — does this skill's prior output already exist?
-- Artifact registries, representative planning files, and historical locations referenced by project instructions
+- Document ownership entries, representative planning files, and historical locations referenced by project instructions
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
 - Context boundaries — existing maps, registered domain owners, user-specified layouts, and actual project responsibilities take precedence. Workspace manifests and package directories are supporting evidence, not prerequisites for multiple contexts.
@@ -37,7 +37,7 @@ Resolve the repository management root from project instructions and existing re
 
 Present one concise configuration difference summary: what is reused, what needs adding or changing, and any migration or overwrite implications. Include proposed content for changes that need a user decision. Ask only for unresolved material choices, grouping independent questions where useful; reuse prior decisions and authorization rather than requiring a separate approval round after each section. If no changes are needed, proceed to verification.
 
-Apply only the relevant configuration areas below. Skip triage configuration when `triage` is not selected or installed; inspect existing artifact registration independently of context count.
+Apply only the relevant configuration areas below. Skip triage configuration when `triage` is not selected or installed; inspect existing document ownership independently of context count.
 
 **Section A — Issue tracker.**
 
@@ -58,13 +58,13 @@ Include the Proposal location/identifier, work-state representation and transiti
 
 Reuse the existing label mapping. If none exists, include the defaults in the configuration summary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. Ask only when a material mapping choice is unresolved. Preserve existing strings and the selected mapping; writing configuration does not itself authorize creating remote labels.
 
-**Section C — Artifact and domain docs.** Read [artifact-registration.md](artifact-registration.md) to register historical and new artifact locations. Reuse the user's chosen registration mode; distinguish new-work routing from migration. Use the selected registry for decision/ADR locations. Without another choice, retain the single-context default of `CONTEXT.md` plus `docs/adr/`.
+**Section C — Document ownership and domain docs.** Read [artifact-registration.md](artifact-registration.md) to locate historical and new document owners. Reuse the existing document entry (normally `docs/AGENTS.md`); distinguish new-work routing from migration. When the user asks to add or revise writing and review standards, also read [docs-agents.md](docs-agents.md), merge only the selected rules into that existing owner, and preserve unrelated project rules. Use its registered ADR and decision locations. Without another choice, retain the single-context default of `CONTEXT.md` plus `docs/adr/`.
 
 Reuse an established multi-context map even without workspace manifests. When no layout exists, propose boundaries, names and paths based on actual responsibilities. Confirm which contexts the user wants to establish in the configuration summary before creating the map; detecting projects or workspace entries does not select them. Reuse settled choices and confirm only additions or changes. A root `CONTEXT-MAP.md` points to the selected contexts' documents. Register intended locations without creating empty glossaries or ADRs.
 
-Multi-context layouts share the root artifact registry. If Agent Notes is selected, separately confirm which established contexts need records and whether a shared record area is wanted, in the same configuration summary. Map only those selected scopes to separate directories within root `.agents/notes/`, following [decision-records.md](decision-records.md). Context selection does not automatically enable records or create categories; later-discovered projects do not expand either selection.
+Multi-context layouts share one document ownership entry. If Agent Notes is selected, separately confirm which established contexts need records and whether a shared record area is wanted, in the same configuration summary. Map only those selected scopes to separate directories within root `.agents/notes/`, following [decision-records.md](decision-records.md). Context selection does not automatically enable records or create categories; later-discovered projects do not expand either selection.
 
-**Optional decision records.** When the user requests categorized decision records with an index and checks, read [decision-records.md](decision-records.md). Reuse any existing decision system first. Include this option in the same configuration review; prior explicit selection does not require another approval round. Selecting an engineering workflow alone does not require installing it.
+**Optional decision records.** When the user requests categorized decision records with navigation and checks, read [decision-records.md](decision-records.md). Reuse any existing decision system first. Include this option in the same configuration review; prior explicit selection does not require another approval round. Selecting an engineering workflow alone does not require installing it.
 
 ### 3. Apply authorized configuration
 
@@ -91,10 +91,10 @@ Adapt this block to the selected configuration; omit unused areas and replace ex
 
 [one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
 
-### Artifact management
+### Document ownership
 
-For engineering artifact discovery, creation, updates and lifecycle, follow `docs/agents/artifacts.md`.
-Resolve registry locations from the repository management root, even inside a subproject.
+For document types, authoritative locations and historical routing, follow the project document entry (normally `docs/AGENTS.md`).
+Resolve registered paths from the repository management root, even inside a subproject.
 ```
 
 Include the triage sub-block and configuration only when selected and needed. Apply the same rule to other areas; configuring domain docs alone does not require creating tracker configuration.
@@ -106,7 +106,7 @@ For each selected configuration, use the corresponding seed template as a starti
 - [issue-tracker-local.md](./issue-tracker-local.md) — local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md) — label mapping (only if `triage` is installed)
 - [domain.md](./domain.md) — domain doc consumer rules + layout
-- [artifacts.md](./artifacts.md) — adapt artifact ownership and historical/new locations to the selected registration mode
+- [docs-agents.md](./docs-agents.md) — adapt document responsibilities, writing and review standards to the selected project entry when requested
 
 For "other" issue trackers, adapt the existing tracker owner using the user's description; create a new configuration at the agreed destination only when no owner exists.
 
@@ -114,7 +114,7 @@ For "other" issue trackers, adapt the existing tracker owner using the user's de
 
 Before claiming setup complete, check the selected configuration:
 
-- Instruction pointers resolve to the actual configuration owners; registry and local paths use the established management root from both root and subproject entry points.
+- Instruction pointers resolve to the actual configuration owners; document ownership and local paths use the established management root from both root and subproject entry points.
 - Tracker destinations, work-state mappings, and review/approval references are explicit for selected work tracking; an existing work item is updated in its owner instead of duplicated.
 - Context layout matches the existing map or selected boundaries; shared registration and optional Agent Notes do not become per-context copies.
 - Existing customizations and historical owners remain intact; no unused configuration or placeholder artifacts were introduced. Registered future locations need not exist yet.

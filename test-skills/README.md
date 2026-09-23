@@ -29,9 +29,9 @@
 | --- | --- |
 | 推进授权 | 根级 AGENTS.md 或 CLAUDE.md |
 | 跟踪器 | docs/agents/issue-tracker.md，登记工作项位置、状态和操作 |
-| 工件注册 | docs/agents/artifacts.md，统一登记当前与历史属主 |
+| 文档归属 | 目标项目既有文档入口（通常 docs/AGENTS.md），写清当前位置和历史属主 |
 | 领域资料 | 根 CONTEXT-MAP.md 或 CONTEXT.md，各上下文资料按映射定位 |
-| Agent Notes（可选） | 根 .agents/notes/ 内按已选上下文分目录，各自索引，根索引导航 |
+| Agent Notes（可选） | 根 .agents/notes/ 内按已选上下文分目录；只读命令导航目录树 |
 
 多项目配置时，setup 先提出上下文边界、名称和路径，由用户选择需要建立的范围；再分别选择哪些上下文启用 Notes、是否需要公共记录区。已有选择直接复用，新发现项目不会自动加入。记录目录按需创建，原有记录保持原路径。
 
@@ -68,4 +68,4 @@
 
 ## 文档维护
 
-AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [记录索引](./.agents/notes/INDEX.md)。setup 的 resources/decision-records 保存通用资源，不复制本仓库项目历史。
+AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [记录规则](./.agents/notes/README.md)。setup 的 resources/decision-records 保存通用资源，不复制本仓库项目历史。

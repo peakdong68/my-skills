@@ -2,14 +2,19 @@
 title: 产品需求优先由现有合同承载
 status: implemented
 created: 2026-09-08
-updated: 2026-09-08
+updated: 2026-09-23
 approval: 本任务会话中用户认可修改方案并要求修正
 verification: 已核对 prd.md 与 plan 入口一致，记录检查通过
 ---
 
-# 产品需求优先由现有合同承载
 
-## 背景与决定
+# Agent Note：产品需求优先由现有合同承载
+
+## 问题
+
+产品需求指引把信息不足与新增 PRD 绑定，暗示每个任务都必须先有 Proposal 或新文档。
+
+## 决定
 
 原 prd.md 将 Proposal 信息不足作为使用 PRD 的前提，暗含必须存在 Proposal，且容易将产品信息缺口转化为新增文档要求。
 
@@ -23,4 +28,14 @@ verification: 已核对 prd.md 与 plan 入口一致，记录检查通过
 
 2026-09-08 本任务会话中，用户询问 PRD 与提案及用户意图的关系，随后要求按建议修正；无独立会话链接。
 
-参见 [产品需求说明](../../../../skills/model-invoked/planning/prd.md)、[Plan 入口](../../../../skills/model-invoked/planning/SKILL.md) 和 [工件注册决定](../decision-records/2026-09-08-artifact-location-registration.md)。
+参见 [产品需求说明](https://github.com/peakdong68/my-skills/blob/dc2212e2853bbc98cb187e134c7fb411cb55e361/test-skills/skills/model-invoked/planning/prd.md)、[Plan 入口](../../../../skills/model-invoked/planning/SKILL.md) 和 [工件注册决定](../decision-records/2026-09-08-artifact-location-registration.md)。
+
+<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->
+
+## 后果
+
+复用充分的现有合同，仅在用户要求或需要独立属主时创建 PRD；成文不代表批准或执行授权。
+
+## 验证
+
+已核对 prd.md 与 plan 入口一致，记录检查通过

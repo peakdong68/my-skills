@@ -2,13 +2,18 @@
 title: 工程阶段与技能内部流程分层编号
 status: proposed
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-09-23
 approval: 本任务会话确认两版工程流程及 plan、implement、verify 层级方案，并要求执行实现
 ---
 
-# 工程阶段与技能内部流程分层编号
 
-## 决定与范围
+# Agent Note：工程阶段与技能内部流程分层编号
+
+## 问题
+
+工程阶段和技能内部步骤的编号混在一起，容易误导执行顺序；该提案的独立审查仍未完成。
+
+## 提案
 
 本任务会话为工作项和验收依据，无独立会话链接。补充[阶段完成约束](../../implemented/engineering/2026-09-10-stage-completion-continuation.md)。
 
@@ -26,8 +31,10 @@ Ticket 完成不代替全变更审查和最终验证，README 同步实施技能
 - 阶段限定请求不自动推进，端到端授权继续复用，Ticket 不代表整体完成。
 - v2 保持独立，技能编排版入口使用标题链接；本地链接及编号锚点有效。
 
-## 当前交付与验证边界
+## 风险
 
 文件已修改，主代理对阶段限定、权限分离、按需分支、测试层级、审查回路及 v2 独立性完成文义核对。三个技能通过 quick_validate.py；受影响文档本地链接及锚点、git diff --check、记录索引检查通过。
 
 Standards 与 Spec 两个独立审查代理均因服务额度限制退出，未生成审查结论。主代理核对不替代规定的独立实施审查，因此本记录保持 proposed；待完成两轴审查并处理发现后，才能宣告完整工程交付。未运行代理行为测试。
+
+<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->
