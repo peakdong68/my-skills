@@ -24,7 +24,7 @@ On repeat invocation, default to inspecting and filling missing configuration, n
 Resolve the repository management root from project instructions and existing document ownership, using the Git top-level only as a fallback. Perform setup for that boundary, not the current subproject directory. Follow [artifact-registration.md](artifact-registration.md) for root resolution and historical exceptions before creating configuration.
 
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
-- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
+- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already a `## 文档与约定` or `## Project conventions` section, or a legacy `## Agent skills` section, in either?
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
 - Existing context maps and the ADR or domain-document locations they actually reference, including project directories outside `src/`
 - `docs/agents/` — does this skill's prior output already exist?
@@ -72,12 +72,12 @@ Use the entry file selected by the user or actually consumed by the target envir
 
 Apply the changes whose scope and choices are already authorized. Preserve unrelated text, existing owners, and customized files; migrations and upgrades follow [artifact-registration.md](./artifact-registration.md) and [decision-records.md](./decision-records.md).
 
-If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
+If `## 文档与约定` or `## Project conventions` already exists, update its document-owner map in place and preserve its heading and unrelated entries. If only the legacy `## Agent skills` block exists, rename and update that block in place. Never append a duplicate or overwrite user edits to surrounding sections.
 
 Adapt this block to the selected configuration; omit unused areas and replace example paths with the existing registered locations:
 
 ```markdown
-## Agent skills
+## Project conventions
 
 ### Issue tracker
 
@@ -115,7 +115,7 @@ For "other" issue trackers, adapt the existing tracker owner using the user's de
 
 Before claiming setup complete, check the selected configuration:
 
-- Update an existing `## Agent skills` block in place. Its document section points to the target's document-standard owner and selected domain/Agent Notes owners without copying their rules; each path resolves from root and subproject entry points through the established management root.
+- Use one document-conventions pointer map: update an existing `## 文档与约定` or `## Project conventions` section in place; if only the legacy `## Agent skills` block exists, rename it in place. The map points to the target's document-standard owner and selected domain/Agent Notes owners without copying their rules; each path resolves from root and subproject entry points through the established management root.
 - Tracker destinations, work-state mappings, and review/approval references are explicit for selected work tracking; an existing work item is updated in its owner instead of duplicated.
 - Context layout matches the existing map or selected boundaries; shared registration and optional Agent Notes do not become per-context copies.
 - Existing customizations and historical owners remain intact; no unused configuration or placeholder artifacts were introduced. Registered future locations need not exist yet.
