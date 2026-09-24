@@ -15,7 +15,7 @@
 
 这些命令是用户授权约定，不是本仓库提供的命令解析器。安装环境负责发现技能和接收用户输入；Harness Plan Mode 只是运行模式，不能替代命令授权，也不能绕过其自身读写限制。
 
-不再需要复制 engineering.md 或维护单独的 Implementation Gate 文档。模型仍需判断合同是否充分，命令不会填补缺失需求。旧 [engineering-v2.md](./engineering-v2.md) 仅保留为独立方法论参考，不是本仓库当前入口，也不与上述命令规则叠加。
+不再需要复制 ./docs/engineering.md 或维护单独的 Implementation Gate 文档。模型仍需判断合同是否充分，命令不会填补缺失需求。旧 [engineering-v2.md](./docs/engineering-v2.md) 仅保留为独立方法论参考，不是本仓库当前入口，也不与上述命令规则叠加。
 
 ## 接入项目
 
