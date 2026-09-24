@@ -87,17 +87,18 @@ Adapt this block to the selected configuration; omit unused areas and replace ex
 
 [one-line summary of the label vocabulary]. See `docs/agents/triage-labels.md`.
 
-### Domain docs
-
-[one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
-
 ### Document ownership
 
-For document types, authoritative locations and historical routing, follow the project document entry (normally `docs/AGENTS.md`).
+The project document entry (normally `docs/AGENTS.md`) is the pointer map for document rules; keep each rule in its owner instead of copying it here:
+
+- Document types, owners, writing and review standards: `docs/AGENTS.md`.
+- Domain docs: `[single-context/multi-context and location summary]`; terminology and ADR consumer rules: `docs/agents/domain.md`.
+- Agent Note scope, lifecycle and format: `.agents/notes/README.md`; local reading and maintenance guidance: `.agents/notes/AGENTS.md` (only when Agent Notes is selected).
+
 Resolve registered paths from the repository management root, even inside a subproject.
 ```
 
-Include the triage sub-block and configuration only when selected and needed. Apply the same rule to other areas; configuring domain docs alone does not require creating tracker configuration.
+Use only pointers for configurations selected for this project. Omit the Agent Notes pointer unless that system is selected; omit unused triage configuration. Do not copy another project's engineering, Git, or other policy pointers unless the target project has matching owners. Configuring domain docs alone does not require creating tracker configuration.
 
 For each selected configuration, use the corresponding seed template as a starting point:
 
@@ -114,7 +115,7 @@ For "other" issue trackers, adapt the existing tracker owner using the user's de
 
 Before claiming setup complete, check the selected configuration:
 
-- Instruction pointers resolve to the actual configuration owners; document ownership and local paths use the established management root from both root and subproject entry points.
+- Update an existing `## Agent skills` block in place. Its document section points to the target's document-standard owner and selected domain/Agent Notes owners without copying their rules; each path resolves from root and subproject entry points through the established management root.
 - Tracker destinations, work-state mappings, and review/approval references are explicit for selected work tracking; an existing work item is updated in its owner instead of duplicated.
 - Context layout matches the existing map or selected boundaries; shared registration and optional Agent Notes do not become per-context copies.
 - Existing customizations and historical owners remain intact; no unused configuration or placeholder artifacts were introduced. Registered future locations need not exist yet.
