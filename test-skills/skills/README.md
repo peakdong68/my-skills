@@ -12,6 +12,7 @@
 - **[grill-with-docs](./user-invoked/grill-with-docs/SKILL.md)**：结合 grilling 与 domain-modeling，在访谈中同步记录领域术语和架构决策。
 - **[handoff](./user-invoked/handoff/SKILL.md)**：将当前会话整理成供另一代理继续工作的交接文档，保存到操作系统临时目录。
 - **[improve-codebase-architecture](./user-invoked/improve-codebase-architecture/SKILL.md)**：寻找模块深化机会，生成 HTML 报告，再围绕用户选择的方向深入讨论。
+- **[playwright-e2e](./user-invoked/playwright-e2e/SKILL.md)**：为有浏览器界面的项目配置 Playwright E2E，写入项目测试规则并创建首个端到端测试。
 - **[setup-matt-pocock-skills](./user-invoked/setup-matt-pocock-skills/SKILL.md)**：配置技能使用的问题跟踪器、分诊标签与领域文档布局。
 - **[teach](./user-invoked/teach/SKILL.md)**：围绕用户的学习目标，在工作区中持续组织课程、练习、参考资料和学习记录。
 - **[to-questionnaire](./user-invoked/to-questionnaire/SKILL.md)**：将需要第三方回答的问题整理为 Markdown 问卷，明确收件人、背景与所需信息。

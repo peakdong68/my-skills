@@ -61,6 +61,7 @@
 | implement | code-review 负责实现审查，verify 负责最终验收；一次授权覆盖范围内修正与重验 |
 | verify | 合同或重大设计变化回 Discuss，不自动调用 planning |
 | tdd | 测试优先执行方式，关联 codebase-design 与 code-review，不另行授予实施权限 |
+| playwright-e2e | 按需为浏览器项目配置 Playwright、项目测试规则和首个 E2E spec |
 | fix-bug | 使用 diagnosing-bugs 与 code-review，仍遵循项目实施授权 |
 | to-verify | 用户手动发起的交付验收；报告结果，不自动修复或切换到实施 |
 

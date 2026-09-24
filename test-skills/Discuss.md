@@ -40,8 +40,26 @@
 ## Discuss-V3 完整版本
 
 ```md
-### Discuss
+## 工程工作流
+
 > 文档和仓库治理工作可以绕过该工程工作流，除非它改变了重要的产品、技术、架构或其他工程契约。
+
+工程任务从 Discuss 开始。
+进入后续阶段时，读取并按 `docs/agents/engineering.md` 执行：
+`Discuss → Planning → Implementation Gate → Implement → Verify`
+
+阶段技能交接（锚在**可判定的动作**上，而不是"进入了某个阶段"）：
+
+* 用户授权推进、且存在待固化的合同决策（进入 Planning）→ `planning`
+* Implementation Gate 通过、**写第一行实现代码之前** → `implement`
+* 实现完成、**报告完成或提交之前** → `code-review`（Implementation Review）
+* 实现期采用测试优先 → `tdd`
+* 审查通过、**声称交付（PASS/完成）之前** → `verify`
+
+上列动作发生前必须加载对应技能。加载技能不等于满足该阶段的完成条件，也不替代该阶段要求的审查。
+Discuss 及阶段推进权限在此定义；Planning 之后的阶段编排、门禁、审查收敛和返回路径由 `docs/agents/engineering.md` 定义。
+
+### Discuss
 
 使用 Discuss 理解问题，结合现有代码、文档、历史决策、已接受的 ADR/RFC 和项目约束形成解决方案，并消除足够的歧义，以判断下一阶段。
 
