@@ -2,7 +2,7 @@
 title: Spec 是可选工件，生成不代表批准
 status: implemented
 created: 2026-09-08
-updated: 2026-09-23
+updated: 2026-09-24
 approval: 用户在本任务会话中已确认，日期与依据见正文
 verification: 对照正文引用的已交付文件及本任务检查结果核对；见依据与关联
 ---
@@ -30,7 +30,7 @@ to-spec 保持用户主动调用，优先更新已有 Spec，引用其他权威�
 
 2026-09-08 本任务会话中，用户要求修正 to-spec，继而要求优先使用已有文件风格并拆分模板；无独立会话链接。
 
-参见 [to-spec](../../../../skills/user-invoked/to-spec/SKILL.md)、[模板](../../../../skills/user-invoked/to-spec/spec-template.md)、[Planning 约定](../../../../engineering-v2.md)。
+参见历史版本中的 [to-spec](https://github.com/peakdong68/my-skills/blob/9d47527/test-skills/skills/user-invoked/to-spec/SKILL.md)、[Spec 模板](https://github.com/peakdong68/my-skills/blob/9d47527/test-skills/skills/user-invoked/to-spec/spec-template.md) 和 [Planning 约定](../../../../engineering-v2.md)。
 
 ## 验证
 

@@ -15,61 +15,21 @@
 - **[setup-matt-pocock-skills](./user-invoked/setup-matt-pocock-skills/SKILL.md)**：配置技能使用的问题跟踪器、分诊标签与领域文档布局。
 - **[teach](./user-invoked/teach/SKILL.md)**：围绕用户的学习目标，在工作区中持续组织课程、练习、参考资料和学习记录。
 - **[to-questionnaire](./user-invoked/to-questionnaire/SKILL.md)**：将需要第三方回答的问题整理为 Markdown 问卷，明确收件人、背景与所需信息。
-- **[to-spec](./user-invoked/to-spec/SKILL.md)**：复用已有合同属主，或将访谈中已确定的决策整理为可验证规范；实际完成必要评审，报告内容就绪情况、评审结果及剩余阻塞，不自动授予实施批准。
 - **[to-verify](./user-invoked/to-verify/SKILL.md)**：对交付结果进行独立验收，依据批准的要求报告通过、失败或阻塞，不修改交付物。
 - **[triage](./user-invoked/triage/SKILL.md)**：对问题及外部 PR 分类、核实和澄清，维护分诊状态并准备可供代理执行的任务说明。
 - **[wait-what](./user-invoked/wait-what/SKILL.md)**：补充上下文并用简明语言重新解释上一条未被理解的回答。
 - **[wayfinder](./user-invoked/wayfinder/SKILL.md)**：将大型、尚不清晰的工作组织为共享决策地图，逐步解决决策工单，明确后续方向。
 
-## 可选的规范整理：to-spec
+## Planning 中的 Spec
 
-[to-spec](./user-invoked/to-spec/SKILL.md) 适合将已经确定的产品和设计决策整理为可实施、可验收的规范，并完成必要评审。它不是 Plan 后的必经步骤，也不要求每次调用都新建 Spec 文件。
+Spec 的整理和评审由 [planning](./model-invoked/planning/SKILL.md) 承担。通过 `/planning` 进入规划后，按工作需要复用或更新权威工作项、Spec 与 RFC，并完成 Plan Review。
 
-### 何时使用
+- 工作项已经清楚写明范围、行为和验收条件，或变更足够小：直接复用工作项，不额外创建 Spec。
+- 行为、范围或验收需要独立于工作项和技术设计演进：创建或更新 Spec；沿用既有归属、格式和评审约定，避免产生竞争合同。
+- 访谈后尚无正式产物：Planning 可据已确定的结论创建最小必要工作项和 Spec；候选建议不写成已批准要求，影响范围的重要未决决定作为 blocker 交由用户决定。
+- 有技术可行性或重要设计问题：按需用探索性 RFC 收敛；RFC 承接稳定 Spec，不能自行改变产品行为。
 
-| 场景 | 处理方式 |
-| --- | --- |
-| Plan 的 Proposal、Issue 等已包含充分的需求和验收条件 | 可以直接复用，无需额外调用；若调用，也先确认现有覆盖，不重复成文 |
-| 同一范围已有 Spec，需要反映已确定的变化 | 更新原 Spec，保留需求标识、引用和归属 |
-| 决策已定，但行为或验收表述还不清晰 | 在原内容属主中补充表达；重大决策尚未确定则标记阻塞 |
-| 访谈已完成，但还没有正式产物 | 从已确定结论直接整理草稿，不必先补齐 PRD、RFC 或 Proposal；建议和未决问题不作为已批准需求 |
-| 需要独立 Spec 交给其他团队或用于明确的交付要求 | 明确要求独立文档，并说明与既有合同的引用或迁移关系，避免两份竞争合同 |
-
-尚需决定产品行为或技术方案时，先回到 Discuss，由用户通过 `/planning` 授权 [planning](./model-invoked/planning/SKILL.md) 解决相应决策；`to-spec` 负责整理已定内容，不通过补写规范替用户作出重大选择。
-
-### 如何调用
-
-提供选定工作范围、已有产物或访谈上下文，以及已知的项目规范格式、存放约定和评审依据。在支持 `$技能名` 的环境中，可参考以下示例；其他环境使用其技能选择方式。
-
-已有规划产物，需要核对并补齐表达：
-
-```text
-$to-spec 整理当前已批准工作项中的导出功能规范。
-先检查现有 Proposal 和 Spec；已有内容充分则复用，表达缺口在原属主补充。
-保留既定决策和需求编号，完成必要评审，报告修改和剩余阻塞。
-```
-
-访谈后首次成文：
-
-```text
-$to-spec 根据本次访谈已经确定的结论，整理导出功能的 Spec 草稿。
-区分确定决策、候选建议和未决问题，结合仓库事实写出可观察的验收条件。
-完成规范评审；无法从既有依据解决的重大问题列为阻塞。
-```
-
-明确需要独立规范交付：
-
-```text
-$to-spec 为当前工作项生成供协作团队使用的独立 Spec。
-沿用项目文档格式，引用现有需求与设计依据，说明文档的权威关系。
-如需迁移详细合同，按项目接受流程处理归属，并完成必要评审。
-```
-
-### 交付与评审
-
-交付应明确复用了或更新了哪个合同，或新增 Spec 的位置与归属，并提供内容就绪情况、实际评审结果、已解决发现、剩余阻塞及所需批准。已有有效评审证据可复用；首次成文和受影响的变更仍需审查，修正后复核。必要审阅者或证据不可用时，应明确说明评审阻塞。
-
-独立调用可交付已评审的草稿及阻塞说明；工程流程中，评审证据交给整体 Plan Review 复用，不重复已覆盖的检查。内容完整、评审通过、用户批准和执行授权分别判断；生成或评审 Spec 不会自动开始实现。仅要求整理规范时，不必为了交付草稿先建立完整工程规划产物或发布配置。
+Plan Review 检查规划工件间的一致性、决策转述、可观察验收和内容归属。发现表述或引用问题时修正并复审；重大决策缺口交回用户决定。复用有效评审证据，只审新增或变化的部分。Spec 草稿、评审通过、批准和实施授权分别判断；规划完成后回到 Discuss，实施仍需单独的 `/implement`。
 
 ## 交付后的手动验收与修复
 
@@ -124,7 +84,7 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 - **[domain-modeling](./model-invoked/domain-modeling/SKILL.md)**：梳理领域术语与模型，将已确定的领域知识和持久架构决策记录到上下文文档或 ADR。
 - **[grilling](./model-invoked/grilling/SKILL.md)**：在用户希望深入推敲想法时，按决策依赖分轮访谈，直到达成共同理解。
 - **[implement](./model-invoked/implement/SKILL.md)**：按进入条件、按需分解、执行与实施期间测试、实施审查、完成交接组织工作；独立审查请求转交 code-review。
-- **[planning](./model-invoked/planning/SKILL.md)**：复用权威工作项，解决必要的产品与技术决策，形成最小规划材料并完成规划审阅。
+- **[planning](./model-invoked/planning/SKILL.md)**：复用权威工作项，按需创建或更新 Proposal、Spec、RFC，收敛必要的产品与技术决策并完成规划审阅。
 - **[prototype](./model-invoked/prototype/SKILL.md)**：构建用于回答特定设计问题的临时原型，探索逻辑、状态模型或界面方案。
 - **[research](./model-invoked/research/SKILL.md)**：由后台代理依据高可信的一手资料调查问题，将带来源引用的结论保存为仓库中的 Markdown 文件。
 - **[resolving-merge-conflicts](./model-invoked/resolving-merge-conflicts/SKILL.md)**：依据双方变更意图处理进行中的 Git 合并或变基冲突，检查结果并完成相应操作。

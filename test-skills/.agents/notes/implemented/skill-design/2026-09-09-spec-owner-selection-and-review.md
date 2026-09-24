@@ -2,7 +2,7 @@
 title: Spec 复用已有合同并完成必要评审
 status: implemented
 created: 2026-09-09
-updated: 2026-09-23
+updated: 2026-09-24
 approval: 本任务会话认可两类输入、必要评审及实际执行评审方案，并明确要求执行实现修正
 verification: 两轴实施审查无实质发现，逐项情境文义核对、技能格式兼容校验、本地链接、差异和记录索引检查通过
 ---
@@ -18,7 +18,7 @@ to-spec 可能重复已有规划合同，或在形成文档后仅自检而未完
 
 本任务会话是本次工作项及验收依据，无独立会话链接。补充 [Spec 可选工件决定](./2026-09-08-optional-spec-artifact.md)，保留内容就绪、评审、批准与执行授权分离的既有规则。
 
-[to-spec](../../../../skills/user-invoked/to-spec/SKILL.md) 先定位内容属主：同范围已有 Spec 则更新；充分合同已存在于 Proposal、Issue 等工件时复用，不为调用技能另建副本；仅表达不清则在原属主补充；明确要求独立 Spec 时建立引用或按项目接受流程迁移详细合同归属。
+[历史版本中的 to-spec](https://github.com/peakdong68/my-skills/blob/9d47527/test-skills/skills/user-invoked/to-spec/SKILL.md) 先定位内容属主：同范围已有 Spec 则更新；充分合同已存在于 Proposal、Issue 等工件时复用，不为调用技能另建副本；仅表达不清则在原属主补充；明确要求独立 Spec 时建立引用或按项目接受流程迁移详细合同归属。
 
 访谈后首次成文可直接使用已确定决策和仓库事实，不要求先补齐其他规划文件。访谈建议不自动成为批准决策，表达缺口可整理，重大决策缺口需保留为阻塞并交由 Planning。
 
@@ -26,7 +26,7 @@ to-spec 可能重复已有规划合同，或在形成文档后仅自检而未完
 
 不强制新增评审文件或并行代理，不强制独立 Spec 调用完成完整 Plan Review。代价是技能交付必须明确实际评审覆盖，不能用内容自检或“待评审”代替已能执行的评审。
 
-范围为该技能、[后备模板](../../../../skills/user-invoked/to-spec/spec-template.md)、[目录简介](../../../../skills/README.md) 和本仓库记录、索引。其他工程技能、配置和安装副本不变。
+范围为该技能、[后备模板](https://github.com/peakdong68/my-skills/blob/9d47527/test-skills/skills/user-invoked/to-spec/spec-template.md)、[目录简介](../../../../skills/README.md) 和本仓库记录、索引。其他工程技能、配置和安装副本不变。
 
 ## 验证
 

@@ -8,7 +8,7 @@
 
 | 命令 | 作用 | 结束位置 |
 | --- | --- | --- |
-| `/planning` | 加载 planning，整理必要合同与设计并完成规划评审 | 回到 Discuss，等待下一条命令 |
+| `/planning` | 加载 planning，按需整理 Proposal、Spec、RFC 等必要合同与设计，并完成规划评审 | 回到 Discuss，等待下一条命令 |
 | `/implement` | 工作充分定义后加载 implement，完成实施、code-review 和 verify | 已授权范围验证完成，或明确阻塞 |
 
 “确认”“可以”“同意”不是推进命令。命令出现在引用、示例或文档中不构成授权。`/implement` 遇到关键合同缺口时报告 blocker 并建议 `/planning`，不能自动规划。实施中改变范围、合同或重大设计时暂停受影响工作，回到 Discuss，由用户重新决定如何推进。
@@ -35,7 +35,7 @@
 
 多项目配置时，setup 先提出上下文边界、名称和路径，由用户选择需要建立的范围；再分别选择哪些上下文启用 Notes、是否需要公共记录区。已有选择直接复用，新发现项目不会自动加入。记录目录按需创建，原有记录保持原路径。
 
-创建或更新 Proposal 前按配置确定存放与状态；配置不足不妨碍 Discuss。RFC、Spec 等按独立归属需要创建，不要求完整文档流水线。历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
+Planning 按需复用或创建 Proposal、Spec、RFC：行为、范围或验收需要独立属主时创建或更新 Spec；工作项已足够清楚或改动较小时直接复用，不为凑流程另建文档。RFC 承接 Spec 中稳定的产品合同。遵循项目既有归属，历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
 
 ## 使用示例
 
@@ -62,7 +62,7 @@
 | verify | 合同或重大设计变化回 Discuss，不自动调用 planning |
 | tdd | 测试优先执行方式，关联 codebase-design 与 code-review，不另行授予实施权限 |
 | fix-bug | 使用 diagnosing-bugs 与 code-review，仍遵循项目实施授权 |
-| to-spec / to-verify | 用户选择的专项交付，不自动切换正式规划或实施 |
+| to-verify | 用户手动发起的交付验收；报告结果，不自动修复或切换到实施 |
 
 只选择所需能力，保留相应依赖及支持资源。[技能目录](./skills/README.md) 提供各技能场景和用法。
 
