@@ -35,7 +35,7 @@
 
 多项目配置时，setup 先提出上下文边界、名称和路径，由用户选择需要建立的范围；再分别选择哪些上下文启用 Notes、是否需要公共记录区。已有选择直接复用，新发现项目不会自动加入。记录目录按需创建，原有记录保持原路径。
 
-Planning 按需复用或创建 Proposal、Spec、RFC：行为、范围或验收需要独立属主时创建或更新 Spec；工作项已足够清楚或改动较小时直接复用，不为凑流程另建文档。RFC 承接 Spec 中稳定的产品合同。遵循项目既有归属，历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
+遵循“一个事实一个家”：Spec 拥有已接受的产品行为合同与验收条件；RFC 拥有实现设计；ADR 拥有需要长期保留的决定及其理由；Proposal 或 Ticket 跟踪本次范围、状态和评审/批准事实。小改动可由工作项直接承载行为与验收，不必另建 Spec。沿用项目既有属主，历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
 
 ## 使用示例
 

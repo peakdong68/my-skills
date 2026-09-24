@@ -22,7 +22,7 @@
 
 ## Planning 中的 Spec
 
-Spec 的整理和评审由 [planning](./model-invoked/planning/SKILL.md) 承担。通过 `/planning` 进入规划后，按工作需要复用或更新权威工作项、Spec 与 RFC，并完成 Plan Review。
+通过 `/planning` 进入规划后，按工作需要复用或更新权威工作项、Spec 与 RFC，并完成 Plan Review。文档归属遵循“一个事实一个家”：Spec 拥有已接受的产品行为合同与验收条件，RFC 拥有实现设计，ADR 拥有需要长期保留的决定及其理由；工作项记录本次范围与状态。
 
 - 工作项已经清楚写明范围、行为和验收条件，或变更足够小：直接复用工作项，不额外创建 Spec。
 - 行为、范围或验收需要独立于工作项和技术设计演进：创建或更新 Spec；沿用既有归属、格式和评审约定，避免产生竞争合同。
