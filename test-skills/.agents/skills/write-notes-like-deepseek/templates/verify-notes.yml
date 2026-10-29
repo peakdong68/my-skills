@@ -1,5 +1,6 @@
 # 复制到宿主仓库 .github/workflows/verify-notes.yml 后启用。
 # 默认项目级安装路径；使用其他路径时请同步修改下方命令。
+# 多上下文项目把矩阵中的路径替换为每一个已选择的 Notes 根。
 name: Verify Agent Notes
 
 on:
@@ -14,6 +15,10 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        notes_root:
+          - .agents/notes
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,6 +38,6 @@ jobs:
           # skips append-only (seal-vs-disk still runs).
           AGENT_NOTE_ARCHIVE_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts
+          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root "${{ matrix.notes_root }}"
+          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root "${{ matrix.notes_root }}"
+          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root "${{ matrix.notes_root }}"

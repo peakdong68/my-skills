@@ -1,14 +1,28 @@
 /**
  * CLI tool to archive an implemented Agent Note with frozen manifest sealing.
- * Usage: npx tsx <skill-dir>/scripts/archive-agent-note.ts .agents/notes/implemented/<class>/<filename>.md [--superseded-by <new-note-path>]
+ * Usage: npx tsx <skill-dir>/scripts/archive-agent-note.ts [--root <notes-dir>] <implemented-note-path> [--superseded-by <new-note-path>]
  * --superseded-by writes a relative link into the NEW note, never into the archived file.
  */
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { existsSync, lstatSync, mkdirSync, readFileSync, realpathSync, renameSync, writeFileSync } from "node:fs";
+import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { agentNoteRoot, AGENT_NOTE_CLASSES, walkAgentNoteTree } from "./agent-note-tree.ts";
 
-const args = process.argv.slice(2);
+const rawArgs = process.argv.slice(2);
+const hasExplicitRoot = rawArgs.some((arg) => arg === '--root' || arg.startsWith('--root='));
+const args = rawArgs.filter((arg, index) => arg !== '--root' && !arg.startsWith('--root=') && !(rawArgs[index - 1] === '--root'));
+const canonicalRoot = realpathSync(agentNoteRoot);
+const isInsideRoot = (path: string) => {
+  const rel = relative(canonicalRoot, path);
+  return rel === '' || (!rel.startsWith('..') && !isAbsolute(rel));
+};
+const resolveNotePath = (value: string) => {
+  if (isAbsolute(value)) return resolve(value);
+  const fromCwd = resolve(process.cwd(), value);
+  const cwdRelative = relative(agentNoteRoot, fromCwd);
+  if (!cwdRelative.startsWith('..') && !isAbsolute(cwdRelative)) return fromCwd;
+  return resolve(hasExplicitRoot || process.env.AGENT_NOTE_ROOT ? agentNoteRoot : process.cwd(), value);
+};
 const targetArg = args[0];
 const supersededByArgIdx = args.indexOf("--superseded-by");
 const supersededByArg = supersededByArgIdx !== -1 ? args[supersededByArgIdx + 1] : undefined;
@@ -17,23 +31,36 @@ if (supersededByArgIdx !== -1 && !supersededByArg) {
   process.exit(1);
 }
 if (!targetArg) {
-  console.error("Usage: npx tsx <skill-dir>/scripts/archive-agent-note.ts <path-to-note> [--superseded-by <new-note-path>]");
+  console.error("Usage: npx tsx <skill-dir>/scripts/archive-agent-note.ts [--root <notes-dir>] <implemented-note-path> [--superseded-by <new-note-path>]");
   process.exit(1);
 }
 
 let successorPath: string | undefined;
 let successorRel: string | undefined;
 if (supersededByArg) {
-  successorPath = resolve(process.cwd(), supersededByArg);
+  successorPath = resolveNotePath(supersededByArg);
+  const successorFromRoot = relative(agentNoteRoot, successorPath);
+  if (successorFromRoot.startsWith('..') || isAbsolute(successorFromRoot)) {
+    console.error(`Error: --superseded-by target must be inside the selected Notes root ${agentNoteRoot}`);
+    process.exit(1);
+  }
   if (!existsSync(successorPath)) {
     console.error(`Error: --superseded-by target not found at ${successorPath}`);
     process.exit(1);
   }
+  if (lstatSync(successorPath).isSymbolicLink() || !isInsideRoot(realpathSync(successorPath))) {
+    console.error(`Error: --superseded-by target must resolve inside the selected Notes root ${agentNoteRoot} and cannot be a symlink`);
+    process.exit(1);
+  }
 }
 
-const targetPath = resolve(process.cwd(), targetArg);
+const targetPath = resolveNotePath(targetArg);
 if (!existsSync(targetPath)) {
   console.error(`Error: target note not found at ${targetPath}`);
+  process.exit(1);
+}
+if (lstatSync(targetPath).isSymbolicLink() || !isInsideRoot(realpathSync(targetPath))) {
+  console.error(`Error: target note must resolve inside the selected Notes root ${agentNoteRoot} and cannot be a symlink`);
   process.exit(1);
 }
 
@@ -41,7 +68,7 @@ const relToRoot = relative(agentNoteRoot, targetPath).replace(/\\/g, "/");
 const segs = relToRoot.split("/");
 
 if (segs[0] !== "implemented" || segs.length !== 3) {
-  console.error(`Error: only notes in .agents/notes/implemented/<class>/ can be archived (got: ${relToRoot})`);
+  console.error(`Error: only notes in the selected root's implemented/<class>/ can be archived (got: ${relToRoot})`);
   process.exit(1);
 }
 
@@ -84,9 +111,34 @@ const oldTitle = (lines[0] ?? "").replace(/^# Agent Note[:：] ?/, "").trim() ||
 const updatedContent = lines.join("\n");
 
 // 2. Determine archived destination
-const archivedDir = join(agentNoteRoot, "archived", cls);
-mkdirSync(archivedDir, { recursive: true });
+const archivedRoot = join(agentNoteRoot, "archived");
+if (existsSync(archivedRoot)) {
+  if (lstatSync(archivedRoot).isSymbolicLink() || !isInsideRoot(realpathSync(archivedRoot))) {
+    console.error(`Error: archive directory must resolve inside the selected Notes root ${agentNoteRoot}`);
+    process.exit(1);
+  }
+} else {
+  mkdirSync(archivedRoot);
+}
+const archivedDir = join(archivedRoot, cls);
+if (existsSync(archivedDir)) {
+  if (lstatSync(archivedDir).isSymbolicLink() || !isInsideRoot(realpathSync(archivedDir))) {
+    console.error(`Error: archive directory must resolve inside the selected Notes root ${agentNoteRoot}`);
+    process.exit(1);
+  }
+} else {
+  mkdirSync(archivedDir);
+}
+if (!isInsideRoot(realpathSync(archivedDir))) {
+  console.error(`Error: archive directory must resolve inside the selected Notes root ${agentNoteRoot}`);
+  process.exit(1);
+}
 const archivedPath = join(archivedDir, filename);
+const manifestPath = join(agentNoteRoot, "archived", "manifest.json");
+if (existsSync(manifestPath) && lstatSync(manifestPath).isSymbolicLink()) {
+  console.error(`Error: archive manifest cannot be a symlink: ${manifestPath}`);
+  process.exit(1);
+}
 
 if (existsSync(archivedPath)) {
   console.error(`Error: target archived note already exists at ${archivedPath}`);
@@ -99,7 +151,6 @@ renameSync(targetPath, archivedPath);
 console.log(`Moved: ${relToRoot} -> archived/${cls}/${filename}`);
 
 // 3. Update archived/manifest.json with SHA-256 seal
-const manifestPath = join(agentNoteRoot, "archived", "manifest.json");
 interface Manifest {
   version: 1;
   files: Record<string, string>;

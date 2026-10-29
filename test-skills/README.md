@@ -21,7 +21,7 @@
 
 1. 从 [技能目录](./skills/README.md) 选择完整技能目录，安装到使用环境支持的位置，保留支持文件。跨技能调用使用技能名，不绑定本仓库路径。
 2. 在目标项目 AGENTS.md 或 CLAUDE.md 中采用本仓库“工程推进”的授权规则，保留已有适用规则；不需要另建工程流程文件。
-3. 按需调用 [setup-matt-pocock-skills](./skills/user-invoked/setup-matt-pocock-skills/SKILL.md)，配置跟踪器、工件归属和领域资料。已有配置优先复用，setup 不授予规划或实施权限。
+3. 按需调用 [setup-agent-skills](./skills/user-invoked/setup-agent-skills/SKILL.md)，配置跟踪器、工件归属和领域资料。已有配置优先复用，setup 不授予规划或实施权限。
 
 技能仍按 user-invoked 与 model-invoked 分组存储；目录分组不授予执行权限。planning 和 implement 保留现有目录位置，其调用策略设置为显式选择，具体阶段授权仍由 AGENTS.md 的命令规则决定。
 
@@ -35,7 +35,7 @@
 
 多项目配置时，setup 先提出上下文边界、名称和路径，由用户选择需要建立的范围；再分别选择哪些上下文启用 Notes、是否需要公共记录区。已有选择直接复用，新发现项目不会自动加入。记录目录按需创建，原有记录保持原路径。
 
-遵循“一个事实一个家”：Spec 拥有已接受的产品行为合同与验收条件；RFC 拥有实现设计；ADR 拥有需要长期保留的决定及其理由；Proposal 或 Ticket 跟踪本次范围、状态和评审/批准事实。小改动可由工作项直接承载行为与验收，不必另建 Spec。沿用项目既有属主，历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-matt-pocock-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-matt-pocock-skills/decision-records.md)。
+遵循“一个事实一个家”：Spec 拥有已接受的产品行为合同与验收条件；RFC 拥有实现设计；ADR 拥有需要长期保留的决定及其理由；Proposal 或 Ticket 跟踪本次范围、状态和评审/批准事实。小改动可由工作项直接承载行为与验收，不必另建 Spec。沿用项目既有属主，历史位置不自动迁移。详见 [注册规则](./skills/user-invoked/setup-agent-skills/artifact-registration.md) 和 [记录部署](./skills/user-invoked/setup-agent-skills/decision-records.md)。
 
 ## 使用示例
 
@@ -69,4 +69,4 @@
 
 ## 文档维护
 
-AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [记录规则](./.agents/notes/README.md)。setup 的 resources/decision-records 保存通用资源，不复制本仓库项目历史。
+AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [项目 Agent Notes 入口](./.agents/notes/README.md)，格式和检查规则遵循 [write-notes-like-deepseek](./.agents/skills/write-notes-like-deepseek/SKILL.md)。Setup 不再打包第二套 Notes 资源。

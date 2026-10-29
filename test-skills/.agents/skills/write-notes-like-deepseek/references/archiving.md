@@ -70,8 +70,8 @@
 
 ```bash
 npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts \
-  .agents/notes/implemented/<class>/<filename>.md \
-  [--superseded-by .agents/notes/implemented/<class>/<新笔记>.md]
+  --root .agents/notes implemented/<class>/<filename>.md \
+  [--superseded-by implemented/<class>/<新笔记>.md]
 ```
 
 CLI 依次完成：

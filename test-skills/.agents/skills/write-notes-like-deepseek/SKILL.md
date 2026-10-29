@@ -51,7 +51,7 @@ description: Use when a change is non-trivial by DSH standards (behavior, archit
 别一上来建全套目录。按这个仓库现在的样子选：
 
 1. 有 `AGENTS.md` / `CLAUDE.md` / 贡献指南 → 读它；有 `docs/adr/`、`docs/decisions/`、Issue 模板等现成的决定记录 → 沿用，状态和种类按本 Skill 的文件夹来即可。
-2. 没有现成的决定记录 → 按标准结构建：`.agents/notes/{proposed,implemented,rejected,archived} × 6 class`，用到哪个目录就建哪个，空目录不必预建——个人写、不用 git 也照此建全套结构，别精简成单目录。
+2. 没有现成的决定记录 → 按标准结构建：`.agents/notes/{proposed,implemented,rejected,archived} × 6 class`，用到哪个目录就建哪个，空目录不必预建——个人写、不用 git 也照此建全套结构，别精简成单目录。若项目明确选择多上下文隔离，为每个已选 Notes 根单独传入 `--root <path>`；未选上下文不扫描、不写入。
 3. 团队长期仓库 → 在相同结构上叠加流程：`CONTRIBUTING.md` / PR 模板加一句「重要改动必带一篇笔记」，并把校验脚本接进 CI。
 
 ## 1. 路径即分类
@@ -164,16 +164,16 @@ npm run init-board                 # 生成 ~69KB 轻量看板 board.html（日�
 npm run bundle-board               # 打包内嵌全量数据的自包含 demo.html
 ```
 
-脚本位于本 Skill 的 `scripts/`，从**宿主项目根目录**调用，默认检查当前目录下的 `.agents/notes/`。先根据已加载的 `SKILL.md` 路径确定 Skill 位置，不要假定宿主根目录存在 `scripts/`，也不要切换到 Skill 目录执行。安装不会自动配置宿主的 npm scripts。
+脚本位于本 Skill 的 `scripts/`，从**宿主项目根目录**调用，默认检查当前目录下的 `.agents/notes/`。所有读取或写入 Notes 的 CLI 都支持 `--root <path>` / `--root=<path>`，每次只处理一个根；优先级为命令行参数、`AGENT_NOTE_ROOT` 环境变量、默认 `.agents/notes/`。先根据已加载的 `SKILL.md` 路径确定 Skill 位置，不要假定宿主根目录存在 `scripts/`，也不要切换到 Skill 目录执行。安装不会自动配置宿主的 npm scripts。
 
 写完或改完任何笔记后必须运行验证：有 npm script 用 `npm run verify-notes`，没有就用下方 `npx tsx` 命令——不得以「未配置校验入口」为由跳过。
 
 项目级安装到 `.agents/skills/` 时，可直接执行：
 
 ```sh
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes
 npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --init board.html "项目决策看板"
 ```
 

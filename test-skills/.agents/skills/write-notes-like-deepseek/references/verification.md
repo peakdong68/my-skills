@@ -4,6 +4,8 @@
 
 ## 检查脚本（均为 tsx，零新增依赖，均可 `npx tsx` 独立运行）
 
+Notes 读取/写入命令均接受 `--root <path>` 或 `--root=<path>`，每次只处理一个 Notes 根。根路径优先级为命令行、`AGENT_NOTE_ROOT`、默认 `.agents/notes/`。隔离上下文时，对每个已选根单独运行命令；不要遍历未选择的上下文。归档 CLI 在显式 `--root` 下将目标和 successor 的相对路径按该根解析。看板的 `--root` 选择输入 Notes 根，后续位置参数仍是输出路径和项目名。
+
 1. **`verify-agent-note-tree`**（`scripts/agent-note-tree.ts` + `scripts/verify-agent-note-tree.ts`）
    - 校验 lifecycle 封闭集 `proposed/implemented/rejected` + `archived`、class 封闭集 6 个、路径深度 `{lifecycle}/{class}/file.md`、文件名 `yyyy-mm-dd-topic.md`、禁止 `INDEX.md`、活跃笔记内部相对 Markdown 链接有效性。
 

@@ -55,12 +55,14 @@ function walk(dir: string, depth: number) {
         continue;
       }
       const noteRel = m[1].split("#")[0].replace(/^\.\//, "");
-      const key = noteRel.replace(/\\/g, "/");
+      const keyFromProjectNotes = noteRel.replace(/\\/g, "/");
+      const absoluteAnchor = resolve(process.cwd(), ".agents/notes", keyFromProjectNotes);
+      const key = relative(agentNoteRoot, absoluteAnchor).replace(/\\/g, "/");
       const list = anchorHits.get(key) ?? [];
       list.push(`${rel}:${i + 1}`);
       anchorHits.set(key, list);
-      if (!existsSync(join(agentNoteRoot, key))) {
-        dangling.push(`${rel}:${i + 1} — .agents/notes/${key} does not exist`);
+      if (key.startsWith("../") || key === ".." || !existsSync(join(agentNoteRoot, key))) {
+        dangling.push(`${rel}:${i + 1} — .agents/notes/${keyFromProjectNotes} is outside the selected Notes root or does not exist`);
       }
     }
   }

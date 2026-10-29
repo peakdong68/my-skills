@@ -3,12 +3,16 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, resolve, relative, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { agentNoteRoot } from './agent-note-tree.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const templatePath = resolve(__dirname, '../assets/agent-notes-board.html');
 const args = process.argv.slice(2);
+const rootValueIndex = args.indexOf('--root');
+const rootValue = rootValueIndex !== -1 ? rootValueIndex + 1 : -1;
+const hasRoot = rootValueIndex !== -1 || args.some((a) => a.startsWith('--root='));
 
 if (!existsSync(templatePath)) {
   console.error(`❌ Template not found at: ${templatePath}`);
@@ -19,7 +23,7 @@ if (!existsSync(templatePath)) {
 const isInitMode = args.includes('--init');
 const isForce = args.includes('--force') || args.includes('-f');
 const isMetadataOnly = args.includes('--metadata-only');
-const cleanArgs = args.filter((a: string) => !a.startsWith('--') && !a.startsWith('-'));
+const cleanArgs = args.filter((a: string, i: number) => !a.startsWith('--') && !a.startsWith('-') && i !== rootValue && !(i > 0 && args[i - 1] === '--root'));
 
 function checkTargetSafety(targetPath: string) {
   if (existsSync(targetPath) && !isForce) {
@@ -51,9 +55,10 @@ if (isInitMode) {
 }
 
 // 打包模式（生成内联完整数据的单文件，如 demo.html）
-const notesDir = cleanArgs[0] ? resolve(cleanArgs[0]) : resolve(process.cwd(), '.agents/notes');
-const outputPath = cleanArgs[1] ? resolve(cleanArgs[1]) : resolve(process.cwd(), 'demo.html');
-const projectName = cleanArgs[2] || '工程决策看板';
+const notesDir = hasRoot ? agentNoteRoot : cleanArgs[0] ? resolve(cleanArgs[0]) : agentNoteRoot;
+const outputArg = cleanArgs[hasRoot ? 0 : 1];
+const outputPath = outputArg ? resolve(outputArg) : resolve(process.cwd(), 'demo.html');
+const projectName = cleanArgs[hasRoot ? 1 : 2] || '工程决策看板';
 
 checkTargetSafety(outputPath);
 

@@ -2,17 +2,9 @@
 
 > **像 DeepSeek 团队一样维护项目。** 把他们在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 里用的那套方法，装进你的仓库。
 
-[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-blue)](https://agentskills.io)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success)](https://czm15053.github.io/write-notes-like-deepseek-demo/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 AI 每天都能帮你交十几个 PR，但每个新会话都是一张白纸，看不见仓库里已经立过的规矩。DeepSeek 团队用写在仓库里的笔记解决这件事；本项目把这套方法做成 Skill，装上就能按同样的方式维护你的项目。
 
-```bash
-npx skills add czm15053/write-notes-like-deepseek
-```
-
-📺 先看效果：[在线演示看板](https://czm15053.github.io/write-notes-like-deepseek-demo/)（内置 1,267 篇来自 DeepSeek Harness 的真实决策笔记，可脱机浏览）
 
 ---
 
@@ -196,53 +188,49 @@ Status: implemented
 
 ## 本地校验：零依赖，`npx` 直接跑
 
-> 校验脚本通过 Node.js 和 `npx tsx` 运行。以下命令在宿主项目根目录执行，使用项目级安装位置 `.agents/skills/write-notes-like-deepseek/`；若安装在 `.claude/skills/` 或全局目录，请替换为实际 Skill 路径。不要切换到 Skill 目录运行，默认检查的是当前目录下的 `.agents/notes/`。
+> 校验脚本通过 Node.js 和 `npx tsx` 运行。以下命令在宿主项目根目录执行，使用项目级安装位置 `.agents/skills/write-notes-like-deepseek/`；若安装在 `.claude/skills/` 或全局目录，请替换为实际 Skill 路径。默认检查当前目录下的 `.agents/notes/`；多上下文项目对每个已选根分别传入 `--root <path>`，不扫描未选根。
 
 ```bash
 # 1. 目录、类别、文件名、笔记之间的相对链接
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes
 
 # 2. 头部与骨架：状态行、必备小节、备选方案必填、implemented 禁用提案标题
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes
 
 # 3. 封存区体检：归档笔记的头部布局、封印哈希、只增不改（没有 git 自动降级）
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes
 
 # 4. 老方案被取代，一键归档：只插 Archived: 一行 + 封印 + 列出谁还链着它
 #    --superseded-by 在新笔记里补互链，不写进归档篇
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts .agents/notes/implemented/<类别>/<文件名>.md \
-  --superseded-by .agents/notes/implemented/<类别>/<新笔记>.md
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts --root .agents/notes \
+  implemented/<class>/<filename>.md --superseded-by implemented/<class>/<new-note>.md
 
 # 5. 可选体检（只提醒不报错，不进 CI）：代码里若有 // Note: 锚点，是否指着不存在的笔记
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts --root .agents/notes
 ```
 
-配进 `package.json`：
+独立安装 DSH 时，可选：在项目 `package.json` 中添加快捷命令。通过 `setup-agent-skills` 配置 Agent Notes 时，Setup 会确保 `verify-notes` 命令存在；`archive-note` 仍是可选快捷命令。
 
 ```json
 {
   "scripts": {
-    "verify-notes": "npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts",
+    "verify-notes": "npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes",
     "archive-note": "npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts"
   }
 }
 ```
 
-团队场景可将安装目录里的 `templates/verify-notes.yml`（[查看模板](skills/write-notes-like-deepseek/templates/verify-notes.yml)）复制到宿主仓库的 `.github/workflows/verify-notes.yml`，核对安装路径并提交 Skill 文件后启用。安装 Skill 本身不会自动启用 CI。
+团队可选将安装目录里的 `templates/verify-notes.yml`（[查看模板](skills/write-notes-like-deepseek/templates/verify-notes.yml)）复制到宿主仓库的 `.github/workflows/verify-notes.yml`，核对安装路径和已选 Notes 根并提交 Skill 文件后启用。单独安装 Skill 不会自动编辑 `package.json` 或启用 CI；Setup 在启用 Agent Notes 时会确保本地 npm 校验入口，CI 仍需显式选择。CI 校验现有 Note 的结构与格式，不判断某次重要改动是否新增了 Note。
 
 ### 装上 Skill 之后
 
-```bash
-npx skills add czm15053/write-notes-like-deepseek
-```
-
-把以下规则加入项目的 `AGENTS.md` 或 `CLAUDE.md`，AI 就会自动遵守：
+通过 `setup-agent-skills` 启用 Agent Notes 时，Setup 会把以下规则合入项目实际生效的 `AGENTS.md` 或 `CLAUDE.md`，并确保根 `package.json` 提供覆盖所有已选 Notes 根的 `verify-notes` 脚本。手动安装本 Skill 而不运行 Setup 时，复制规则前需先配置该脚本；将路径适配到实际 Skill 安装位置和已选 Notes 根。指令本身不是机械门禁；校验脚本和可选 CI 只检查现有 Note 的结构与格式，不保证每项重要代码改动都附带 Note。团队若要求此项必须通过，需要在 PR 审查流程中明确检查是否有对应记录。
 
 ```markdown
 ## 重要改动必须留笔记
 
 1. 非平凡改动（改了行为、架构、跨文件契约、流程与工具链、测试策略、落盘/网络/配置格式）前，遵循 .agents/skills/write-notes-like-deepseek/SKILL.md 写或更新笔记；机械性小改（样式、格式化、打标、不改行为的补丁）直接提交。
-2. 写之前先检索 .agents/notes/ 里的同主题旧笔记：有归属就地更新；新想法先放 proposed/，落地随同代码改动转 implemented/；新方案彻底取代旧决策时，同批归档旧篇并标明被谁取代。
+2. 写之前先检索所有已选 Notes 根里的同主题旧笔记：核心决定未变时就地同步现行事实；新想法先放 proposed/，落地随同代码改动转 implemented/；部分取代时保留并互链。新方案完全取代旧决策时，同批吸收旧篇独有理由和证据、修复入站链接；再按 DSH 规则删除已完全吸收的旧篇，或归档仍有独立参考价值的旧篇，并在新篇标明取代关系。
 3. 被放弃的方案先写它最强的理由，再解释为什么不用。
 4. 提交前跑 npm run verify-notes，红了先修再交。
 ```
@@ -254,20 +242,19 @@ npx skills add czm15053/write-notes-like-deepseek
 动手前先按 write-notes-like-deepseek 立一篇 Note。
 ```
 
-AI 会自动在 `proposed/` 输出结构化提案（背景、备选及各自的最强理由、验收标准），等你确认后施工；代码落地时，笔记随同转为 `implemented/`。
+当项目指令生效且 Agent 遵循 Skill 时，它会先在 `proposed/` 形成结构化设计（背景、备选及取舍、设计验收与风险）；笔记内容确认本身不替代项目的 Planning/Implementation Gate。实现完成并通过项目 Verify 后，笔记随交付转为 `implemented/`。
 
 ---
 
 ## 辅助工具：决策看板
 
-不是必需品，只是个顺手的观察窗：一条命令生成单文件 `board.html`，双击就能看——**被引用最多的那几篇笔记**（就是这套系统里最怕碰的决定）、所有被否决方案的避坑清单、按月份的演进时间线。日常开发中它直读本地笔记目录，改了笔记切回浏览器就自动刷新；也可以打包成单文件发到网上（[在线演示](https://czm15053.github.io/write-notes-like-deepseek-demo/)就是这么来的）。
+不是必需品，只是个顺手的观察窗：一条命令生成单文件 `board.html`，双击就能看——**被引用最多的那几篇笔记**（就是这套系统里最怕碰的决定）、所有被否决方案的避坑清单、按月份的演进时间线。日常开发中它直读本地笔记目录，改了笔记切回浏览器就自动刷新；也可以打包成单文件发到网上。
 
 ```bash
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --init board.html "项目决策看板"     # 本地直读，热更新
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --bundle .agents/notes demo.html "项目决策看板"  # 打包分发
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --init board.html "项目决策看板"     # 本地直读，打开后手动选择一个 Notes 根并启用热更新
+npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --root .agents/notes demo.html "项目决策看板"  # 打包分发
 ```
 
-真实界面（来自内嵌 DeepSeek Harness 1,267 篇真实笔记的[在线演示](https://czm15053.github.io/write-notes-like-deepseek-demo/)）：
 
 <p align="center">
   <img src="assets/board-baseline.png" alt="看板真实界面：四组 KPI 总览与「系统承重墙」——按交叉引用权重萃取的最关键决策" width="100%" />
@@ -301,23 +288,3 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --bundle
 - [`references/archiving.md`](skills/write-notes-like-deepseek/references/archiving.md)：封存规矩——被取代的老决定怎么干净归档。
 - [`references/quality-gate.md`](skills/write-notes-like-deepseek/references/quality-gate.md)：写完笔记后的语义自检清单。
 - [`references/verification.md`](skills/write-notes-like-deepseek/references/verification.md)：每个校验脚本在查什么、为什么。
-
-
-
-## 友情链接
-
-- [LinuxDo](https://linux.do) — 真诚、友善、团结、专业，你的品质开源与技术社区
-
-## 许可证
-
-[MIT](LICENSE)
-
-## 仓库维护与安装内容
-
-可安装内容集中在 `skills/write-notes-like-deepseek/`，包含 `SKILL.md`、`references/`、`templates/`、`scripts/` 和看板模板 `assets/agent-notes-board.html`。根目录的 README 配图、CI、导入示例笔记和配图导出脚本用于维护本仓库。
-
-原安装命令 `npx skills add czm15053/write-notes-like-deepseek` 保持不变，无需指定 `--skill`。安装器负责发现子目录中的 Skill 并放入所选 Agent 的安装位置。
-
-维护本仓库时，在仓库根目录执行 `npm run verify-notes`、`npm run init-board` 或 `npm run bundle-board`；`board.html` 和 `demo.html` 均为生成产物。下游项目需自行配置上文的 npm scripts。
-
-运行 `npm run test-skill-install` 可在临时宿主项目中验证安装边界、Codex / Claude Code 安装路径、笔记校验、归档和看板生成。该检查使用固定版本 `skills@1.7.1`，覆盖默认链接和 `--copy` 两种安装方式，且不指定 `--skill`；需要联网获取 CLI 与 tsx，CI 使用 Node.js 24。

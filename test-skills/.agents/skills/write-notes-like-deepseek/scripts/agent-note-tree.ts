@@ -1,6 +1,6 @@
 /**
  * Shared structural source of truth for the Agent Note tree.
- * Portable: resolves .agents/notes from cwd (or AGENT_NOTE_ROOT env).
+ * Portable: resolves --root, AGENT_NOTE_ROOT, or .agents/notes from cwd.
  */
 import { readdirSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
@@ -19,6 +19,16 @@ function listMd(dir: string, prefix: string): string[] {
 }
 
 function resolveAgentNoteRoot(): string {
+  const args = process.argv.slice(2)
+  const rootFlag = args.findIndex((arg) => arg === '--root' || arg.startsWith('--root='))
+  if (rootFlag !== -1) {
+    const value = args[rootFlag] === '--root' ? args[rootFlag + 1] : args[rootFlag].slice('--root='.length)
+    if (!value || value.startsWith('--')) {
+      console.error('Error: --root requires a Notes directory path')
+      process.exit(1)
+    }
+    return resolve(process.cwd(), value)
+  }
   if (process.env.AGENT_NOTE_ROOT) return resolve(process.env.AGENT_NOTE_ROOT)
   return resolve(process.cwd(), '.agents/notes')
 }

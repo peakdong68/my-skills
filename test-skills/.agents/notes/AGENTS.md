@@ -1,5 +1,7 @@
 # Agent Notes
 
-写入前读取[记录规则](./README.md)、[项目配置](./config.json)并搜索同主题记录；已有决定优先更新原属主。目录编码生命周期、分类及已选择的上下文，`node scripts/decisions/list.mjs` 可只读查看目录。记录引用权威 Spec、RFC 和 ADR，只保留本次变更独有的理由、取舍、后果和验证。正文写法遵循[文档标准](../../skills/user-invoked/setup-matt-pocock-skills/docs-agents.md)。
+The repository-wide Notes root is `.agents/notes/`; existing records are shared process and repository decisions. No per-context or shared subroots beyond this root are currently selected.
 
-交付事实与实现保持同步。部分替代时互相链接并写清适用范围；完全替代先保留旧记录仍有价值的内容并修复引用，再删除旧文件。运行 `node scripts/decisions/check.mjs` 检查机械规则；批准真实性和实际交付仍需审阅。
+Follow the [write-notes-like-deepseek Skill](../skills/write-notes-like-deepseek/SKILL.md) for Note eligibility, fixed classes, format, lifecycle, alternatives and validation. Search existing records before creating a Note. Use `--root .agents/notes` when invoking a DSH command from the repository root. A future isolated context root requires an explicit project decision and an entry here; run its DSH commands with that selected root.
+
+The project work item, review and authorization rules live in [root AGENTS.md](../../AGENTS.md). Keep those workflow facts in the work item; Notes record durable technical reasons and decisions.
