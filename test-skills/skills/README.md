@@ -2,7 +2,7 @@
 
 项目定位、推进命令、初始化和组合用法见 [根目录使用指南](../README.md)。本页维护调用分类、技能简介及使用示例；具体执行规则以各技能的 `SKILL.md` 为准。
 
-用户调用类由用户主动选择；模型调用类通常可按任务选用。planning 和 implement 虽保留在 model-invoked 目录，其调用策略要求显式选择，工程推进仍分别需要用户的 `/planning`、`/implement` 命令。实际调用语法与技能发现方式由使用环境提供。选择技能不替代项目的执行授权。
+用户调用类由用户主动选择；模型调用类通常可按任务选用。planning 和 implement 保留在 model-invoked 目录：用户通过 `/planning` 授权规划，通过输入「批准，执行实现」授权实施；模型按项目门控步骤加载对应技能。实际调用语法与技能发现方式由使用环境提供。选择技能不替代项目的执行授权。
 
 ## 用户调用（user-invoked）
 
@@ -13,7 +13,7 @@
 - **[handoff](./user-invoked/handoff/SKILL.md)**：将当前会话整理成供另一代理继续工作的交接文档，保存到操作系统临时目录。
 - **[improve-codebase-architecture](./user-invoked/improve-codebase-architecture/SKILL.md)**：寻找模块深化机会，生成 HTML 报告，再围绕用户选择的方向深入讨论。
 - **[playwright-e2e](./user-invoked/playwright-e2e/SKILL.md)**：为有浏览器界面的项目配置 Playwright E2E，写入项目测试规则并创建首个端到端测试。
-- **[setup-matt-pocock-skills](./user-invoked/setup-matt-pocock-skills/SKILL.md)**：配置技能使用的问题跟踪器、分诊标签与领域文档布局。
+- **[setup-matt-pocock-skills](./user-invoked/setup-matt-pocock-skills/SKILL.md)**：配置问题跟踪器、文档属主、历史工件承接关系、领域资料与 Agent Notes。
 - **[teach](./user-invoked/teach/SKILL.md)**：围绕用户的学习目标，在工作区中持续组织课程、练习、参考资料和学习记录。
 - **[to-questionnaire](./user-invoked/to-questionnaire/SKILL.md)**：将需要第三方回答的问题整理为 Markdown 问卷，明确收件人、背景与所需信息。
 - **[to-verify](./user-invoked/to-verify/SKILL.md)**：对交付结果进行独立验收，依据批准的要求报告通过、失败或阻塞，不修改交付物。
@@ -21,16 +21,15 @@
 - **[wait-what](./user-invoked/wait-what/SKILL.md)**：补充上下文并用简明语言重新解释上一条未被理解的回答。
 - **[wayfinder](./user-invoked/wayfinder/SKILL.md)**：将大型、尚不清晰的工作组织为共享决策地图，逐步解决决策工单，明确后续方向。
 
-## Planning 中的 Spec
+## Planning 中的合同与设计
 
-通过 `/planning` 进入规划后，按工作需要复用或更新权威工作项、Spec 与 RFC，并完成 Plan Review。文档归属遵循“一个事实一个家”：Spec 拥有已接受的产品行为合同与验收条件，RFC 拥有实现设计，ADR 拥有需要长期保留的决定及其理由；工作项记录本次范围与状态。
+通过 `/planning` 进入规划后，按工作需要复用或更新工作项、独立 Spec 与 Agent Notes，并完成 Plan Review。工作项拥有本次范围、产品行为、验收及批准证据；Agent Note 拥有长期技术提案、设计与决定。适用输入由项目配置确定，工件归属由 setup 配置。
 
-- 工作项已经清楚写明范围、行为和验收条件，或变更足够小：直接复用工作项，不额外创建 Spec。
-- 行为、范围或验收需要独立于工作项和技术设计演进：创建或更新 Spec；沿用既有归属、格式和评审约定，避免产生竞争合同。
-- 访谈后尚无正式产物：Planning 可据已确定的结论创建最小必要工作项和 Spec；候选建议不写成已批准要求，影响范围的重要未决决定作为 blocker 交由用户决定。
-- 有技术可行性或重要设计问题：按需用探索性 RFC 收敛；RFC 承接稳定 Spec，不能自行改变产品行为。
+- 本次产品行为与验收写在工作项；跨工作项持续生效的合同才按需创建或更新独立 Spec。
+- 访谈后尚无正式产物：Planning 可据已确定的结论创建最小必要工作项；候选建议不写成已批准要求，影响范围的重要未决决定作为 blocker 交由用户决定。
+- 有技术可行性或重要设计问题：在 proposed Note 中探索；设计承接稳定产品合同，不能自行改变产品行为。
 
-Plan Review 检查规划工件间的一致性、决策转述、可观察验收和内容归属。发现表述或引用问题时修正并复审；重大决策缺口交回用户决定。复用有效评审证据，只审新增或变化的部分。Spec 草稿、评审通过、批准和实施授权分别判断；规划完成后回到 Discuss，实施仍需单独的 `/implement`。
+Plan Review 检查规划工件间的一致性、决策转述、可观察验收和内容归属。发现表述或引用问题时修正并复审；重大决策缺口交回用户决定。复用有效评审证据，只审新增或变化的部分。设计草稿、评审通过、批准和实施授权分别判断；规划完成后回到 Discuss，实施仍需单独的 `批准，执行实现`。
 
 ## 交付后的手动验收与修复
 
@@ -64,7 +63,7 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 预期依据：导出需求要求中文字段原样保留。请核实原因并修复。
 ```
 
-本仓库的正式规划和实施分别由 `/planning` 与 `/implement` 授权；选择 fix-bug 等方法不代替 `/implement`。上面的修复示例需同时提供或已有覆盖当前范围的 `/implement` 授权，同一范围内的修正、审查和重验无需重复授权。
+本仓库的正式规划和实施分别由 `/planning` 与 `批准，执行实现` 授权；选择 fix-bug 等方法不代替 `批准，执行实现`。上面的修复示例需同时提供或已有覆盖当前范围的 `批准，执行实现` 授权，同一范围内的修正、审查和重验无需重复授权。
 
 ### 两者如何衔接
 
@@ -82,10 +81,10 @@ $fix-bug 当前版本导出包含中文字段的 CSV 后出现乱码。
 - **[code-review](./model-invoked/code-review/SKILL.md)**：从 Standards 和 Spec 两个维度并行审阅指定范围的变更，分别报告规范遵循与需求符合情况。
 - **[codebase-design](./model-invoked/codebase-design/SKILL.md)**：提供深模块、接口和测试接缝的设计原则，用于改善模块边界、可测试性和代码可导航性。
 - **[diagnosing-bugs](./model-invoked/diagnosing-bugs/SKILL.md)**：为故障和性能回归建立反馈循环，通过复现、假设验证和定向探测定位原因，并在授权范围内修复与验证。
-- **[domain-modeling](./model-invoked/domain-modeling/SKILL.md)**：梳理领域术语与模型，将已确定的领域知识和持久架构决策记录到上下文文档或 ADR。
+- **[domain-modeling](./model-invoked/domain-modeling/SKILL.md)**：梳理领域术语与模型，使用项目配置的资料位置；单独记录架构决定时调用 adr 判断准入与记录方式。
 - **[grilling](./model-invoked/grilling/SKILL.md)**：在用户希望深入推敲想法时，按决策依赖分轮访谈，直到达成共同理解。
 - **[implement](./model-invoked/implement/SKILL.md)**：按进入条件、按需分解、执行与实施期间测试、实施审查、完成交接组织工作；独立审查请求转交 code-review。
-- **[planning](./model-invoked/planning/SKILL.md)**：复用权威工作项，按需创建或更新 Proposal、Spec、RFC，收敛必要的产品与技术决策并完成规划审阅。
+- **[planning](./model-invoked/planning/SKILL.md)**：复用工作项，按需维护独立 Spec 与 Agent Notes，收敛必要决定并完成规划审阅。
 - **[prototype](./model-invoked/prototype/SKILL.md)**：构建用于回答特定设计问题的临时原型，探索逻辑、状态模型或界面方案。
 - **[research](./model-invoked/research/SKILL.md)**：由后台代理依据高可信的一手资料调查问题，将带来源引用的结论保存为仓库中的 Markdown 文件。
 - **[resolving-merge-conflicts](./model-invoked/resolving-merge-conflicts/SKILL.md)**：依据双方变更意图处理进行中的 Git 合并或变基冲突，检查结果并完成相应操作。

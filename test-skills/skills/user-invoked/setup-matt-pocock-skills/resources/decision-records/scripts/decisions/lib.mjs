@@ -74,7 +74,7 @@ export async function collect() {
       const parts = relative.split('/');
       if (entry.isSymbolicLink()) { errors.push(`${relative}: symbolic links are not supported in Notes`); continue; }
       if (entry.isDirectory()) {
-        if (entry.name === 'templates' && (await readdir(full)).length === 0) continue;
+        if (relative === 'templates') continue;
         const scoped = recordRoots.some(owner => owner.path === parts[0]);
         const local = scoped ? parts.slice(1) : parts;
         if (local.length === 1 && !lifecycles.includes(entry.name)) errors.push(`${relative}: unknown lifecycle directory`);
@@ -109,15 +109,14 @@ export async function collect() {
       for (const key of ['created', 'updated']) if (!dateOK(metadata[key])) errors.push(`${relative}: invalid ${key}`);
       if (metadata.created !== filename[1]) errors.push(`${relative}: filename date differs from created`);
       if (metadata.updated < metadata.created) errors.push(`${relative}: updated precedes created`);
-      if (!metadata.approval) errors.push(`${relative}: approval evidence or pending statement required`);
       if (metadata.status === 'implemented' && !metadata.verification) errors.push(`${relative}: verification reference or explanation required`);
       if (metadata.status === 'rejected' && !metadata.reason) errors.push(`${relative}: rejection reason required`);
       if (!/^# .+/m.test(text.slice(header?.[0].length ?? 0))) errors.push(`${relative}: document title required`);
 
-      const keys = ['title', 'status', 'created', 'updated', 'approval', 'verification', 'reason'];
+      const keys = ['title', 'status', 'created', 'updated', 'verification', 'reason'];
       const actual = (header?.[1] ?? '').split(/\r?\n/).map(line => /^([a-z]+): /.exec(line)?.[1]).filter(Boolean);
       const allowed = keys.filter(key => Object.hasOwn(metadata, key));
-      const expected = keys.slice(0, 5).concat(metadata.status === 'implemented' ? ['verification'] : metadata.status === 'rejected' ? ['reason'] : []);
+      const expected = keys.slice(0, 4).concat(metadata.status === 'implemented' ? ['verification'] : metadata.status === 'rejected' ? ['reason'] : []);
       if (actual.join(',') !== expected.join(',')) errors.push(`${relative}: metadata fields must use the documented keys and order`);
       if (actual.some(key => !keys.includes(key))) errors.push(`${relative}: unknown metadata field`);
       if (metadata.status !== 'implemented' && metadata.verification) errors.push(`${relative}: verification belongs to implemented records`);
@@ -128,7 +127,7 @@ export async function collect() {
       if (lines[0] !== `# Agent Note：${metadata.title}`) errors.push(`${relative}: title must match metadata`);
       const sections = lines.filter(line => line.startsWith('## '));
       if (sections[0] !== '## 问题') errors.push(`${relative}: first section must be ## 问题`);
-      const required = metadata.status === 'proposed' ? ['提案', '备选方案', '验收条件', '风险'] : metadata.status === 'implemented' ? ['决定', '备选方案', '后果', '验证'] : ['备选方案'];
+      const required = metadata.status === 'proposed' ? ['提案', '备选方案', '验收条件', '风险'] : metadata.status === 'implemented' ? ['决定', '备选方案', '后果', '验证'] : ['提案', '备选方案'];
       for (const heading of required.filter(value => value !== '备选方案')) if (!sections.includes(`## ${heading}`)) errors.push(`${relative}: missing section ## ${heading}`);
       if (!sections.includes('## 备选方案')) {
         const exception = '<!-- agent-note-format: alternatives-not-recorded (pre-format Agent Note) -->';

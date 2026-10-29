@@ -1,12 +1,12 @@
 # Issue tracker: Local Markdown
 
-Work items for this repo are tracked as Markdown files in `.scratch/`. Independent Specs and designs retain their registered owners.
+Work items for this repo are tracked as Markdown files in `.scratch/`. Each work item owns its product behavior, acceptance, review and approval evidence; independently owned contracts and designs retain their registered owners.
 
 ## Conventions
 
 - One feature per directory: `.scratch/<feature-slug>/`
 - The Proposal is `.scratch/<feature-slug>/proposal.md`; its file path is its work identifier. Reuse registered historical Proposal paths for existing work.
-- An independent Spec keeps its registered location; this tracker does not establish a second Spec owner
+- An independent cross-work-item Spec keeps its registered location; this tracker does not establish a second Spec owner
 - Implementation issues are one file per ticket at `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` — never a single combined tickets file
 - Triage state is recorded as a `Status:` line near the top of each issue file (see `triage-labels.md` for the role strings)
 - Comments and conversation history append to the bottom of the file under a `## Comments` heading
@@ -15,9 +15,9 @@ Work items for this repo are tracked as Markdown files in `.scratch/`. Independe
 
 Use `Status: planning`, `ready`, `in-progress`, `complete` or `rejected` near the top of the Proposal, unless the project has configured other states. These are work states, separate from ticket triage and decision-record lifecycle.
 
-Record Plan Review results and approval evidence in the Proposal's Decisions section, with references to relevant requirements and design. Move to `ready` only when required review and approvals are complete and the selected scope has no blocking decision or dependency. Start `in-progress` only with execution authorization under project rules; use `complete` after delivery and final verification. If readiness is lost, revoke the invalid readiness by moving the work item back to its configured non-ready state (`planning` in this template), record the blocker, and return affected work to Discuss; a tracker state does not authorize a `/planning` or `/implement` transition; record the decision when rejecting work.
+Record Plan Review results and approval evidence in the Proposal's Decisions section, with references to relevant requirements and design. Move to `ready` only when required review and approvals are complete and the selected scope has no blocking decision or dependency. Start `in-progress` only with execution authorization under project rules; use `complete` after delivery and final verification. If readiness is lost, revoke the invalid readiness by moving the work item back to its configured non-ready state (`planning` in this template), record the blocker, and return affected work to Discuss; a tracker state does not authorize a planning or implementation transition; record the decision when rejecting work.
 
-Separate Specs and designs remain at their registered locations.
+Link from the Proposal to its Agent Note when that Note owns the durable design. Independent cross-work-item contracts remain at their registered locations.
 
 ## When a skill says "publish to the issue tracker"
 

@@ -4,52 +4,28 @@ How the engineering skills should consume this repo's domain documentation when 
 
 ## Before exploring, read these
 
-Use the document ownership entry referenced by project instructions (normally `docs/AGENTS.md`) to resolve current and historical decision owners. ADR paths below are defaults; when decisions are registered elsewhere, read that location and do not create a competing ADR directory.
+Use the document ownership entry referenced by project instructions (normally `docs/AGENTS.md`) to locate the domain glossary and applicable designs, decisions and constraints for the task.
 
-Resolve the document owners and root paths from the repository management root established by project instructions and registration, not the current subproject directory. Multiple contexts share that entry and root `.agents/notes/`; historical owners remain as registered. The context map selects domain documents. Its layout and initialization scope require user selection; discovering projects does not initialize contexts automatically. When Notes is enabled, its root configuration separately maps user-selected contexts to isolated record directories within `.agents/notes/`; use the read-only `node scripts/decisions/list.mjs` navigation for the relevant context and selected shared area. Contexts do not imply record categories or automatic Notes enrollment. Read context-local paths from the map and document entry rather than assuming every project lives under `src/`. Ordinary Markdown links resolve relative to their containing file.
+Resolve document paths from the repository management root established by project instructions, not the current subproject directory. The context map selects domain documents; read context-local paths from it and the document entry rather than assuming every project lives under `src/`. For Agent Notes, use its configured record roots and documented read-only navigation when needed. Ordinary Markdown links resolve relative to their containing file.
 
-- **`CONTEXT.md`** at the repo root, or
-- **`CONTEXT-MAP.md`** at the repo root if it exists — it points at one `CONTEXT.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`** — read ADRs that touch the area you're about to work in. In multi-context repos, use the context map and document ownership entry to locate context-scoped ADRs; project directories do not have a fixed `src/` prefix.
+- **`GLOSSARY.md`** at the repo root, or
+- **`GLOSSARY-MAP.md`** at the repo root if it exists — it points at one `GLOSSARY.md` per context. Read each one relevant to the topic.
+- **Configured design and decision sources** — read the inputs whose registered scope applies to the task. In multi-context repos, use the context map and document ownership entry to locate them.
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
+An absent optional glossary does not require creating one upfront. The `domain-modeling` skill creates it when terms are resolved. If a required design or decision input is missing or its scope conflicts with another input, report the specific configuration gap and affected work.
 
 ## File structure
 
-Single-context repo (most repos):
-
-```
-/
-├── CONTEXT.md
-├── docs/adr/
-│   ├── 0001-event-sourced-orders.md
-│   └── 0002-postgres-for-write-model.md
-└── src/
-```
-
-Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
-
-```
-/
-├── CONTEXT-MAP.md
-├── docs/adr/                          ← system-wide decisions
-└── src/
-    ├── ordering/
-    │   ├── CONTEXT.md
-    │   └── docs/adr/                  ← context-specific decisions
-    └── billing/
-        ├── CONTEXT.md
-        └── docs/adr/
-```
+A single-context project may use a root `GLOSSARY.md`; a root `GLOSSARY-MAP.md` points to selected context glossaries in a multi-context project. Resolve decision record paths separately from the document ownership entry and, when selected, the Agent Notes record-root configuration.
 
 ## Use the glossary's vocabulary
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `GLOSSARY.md`. Don't drift to synonyms the glossary explicitly avoids.
 
 If the concept you need isn't in the glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
-## Flag ADR conflicts
+## Flag decision conflicts
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+If your output contradicts an applicable decision, identify the configured source and explain the conflict:
 
-> _Contradicts ADR-0007 (event-sourced orders) — but worth reopening because…_
+> _Contradicts the current Agent Note on order events — revisit that decision because…_

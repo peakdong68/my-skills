@@ -1,6 +1,6 @@
 # Issue tracker: GitHub
 
-Work items for this repo are tracked as GitHub issues. Independent Specs and design artifacts remain at their registered locations. Use the `gh` CLI for all operations.
+Work items for this repo are tracked as GitHub issues. Each issue owns its product behavior, acceptance, review and approval evidence; durable designs and decisions live at their registered owner. Use the `gh` CLI for all operations.
 
 ## Conventions
 
@@ -15,7 +15,7 @@ Infer the repo from `git remote -v` — `gh` does this automatically when run in
 
 ## Proposal workflow
 
-A Proposal is a GitHub issue identified by its URL or repository-qualified issue number. Reuse an existing issue for the same work; keep separate requirements and design artifacts at their registered locations and link them.
+A Proposal is a GitHub issue identified by its URL or repository-qualified issue number. Reuse an existing issue for the same work. Link from the issue to its Agent Note when that Note owns the durable design; independently owned cross-work-item contracts retain their registered location.
 
 During setup, register the project's representation of planning, ready, in-progress, complete and rejected work, using existing project fields, labels or a status entry in the issue body. Record Plan Review results and approval evidence in the issue's decision section or linked review comments. A ready transition requires the applicable review and approvals with no blocker for the selected scope; execution authorization remains governed by project instructions. Completion follows delivery and final verification. Preserve historical state mappings rather than adding a parallel vocabulary.
 

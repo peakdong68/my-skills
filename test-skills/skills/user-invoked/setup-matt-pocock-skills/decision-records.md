@@ -1,6 +1,6 @@
-# Optional Agent Notes setup
+# Agent Notes configuration and deployment
 
-Use this resource when the user selects a categorized decision system with read-only directory navigation and checks. It supplements project configuration; it does not choose an engineering workflow, approve decisions, or authorize implementation.
+Use this resource when the setup scope includes Planning or Agent Notes. Configure record locations and, when needed, deploy the read-only navigator and checks. Setup does not approve decisions or authorize implementation.
 
 ## Existing projects
 
@@ -8,17 +8,17 @@ New installations use `.agents/notes/` for Agent Notes. For an existing location
 
 Resolve the repository management root through the project document ownership entry before deployment. Target paths in this resource are relative to that root, not the invocation's current directory. A multi-context repository shares one Agent Notes installation and its scripts; do not deploy another bundle inside each subproject. Contexts and record categories are independent: use config.json rather than generating categories from project folders.
 
-Follow [artifact-registration.md](artifact-registration.md) to establish document owners and historical/new locations. New Proposals use configured work tracking; decision records may reference them without duplicating their contents or work status. Preserve registered historical files that serve both roles and their state mappings unless migration is authorized. Independent RFCs/Specs retain their own owners. Deploying this bundle does not silently change that ownership.
+Follow [artifact-registration.md](artifact-registration.md) for document ownership and any historical transition. New Proposals use configured work tracking and link to their relevant Agent Notes. The Note owns the durable design and decision, while work scope, product acceptance, review and approval evidence remain in the work item.
 
-Inspect existing decision, ADR, RFC and proposal conventions. Reuse their authoritative locations rather than creating a competing system. If adopting this bundle requires changing existing categories, statuses or formats, present that mapping in the setup draft; do not migrate records or overwrite customized files implicitly.
+Inspect the existing Notes installation, categories, statuses and formats. Present necessary changes in the setup draft and preserve customizations outside the authorized change.
 
 ## Select record scopes
 
-First reuse the user-confirmed context layout; setup must confirm proposed context boundaries, names and paths before initializing a new `CONTEXT-MAP.md`. Repository discovery alone does not authorize creating all contexts.
+First reuse the user-confirmed context layout; setup must confirm proposed context boundaries, names and paths before initializing a new `GLOSSARY-MAP.md`. Repository discovery alone does not authorize creating all contexts.
 
 Separately confirm which established contexts need Agent Notes and whether a shared area is needed, in the same setup summary. Reuse existing selections; ask only about new or changed scopes. It is valid to enable only some contexts or none. Do not create Notes for every mapped context automatically.
 
-The root config maps selected context identifiers from `CONTEXT-MAP.md` to distinct directories under `.agents/notes/`. Each selected directory has its own lifecycle/category tree; `list.mjs` prints the configured record directories and can filter by context. The map owns domain boundaries, while Notes config owns record enrollment and paths. Categories remain independent. Use `node scripts/decisions/list.mjs --context ordering` and, when selected, `--shared` to locate relevant record directories; follow explicit cross-context links as needed.
+The root config maps selected context identifiers from `GLOSSARY-MAP.md` to distinct directories under `.agents/notes/`. Each selected directory has its own lifecycle/category tree; `list.mjs` prints the configured record directories and can filter by context. The map owns domain boundaries, while Notes config owns record enrollment and paths. Categories remain independent. Use `node scripts/decisions/list.mjs --context ordering` and, when selected, `--shared` to locate relevant record directories; follow explicit cross-context links as needed.
 
 See the bundled [management rules](resources/decision-records/.agents/notes/README.md) for `contextMap` and `recordRoots` configuration. Record context map paths relative to the management root and record directory paths relative to `.agents/notes/`. Register paths first; create a selected directory only when its first record is needed. Cross-context decisions have one owner in the selected shared area or an agreed participating context, with links from other contexts rather than duplicate records. If no suitable owner is selected, resolve that choice before creating the record.
 
@@ -34,7 +34,7 @@ Compare each destination file with the bundle before writing:
 - **Missing** — fill it within the selected setup scope only after checking compatibility with existing project configuration and companion scripts. Do not mix incompatible script versions merely to fill a missing file.
 - **Different** — preserve the existing file and report the difference; do not infer that the bundled version is newer or more authoritative.
 
-These rules apply to the management README, local instructions, project category configuration, and the checker and navigator scripts. The management README owns the record format; there is no separate copyable template. Repeat setup alone is not an upgrade request. If everything is present and no change was requested, report that configuration was reused without asking for another approval.
+These rules apply to the management README, local instructions, project category configuration, the record template, and the checker and navigator scripts. The management README owns the record format; the template is a starting point for a proposed record, not a separate format authority. Repeat setup alone is not an upgrade request. If everything is present and no change was requested, report that configuration was reused without asking for another approval.
 
 When the user explicitly requests an upgrade, inspect differences and prepare a coherent merge that preserves project categories, formats and other customizations. Apply it within the authorized scope, then validate the resulting rules and scripts together. Do not require approval again for an already authorized merge; surface only unresolved project decisions.
 
@@ -49,24 +49,25 @@ The reusable source contains:
 - `.agents/notes/README.md`: management rules with project-configured categories
 - `.agents/notes/AGENTS.md`: local reading and maintenance guidance
 - `.agents/notes/config.json`: empty category configuration to populate from the target project
+- `.agents/notes/templates/record.md`: starting point for a proposed record
 - `scripts/decisions/README.md`: tool commands and upgrade boundary
 - `scripts/decisions/lib.mjs`, `check.mjs`, `list.mjs`: dependency-free Node.js tools
 
-For a new installation, copy these seven files to matching paths under the target project after the setup draft is approved or deployment is already authorized. For existing installations, follow the per-file rules above. Copy no records from this skill repository's own `.agents/notes/`. Existing projects retain their records; remove generated indexes only as part of an authorized, link-repaired upgrade.
+For a new installation, copy these eight files to matching paths under the target project after the setup draft is approved or deployment is already authorized. For existing installations, follow the per-file rules above. Copy no records from this skill repository's own `.agents/notes/`. Existing projects retain their records; remove generated indexes only as part of an authorized, link-repaired upgrade.
 
-The bundle defines no default categories. Reuse target-project categories, or propose ids, names and scopes based on its actual delivery objects and confirm them in the existing setup review. Save them in config.json; scripts read this configuration. An empty categories array can bootstrap the tool, but cannot classify records. Do not copy this skill repository's categories. Preserve the proposed/implemented/rejected lifecycle and record project approval evidence separately. Existing lifecycle migrations require an explicit upgrade request; preserve history and repair links.
+The bundle defines no default categories. Reuse target-project categories, or propose ids, names and scopes based on its actual delivery objects and confirm them in the existing setup review. Save them in config.json; scripts read this configuration. An empty categories array can bootstrap the tool, but cannot classify records. Do not copy this skill repository's categories. Preserve the proposed/implemented/rejected lifecycle and keep project approval evidence in the work item. Existing lifecycle or metadata migrations require an explicit upgrade request; preserve history and repair links.
 
 Add a concise reference in the selected project instruction file:
 
 ```markdown
 ### Agent Notes
 
-For nontrivial engineering changes and major proposals, follow `.agents/notes/README.md`.
+For durable technical proposals and decisions, follow `.agents/notes/README.md`.
 Reuse existing authoritative records; maintain affected records with the change,
 use read-only directory navigation when needed, and run the documented checks.
 ```
 
-Record the agreed relationship to ADRs in `docs/agents/domain.md`. Do not leave a default ADR location that conflicts with the selected decision location. Existing authoritative ADRs need not be duplicated or moved.
+Register the Notes location in the project document entry; make `docs/agents/domain.md` consume that entry rather than maintain a second ownership map. Use [artifact-registration.md](./artifact-registration.md) for other artifact owners and transitions.
 
 Ordinary formatting and link maintenance do not trigger an engineering planning cycle. Material contract changes do. Overall proposals can link stages and module work items; project tracking owns progress, while each record retains its own delivery lifecycle.
 

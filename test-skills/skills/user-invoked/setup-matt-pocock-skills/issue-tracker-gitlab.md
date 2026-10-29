@@ -1,6 +1,6 @@
 # Issue tracker: GitLab
 
-Work items for this repo are tracked as GitLab issues. Independent Specs and design artifacts remain at their registered locations. Use the [`glab`](https://gitlab.com/gitlab-org/cli) CLI for all operations.
+Work items for this repo are tracked as GitLab issues. Each issue owns its product behavior, acceptance, review and approval evidence; durable designs and decisions live at their registered owner. Use the [`glab`](https://gitlab.com/gitlab-org/cli) CLI for all operations.
 
 ## Conventions
 
@@ -16,7 +16,7 @@ Infer the repo from `git remote -v` — `glab` does this automatically when run 
 
 ## Proposal workflow
 
-A Proposal is a GitLab issue identified by its URL or project-qualified issue number. Reuse an existing issue for the same work; keep separate requirements and design artifacts at their registered locations and link them.
+A Proposal is a GitLab issue identified by its URL or project-qualified issue number. Reuse an existing issue for the same work. Link from the issue to its Agent Note when that Note owns the durable design; independently owned cross-work-item contracts retain their registered location.
 
 During setup, register the project's representation of planning, ready, in-progress, complete and rejected work, using existing project fields, labels or a status entry in the issue description. Record Plan Review results and approval evidence in the issue's decision section or linked review notes. A ready transition requires the applicable review and approvals with no blocker for the selected scope; execution authorization remains governed by project instructions. Completion follows delivery and final verification. Preserve historical state mappings rather than adding a parallel vocabulary.
 

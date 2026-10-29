@@ -2,7 +2,6 @@
 name: playwright-e2e
 description: 为一个项目配置 Playwright E2E——装依赖、写 config、把「验证只走 playwright test」落进 AGENTS.md、写出第一个 spec。
 argument-hint: "项目路径，或要覆盖的功能 / bug"
-disable-model-invocation: true
 ---
 
 # Playwright E2E 配置
