@@ -29,7 +29,7 @@
 | --- | --- | --- |
 | 工作项 | 已启用；本次交付范围、产品行为与验收 | 当前任务/对话；若项目选用跟踪器，则填写其实际位置与规则 |
 | 工作状态、评审与批准证据 | 已启用；工作项推进 | 当前任务/对话，或项目已配置的跟踪器 |
-| Agent Note | 已启用；长期技术提案、设计、决定、备选与理由 | 项目选定的 `.agents/notes/` 根；格式与生命周期遵循 `write-notes-like-deepseek` Skill；多上下文时由 `.agents/notes/AGENTS.md` 登记已选根；工作项链接到 Note |
+| Agent Note | 已启用；长期技术提案、设计、决定、备选与理由 | 项目选定的 `.agents/notes/` 根；格式与生命周期遵循 `write-agent-notes` Skill；多上下文时由 `.agents/notes/AGENTS.md` 登记已选根；工作项链接到 Note |
 | 独立 RFC／ADR | 新工作未启用 | 相应技术设计与决定归 Agent Note |
 | 独立 Spec | 按需启用；跨工作项持续生效的行为合同 | 首次需要时先登记合同属主、适用范围、位置与规则，再创建正文 |
 ```
@@ -71,7 +71,7 @@
 | 其他代码注释 | 不变量、并发与顺序、所有权、安全边界，以及会让调用者意外的失败行为；只写不显然的事实 |
 | 测试 | 只解释不显然的测试设计，例如 fixture、断言或平台分支的原因；删掉步骤走查与用例清单 |
 | README 与 `docs/` 正文 | 消费者要遵守的合同：配置、语义、失败、限制与扩展点 |
-| Agent Note | 长期技术提案、已交付决定、真实备选和后果；格式与生命周期遵循 `write-notes-like-deepseek` Skill |
+| Agent Note | 长期技术提案、已交付决定、真实备选和后果；格式与生命周期遵循 `write-agent-notes` Skill |
 | 技能与 Agent 指令 | 行为护栏和明确范围限制；保持简短，链接到规则属主 |
 | 用户可见字符串、日志与诊断 | 文字本身属于行为，修改时运行拥有该输出的用例；诊断点名失败主体或路径、违反的规则和修复方式 |
 
@@ -96,4 +96,4 @@
 
 ## 检查
 
-Agent Note 的目录、格式、正文骨架和本地链接由 `write-notes-like-deepseek` Skill 的校验命令检查。对选定的隔离根，使用 `--root <Notes根路径>`；不要部署第二套格式或 checker。Setup 启用 Agent Notes 时会确保管理根的 `package.json` 提供覆盖全部已选 Notes 根的 `verify-notes` 命令；GitHub Actions CI 仍由项目显式选择。运行该项目已配置的文档和代码检查；不要把某一语言或仓库专属命令复制成所有项目的要求。机械检查通过不代替对事实归属、内容真实性与合同完整性的审阅。
+Agent Note 的目录、格式、正文骨架和本地链接由 `write-agent-notes` Skill 的校验命令检查。对选定的隔离根，使用 `--root <Notes根路径>`；不要部署第二套格式或 checker。Setup 启用 Agent Notes 时会确保管理根的 `package.json` 提供覆盖全部已选 Notes 根的 `verify-notes` 命令；GitHub Actions CI 仍由项目显式选择。运行该项目已配置的文档和代码检查；不要把某一语言或仓库专属命令复制成所有项目的要求。机械检查通过不代替对事实归属、内容真实性与合同完整性的审阅。

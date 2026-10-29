@@ -28,7 +28,7 @@ DSH 固定 class 和生命周期由 Skill 脚本校验；项目不再新增动�
 
 部分替代 [可复用资源与项目历史分离](./2026-09-08-portable-decision-records.md) 中关于固定分类及旧生命周期的内容，其余副本归属和防覆盖规则继续适用。
 
-当前 Notes 规则见 [DSH Skill](../../../../.agents/skills/write-notes-like-deepseek/SKILL.md)；Setup 的项目选择与迁移说明见 [Agent Notes setup](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。
+当前 Notes 规则见 [DSH Skill](../../../../.agents/skills/write-agent-notes/SKILL.md)；Setup 的项目选择与迁移说明见 [Agent Notes setup](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。
 
 历史验证曾用旧索引生成器、checker 与自测脚本覆盖空资源部署、自定义分类、生命周期、必填依据、失效链接及索引新鲜度；这些工具已移除，记录格式和目录当前由 DSH Skill 校验。重复 Setup 防覆盖仍是技能执行约束，不是安装器保证。
 

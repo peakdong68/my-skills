@@ -100,7 +100,7 @@ The project document entry (normally `docs/AGENTS.md`) is the pointer map for do
 
 - 文档遵循 [`docs/AGENTS.md`](docs/AGENTS.md)：文档分层、位置、职责与写法。
 - Domain docs: `[single-context/multi-context and location summary]`; terminology and decision consumer rules: `docs/agents/domain.md`.
-- Agent Note format and lifecycle: `write-notes-like-deepseek` Skill; selected Notes roots and project-specific context mapping: `.agents/notes/AGENTS.md` (only when Agent Notes is selected and a mapping is needed).
+- Agent Note format and lifecycle: `write-agent-notes` Skill; selected Notes roots and project-specific context mapping: `.agents/notes/AGENTS.md` (only when Agent Notes is selected and a mapping is needed).
 
 Resolve registered paths from the repository management root, even inside a subproject.
 ```

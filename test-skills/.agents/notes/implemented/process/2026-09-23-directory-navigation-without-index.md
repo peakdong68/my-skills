@@ -38,4 +38,4 @@ Standards 与 Spec 两轴实施审查发现：四份已有真实备选的历史�
 
 ## 依据与关联
 
-参考材料为 `seeaihub-server-next/docs/AGENTS.md`、`.agents/notes/README.md`、`.agents/notes/AGENTS.md`，以及当时采用的格式与文档治理决定。项目文档标准种子见 [docs-agents.md](../../../../skills/user-invoked/setup-agent-skills/docs-agents.md)；本地范围见 [README](../../README.md) 与 [AGENTS](../../AGENTS.md)；Note 格式及工具边界见 [DSH Skill](../../../../.agents/skills/write-notes-like-deepseek/SKILL.md) 和 [Setup 说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。
+参考材料为 `seeaihub-server-next/docs/AGENTS.md`、`.agents/notes/README.md`、`.agents/notes/AGENTS.md`，以及当时采用的格式与文档治理决定。项目文档标准种子见 [docs-agents.md](../../../../skills/user-invoked/setup-agent-skills/docs-agents.md)；本地范围见 [README](../../README.md) 与 [AGENTS](../../AGENTS.md)；Note 格式及工具边界见 [DSH Skill](../../../../.agents/skills/write-agent-notes/SKILL.md) 和 [Setup 说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。

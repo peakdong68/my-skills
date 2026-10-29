@@ -1,9 +1,9 @@
 ---
-name: write-notes-like-deepseek
+name: write-agent-notes
 description: Use when a change is non-trivial by DSH standards (behavior, architecture, cross-file contracts, process/tooling, testing strategy, or on-disk/wire/config formats), when choosing between technical alternatives, superseding a decision, or writing a postmortem. Records the why and rejected options in .agents/notes/ with script-enforced gates; skips purely mechanical edits (CRUD, styling, patches, tagging, formatting).
 ---
 
-# Write Notes Like DeepSeek
+# Write Agent Notes
 
 > 方法提炼自 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的工程实践。聊天里的 Agent 负责拆任务、排计划；本 Skill 只做一件事：为什么这样改、放弃了什么、怎么证明改对了，都留在一处，给下一个改这段代码的人用。
 
@@ -171,10 +171,10 @@ npm run bundle-board               # 打包内嵌全量数据的自包含 demo.h
 项目级安装到 `.agents/skills/` 时，可直接执行：
 
 ```sh
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --init board.html "项目决策看板"
+npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-tree.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-format.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/verify-archived-agent-notes.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/build-board.ts --init board.html "项目决策看板"
 ```
 
 安装到 `.claude/skills/` 或全局目录时，用实际 Skill 路径替换上述前缀。看板打包参数为 `--bundle <notes目录> <输出.html> "名字"`；参数与免疫规则见 `references/verification.md`。

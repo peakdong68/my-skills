@@ -28,7 +28,7 @@ DSH Skill 是可复用规则源，项目指令只指向它并记录项目特有�
 
 同一会话后续，用户要求落实重复执行不自动覆盖、已有差异保留和显式升级的规则；本段补充既有项目副本归属决定的维护行为。
 
-参见 [Agent Notes Setup](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)、[DSH Skill](../../../../.agents/skills/write-notes-like-deepseek/SKILL.md)、[项目 Notes 入口](../../README.md)。
+参见 [Agent Notes Setup](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)、[DSH Skill](../../../../.agents/skills/write-agent-notes/SKILL.md)、[项目 Notes 入口](../../README.md)。
 
 历史验证：本仓库当时的记录检查通过；临时目标项目曾部署旧资源并生成索引。旧资源与索引工具现已移除；本次迁移按 DSH Skill 校验。
 

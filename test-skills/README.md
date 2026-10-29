@@ -69,4 +69,4 @@
 
 ## 文档维护
 
-AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [项目 Agent Notes 入口](./.agents/notes/README.md)，格式和检查规则遵循 [write-notes-like-deepseek](./.agents/skills/write-notes-like-deepseek/SKILL.md)。Setup 不再打包第二套 Notes 资源。
+AGENTS.md 拥有推进权限；技能拥有实际工作方法及完成条件；本 README 说明接入与使用方式。历史决定与验证依据见 [项目 Agent Notes 入口](./.agents/notes/README.md)，格式和检查规则遵循 [write-agent-notes](./.agents/skills/write-agent-notes/SKILL.md)。Setup 不再打包第二套 Notes 资源。

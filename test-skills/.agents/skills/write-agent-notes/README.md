@@ -1,4 +1,4 @@
-# write-notes-like-deepseek
+# write-agent-notes
 
 > **像 DeepSeek 团队一样维护项目。** 把他们在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 里用的那套方法，装进你的仓库。
 
@@ -188,25 +188,25 @@ Status: implemented
 
 ## 本地校验：零依赖，`npx` 直接跑
 
-> 校验脚本通过 Node.js 和 `npx tsx` 运行。以下命令在宿主项目根目录执行，使用项目级安装位置 `.agents/skills/write-notes-like-deepseek/`；若安装在 `.claude/skills/` 或全局目录，请替换为实际 Skill 路径。默认检查当前目录下的 `.agents/notes/`；多上下文项目对每个已选根分别传入 `--root <path>`，不扫描未选根。
+> 校验脚本通过 Node.js 和 `npx tsx` 运行。以下命令在宿主项目根目录执行，使用项目级安装位置 `.agents/skills/write-agent-notes/`；若安装在 `.claude/skills/` 或全局目录，请替换为实际 Skill 路径。默认检查当前目录下的 `.agents/notes/`；多上下文项目对每个已选根分别传入 `--root <path>`，不扫描未选根。
 
 ```bash
 # 1. 目录、类别、文件名、笔记之间的相对链接
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-tree.ts --root .agents/notes
 
 # 2. 头部与骨架：状态行、必备小节、备选方案必填、implemented 禁用提案标题
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-format.ts --root .agents/notes
 
 # 3. 封存区体检：归档笔记的头部布局、封印哈希、只增不改（没有 git 自动降级）
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/verify-archived-agent-notes.ts --root .agents/notes
 
 # 4. 老方案被取代，一键归档：只插 Archived: 一行 + 封印 + 列出谁还链着它
 #    --superseded-by 在新笔记里补互链，不写进归档篇
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts --root .agents/notes \
+npx tsx .agents/skills/write-agent-notes/scripts/archive-agent-note.ts --root .agents/notes \
   implemented/<class>/<filename>.md --superseded-by implemented/<class>/<new-note>.md
 
 # 5. 可选体检（只提醒不报错，不进 CI）：代码里若有 // Note: 锚点，是否指着不存在的笔记
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts --root .agents/notes
+npx tsx .agents/skills/write-agent-notes/scripts/check-note-anchors.ts --root .agents/notes
 ```
 
 独立安装 DSH 时，可选：在项目 `package.json` 中添加快捷命令。通过 `setup-agent-skills` 配置 Agent Notes 时，Setup 会确保 `verify-notes` 命令存在；`archive-note` 仍是可选快捷命令。
@@ -214,13 +214,13 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts -
 ```json
 {
   "scripts": {
-    "verify-notes": "npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root .agents/notes && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root .agents/notes && npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root .agents/notes",
-    "archive-note": "npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts"
+    "verify-notes": "npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-tree.ts --root .agents/notes && npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-format.ts --root .agents/notes && npx tsx .agents/skills/write-agent-notes/scripts/verify-archived-agent-notes.ts --root .agents/notes",
+    "archive-note": "npx tsx .agents/skills/write-agent-notes/scripts/archive-agent-note.ts"
   }
 }
 ```
 
-团队可选将安装目录里的 `templates/verify-notes.yml`（[查看模板](skills/write-notes-like-deepseek/templates/verify-notes.yml)）复制到宿主仓库的 `.github/workflows/verify-notes.yml`，核对安装路径和已选 Notes 根并提交 Skill 文件后启用。单独安装 Skill 不会自动编辑 `package.json` 或启用 CI；Setup 在启用 Agent Notes 时会确保本地 npm 校验入口，CI 仍需显式选择。CI 校验现有 Note 的结构与格式，不判断某次重要改动是否新增了 Note。
+团队可选将安装目录里的 `templates/verify-notes.yml`（[查看模板](templates/verify-notes.yml)）复制到宿主仓库的 `.github/workflows/verify-notes.yml`，核对安装路径和已选 Notes 根并提交 Skill 文件后启用。单独安装 Skill 不会自动编辑 `package.json` 或启用 CI；Setup 在启用 Agent Notes 时会确保本地 npm 校验入口，CI 仍需显式选择。CI 校验现有 Note 的结构与格式，不判断某次重要改动是否新增了 Note。
 
 ### 装上 Skill 之后
 
@@ -229,7 +229,7 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts -
 ```markdown
 ## 重要改动必须留笔记
 
-1. 非平凡改动（改了行为、架构、跨文件契约、流程与工具链、测试策略、落盘/网络/配置格式）前，遵循 .agents/skills/write-notes-like-deepseek/SKILL.md 写或更新笔记；机械性小改（样式、格式化、打标、不改行为的补丁）直接提交。
+1. 非平凡改动（改了行为、架构、跨文件契约、流程与工具链、测试策略、落盘/网络/配置格式）前，遵循 `write-agent-notes` 技能写或更新笔记；机械性小改（样式、格式化、打标、不改行为的补丁）直接提交。
 2. 写之前先检索所有已选 Notes 根里的同主题旧笔记：核心决定未变时就地同步现行事实；新想法先放 proposed/，落地随同代码改动转 implemented/；部分取代时保留并互链。新方案完全取代旧决策时，同批吸收旧篇独有理由和证据、修复入站链接；再按 DSH 规则删除已完全吸收的旧篇，或归档仍有独立参考价值的旧篇，并在新篇标明取代关系。
 3. 被放弃的方案先写它最强的理由，再解释为什么不用。
 4. 提交前跑 npm run verify-notes，红了先修再交。
@@ -239,7 +239,7 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts -
 
 ```text
 把鉴权模块从 Session 重构成 JWT，改动比较大，
-动手前先按 write-notes-like-deepseek 立一篇 Note。
+动手前先按 write-agent-notes 立一篇 Note。
 ```
 
 当项目指令生效且 Agent 遵循 Skill 时，它会先在 `proposed/` 形成结构化设计（背景、备选及取舍、设计验收与风险）；笔记内容确认本身不替代项目的 Planning/Implementation Gate。实现完成并通过项目 Verify 后，笔记随交付转为 `implemented/`。
@@ -251,8 +251,8 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/check-note-anchors.ts -
 不是必需品，只是个顺手的观察窗：一条命令生成单文件 `board.html`，双击就能看——**被引用最多的那几篇笔记**（就是这套系统里最怕碰的决定）、所有被否决方案的避坑清单、按月份的演进时间线。日常开发中它直读本地笔记目录，改了笔记切回浏览器就自动刷新；也可以打包成单文件发到网上。
 
 ```bash
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --init board.html "项目决策看板"     # 本地直读，打开后手动选择一个 Notes 根并启用热更新
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --root .agents/notes demo.html "项目决策看板"  # 打包分发
+npx tsx .agents/skills/write-agent-notes/scripts/build-board.ts --init board.html "项目决策看板"     # 本地直读，打开后手动选择一个 Notes 根并启用热更新
+npx tsx .agents/skills/write-agent-notes/scripts/build-board.ts --root .agents/notes demo.html "项目决策看板"  # 打包分发
 ```
 
 
@@ -282,9 +282,9 @@ npx tsx .agents/skills/write-notes-like-deepseek/scripts/build-board.ts --root .
 
 ## 仓库导览
 
-- [`SKILL.md`](skills/write-notes-like-deepseek/SKILL.md)：装给 AI 的主契约——先判「要不要写」，再谈怎么写。
-- [`templates/`](skills/write-notes-like-deepseek/templates/)：`proposed` / `implemented` / `rejected` 三份填空模板。
-- [`references/when-to-write.md`](skills/write-notes-like-deepseek/references/when-to-write.md)：什么时候写、什么时候原地改、什么时候归档。
-- [`references/archiving.md`](skills/write-notes-like-deepseek/references/archiving.md)：封存规矩——被取代的老决定怎么干净归档。
-- [`references/quality-gate.md`](skills/write-notes-like-deepseek/references/quality-gate.md)：写完笔记后的语义自检清单。
-- [`references/verification.md`](skills/write-notes-like-deepseek/references/verification.md)：每个校验脚本在查什么、为什么。
+- [`SKILL.md`](SKILL.md)：装给 AI 的主契约——先判「要不要写」，再谈怎么写。
+- [`templates/`](templates/)：`proposed` / `implemented` / `rejected` 三份填空模板。
+- [`references/when-to-write.md`](references/when-to-write.md)：什么时候写、什么时候原地改、什么时候归档。
+- [`references/archiving.md`](references/archiving.md)：封存规矩——被取代的老决定怎么干净归档。
+- [`references/quality-gate.md`](references/quality-gate.md)：写完笔记后的语义自检清单。
+- [`references/verification.md`](references/verification.md)：每个校验脚本在查什么、为什么。

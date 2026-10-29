@@ -41,7 +41,7 @@
 
 ## Agent Notes
 
-非平凡工程变更与重大提案按 [项目 Agent Notes 入口](.agents/notes/README.md) 及 `write-notes-like-deepseek` Skill 记录。复用已有权威记录，维护受影响的内容；本仓库独立记录存于 `.agents/notes/`。分类、格式、生命周期和检查遵循 DSH Skill，不读取项目类别配置。更新后运行规定的检查；按需使用只读目录导航。格式整理和链接修复等日常文档治理直接处理并检查，不要求重新进入工程阶段；实质改变工程合同的修改仍按工程流程处理。
+非平凡工程变更与重大提案按 [项目 Agent Notes 入口](.agents/notes/README.md) 及 `write-agent-notes` Skill 记录。复用已有权威记录，维护受影响的内容；本仓库独立记录存于 `.agents/notes/`。分类、格式、生命周期和检查遵循 DSH Skill，不读取项目类别配置。更新后运行规定的检查；按需使用只读目录导航。格式整理和链接修复等日常文档治理直接处理并检查，不要求重新进入工程阶段；实质改变工程合同的修改仍按工程流程处理。
 
-`write-notes-like-deepseek` 是 Agent Notes 格式与工具的唯一属主。Setup 不再附带另一套 Notes 资源；目标项目按需安装 DSH Skill，并只记录其自身选择的 Notes 根。`.agents/notes/` 中的实际记录属于本仓库历史，不复制到其他项目。
+`write-agent-notes` 是 Agent Notes 格式与工具的唯一属主。Setup 不再附带另一套 Notes 资源；目标项目按需安装 DSH Skill，并只记录其自身选择的 Notes 根。`.agents/notes/` 中的实际记录属于本仓库历史，不复制到其他项目。
 

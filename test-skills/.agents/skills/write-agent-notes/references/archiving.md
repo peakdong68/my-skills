@@ -69,7 +69,7 @@
 推荐直接用 CLI（物理移动 + 封印 + 入站死链报告一次完成，**不依赖 git**）：
 
 ```bash
-npx tsx .agents/skills/write-notes-like-deepseek/scripts/archive-agent-note.ts \
+npx tsx .agents/skills/write-agent-notes/scripts/archive-agent-note.ts \
   --root .agents/notes implemented/<class>/<filename>.md \
   [--superseded-by implemented/<class>/<新笔记>.md]
 ```
@@ -94,7 +94,7 @@ CLI 依次完成：
 除头部 `Archived:` 一行外，**禁止修改归档正文的任何其他字符**。
 
 > 历史包袱补齐：若 `archived/` 已有笔记但还没有 manifest（例如从 DSH 导入的语料），运行
-> `npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --write` 一次性补封印——它会先校验既有封印未被改动，再追加缺失条目，绝不重写历史。
+> `npx tsx .agents/skills/write-agent-notes/scripts/verify-archived-agent-notes.ts --write` 一次性补封印——它会先校验既有封印未被改动，再追加缺失条目，绝不重写历史。
 
 ---
 
@@ -106,4 +106,4 @@ CLI 依次完成：
 - **免除日常扫描**：`verify-agent-note-tree` 和 `verify-agent-note-format` 默认跳过 `archived/` 目录，归档文件的出站链接失效不会阻塞日常构建。
 - **不可作为当前行为依据**：代码冲突或架构评审时，以 `implemented/` 为准，`archived/` 仅作为历史考据参考；取代关系以新笔记互链和入站改写为准。
 
-上述命令从宿主项目根目录执行；若 Skill 安装在其他位置，请替换 `.agents/skills/write-notes-like-deepseek` 为实际路径。
+上述命令从宿主项目根目录执行；若 Skill 安装在其他位置，请替换 `.agents/skills/write-agent-notes` 为实际路径。

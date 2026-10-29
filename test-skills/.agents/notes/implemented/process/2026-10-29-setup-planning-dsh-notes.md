@@ -16,7 +16,7 @@ Planning 优先复用已有工作项。未配置 tracker 时，当前任务会�
 
 旧项目升级先盘点已注册根、记录、脚本、命令和 CI，展示迁移映射后一次性迁移。保留记录日期、决定事实、有效证据和引用；逐篇映射至固定分类，转换章节与头部，恢复有依据的备选，没有真实备选时写“无”，不改写决定历史。修复受影响的链接和调用后移除旧脚本、旧配置与旧格式说明。历史路径继续由项目原属主保管，除非用户另行选择迁移位置。
 
-本仓库已迁移现有活动记录并更新通用资源与部署副本。动态分类、生命周期及格式规则由 [DSH Notes Skill](../../../../.agents/skills/write-notes-like-deepseek/SKILL.md) 取代；无索引、按用户选定上下文隔离、保留项目定制和不自动迁移历史的决定继续有效，参见[按用户选定上下文隔离 Agent Notes 目录](../../implemented/process/2026-09-15-context-record-directories.md)、[文档归属入口与无索引记录导航](../../implemented/process/2026-09-23-directory-navigation-without-index.md)及[Setup 按需配置](../../implemented/process/2026-09-14-setup-targeted-configuration.md)。Setup 的项目接线规则见[Setup Agent Notes 配置说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。
+本仓库已迁移现有活动记录并更新通用资源与部署副本。动态分类、生命周期及格式规则由 [DSH Notes Skill](../../../../.agents/skills/write-agent-notes/SKILL.md) 取代；无索引、按用户选定上下文隔离、保留项目定制和不自动迁移历史的决定继续有效，参见[按用户选定上下文隔离 Agent Notes 目录](../../implemented/process/2026-09-15-context-record-directories.md)、[文档归属入口与无索引记录导航](../../implemented/process/2026-09-23-directory-navigation-without-index.md)及[Setup 按需配置](../../implemented/process/2026-09-14-setup-targeted-configuration.md)。Setup 的项目接线规则见[Setup Agent Notes 配置说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)。
 
 ## Alternatives considered
 

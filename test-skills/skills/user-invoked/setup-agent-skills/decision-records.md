@@ -1,6 +1,6 @@
 # Agent Notes setup
 
-Use this reference when Planning or the requested setup selects Agent Notes. The `write-notes-like-deepseek` Skill owns note format, lifecycle, authoring, validation and migration semantics. Setup owns project-specific selection and wiring only; it does not deploy a second copy of the Skill's rules or scripts.
+Use this reference when Planning or the requested setup selects Agent Notes. The `write-agent-notes` Skill owns note format, lifecycle, authoring, validation and migration semantics. Setup owns project-specific selection and wiring only; it does not deploy a second copy of the Skill's rules or scripts.
 
 ## Select Notes roots
 
@@ -11,7 +11,7 @@ Reuse the project's established context map and Notes selections. Ask only about
 - Keep domain boundaries in `GLOSSARY-MAP.md`. The Notes root map records which selected scopes have Notes and their paths; it does not duplicate DSH format rules or act as a category configuration.
 - For every selected scope, run DSH commands with `--root <path>` targeting exactly that scope. Never silently scan or write a different scope.
 
-Project instructions identify the `write-notes-like-deepseek` Skill by name and point to the selected Notes roots. Add its filesystem path only when needed to make the Skill discoverable. When a required DSH Skill is unavailable, report the missing prerequisite and the actual path needed; do not replace it with bundled Setup rules.
+Project instructions identify the `write-agent-notes` Skill by name and point to the selected Notes roots. Add its filesystem path only when needed to make the Skill discoverable. When a required DSH Skill is unavailable, report the missing prerequisite and the actual path needed; do not replace it with bundled Setup rules.
 
 ## Work items and Issue trackers
 
@@ -28,7 +28,7 @@ When Setup enables Agent Notes, copy the following Setup-owned template into tha
 ```markdown
 ## 重要改动必须留笔记
 
-1. 非平凡改动（改了行为、架构、跨文件契约、流程与工具链、测试策略、落盘/网络/配置格式）前，遵循 `write-notes-like-deepseek` Skill 写或更新笔记；机械性小改（样式、格式化、打标、不改行为的补丁）直接提交。
+1. 非平凡改动（改了行为、架构、跨文件契约、流程与工具链、测试策略、落盘/网络/配置格式）前，遵循 `write-agent-notes` Skill 写或更新笔记；机械性小改（样式、格式化、打标、不改行为的补丁）直接提交。
 2. 写之前先检索 .agents/notes/ 里的同主题旧笔记：有归属就地更新；新想法先放 proposed/，落地随同代码改动转 implemented/；新方案彻底取代旧决策时，同批归档旧篇并标明被谁取代。
 3. 被放弃的方案先写它最强的理由，再解释为什么不用。
 4. 提交前跑 npm run verify-notes，红了先修再交。

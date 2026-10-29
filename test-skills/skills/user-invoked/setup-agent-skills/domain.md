@@ -16,7 +16,7 @@ An absent optional glossary does not require creating one upfront. The `domain-m
 
 ## File structure
 
-A single-context project may use a root `GLOSSARY.md`; a root `GLOSSARY-MAP.md` points to selected context glossaries in a multi-context project. Resolve Agent Note paths from the selected Notes root map; format and lifecycle follow the installed `write-notes-like-deepseek` Skill.
+A single-context project may use a root `GLOSSARY.md`; a root `GLOSSARY-MAP.md` points to selected context glossaries in a multi-context project. Resolve Agent Note paths from the selected Notes root map; format and lifecycle follow the installed `write-agent-notes` Skill.
 
 ## Use the glossary's vocabulary
 

@@ -13,7 +13,7 @@ description: 创建或更新工作项、按需维护独立产品合同与技术�
 
 复用合适的既有工作项；确实需要新的规划根节点时才创建 Proposal。没有跟踪器时不要为满足格式而另建 Proposal 文件，直接在当前任务中记录范围、验收、评审与批准事实。创建或更新 Proposal 时读取 [proposal.md](./proposal.md)。
 
-工作项直接写清本次产品行为、范围和验收；跨工作项持续生效的合同按需复用或建立独立 Spec。需要长期保留的技术设计与决定写入 Agent Note，proposed Note 承载实施前设计评审，工作项从自身链接到 Note。Note 的位置遵循项目选择，格式遵循 `write-notes-like-deepseek` Skill；不得要求为定位本次 Proposal 配置 Issue tracker。
+工作项直接写清本次产品行为、范围和验收；跨工作项持续生效的合同按需复用或建立独立 Spec。需要长期保留的技术设计与决定写入 Agent Note，proposed Note 承载实施前设计评审，工作项从自身链接到 Note。Note 的位置遵循项目选择，格式遵循 `write-agent-notes` Skill；不得要求为定位本次 Proposal 配置 Issue tracker。
 
 ## 2. 收敛产品合同与技术设计
 

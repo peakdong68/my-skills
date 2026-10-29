@@ -38,6 +38,6 @@ jobs:
           # skips append-only (seal-vs-disk still runs).
           AGENT_NOTE_ARCHIVE_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-tree.ts --root "${{ matrix.notes_root }}"
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-agent-note-format.ts --root "${{ matrix.notes_root }}"
-          npx tsx .agents/skills/write-notes-like-deepseek/scripts/verify-archived-agent-notes.ts --root "${{ matrix.notes_root }}"
+          npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-tree.ts --root "${{ matrix.notes_root }}"
+          npx tsx .agents/skills/write-agent-notes/scripts/verify-agent-note-format.ts --root "${{ matrix.notes_root }}"
+          npx tsx .agents/skills/write-agent-notes/scripts/verify-archived-agent-notes.ts --root "${{ matrix.notes_root }}"

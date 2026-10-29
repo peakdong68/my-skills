@@ -14,7 +14,7 @@ Status: implemented
 
 本决定补充[按需配置](./2026-09-14-setup-targeted-configuration.md)的多上下文处理：Notes 启用范围由用户分别选择，不从发现的项目自动推断。原实现用根 `config.json` 的 `contextMap` 与 `recordRoots` 登记隔离路径；该配置机制已由 [DSH 统一 Notes 决定](./2026-10-29-setup-planning-dsh-notes.md) 取代。当前选定根写入项目 `.agents/notes/AGENTS.md`，每个 DSH 命令用 `--root <path>` 处理一个根。公共和跨上下文决定仍只有一个选定属主，其他位置引用；隔离范围与 Note 分类相互独立。
 
-[部署说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)、[本地范围入口](../../AGENTS.md)、[DSH Skill](../../../../.agents/skills/write-notes-like-deepseek/SKILL.md)共同说明当前用户选择、根路径和工具规则。
+[部署说明](../../../../skills/user-invoked/setup-agent-skills/decision-records.md)、[本地范围入口](../../AGENTS.md)、[DSH Skill](../../../../.agents/skills/write-agent-notes/SKILL.md)共同说明当前用户选择、根路径和工具规则。
 
 ## 兼容与边界
 
